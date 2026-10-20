@@ -22,7 +22,7 @@ next dungeon chain with its quests, profession steps and materials, character ro
 points, and a **bank character** (Banka) that receives everyone's materials and trades on the AH. The browser
 dashboard stays but gets no new work ("game first"). **Restated 2026-10-17:** the addon does not replace quest addons; it
 gathers information from other addons and our data for **professions and dungeons** and gives **high-level
-guidance per character**, flexible, informative, with **no unnecessary information**. Our older full-quest version is tag `own-3.31.0` and still
+guidance per character**, flexible, informative, with **no unnecessary information**. Our older full-quest version is tag `own-3.31.0` (since 2026-10-20 only in `personal/backups/history-backup.bundle`: `git clone personal/backups/history-backup.bundle /tmp/old -b history-backup`) and still
 lives on as the Quests window addon.
 
 **Three addons (`make addon` installs every folder under addon/):**
@@ -675,6 +675,10 @@ and update section 3 if Blizzard changed an API.
 ## 9. Session Log
 
 Newest first. One short entry per session.
+
+- **2026-10-20** (Claude): Fresh history pushed to the public remote https://github.com/dragan-lukac/wowForeverLeveler
+  (main = one clean commit). The old 117 commits and the tag own-3.31.0 are packed in
+  `personal/backups/history-backup.bundle` (checked: opens, complete); the local branch and tag are deleted.
 
 - **2026-10-20** (Claude): **Personal data split** (user: make it universal before a remote repo). New
   `personal/` (git-ignored): team.json (names, last names, races, groups, start, order, professions per character
