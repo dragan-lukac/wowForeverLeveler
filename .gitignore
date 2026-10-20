@@ -1,0 +1,17 @@
+.env
+*.pyc
+__pycache__/
+.DS_Store
+node_modules/
+.claude/settings.local.json
+data/.last_sync.json
+data/dungeons.js
+data/forever_pages/
+
+# Personal data: your team, account, characters and history (see personal.example/)
+personal/
+# Built from data/guide.json + personal/team.json by `make guide` (they hold your character names)
+data/guide.js
+data/addon_plan.js
+addon/WoWForeverLeveler/Plan.lua
+guide.md

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Dashboard icon: a simple Horde-style crest drawn by hand, dark mark on a red shield. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c0262d"/>
+      <stop offset="1" stop-color="#6e0f14"/>
+    </linearGradient>
+  </defs>
+  <rect x="1" y="1" width="62" height="62" rx="12" fill="url(#bg)" stroke="#e8b04a" stroke-width="2"/>
+  <g fill="#141414" stroke="#141414" stroke-linejoin="round">
+    <!-- side tusks -->
+    <path d="M17 9 C 5 24, 8 44, 25 55" fill="none" stroke-width="6" stroke-linecap="round"/>
+    <path d="M47 9 C 59 24, 56 44, 39 55" fill="none" stroke-width="6" stroke-linecap="round"/>
+    <!-- crossbar -->
+    <polygon points="9,28 16,22 48,22 55,28 48,33 16,33" stroke-width="1"/>
+    <!-- centre blade -->
+    <polygon points="32,4 38,17 36,54 32,60 28,54 26,17" stroke-width="1"/>
+  </g>
+</svg>

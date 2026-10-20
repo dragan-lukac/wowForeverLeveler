@@ -1,0 +1,47 @@
+-- Generated from data/guide.json by scripts/build_guide.py. Do not edit by hand.
+-- Trainers to visit per city; the addon reminds you when you enter the city.
+WoWForeverLevelerNPCPlan = {
+    ["Durotar"] = {
+        { name = "Enchanting trainer (Forever, name not known)", profession = "Enchanting", where = "Sen'jin Village" },
+    },
+    ["Orgrimmar"] = {
+        { name = "Yelmak", profession = "Alchemy", where = "The Drag" },
+        { name = "Saru Steelfury", profession = "Blacksmithing", where = "Valley of Honor" },
+        { name = "Jhag", profession = "Enchanting", where = "The Drag" },
+        { name = "Nogg", profession = "Engineering", where = "Valley of Honor" },
+        { name = "Jandi", profession = "Herbalism", where = "The Drag" },
+        { name = "Karolek", profession = "Leatherworking", where = "The Drag" },
+        { name = "Makaru", profession = "Mining", where = "Valley of Honor" },
+        { name = "Thuwd", profession = "Skinning", where = "The Drag" },
+        { name = "Magar", profession = "Tailoring", where = "The Drag" },
+        { name = "Zamja", profession = "Cooking", where = "Valley of Strength" },
+        { name = "Arnok", profession = "First Aid", where = "Valley of Spirits" },
+        { name = "Lumak", profession = "Fishing", where = "Valley of Honor" },
+    },
+    ["Thunder Bluff"] = {
+        { name = "Bena Winterhoof", profession = "Alchemy", where = "Spirit Rise" },
+        { name = "Mot Dawnstrider", profession = "Enchanting", where = "Spirit Rise" },
+        { name = "Komin Winterhoof", profession = "Herbalism", where = "Spirit Rise" },
+        { name = "Una", profession = "Leatherworking", where = "ask a guard" },
+        { name = "Brek Stonehoof", profession = "Mining", where = "ask a guard" },
+        { name = "Mooranta", profession = "Skinning", where = "ask a guard" },
+        { name = "Tepa", profession = "Tailoring", where = "ask a guard" },
+        { name = "Aska Mistrunner", profession = "Cooking", where = "ask a guard" },
+        { name = "Pand Stonebinder", profession = "First Aid", where = "ask a guard" },
+        { name = "Kah Mistrunner", profession = "Fishing", where = "ask a guard" },
+    },
+    ["Undercity"] = {
+        { name = "Doctor Herbert Halsey", profession = "Alchemy", where = "The Apothecarium" },
+        { name = "James Van Brunt", profession = "Blacksmithing", where = "War Quarter" },
+        { name = "Lavinia Crowe", profession = "Enchanting", where = "Magic Quarter" },
+        { name = "Graham Van Talen", profession = "Engineering", where = "ask a guard" },
+        { name = "Martha Alliestar", profession = "Herbalism", where = "The Apothecarium" },
+        { name = "Arthur Moore", profession = "Leatherworking", where = "Rogues' Quarter" },
+        { name = "Brom Killian", profession = "Mining", where = "War Quarter" },
+        { name = "Killian Hagey", profession = "Skinning", where = "Rogues' Quarter" },
+        { name = "Josef Gregorian", profession = "Tailoring", where = "Magic Quarter" },
+        { name = "Eunice Burch", profession = "Cooking", where = "Trade Quarter" },
+        { name = "Mary Edras", profession = "First Aid", where = "Rogues' Quarter" },
+        { name = "Armand Cromwell", profession = "Fishing", where = "The Canals" },
+    },
+}

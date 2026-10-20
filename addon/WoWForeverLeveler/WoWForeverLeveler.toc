@@ -1,0 +1,13 @@
+## Interface: 16001, 11508
+## Title: WoW Forever Leveler
+## Notes: Core: records your characters (level, quests, professions, rested XP, prices) and holds the plan data and window parts. Enable one window: WoW Forever Leveler - Quests or - Planner.
+## Author: Antigravity
+## Version: 3.37.2
+## OptionalDeps: Auctionator, TomTom
+## SavedVariables: WoWForeverLevelerDB, WoWForeverLevelerQuestLog, WoWForeverLevelerRecipes, WoWForeverLevelerLog, WoWForeverLevelerTrainer, WoWForeverLevelerVendors, WoWForeverLevelerNPCs, WoWForeverLevelerSellPrices, WoWForeverLevelerItemIDs, WoWForeverLevelerAuctionRealms, WoWForeverLevelerClassTrainer, WoWForeverLevelerBagVendors, WoWForeverLevelerScanTimes, WoWForeverLevelerShopPrices, WoWForeverLevelerUI
+
+TrackedItems.lua
+NPCList.lua
+Plan.lua
+WoWForeverLeveler.lua
+UI.lua

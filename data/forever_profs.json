@@ -1,0 +1,4802 @@
+{
+ "source": "scripts/forever_profs.py from data/forever_recipes.json",
+ "professions": {
+  "Alchemy": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 10,
+     "recipe": "Elixir of Minor Defense",
+     "count": 9,
+     "mats": {
+      "Silverleaf": 9,
+      "Peacebloom": 9,
+      "Empty Vial": 9
+     },
+     "raw": {
+      "Silverleaf": 9,
+      "Peacebloom": 9
+     },
+     "sell": 6
+    },
+    {
+     "from": 10,
+     "to": 15,
+     "recipe": "Elixir of Minor Force",
+     "count": 12,
+     "mats": {
+      "Silverleaf": 12,
+      "Empty Vial": 12
+     },
+     "raw": {
+      "Silverleaf": 12
+     },
+     "sell": 65
+    },
+    {
+     "from": 15,
+     "to": 25,
+     "recipe": "Elixir of Minor Strength",
+     "count": 10,
+     "mats": {
+      "Earthroot": 10,
+      "Silverleaf": 10,
+      "Empty Vial": 10
+     },
+     "raw": {
+      "Earthroot": 10,
+      "Silverleaf": 10
+     },
+     "sell": 378
+    },
+    {
+     "from": 25,
+     "to": 40,
+     "recipe": "Elixir of Minor Defense",
+     "count": 15,
+     "mats": {
+      "Silverleaf": 15,
+      "Peacebloom": 15,
+      "Empty Vial": 15
+     },
+     "raw": {
+      "Silverleaf": 15,
+      "Peacebloom": 15
+     },
+     "sell": 6
+    },
+    {
+     "from": 40,
+     "to": 50,
+     "recipe": "Sulfuric Acid",
+     "count": 10,
+     "mats": {
+      "Pyrite": 20,
+      "Empty Vial": 10
+     },
+     "raw": {
+      "Pyrite": 20
+     },
+     "sell": 976
+    },
+    {
+     "from": 50,
+     "to": 60,
+     "recipe": "Minor Discolored Healing Potion",
+     "count": 11,
+     "mats": {
+      "Empty Vial": 11,
+      "Peacebloom": 11,
+      "Murloc Eye": 11
+     },
+     "raw": {
+      "Peacebloom": 11,
+      "Murloc Eye": 11
+     },
+     "sell": 150
+    },
+    {
+     "from": 60,
+     "to": 65,
+     "recipe": "Rage Potion",
+     "count": 5,
+     "mats": {
+      "Sharp Claw": 5,
+      "Briarthorn": 5,
+      "Empty Vial": 5
+     },
+     "raw": {
+      "Sharp Claw": 5,
+      "Briarthorn": 5
+     },
+     "source": "Vendor",
+     "sell": 293
+    },
+    {
+     "from": 65,
+     "to": 74,
+     "recipe": "Elixir of Lesser Spirit",
+     "count": 12,
+     "mats": {
+      "Wild Steelbloom": 24,
+      "Mageroyal": 12,
+      "Empty Vial": 12
+     },
+     "raw": {
+      "Wild Steelbloom": 24,
+      "Mageroyal": 12
+     },
+     "source": "Vendor",
+     "sell": 5999
+    },
+    {
+     "from": 74,
+     "to": 75,
+     "recipe": "Rage Potion",
+     "count": 1,
+     "mats": {
+      "Sharp Claw": 1,
+      "Briarthorn": 1,
+      "Empty Vial": 1
+     },
+     "raw": {
+      "Sharp Claw": 1,
+      "Briarthorn": 1
+     },
+     "source": "Vendor",
+     "sell": 293
+    },
+    {
+     "from": 75,
+     "to": 84,
+     "recipe": "Lesser Mageblood Elixir",
+     "count": 12,
+     "mats": {
+      "Kingsblood": 36,
+      "Empty Vial": 12
+     },
+     "raw": {
+      "Kingsblood": 36
+     },
+     "source": "Vendor",
+     "sell": 6498
+    },
+    {
+     "from": 84,
+     "to": 85,
+     "recipe": "Rage Potion",
+     "count": 1,
+     "mats": {
+      "Sharp Claw": 1,
+      "Briarthorn": 1,
+      "Empty Vial": 1
+     },
+     "raw": {
+      "Sharp Claw": 1,
+      "Briarthorn": 1
+     },
+     "source": "Vendor",
+     "sell": 293
+    },
+    {
+     "from": 85,
+     "to": 94,
+     "recipe": "Lesser Discolored Healing Potion",
+     "count": 11,
+     "mats": {
+      "Empty Vial": 11,
+      "Briarthorn": 11,
+      "Murloc Eye": 11
+     },
+     "raw": {
+      "Briarthorn": 11,
+      "Murloc Eye": 11
+     },
+     "sell": 500
+    },
+    {
+     "from": 94,
+     "to": 95,
+     "recipe": "Rage Potion",
+     "count": 2,
+     "mats": {
+      "Sharp Claw": 2,
+      "Briarthorn": 2,
+      "Empty Vial": 2
+     },
+     "raw": {
+      "Sharp Claw": 2,
+      "Briarthorn": 2
+     },
+     "source": "Vendor",
+     "sell": 293
+    },
+    {
+     "from": 95,
+     "to": 104,
+     "recipe": "Lesser Cleric's Elixir",
+     "count": 12,
+     "mats": {
+      "Kingsblood": 24,
+      "Liferoot": 24,
+      "Leaded Vial": 12
+     },
+     "raw": {
+      "Kingsblood": 24,
+      "Liferoot": 24
+     },
+     "source": "Vendor",
+     "sell": 5596
+    },
+    {
+     "from": 104,
+     "to": 105,
+     "recipe": "Elixir of Lesser Intellect",
+     "count": 5,
+     "mats": {
+      "Kingsblood": 15,
+      "Leaded Vial": 5
+     },
+     "raw": {
+      "Kingsblood": 15
+     },
+     "source": "Vendor",
+     "sell": 8999
+    },
+    {
+     "from": 105,
+     "to": 107,
+     "recipe": "Rage Potion",
+     "count": 4,
+     "mats": {
+      "Sharp Claw": 4,
+      "Briarthorn": 4,
+      "Empty Vial": 4
+     },
+     "raw": {
+      "Sharp Claw": 4,
+      "Briarthorn": 4
+     },
+     "source": "Vendor",
+     "sell": 293
+    },
+    {
+     "from": 107,
+     "to": 117,
+     "recipe": "Elixir of Wisdom",
+     "count": 10,
+     "mats": {
+      "Mageroyal": 10,
+      "Briarthorn": 20,
+      "Empty Vial": 10
+     },
+     "raw": {
+      "Briarthorn": 20,
+      "Mageroyal": 10
+     },
+     "sell": 150
+    },
+    {
+     "from": 117,
+     "to": 120,
+     "recipe": "Holy Protection Potion",
+     "count": 3,
+     "mats": {
+      "Bruiseweed": 3,
+      "Swiftthistle": 3,
+      "Empty Vial": 3
+     },
+     "raw": {
+      "Bruiseweed": 3,
+      "Swiftthistle": 3
+     },
+     "source": "Vendor",
+     "sell": 725
+    },
+    {
+     "from": 120,
+     "to": 125,
+     "recipe": "Lesser Mana Potion",
+     "count": 5,
+     "mats": {
+      "Mageroyal": 5,
+      "Stranglekelp": 5,
+      "Empty Vial": 5
+     },
+     "raw": {
+      "Mageroyal": 5,
+      "Stranglekelp": 5
+     },
+     "sell": 309
+    },
+    {
+     "from": 125,
+     "to": 130,
+     "recipe": "Lesser Troll's Blood Elixir",
+     "count": 5,
+     "mats": {
+      "Bruiseweed": 10,
+      "Briarthorn": 10,
+      "Leaded Vial": 5
+     },
+     "raw": {
+      "Bruiseweed": 10,
+      "Briarthorn": 10
+     },
+     "sell": 1400
+    },
+    {
+     "from": 130,
+     "to": 140,
+     "recipe": "Elixir of Lesser Defense",
+     "count": 10,
+     "mats": {
+      "Wild Steelbloom": 10,
+      "Stranglekelp": 10,
+      "Leaded Vial": 10
+     },
+     "raw": {
+      "Wild Steelbloom": 10,
+      "Stranglekelp": 10
+     },
+     "sell": 1398
+    },
+    {
+     "from": 140,
+     "to": 148,
+     "recipe": "Frenzy Potion",
+     "count": 9,
+     "mats": {
+      "Fadeleaf": 18,
+      "Briarthorn": 18,
+      "Leaded Vial": 9
+     },
+     "raw": {
+      "Fadeleaf": 18,
+      "Briarthorn": 18
+     },
+     "source": "Vendor",
+     "sell": 6000
+    },
+    {
+     "from": 148,
+     "to": 158,
+     "recipe": "Shadow Protection Potion",
+     "count": 10,
+     "mats": {
+      "Grave Moss": 10,
+      "Kingsblood": 10,
+      "Leaded Vial": 10
+     },
+     "raw": {
+      "Grave Moss": 10,
+      "Kingsblood": 10
+     },
+     "source": "Vendor",
+     "sell": 3599
+    },
+    {
+     "from": 158,
+     "to": 162,
+     "recipe": "Lesser Troll's Blood Elixir",
+     "count": 6,
+     "mats": {
+      "Bruiseweed": 12,
+      "Briarthorn": 12,
+      "Leaded Vial": 6
+     },
+     "raw": {
+      "Bruiseweed": 12,
+      "Briarthorn": 12
+     },
+     "sell": 1400
+    },
+    {
+     "from": 162,
+     "to": 165,
+     "recipe": "Discolored Healing Potion",
+     "count": 11,
+     "mats": {
+      "Leaded Vial": 11,
+      "Bruiseweed": 11,
+      "Murloc Eye": 11
+     },
+     "raw": {
+      "Bruiseweed": 11,
+      "Murloc Eye": 11
+     },
+     "sell": 999
+    },
+    {
+     "from": 165,
+     "to": 175,
+     "recipe": "Shadow Oil",
+     "count": 10,
+     "mats": {
+      "Fadeleaf": 40,
+      "Grave Moss": 40,
+      "Leaded Vial": 10
+     },
+     "raw": {
+      "Fadeleaf": 40,
+      "Grave Moss": 40
+     },
+     "source": "Vendor",
+     "sell": 6350
+    },
+    {
+     "from": 175,
+     "to": 184,
+     "recipe": "Greater Discolored Healing Potion",
+     "count": 11,
+     "mats": {
+      "Leaded Vial": 11,
+      "Kingsblood": 11,
+      "Murloc Eye": 11
+     },
+     "raw": {
+      "Kingsblood": 11,
+      "Murloc Eye": 11
+     },
+     "sell": 4487
+    },
+    {
+     "from": 184,
+     "to": 190,
+     "recipe": "Fire Protection Potion",
+     "count": 6,
+     "mats": {
+      "Small Flame Sac": 6,
+      "Fire Oil": 6,
+      "Leaded Vial": 6
+     },
+     "raw": {
+      "Small Flame Sac": 6
+     },
+     "source": "Vendor",
+     "sell": 4600
+    },
+    {
+     "from": 190,
+     "to": 200,
+     "recipe": "Nature Protection Potion",
+     "count": 10,
+     "mats": {
+      "Liferoot": 10,
+      "Stranglekelp": 10,
+      "Leaded Vial": 10
+     },
+     "raw": {
+      "Liferoot": 10,
+      "Stranglekelp": 10
+     },
+     "source": "Vendor",
+     "sell": 1800
+    },
+    {
+     "from": 200,
+     "to": 210,
+     "recipe": "Frost Oil",
+     "count": 10,
+     "mats": {
+      "Khadgar's Whisker": 40,
+      "Wintersbite": 20,
+      "Leaded Vial": 10
+     },
+     "raw": {
+      "Khadgar's Whisker": 40,
+      "Wintersbite": 20
+     },
+     "source": "Vendor",
+     "sell": 12476
+    },
+    {
+     "from": 210,
+     "to": 214,
+     "recipe": "Fire Protection Potion",
+     "count": 5,
+     "mats": {
+      "Small Flame Sac": 5,
+      "Fire Oil": 5,
+      "Leaded Vial": 5
+     },
+     "raw": {
+      "Small Flame Sac": 5
+     },
+     "source": "Vendor",
+     "sell": 4600
+    },
+    {
+     "from": 214,
+     "to": 215,
+     "recipe": "Free Action Potion",
+     "count": 40,
+     "mats": {
+      "Blackmouth Oil": 80,
+      "Stranglekelp": 40,
+      "Leaded Vial": 40
+     },
+     "raw": {
+      "Stranglekelp": 40
+     },
+     "source": "Vendor",
+     "sell": 1398
+    },
+    {
+     "from": 215,
+     "to": 220,
+     "recipe": "Elixir of Lesser Fortitude",
+     "count": 12,
+     "mats": {
+      "Wild Steelbloom": 12,
+      "Goldthorn": 12,
+      "Leaded Vial": 12
+     },
+     "raw": {
+      "Wild Steelbloom": 12,
+      "Goldthorn": 12
+     },
+     "sell": 5500
+    },
+    {
+     "from": 220,
+     "to": 229,
+     "recipe": "Oil of Immolation",
+     "count": 11,
+     "mats": {
+      "Firebloom": 11,
+      "Goldthorn": 11,
+      "Crystal Vial": 11
+     },
+     "raw": {
+      "Firebloom": 11,
+      "Goldthorn": 11
+     },
+     "sell": 12500
+    },
+    {
+     "from": 229,
+     "to": 230,
+     "recipe": "Nature Protection Potion",
+     "count": 2,
+     "mats": {
+      "Liferoot": 2,
+      "Stranglekelp": 2,
+      "Leaded Vial": 2
+     },
+     "raw": {
+      "Liferoot": 2,
+      "Stranglekelp": 2
+     },
+     "source": "Vendor",
+     "sell": 1800
+    },
+    {
+     "from": 230,
+     "to": 240,
+     "recipe": "Viridian Dye",
+     "count": 12,
+     "mats": {
+      "Stranglevine": 24,
+      "Crystal Vial": 12
+     },
+     "raw": {
+      "Stranglevine": 24
+     }
+    },
+    {
+     "from": 240,
+     "to": 250,
+     "recipe": "Elixir of Greater Intellect",
+     "count": 10,
+     "mats": {
+      "Blindweed": 10,
+      "Khadgar's Whisker": 10,
+      "Crystal Vial": 10
+     },
+     "raw": {
+      "Blindweed": 10,
+      "Khadgar's Whisker": 10
+     }
+    },
+    {
+     "from": 250,
+     "to": 260,
+     "recipe": "Stonescale Oil",
+     "count": 30,
+     "mats": {
+      "Stonescale Eel": 30,
+      "Leaded Vial": 30
+     },
+     "raw": {
+      "Stonescale Eel": 30
+     }
+    },
+    {
+     "from": 260,
+     "to": 278,
+     "recipe": "Elixir of Greater Intellect",
+     "count": 36,
+     "mats": {
+      "Blindweed": 36,
+      "Khadgar's Whisker": 36,
+      "Crystal Vial": 36
+     },
+     "raw": {
+      "Blindweed": 36,
+      "Khadgar's Whisker": 36
+     }
+    },
+    {
+     "from": 278,
+     "to": 299,
+     "recipe": "Elixir of Shadow Power",
+     "count": 58,
+     "mats": {
+      "Ghost Mushroom": 174,
+      "Crystal Vial": 58
+     },
+     "raw": {
+      "Ghost Mushroom": 174
+     },
+     "source": "Vendor"
+    },
+    {
+     "from": 299,
+     "to": 300,
+     "recipe": "Elixir of Greater Defense",
+     "count": 2,
+     "mats": {
+      "Stonescale Oil": 4,
+      "Sungrass": 2,
+      "Crystal Vial": 2
+     },
+     "raw": {
+      "Sungrass": 2
+     },
+     "source": "Vendor"
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Kingsblood": 85,
+      "Briarthorn": 72,
+      "Silverleaf": 46,
+      "Peacebloom": 35,
+      "Wild Steelbloom": 34,
+      "Mageroyal": 27,
+      "Liferoot": 24,
+      "Murloc Eye": 22,
+      "Pyrite": 20,
+      "Fadeleaf": 18,
+      "Stranglekelp": 15,
+      "Sharp Claw": 13,
+      "Bruiseweed": 13,
+      "Earthroot": 10,
+      "Grave Moss": 10,
+      "Swiftthistle": 3
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Stranglekelp": 50,
+      "Fadeleaf": 40,
+      "Grave Moss": 40,
+      "Khadgar's Whisker": 40,
+      "Bruiseweed": 23,
+      "Goldthorn": 23,
+      "Murloc Eye": 22,
+      "Wintersbite": 20,
+      "Briarthorn": 12,
+      "Wild Steelbloom": 12,
+      "Kingsblood": 11,
+      "Small Flame Sac": 11,
+      "Firebloom": 11,
+      "Liferoot": 10
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Ghost Mushroom": 174,
+      "Blindweed": 46,
+      "Khadgar's Whisker": 46,
+      "Stonescale Eel": 30,
+      "Stranglevine": 24,
+      "Liferoot": 2,
+      "Stranglekelp": 2,
+      "Sungrass": 2
+     }
+    }
+   ],
+   "vendor": {
+    "Blackmouth Oil": 80,
+    "Crystal Vial": 129,
+    "Empty Vial": 133,
+    "Fire Oil": 11,
+    "Leaded Vial": 204,
+    "Stonescale Oil": 4
+   }
+  },
+  "Blacksmithing": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 11,
+     "recipe": "Rough Sharpening Stone",
+     "count": 10,
+     "mats": {
+      "Rough Stone": 10
+     },
+     "raw": {
+      "Rough Stone": 10
+     },
+     "sell": 4
+    },
+    {
+     "from": 11,
+     "to": 20,
+     "recipe": "Rough Weightstone",
+     "count": 10,
+     "mats": {
+      "Rough Stone": 10
+     },
+     "raw": {
+      "Rough Stone": 10
+     },
+     "sell": 4
+    },
+    {
+     "from": 20,
+     "to": 25,
+     "recipe": "Copper Chain Boots",
+     "count": 5,
+     "mats": {
+      "Copper Bar": 40
+     },
+     "raw": {
+      "Copper Ore": 40
+     },
+     "sell": 2000,
+     "de": 485
+    },
+    {
+     "from": 25,
+     "to": 35,
+     "recipe": "Copper Claymore",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 100,
+      "Weak Flux": 20,
+      "Rough Grinding Stone": 10,
+      "Light Leather": 10
+     },
+     "raw": {
+      "Copper Ore": 100,
+      "Rough Stone": 20,
+      "Light Leather": 10
+     },
+     "sell": 4800,
+     "de": 891
+    },
+    {
+     "from": 35,
+     "to": 45,
+     "recipe": "Copper Battle Axe",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 120,
+      "Weak Flux": 20,
+      "Malachite": 20,
+      "Rough Grinding Stone": 20,
+      "Light Leather": 20
+     },
+     "raw": {
+      "Copper Ore": 120,
+      "Rough Stone": 40,
+      "Malachite": 20,
+      "Light Leather": 20
+     },
+     "sell": 3800,
+     "de": 891
+    },
+    {
+     "from": 45,
+     "to": 55,
+     "recipe": "Thick War Axe",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 100,
+      "Weak Flux": 20,
+      "Silver Bar": 20,
+      "Rough Grinding Stone": 20,
+      "Light Leather": 20
+     },
+     "raw": {
+      "Copper Ore": 100,
+      "Rough Stone": 40,
+      "Silver Ore": 20,
+      "Light Leather": 20
+     },
+     "sell": 5400,
+     "de": 2436
+    },
+    {
+     "from": 55,
+     "to": 65,
+     "recipe": "Copper Dagger",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 60,
+      "Weak Flux": 10,
+      "Rough Grinding Stone": 10,
+      "Light Leather": 10
+     },
+     "raw": {
+      "Copper Ore": 60,
+      "Rough Stone": 20,
+      "Light Leather": 10
+     },
+     "sell": 3200,
+     "de": 891
+    },
+    {
+     "from": 65,
+     "to": 75,
+     "recipe": "Heavy Copper Maul",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 120,
+      "Weak Flux": 20,
+      "Light Leather": 20
+     },
+     "raw": {
+      "Copper Ore": 120,
+      "Light Leather": 20
+     },
+     "sell": 3000,
+     "de": 2436
+    },
+    {
+     "from": 75,
+     "to": 84,
+     "recipe": "Runed Copper Pants",
+     "count": 11,
+     "mats": {
+      "Copper Bar": 88,
+      "Coarse Thread": 33,
+      "Rough Grinding Stone": 33
+     },
+     "raw": {
+      "Copper Ore": 88,
+      "Rough Stone": 66
+     },
+     "sell": 2000,
+     "de": 485
+    },
+    {
+     "from": 84,
+     "to": 95,
+     "recipe": "Heavy Copper Maul",
+     "count": 15,
+     "mats": {
+      "Copper Bar": 180,
+      "Weak Flux": 30,
+      "Light Leather": 30
+     },
+     "raw": {
+      "Copper Ore": 180,
+      "Light Leather": 30
+     },
+     "sell": 3000,
+     "de": 2436
+    },
+    {
+     "from": 95,
+     "to": 105,
+     "recipe": "Heavy Copper Broadsword",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 140,
+      "Weak Flux": 20,
+      "Tigerseye": 20,
+      "Medium Leather": 20
+     },
+     "raw": {
+      "Copper Ore": 140,
+      "Tigerseye": 20,
+      "Medium Leather": 20
+     },
+     "sell": 4400,
+     "de": 2436
+    },
+    {
+     "from": 105,
+     "to": 111,
+     "recipe": "Big Bronze Knife",
+     "count": 6,
+     "mats": {
+      "Bronze Bar": 36,
+      "Weak Flux": 24,
+      "Rough Grinding Stone": 12,
+      "Tigerseye": 6,
+      "Medium Leather": 6
+     },
+     "raw": {
+      "Rough Stone": 24,
+      "Copper Ore": 18,
+      "Tin Ore": 18,
+      "Tigerseye": 6,
+      "Medium Leather": 6
+     },
+     "sell": 3100,
+     "de": 2436
+    },
+    {
+     "from": 111,
+     "to": 115,
+     "recipe": "Pearl-handled Dagger",
+     "count": 4,
+     "mats": {
+      "Bronze Bar": 24,
+      "Strong Flux": 4,
+      "Small Lustrous Pearl": 8,
+      "Coarse Grinding Stone": 8
+     },
+     "raw": {
+      "Coarse Stone": 16,
+      "Copper Ore": 12,
+      "Tin Ore": 12,
+      "Small Lustrous Pearl": 8
+     },
+     "sell": 8900,
+     "de": 948
+    },
+    {
+     "from": 115,
+     "to": 125,
+     "recipe": "Bronze Axe",
+     "count": 11,
+     "mats": {
+      "Bronze Bar": 77,
+      "Weak Flux": 44,
+      "Medium Leather": 11
+     },
+     "raw": {
+      "Copper Ore": 39,
+      "Tin Ore": 39,
+      "Medium Leather": 11
+     },
+     "sell": 3900,
+     "de": 948
+    },
+    {
+     "from": 125,
+     "to": 130,
+     "recipe": "Heavy Sharpening Stone",
+     "count": 5,
+     "mats": {
+      "Heavy Stone": 5
+     },
+     "raw": {
+      "Heavy Stone": 5
+     },
+     "sell": 1890
+    },
+    {
+     "from": 130,
+     "to": 140,
+     "recipe": "Heavy Bronze Mace",
+     "count": 11,
+     "mats": {
+      "Bronze Bar": 88,
+      "Strong Flux": 11,
+      "Moss Agate": 11,
+      "Shadowgem": 11,
+      "Coarse Grinding Stone": 22,
+      "Medium Leather": 22
+     },
+     "raw": {
+      "Copper Ore": 44,
+      "Tin Ore": 44,
+      "Coarse Stone": 44,
+      "Medium Leather": 22,
+      "Moss Agate": 11,
+      "Shadowgem": 11
+     },
+     "sell": 7000,
+     "de": 948
+    },
+    {
+     "from": 140,
+     "to": 141,
+     "recipe": "Pearl-handled Dagger",
+     "count": 6,
+     "mats": {
+      "Bronze Bar": 36,
+      "Strong Flux": 6,
+      "Small Lustrous Pearl": 12,
+      "Coarse Grinding Stone": 12
+     },
+     "raw": {
+      "Coarse Stone": 24,
+      "Copper Ore": 18,
+      "Tin Ore": 18,
+      "Small Lustrous Pearl": 12
+     },
+     "sell": 8900,
+     "de": 948
+    },
+    {
+     "from": 141,
+     "to": 146,
+     "recipe": "Bronze Shortsword",
+     "count": 13,
+     "mats": {
+      "Bronze Bar": 65,
+      "Weak Flux": 52,
+      "Medium Leather": 26
+     },
+     "raw": {
+      "Copper Ore": 33,
+      "Tin Ore": 33,
+      "Medium Leather": 26
+     },
+     "sell": 2200,
+     "de": 948
+    },
+    {
+     "from": 146,
+     "to": 148,
+     "recipe": "Heavy Copper Broadsword",
+     "count": 24,
+     "mats": {
+      "Copper Bar": 336,
+      "Weak Flux": 48,
+      "Tigerseye": 48,
+      "Medium Leather": 48
+     },
+     "raw": {
+      "Copper Ore": 336,
+      "Tigerseye": 48,
+      "Medium Leather": 48
+     },
+     "sell": 4400,
+     "de": 2436
+    },
+    {
+     "from": 148,
+     "to": 150,
+     "recipe": "Bronze Warhammer",
+     "count": 2,
+     "mats": {
+      "Bronze Bar": 16,
+      "Strong Flux": 2,
+      "Medium Leather": 2
+     },
+     "raw": {
+      "Copper Ore": 8,
+      "Tin Ore": 8,
+      "Medium Leather": 2
+     },
+     "sell": 2400,
+     "de": 948
+    },
+    {
+     "from": 150,
+     "to": 160,
+     "recipe": "Golden Rod",
+     "count": 12,
+     "mats": {
+      "Gold Bar": 12,
+      "Coarse Grinding Stone": 24
+     },
+     "raw": {
+      "Coarse Stone": 48,
+      "Gold Ore": 12
+     },
+     "sell": 1600
+    },
+    {
+     "from": 160,
+     "to": 169,
+     "recipe": "Hardened Iron Shortsword",
+     "count": 11,
+     "mats": {
+      "Iron Bar": 66,
+      "Strong Flux": 22,
+      "Heavy Grinding Stone": 11,
+      "Lesser Moonstone": 22,
+      "Heavy Leather": 33
+     },
+     "raw": {
+      "Iron Ore": 66,
+      "Heavy Stone": 33,
+      "Heavy Leather": 33,
+      "Lesser Moonstone": 22
+     },
+     "source": "Vendor",
+     "sell": 19800,
+     "de": 6335
+    },
+    {
+     "from": 169,
+     "to": 175,
+     "recipe": "Green Iron Bracers",
+     "count": 9,
+     "mats": {
+      "Iron Bar": 54,
+      "Green Dye": 9
+     },
+     "raw": {
+      "Iron Ore": 54
+     },
+     "sell": 2000,
+     "de": 3940
+    },
+    {
+     "from": 175,
+     "to": 205,
+     "recipe": "Officer's Gauntlet",
+     "count": 31,
+     "mats": {
+      "Steel Bar": 310,
+      "Heavy Grinding Stone": 124,
+      "Sandpaper": 124,
+      "Sulfuric Acid": 62,
+      "Jade": 124
+     },
+     "raw": {
+      "Heavy Stone": 372,
+      "Iron Ore": 310,
+      "Sandpaper": 124,
+      "Jade": 124,
+      "Sulfuric Acid": 62
+     },
+     "source": "Vendor",
+     "de": 53200
+    },
+    {
+     "from": 205,
+     "to": 210,
+     "recipe": "Heavy Mithril Shoulder",
+     "count": 6,
+     "mats": {
+      "Mithril Bar": 48,
+      "Heavy Leather": 36
+     },
+     "raw": {
+      "Mithril Ore": 48,
+      "Heavy Leather": 36
+     },
+     "sell": 55600,
+     "de": 16241
+    },
+    {
+     "from": 210,
+     "to": 219,
+     "recipe": "Heavy Mithril Axe",
+     "count": 11,
+     "mats": {
+      "Mithril Bar": 132,
+      "Citrine": 22,
+      "Solid Grinding Stone": 11,
+      "Heavy Leather": 44
+     },
+     "raw": {
+      "Mithril Ore": 132,
+      "Solid Stone": 44,
+      "Heavy Leather": 44,
+      "Citrine": 22
+     },
+     "sell": 118800,
+     "de": 14411
+    },
+    {
+     "from": 219,
+     "to": 225,
+     "recipe": "Officer's Gauntlet",
+     "count": 62,
+     "mats": {
+      "Steel Bar": 620,
+      "Heavy Grinding Stone": 248,
+      "Sandpaper": 248,
+      "Sulfuric Acid": 124,
+      "Jade": 248
+     },
+     "raw": {
+      "Heavy Stone": 744,
+      "Iron Ore": 620,
+      "Sandpaper": 248,
+      "Jade": 248,
+      "Sulfuric Acid": 124
+     },
+     "source": "Vendor",
+     "de": 53200
+    },
+    {
+     "from": 225,
+     "to": 229,
+     "recipe": "Steel Plate Helm",
+     "count": 20,
+     "mats": {
+      "Steel Bar": 280,
+      "Solid Grinding Stone": 20
+     },
+     "raw": {
+      "Iron Ore": 280,
+      "Solid Stone": 80
+     },
+     "de": 16241
+    },
+    {
+     "from": 229,
+     "to": 230,
+     "recipe": "Ornate Mithril Shoulders",
+     "count": 2,
+     "mats": {
+      "Mithril Bar": 24,
+      "Truesilver Bar": 2,
+      "Thick Leather": 12
+     },
+     "raw": {
+      "Mithril Ore": 24,
+      "Thick Leather": 12,
+      "Truesilver Ore": 2
+     },
+     "source": "Quest",
+     "de": 16241
+    },
+    {
+     "from": 230,
+     "to": 239,
+     "recipe": "Heavy Mithril Breastplate",
+     "count": 14,
+     "mats": {
+      "Mithril Bar": 224
+     },
+     "raw": {
+      "Mithril Ore": 224
+     },
+     "de": 14517
+    },
+    {
+     "from": 239,
+     "to": 250,
+     "recipe": "Big Black Mace",
+     "count": 28,
+     "mats": {
+      "Mithril Bar": 448,
+      "Black Pearl": 28,
+      "Shadowgem": 112,
+      "Solid Grinding Stone": 28,
+      "Thick Leather": 56
+     },
+     "raw": {
+      "Mithril Ore": 448,
+      "Shadowgem": 112,
+      "Solid Stone": 112,
+      "Thick Leather": 56,
+      "Black Pearl": 28
+     },
+     "de": 30036
+    },
+    {
+     "from": 250,
+     "to": 265,
+     "recipe": "Dense Sharpening Stone",
+     "count": 35,
+     "mats": {
+      "Dense Stone": 35
+     },
+     "raw": {
+      "Dense Stone": 35
+     }
+    },
+    {
+     "from": 265,
+     "to": 269,
+     "recipe": "Imperial Plate Belt",
+     "count": 5,
+     "mats": {
+      "Thorium Bar": 110,
+      "Rugged Leather": 30,
+      "Aquamarine": 5
+     },
+     "raw": {
+      "Thorium Ore": 110,
+      "Rugged Leather": 30,
+      "Aquamarine": 5
+     },
+     "source": "Quest",
+     "de": 17252
+    },
+    {
+     "from": 269,
+     "to": 270,
+     "recipe": "Officer's Waistguard",
+     "count": 1,
+     "mats": {
+      "Thorium Bar": 24,
+      "Solid Grinding Stone": 4,
+      "Sandpaper": 6,
+      "Sulfuric Acid": 6,
+      "Jade": 10
+     },
+     "raw": {
+      "Thorium Ore": 24,
+      "Solid Stone": 16,
+      "Jade": 10,
+      "Sandpaper": 6,
+      "Sulfuric Acid": 6
+     },
+     "source": "Vendor",
+     "de": 26030
+    },
+    {
+     "from": 270,
+     "to": 272,
+     "recipe": "Imperial Plate Bracers",
+     "count": 3,
+     "mats": {
+      "Thorium Bar": 60,
+      "Star Ruby": 3
+     },
+     "raw": {
+      "Thorium Ore": 60,
+      "Star Ruby": 3
+     },
+     "source": "Quest",
+     "de": 17252
+    },
+    {
+     "from": 272,
+     "to": 275,
+     "recipe": "Bold Dirk",
+     "count": 3,
+     "mats": {
+      "Thorium Bar": 90,
+      "Essence of Air": 12,
+      "Azerothium Bar": 30,
+      "Rugged Leather": 12
+     },
+     "raw": {
+      "Thorium Ore": 90,
+      "Azerothium Bar": 30,
+      "Essence of Air": 12,
+      "Rugged Leather": 12
+     },
+     "source": "Vendor",
+     "de": 54535
+    },
+    {
+     "from": 275,
+     "to": 278,
+     "recipe": "Arcanite Skeleton Key",
+     "count": 4,
+     "mats": {
+      "Arcanite Bar": 4,
+      "Dense Grinding Stone": 4
+     },
+     "raw": {
+      "Dense Stone": 16,
+      "Arcanite Bar": 4
+     }
+    },
+    {
+     "from": 278,
+     "to": 280,
+     "recipe": "Arcanite Rod",
+     "count": 2,
+     "mats": {
+      "Arcanite Bar": 6,
+      "Dense Grinding Stone": 2
+     },
+     "raw": {
+      "Dense Stone": 8,
+      "Arcanite Bar": 6
+     }
+    },
+    {
+     "from": 280,
+     "to": 285,
+     "recipe": "Enchanted Battlehammer",
+     "count": 6,
+     "mats": {
+      "Thorium Bar": 120,
+      "Enchanted Thorium Bar": 36,
+      "Huge Emerald": 12,
+      "Powerful Mojo": 24,
+      "Rugged Leather": 24
+     },
+     "raw": {
+      "Thorium Ore": 120,
+      "Enchanted Thorium Bar": 36,
+      "Powerful Mojo": 24,
+      "Rugged Leather": 24,
+      "Huge Emerald": 12
+     },
+     "source": "Quest",
+     "de": 133095
+    },
+    {
+     "from": 285,
+     "to": 290,
+     "recipe": "Clutchlord's Grips",
+     "count": 5,
+     "mats": {
+      "Thorium Bar": 35,
+      "Enchanted Thorium Bar": 25,
+      "Essence of Earth": 15,
+      "Elemental Flux": 5
+     },
+     "raw": {
+      "Thorium Ore": 35,
+      "Enchanted Thorium Bar": 25,
+      "Essence of Earth": 15
+     },
+     "source": "Vendor",
+     "de": 133095
+    },
+    {
+     "from": 290,
+     "to": 299,
+     "recipe": "Clutchlord's Support",
+     "count": 12,
+     "mats": {
+      "Thorium Bar": 132,
+      "Enchanted Thorium Bar": 60,
+      "Essence of Earth": 36,
+      "Elemental Flux": 12
+     },
+     "raw": {
+      "Thorium Ore": 132,
+      "Enchanted Thorium Bar": 60,
+      "Essence of Earth": 36
+     },
+     "source": "Vendor",
+     "de": 133095
+    },
+    {
+     "from": 299,
+     "to": 300,
+     "recipe": "Girdle of the Dawn",
+     "count": 3,
+     "mats": {
+      "Thorium Bar": 24,
+      "Truesilver Bar": 18,
+      "Righteous Orb": 3
+     },
+     "raw": {
+      "Thorium Ore": 24,
+      "Truesilver Ore": 18,
+      "Righteous Orb": 3
+     },
+     "source": "Vendor",
+     "de": 133095
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Copper Ore": 1455,
+      "Rough Stone": 230,
+      "Tin Ore": 171,
+      "Medium Leather": 135,
+      "Light Leather": 110,
+      "Coarse Stone": 84,
+      "Tigerseye": 74,
+      "Malachite": 20,
+      "Silver Ore": 20,
+      "Small Lustrous Pearl": 20,
+      "Moss Agate": 11,
+      "Shadowgem": 11,
+      "Heavy Stone": 5
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Heavy Stone": 1149,
+      "Iron Ore": 1050,
+      "Sandpaper": 372,
+      "Jade": 372,
+      "Sulfuric Acid": 186,
+      "Mithril Ore": 180,
+      "Heavy Leather": 113,
+      "Coarse Stone": 48,
+      "Solid Stone": 44,
+      "Lesser Moonstone": 22,
+      "Citrine": 22,
+      "Gold Ore": 12
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Mithril Ore": 696,
+      "Thorium Ore": 595,
+      "Iron Ore": 280,
+      "Solid Stone": 208,
+      "Enchanted Thorium Bar": 121,
+      "Shadowgem": 112,
+      "Thick Leather": 68,
+      "Rugged Leather": 66,
+      "Dense Stone": 59,
+      "Essence of Earth": 51,
+      "Azerothium Bar": 30,
+      "Black Pearl": 28,
+      "Powerful Mojo": 24,
+      "Truesilver Ore": 20,
+      "Essence of Air": 12,
+      "Huge Emerald": 12,
+      "Jade": 10,
+      "Arcanite Bar": 10,
+      "Sandpaper": 6,
+      "Sulfuric Acid": 6,
+      "Aquamarine": 5,
+      "Star Ruby": 3,
+      "Righteous Orb": 3
+     }
+    }
+   ],
+   "vendor": {
+    "Coal": 1210,
+    "Coarse Thread": 33,
+    "Elemental Flux": 17,
+    "Green Dye": 9,
+    "Strong Flux": 45,
+    "Weak Flux": 308
+   }
+  },
+  "Enchanting": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 11,
+     "recipe": "Novice's Practice Wand",
+     "count": 10,
+     "mats": {
+      "Simple Wood": 10,
+      "Mote of Magic": 10
+     },
+     "raw": {
+      "Simple Wood": 10
+     },
+     "sell": 100
+    },
+    {
+     "from": 11,
+     "to": 25,
+     "recipe": "Enchant Bracer - Inferior Stamina",
+     "count": 21,
+     "mats": {
+      "Mote of Magic": 21
+     },
+     "raw": {}
+    },
+    {
+     "from": 25,
+     "to": 45,
+     "recipe": "Enchant Chest - Inferior Stamina",
+     "count": 20,
+     "mats": {
+      "Strange Dust": 20
+     },
+     "raw": {
+      "Strange Dust": 20
+     }
+    },
+    {
+     "from": 45,
+     "to": 46,
+     "recipe": "Minor Wizard Oil",
+     "count": 1,
+     "mats": {
+      "Strange Dust": 1,
+      "Maple Seed": 1,
+      "Empty Vial": 1
+     },
+     "raw": {
+      "Strange Dust": 1,
+      "Maple Seed": 1
+     },
+     "source": "Vendor",
+     "sell": 400
+    },
+    {
+     "from": 46,
+     "to": 91,
+     "recipe": "Enchant Chest - Inferior Stamina",
+     "count": 54,
+     "mats": {
+      "Strange Dust": 54
+     },
+     "raw": {
+      "Strange Dust": 54
+     }
+    },
+    {
+     "from": 91,
+     "to": 100,
+     "recipe": "Enchant Bracer - Minor Stamina",
+     "count": 9,
+     "mats": {
+      "Strange Dust": 18
+     },
+     "raw": {
+      "Strange Dust": 18
+     }
+    },
+    {
+     "from": 100,
+     "to": 146,
+     "recipe": "Enchant 2H Weapon - Minor Impact",
+     "count": 51,
+     "mats": {
+      "Strange Dust": 51,
+      "Small Glimmering Shard": 51
+     },
+     "raw": {
+      "Strange Dust": 51,
+      "Small Glimmering Shard": 51
+     }
+    },
+    {
+     "from": 146,
+     "to": 150,
+     "recipe": "Enchant Cloak - Lesser Fire Resistance",
+     "count": 4,
+     "mats": {
+      "Fire Oil": 4,
+      "Lesser Astral Essence": 4
+     },
+     "raw": {
+      "Lesser Astral Essence": 4
+     }
+    },
+    {
+     "from": 150,
+     "to": 160,
+     "recipe": "Minor Mana Oil",
+     "count": 10,
+     "mats": {
+      "Soul Dust": 10,
+      "Maple Seed": 20,
+      "Leaded Vial": 10
+     },
+     "raw": {
+      "Maple Seed": 20,
+      "Soul Dust": 10
+     },
+     "source": "Vendor",
+     "sell": 1100
+    },
+    {
+     "from": 160,
+     "to": 211,
+     "recipe": "Enchant Boots - Lesser Agility",
+     "count": 78,
+     "mats": {
+      "Soul Dust": 78
+     },
+     "raw": {
+      "Soul Dust": 78
+     }
+    },
+    {
+     "from": 211,
+     "to": 214,
+     "recipe": "Enchant Boots - Lesser Stamina",
+     "count": 7,
+     "mats": {
+      "Soul Dust": 14
+     },
+     "raw": {
+      "Soul Dust": 14
+     }
+    },
+    {
+     "from": 214,
+     "to": 226,
+     "recipe": "Enchant Cloak - Greater Defense",
+     "count": 12,
+     "mats": {
+      "Vision Dust": 12
+     },
+     "raw": {
+      "Vision Dust": 12
+     }
+    },
+    {
+     "from": 226,
+     "to": 260,
+     "recipe": "Enchant Gloves - Agility",
+     "count": 58,
+     "mats": {
+      "Vision Dust": 58
+     },
+     "raw": {
+      "Vision Dust": 58
+     }
+    },
+    {
+     "from": 260,
+     "to": 266,
+     "recipe": "Lesser Mana Oil",
+     "count": 7,
+     "mats": {
+      "Dream Dust": 7,
+      "Purple Lotus": 7,
+      "Crystal Vial": 7
+     },
+     "raw": {
+      "Dream Dust": 7,
+      "Purple Lotus": 7
+     },
+     "source": "Vendor"
+    },
+    {
+     "from": 266,
+     "to": 286,
+     "recipe": "Enchant Bracer - Greater Strength",
+     "count": 35,
+     "mats": {
+      "Dream Dust": 35,
+      "Lesser Nether Essence": 70
+     },
+     "raw": {
+      "Lesser Nether Essence": 70,
+      "Dream Dust": 35
+     }
+    },
+    {
+     "from": 286,
+     "to": 290,
+     "recipe": "Enchant Shield - Greater Stamina",
+     "count": 5,
+     "mats": {
+      "Dream Dust": 30
+     },
+     "raw": {
+      "Dream Dust": 30
+     },
+     "source": "Vendor"
+    },
+    {
+     "from": 290,
+     "to": 300,
+     "recipe": "Sigil of Flowing Waters",
+     "count": 10,
+     "mats": {
+      "Illusion Dust": 10
+     },
+     "raw": {
+      "Illusion Dust": 10
+     },
+     "source": "Vendor"
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Strange Dust": 144,
+      "Small Glimmering Shard": 51,
+      "Simple Wood": 10,
+      "Lesser Astral Essence": 4,
+      "Maple Seed": 1
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Soul Dust": 102,
+      "Maple Seed": 20,
+      "Vision Dust": 12
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Dream Dust": 72,
+      "Lesser Nether Essence": 70,
+      "Vision Dust": 58,
+      "Illusion Dust": 10,
+      "Purple Lotus": 7
+     }
+    }
+   ],
+   "vendor": {
+    "Crystal Vial": 7,
+    "Empty Vial": 1,
+    "Fire Oil": 4,
+    "Leaded Vial": 10,
+    "Mote of Magic": 31
+   }
+  },
+  "Engineering": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 25,
+     "recipe": "Rough Blasting Powder",
+     "count": 25,
+     "mats": {
+      "Rough Stone": 25
+     },
+     "raw": {
+      "Rough Stone": 25
+     },
+     "sell": 4
+    },
+    {
+     "from": 25,
+     "to": 30,
+     "recipe": "SAF-T Dynamite",
+     "count": 7,
+     "mats": {
+      "Rough Blasting Powder": 14,
+      "Linen Cloth": 7
+     },
+     "raw": {
+      "Rough Stone": 14,
+      "Linen Cloth": 7
+     },
+     "source": "Vendor",
+     "sell": 500
+    },
+    {
+     "from": 30,
+     "to": 40,
+     "recipe": "Handful of Copper Bolts",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 10
+     },
+     "raw": {
+      "Copper Ore": 10
+     },
+     "sell": 200
+    },
+    {
+     "from": 40,
+     "to": 46,
+     "recipe": "Rough Dynamite",
+     "count": 11,
+     "mats": {
+      "Rough Blasting Powder": 11,
+      "Linen Cloth": 11
+     },
+     "raw": {
+      "Rough Stone": 11,
+      "Linen Cloth": 11
+     },
+     "sell": 30
+    },
+    {
+     "from": 46,
+     "to": 50,
+     "recipe": "Handful of Copper Bolts",
+     "count": 5,
+     "mats": {
+      "Copper Bar": 5
+     },
+     "raw": {
+      "Copper Ore": 5
+     },
+     "sell": 200
+    },
+    {
+     "from": 50,
+     "to": 60,
+     "recipe": "Copper Tube",
+     "count": 10,
+     "mats": {
+      "Copper Bar": 20,
+      "Weak Flux": 10
+     },
+     "raw": {
+      "Copper Ore": 20
+     },
+     "sell": 375
+    },
+    {
+     "from": 60,
+     "to": 65,
+     "recipe": "Rough Copper Bomb",
+     "count": 6,
+     "mats": {
+      "Copper Bar": 6,
+      "Handful of Copper Bolts": 6,
+      "Rough Blasting Powder": 12,
+      "Linen Cloth": 6
+     },
+     "raw": {
+      "Copper Ore": 12,
+      "Rough Stone": 12,
+      "Linen Cloth": 6
+     },
+     "sell": 60
+    },
+    {
+     "from": 65,
+     "to": 75,
+     "recipe": "Copper Modulator",
+     "count": 10,
+     "mats": {
+      "Handful of Copper Bolts": 20,
+      "Copper Bar": 10,
+      "Linen Cloth": 20
+     },
+     "raw": {
+      "Copper Ore": 30,
+      "Linen Cloth": 20
+     },
+     "sell": 447
+    },
+    {
+     "from": 75,
+     "to": 85,
+     "recipe": "Crafted Heavy Shot",
+     "count": 10,
+     "mats": {
+      "Coarse Blasting Powder": 10,
+      "Copper Bar": 10
+     },
+     "raw": {
+      "Coarse Stone": 10,
+      "Copper Ore": 10
+     },
+     "sell": 3
+    },
+    {
+     "from": 85,
+     "to": 92,
+     "recipe": "Coarse Blasting Powder",
+     "count": 11,
+     "mats": {
+      "Coarse Stone": 11
+     },
+     "raw": {
+      "Coarse Stone": 11
+     },
+     "sell": 100
+    },
+    {
+     "from": 92,
+     "to": 93,
+     "recipe": "Satchel of Copper Bombs",
+     "count": 2,
+     "mats": {
+      "Rough Copper Bomb": 40,
+      "Light Leather": 12,
+      "Handful of Copper Bolts": 8
+     },
+     "raw": {
+      "Rough Copper Bomb": 40,
+      "Light Leather": 12,
+      "Copper Ore": 8
+     },
+     "source": "Vendor",
+     "de": 2436
+    },
+    {
+     "from": 93,
+     "to": 100,
+     "recipe": "Target Dummy",
+     "count": 7,
+     "mats": {
+      "Copper Modulator": 7,
+      "Handful of Copper Bolts": 14,
+      "Bronze Bar": 7,
+      "Wool Cloth": 7
+     },
+     "raw": {
+      "Copper Ore": 18,
+      "Copper Modulator": 7,
+      "Wool Cloth": 7,
+      "Tin Ore": 4
+     },
+     "sell": 1200
+    },
+    {
+     "from": 100,
+     "to": 105,
+     "recipe": "EZ-Thro Wrap",
+     "count": 12,
+     "mats": {
+      "Wool Cloth": 12,
+      "Sulfuric Acid": 12
+     },
+     "raw": {
+      "Wool Cloth": 12,
+      "Sulfuric Acid": 12
+     },
+     "source": "Vendor",
+     "sell": 2075
+    },
+    {
+     "from": 105,
+     "to": 115,
+     "recipe": "Deadly Blunderbuss",
+     "count": 10,
+     "mats": {
+      "Copper Tube": 20,
+      "Handful of Copper Bolts": 40,
+      "Wooden Stock": 10,
+      "Medium Leather": 20
+     },
+     "raw": {
+      "Copper Ore": 80,
+      "Medium Leather": 20,
+      "Wooden Stock": 10
+     },
+     "sell": 5300,
+     "de": 948
+    },
+    {
+     "from": 115,
+     "to": 120,
+     "recipe": "Flying Tiger Goggles",
+     "count": 5,
+     "mats": {
+      "Light Leather": 30,
+      "Tigerseye": 10
+     },
+     "raw": {
+      "Light Leather": 30,
+      "Tigerseye": 10
+     },
+     "sell": 600,
+     "de": 1062
+    },
+    {
+     "from": 120,
+     "to": 130,
+     "recipe": "Lovingly Crafted Boomstick",
+     "count": 10,
+     "mats": {
+      "Bronze Tube": 20,
+      "Handful of Copper Bolts": 20,
+      "Heavy Stock": 10,
+      "Moss Agate": 30
+     },
+     "raw": {
+      "Copper Ore": 40,
+      "Moss Agate": 30,
+      "Tin Ore": 20,
+      "Heavy Stock": 10
+     },
+     "source": "Vendor",
+     "sell": 40000,
+     "de": 948
+    },
+    {
+     "from": 130,
+     "to": 140,
+     "recipe": "Silver-plated Shotgun",
+     "count": 10,
+     "mats": {
+      "Bronze Tube": 20,
+      "Whirring Bronze Gizmo": 20,
+      "Heavy Stock": 10,
+      "Silver Bar": 30
+     },
+     "raw": {
+      "Copper Ore": 40,
+      "Tin Ore": 40,
+      "Silver Ore": 30,
+      "Wool Cloth": 20,
+      "Heavy Stock": 10
+     },
+     "sell": 10000,
+     "de": 2903
+    },
+    {
+     "from": 140,
+     "to": 150,
+     "recipe": "Minor Recombobulator",
+     "count": 10,
+     "mats": {
+      "Bronze Tube": 10,
+      "Whirring Bronze Gizmo": 20,
+      "Medium Leather": 20,
+      "Moss Agate": 10
+     },
+     "raw": {
+      "Copper Ore": 30,
+      "Tin Ore": 30,
+      "Wool Cloth": 20,
+      "Medium Leather": 20,
+      "Moss Agate": 10
+     },
+     "source": "Drop, Vendor",
+     "sell": 9500,
+     "de": 1771
+    },
+    {
+     "from": 150,
+     "to": 155,
+     "recipe": "Gnomish Universal Remote",
+     "count": 6,
+     "mats": {
+      "Bronze Bar": 36,
+      "Whirring Bronze Gizmo": 6,
+      "Flask of Oil": 12,
+      "Tigerseye": 6,
+      "Malachite": 6
+     },
+     "raw": {
+      "Copper Ore": 24,
+      "Tin Ore": 24,
+      "Wool Cloth": 6,
+      "Tigerseye": 6,
+      "Malachite": 6
+     },
+     "source": "Drop, Vendor",
+     "sell": 9000,
+     "de": 1070
+    },
+    {
+     "from": 155,
+     "to": 165,
+     "recipe": "Ice Deflector",
+     "count": 10,
+     "mats": {
+      "Whirring Bronze Gizmo": 10,
+      "Frost Oil": 10
+     },
+     "raw": {
+      "Copper Ore": 10,
+      "Tin Ore": 10,
+      "Wool Cloth": 10
+     },
+     "source": "Vendor",
+     "sell": 22000
+    },
+    {
+     "from": 165,
+     "to": 174,
+     "recipe": "Goblin Jumper Cables",
+     "count": 11,
+     "mats": {
+      "Iron Bar": 66,
+      "Whirring Bronze Gizmo": 22,
+      "Flask of Oil": 22,
+      "Silk Cloth": 22,
+      "Shadowgem": 22,
+      "Fused Wiring": 11
+     },
+     "raw": {
+      "Iron Ore": 66,
+      "Copper Ore": 22,
+      "Tin Ore": 22,
+      "Wool Cloth": 22,
+      "Silk Cloth": 22,
+      "Shadowgem": 22,
+      "Fused Wiring": 11
+     },
+     "source": "Drop, Vendor",
+     "sell": 70000
+    },
+    {
+     "from": 174,
+     "to": 175,
+     "recipe": "Iron Strut",
+     "count": 4,
+     "mats": {
+      "Iron Bar": 8
+     },
+     "raw": {
+      "Iron Ore": 8
+     },
+     "sell": 2996
+    },
+    {
+     "from": 175,
+     "to": 180,
+     "recipe": "Solid Dynamite",
+     "count": 6,
+     "mats": {
+      "Solid Blasting Powder": 6,
+      "Silk Cloth": 6
+     },
+     "raw": {
+      "Solid Stone": 12,
+      "Silk Cloth": 6
+     },
+     "sell": 3467
+    },
+    {
+     "from": 180,
+     "to": 185,
+     "recipe": "Accurate Scope",
+     "count": 5,
+     "mats": {
+      "Bronze Tube": 5,
+      "Jade": 5,
+      "Citrine": 5
+     },
+     "raw": {
+      "Copper Ore": 5,
+      "Tin Ore": 5,
+      "Jade": 5,
+      "Citrine": 5
+     },
+     "source": "Vendor",
+     "sell": 13900
+    },
+    {
+     "from": 185,
+     "to": 190,
+     "recipe": "Advanced Target Dummy",
+     "count": 6,
+     "mats": {
+      "Iron Strut": 6,
+      "Bronze Framework": 6,
+      "Gyrochronatom": 6,
+      "Heavy Leather": 24
+     },
+     "raw": {
+      "Heavy Leather": 24,
+      "Iron Ore": 18,
+      "Copper Ore": 6,
+      "Tin Ore": 6,
+      "Medium Leather": 6,
+      "Wool Cloth": 6,
+      "Gold Power Core": 6
+     },
+     "sell": 12500
+    },
+    {
+     "from": 190,
+     "to": 198,
+     "recipe": "Centaur Banner Deployment Device",
+     "count": 11,
+     "mats": {
+      "Iron Strut": 66,
+      "Gyrochronatom": 22,
+      "Gold Power Core": 44,
+      "Heavy Leather": 330
+     },
+     "raw": {
+      "Heavy Leather": 330,
+      "Iron Ore": 154,
+      "Gold Power Core": 66
+     },
+     "source": "Quest, Vendor",
+     "sell": 210800
+    },
+    {
+     "from": 198,
+     "to": 200,
+     "recipe": "Advanced Target Dummy",
+     "count": 4,
+     "mats": {
+      "Iron Strut": 4,
+      "Bronze Framework": 4,
+      "Gyrochronatom": 4,
+      "Heavy Leather": 16
+     },
+     "raw": {
+      "Heavy Leather": 16,
+      "Iron Ore": 12,
+      "Copper Ore": 4,
+      "Tin Ore": 4,
+      "Medium Leather": 4,
+      "Wool Cloth": 4,
+      "Gold Power Core": 4
+     },
+     "sell": 12500
+    },
+    {
+     "from": 200,
+     "to": 205,
+     "recipe": "Mechanical Dragonling",
+     "count": 5,
+     "mats": {
+      "Bronze Framework": 5,
+      "Iron Strut": 20,
+      "Gyrochronatom": 20,
+      "Citrine": 10,
+      "Fused Wiring": 5
+     },
+     "raw": {
+      "Iron Ore": 60,
+      "Gold Power Core": 20,
+      "Citrine": 10,
+      "Copper Ore": 5,
+      "Tin Ore": 5,
+      "Medium Leather": 5,
+      "Wool Cloth": 5,
+      "Fused Wiring": 5
+     },
+     "source": "Vendor",
+     "sell": 370000
+    },
+    {
+     "from": 205,
+     "to": 215,
+     "recipe": "Fire Goggles",
+     "count": 10,
+     "mats": {
+      "Green Tinted Goggles": 10,
+      "Citrine": 20,
+      "Elemental Fire": 20,
+      "Heavy Leather": 40
+     },
+     "raw": {
+      "Heavy Leather": 40,
+      "Citrine": 20,
+      "Elemental Fire": 20,
+      "Green Tinted Goggles": 10
+     },
+     "sell": 145000,
+     "de": 16241
+    },
+    {
+     "from": 215,
+     "to": 220,
+     "recipe": "Mechanical Dragonling",
+     "count": 5,
+     "mats": {
+      "Bronze Framework": 5,
+      "Iron Strut": 20,
+      "Gyrochronatom": 20,
+      "Citrine": 10,
+      "Fused Wiring": 5
+     },
+     "raw": {
+      "Iron Ore": 60,
+      "Gold Power Core": 20,
+      "Citrine": 10,
+      "Copper Ore": 5,
+      "Tin Ore": 5,
+      "Medium Leather": 5,
+      "Wool Cloth": 5,
+      "Fused Wiring": 5
+     },
+     "source": "Vendor",
+     "sell": 370000
+    },
+    {
+     "from": 220,
+     "to": 229,
+     "recipe": "Gnomish Cloaking Device",
+     "count": 12,
+     "mats": {
+      "Gyrochronatom": 48,
+      "Jade": 24,
+      "Lesser Moonstone": 24,
+      "Citrine": 24,
+      "Fused Wiring": 12
+     },
+     "raw": {
+      "Iron Ore": 48,
+      "Gold Power Core": 48,
+      "Jade": 24,
+      "Lesser Moonstone": 24,
+      "Citrine": 24,
+      "Fused Wiring": 12
+     },
+     "source": "Drop, Vendor",
+     "sell": 54500
+    },
+    {
+     "from": 229,
+     "to": 238,
+     "recipe": "Deadly Scope",
+     "count": 11,
+     "mats": {
+      "Mithril Tube": 11,
+      "Aquamarine": 22,
+      "Thick Leather": 22
+     },
+     "raw": {
+      "Mithril Ore": 33,
+      "Aquamarine": 22,
+      "Thick Leather": 22
+     },
+     "source": "Vendor",
+     "sell": 39700
+    },
+    {
+     "from": 238,
+     "to": 241,
+     "recipe": "Hi-Impact Mithril Slugs",
+     "count": 11,
+     "mats": {
+      "Mithril Bar": 11,
+      "Solid Blasting Powder": 11
+     },
+     "raw": {
+      "Solid Stone": 22,
+      "Mithril Ore": 11
+     },
+     "sell": 19
+    },
+    {
+     "from": 241,
+     "to": 245,
+     "recipe": "Mithril Frag Bomb",
+     "count": 13,
+     "mats": {
+      "Mithril Casing": 13,
+      "Unstable Trigger": 13,
+      "Solid Blasting Powder": 13
+     },
+     "raw": {
+      "Mithril Ore": 52,
+      "Solid Stone": 52,
+      "Mageweave Cloth": 13
+     },
+     "sell": 6563
+    },
+    {
+     "from": 245,
+     "to": 285,
+     "recipe": "Green Lens",
+     "count": 92,
+     "mats": {
+      "Thick Leather": 736,
+      "Jade": 276,
+      "Aquamarine": 276,
+      "Heart of the Wild": 184,
+      "Wildvine": 184
+     },
+     "raw": {
+      "Thick Leather": 736,
+      "Jade": 276,
+      "Aquamarine": 276,
+      "Heart of the Wild": 184,
+      "Wildvine": 184
+     },
+     "de": 66500
+    },
+    {
+     "from": 285,
+     "to": 300,
+     "recipe": "Delicate Arcanite Converter",
+     "count": 15,
+     "mats": {
+      "Arcanite Bar": 15,
+      "Ironweb Spider Silk": 15
+     },
+     "raw": {
+      "Arcanite Bar": 15,
+      "Ironweb Spider Silk": 15
+     },
+     "source": "Vendor"
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Copper Ore": 303,
+      "Tin Ore": 94,
+      "Rough Stone": 62,
+      "Wool Cloth": 59,
+      "Linen Cloth": 44,
+      "Light Leather": 42,
+      "Rough Copper Bomb": 40,
+      "Medium Leather": 40,
+      "Moss Agate": 40,
+      "Silver Ore": 30,
+      "Coarse Stone": 21,
+      "Heavy Stock": 20,
+      "Sulfuric Acid": 12,
+      "Wooden Stock": 10,
+      "Tigerseye": 10,
+      "Copper Modulator": 7
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Iron Ore": 426,
+      "Heavy Leather": 410,
+      "Gold Power Core": 164,
+      "Copper Ore": 81,
+      "Tin Ore": 81,
+      "Citrine": 69,
+      "Wool Cloth": 58,
+      "Fused Wiring": 33,
+      "Jade": 29,
+      "Silk Cloth": 28,
+      "Lesser Moonstone": 24,
+      "Shadowgem": 22,
+      "Medium Leather": 20,
+      "Elemental Fire": 20,
+      "Solid Stone": 12,
+      "Green Tinted Goggles": 10,
+      "Tigerseye": 6,
+      "Malachite": 6
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Thick Leather": 758,
+      "Aquamarine": 298,
+      "Jade": 276,
+      "Heart of the Wild": 184,
+      "Wildvine": 184,
+      "Mithril Ore": 96,
+      "Solid Stone": 74,
+      "Arcanite Bar": 15,
+      "Ironweb Spider Silk": 15,
+      "Mageweave Cloth": 13
+     }
+    }
+   ],
+   "vendor": {
+    "Flask of Oil": 34,
+    "Frost Oil": 10,
+    "Weak Flux": 85
+   }
+  },
+  "Leatherworking": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 30,
+     "recipe": "Handstitched Leather Vest",
+     "count": 29,
+     "mats": {
+      "Light Leather": 87,
+      "Coarse Thread": 29
+     },
+     "raw": {
+      "Light Leather": 87
+     },
+     "sell": 300,
+     "de": 485
+    },
+    {
+     "from": 30,
+     "to": 40,
+     "recipe": "Light Leather Reagent Bag",
+     "count": 10,
+     "mats": {
+      "Light Leather": 80,
+      "Cured Light Hide": 10,
+      "Coarse Thread": 30
+     },
+     "raw": {
+      "Light Leather": 80,
+      "Light Hide": 10
+     },
+     "source": "Quest, Vendor",
+     "sell": 1500
+    },
+    {
+     "from": 40,
+     "to": 45,
+     "recipe": "Handstitched Leather Vest",
+     "count": 6,
+     "mats": {
+      "Light Leather": 18,
+      "Coarse Thread": 6
+     },
+     "raw": {
+      "Light Leather": 18
+     },
+     "sell": 300,
+     "de": 485
+    },
+    {
+     "from": 45,
+     "to": 80,
+     "recipe": "Embossed Leather Gloves",
+     "count": 37,
+     "mats": {
+      "Light Leather": 111,
+      "Coarse Thread": 74
+     },
+     "raw": {
+      "Light Leather": 111
+     },
+     "sell": 300,
+     "de": 485
+    },
+    {
+     "from": 80,
+     "to": 90,
+     "recipe": "Fine Leather Belt",
+     "count": 11,
+     "mats": {
+      "Light Leather": 66,
+      "Coarse Thread": 22
+     },
+     "raw": {
+      "Light Leather": 66
+     },
+     "sell": 900,
+     "de": 1062
+    },
+    {
+     "from": 90,
+     "to": 100,
+     "recipe": "Murloc Scale Belt",
+     "count": 11,
+     "mats": {
+      "Slimy Murloc Scale": 88,
+      "Light Leather": 66,
+      "Fine Thread": 11
+     },
+     "raw": {
+      "Slimy Murloc Scale": 88,
+      "Light Leather": 66
+     },
+     "source": "Drop, Vendor",
+     "sell": 7500,
+     "de": 1062
+    },
+    {
+     "from": 100,
+     "to": 109,
+     "recipe": "Murloc Scale Breastplate",
+     "count": 11,
+     "mats": {
+      "Slimy Murloc Scale": 132,
+      "Cured Light Hide": 11,
+      "Light Leather": 88,
+      "Fine Thread": 11
+     },
+     "raw": {
+      "Slimy Murloc Scale": 132,
+      "Light Leather": 88,
+      "Light Hide": 11
+     },
+     "source": "Drop, Vendor",
+     "sell": 8900,
+     "de": 1062
+    },
+    {
+     "from": 109,
+     "to": 115,
+     "recipe": "Deviate Scale Cloak",
+     "count": 14,
+     "mats": {
+      "Deviate Scale": 112,
+      "Cured Light Hide": 14,
+      "Fine Thread": 14
+     },
+     "raw": {
+      "Deviate Scale": 112,
+      "Light Hide": 14
+     },
+     "source": "Vendor",
+     "sell": 900,
+     "de": 1062
+    },
+    {
+     "from": 115,
+     "to": 124,
+     "recipe": "Deviate Scale Belt",
+     "count": 11,
+     "mats": {
+      "Perfect Deviate Scale": 110,
+      "Deviate Scale": 110,
+      "Fine Thread": 22
+     },
+     "raw": {
+      "Perfect Deviate Scale": 110,
+      "Deviate Scale": 110
+     },
+     "source": "Quest",
+     "sell": 25000,
+     "de": 189
+    },
+    {
+     "from": 124,
+     "to": 125,
+     "recipe": "Deviate Scale Cloak",
+     "count": 30,
+     "mats": {
+      "Deviate Scale": 240,
+      "Cured Light Hide": 30,
+      "Fine Thread": 30
+     },
+     "raw": {
+      "Deviate Scale": 240,
+      "Light Hide": 30
+     },
+     "source": "Vendor",
+     "sell": 900,
+     "de": 1062
+    },
+    {
+     "from": 125,
+     "to": 130,
+     "recipe": "Dark Leather Belt",
+     "count": 6,
+     "mats": {
+      "Fine Leather Belt": 6,
+      "Cured Medium Hide": 6,
+      "Fine Thread": 12,
+      "Gray Dye": 6
+     },
+     "raw": {
+      "Fine Leather Belt": 6,
+      "Medium Hide": 6
+     },
+     "sell": 800,
+     "de": 1070
+    },
+    {
+     "from": 130,
+     "to": 150,
+     "recipe": "Hillman's Shoulders",
+     "count": 39,
+     "mats": {
+      "Cured Medium Hide": 39,
+      "Medium Leather": 156,
+      "Fine Thread": 39
+     },
+     "raw": {
+      "Medium Leather": 156,
+      "Medium Hide": 39
+     },
+     "sell": 1300,
+     "de": 1771
+    },
+    {
+     "from": 150,
+     "to": 155,
+     "recipe": "Mystic Heavy Armor Kit",
+     "count": 5,
+     "mats": {
+      "Heavy Armor Kit": 5,
+      "Soul Dust": 10,
+      "Lesser Mana Potion": 10
+     },
+     "raw": {
+      "Soul Dust": 10,
+      "Lesser Mana Potion": 10,
+      "Heavy Armor Kit": 5
+     },
+     "source": "Vendor",
+     "sell": 9699
+    },
+    {
+     "from": 155,
+     "to": 164,
+     "recipe": "Barbaric Bracers",
+     "count": 12,
+     "mats": {
+      "Heavy Leather": 96,
+      "Cured Heavy Hide": 24,
+      "Small Lustrous Pearl": 48,
+      "Raptor Hide": 12,
+      "Large Fang": 48
+     },
+     "raw": {
+      "Heavy Leather": 96,
+      "Small Lustrous Pearl": 48,
+      "Large Fang": 48,
+      "Heavy Hide": 24,
+      "Raptor Hide": 12
+     },
+     "source": "Vendor",
+     "sell": 154000,
+     "de": 9025
+    },
+    {
+     "from": 164,
+     "to": 167,
+     "recipe": "Green Leather Armor",
+     "count": 10,
+     "mats": {
+      "Heavy Leather": 90,
+      "Green Dye": 20,
+      "Fine Thread": 40
+     },
+     "raw": {
+      "Heavy Leather": 90
+     },
+     "source": "Vendor",
+     "sell": 15000,
+     "de": 3940
+    },
+    {
+     "from": 167,
+     "to": 169,
+     "recipe": "Mystic Heavy Armor Kit",
+     "count": 6,
+     "mats": {
+      "Heavy Armor Kit": 6,
+      "Soul Dust": 12,
+      "Lesser Mana Potion": 12
+     },
+     "raw": {
+      "Soul Dust": 12,
+      "Lesser Mana Potion": 12,
+      "Heavy Armor Kit": 6
+     },
+     "source": "Vendor",
+     "sell": 9699
+    },
+    {
+     "from": 169,
+     "to": 170,
+     "recipe": "Green Leather Armor",
+     "count": 15,
+     "mats": {
+      "Heavy Leather": 135,
+      "Green Dye": 30,
+      "Fine Thread": 60
+     },
+     "raw": {
+      "Heavy Leather": 135
+     },
+     "source": "Vendor",
+     "sell": 15000,
+     "de": 3940
+    },
+    {
+     "from": 170,
+     "to": 175,
+     "recipe": "Barbaric Leggings",
+     "count": 6,
+     "mats": {
+      "Heavy Leather": 60,
+      "Fine Thread": 12,
+      "Moss Agate": 6
+     },
+     "raw": {
+      "Heavy Leather": 60,
+      "Moss Agate": 6
+     },
+     "source": "Vendor",
+     "sell": 19000,
+     "de": 3940
+    },
+    {
+     "from": 175,
+     "to": 185,
+     "recipe": "Azure Gustwoven Spaulders",
+     "count": 10,
+     "mats": {
+      "Heavy Leather": 120,
+      "Cured Heavy Hide": 20,
+      "Heavy Silken Thread": 10,
+      "Blue Dye": 30
+     },
+     "raw": {
+      "Heavy Leather": 120,
+      "Heavy Hide": 20
+     },
+     "source": "Vendor",
+     "sell": 275500,
+     "de": 3940
+    },
+    {
+     "from": 185,
+     "to": 190,
+     "recipe": "Dusky Bracers",
+     "count": 6,
+     "mats": {
+      "Heavy Leather": 96,
+      "Black Dye": 6,
+      "Silken Thread": 12
+     },
+     "raw": {
+      "Heavy Leather": 96
+     },
+     "sell": 6500,
+     "de": 11152
+    },
+    {
+     "from": 190,
+     "to": 195,
+     "recipe": "Guardian Gloves",
+     "count": 6,
+     "mats": {
+      "Heavy Leather": 24,
+      "Cured Heavy Hide": 6,
+      "Silken Thread": 6
+     },
+     "raw": {
+      "Heavy Leather": 24,
+      "Heavy Hide": 6
+     },
+     "sell": 4500,
+     "de": 11152
+    },
+    {
+     "from": 195,
+     "to": 203,
+     "recipe": "Dusky Belt",
+     "count": 11,
+     "mats": {
+      "Heavy Leather": 110,
+      "Bolt of Silk Cloth": 22,
+      "Black Dye": 22,
+      "Iron Buckle": 11
+     },
+     "raw": {
+      "Heavy Leather": 110,
+      "Silk Cloth": 88,
+      "Iron Buckle": 11
+     },
+     "sell": 49800,
+     "de": 11152
+    },
+    {
+     "from": 203,
+     "to": 205,
+     "recipe": "Forceful Thick Armor Kit",
+     "count": 2,
+     "mats": {
+      "Thick Armor Kit": 2,
+      "Vision Dust": 4,
+      "Elixir of Ogre Strength": 4
+     },
+     "raw": {
+      "Vision Dust": 4,
+      "Elixir of Ogre Strength": 4,
+      "Thick Armor Kit": 2
+     },
+     "source": "Vendor",
+     "sell": 45000
+    },
+    {
+     "from": 205,
+     "to": 212,
+     "recipe": "Nightscape Tunic",
+     "count": 10,
+     "mats": {
+      "Thick Leather": 70,
+      "Silken Thread": 20
+     },
+     "raw": {
+      "Thick Leather": 70
+     },
+     "sell": 35000,
+     "de": 16241
+    },
+    {
+     "from": 212,
+     "to": 217,
+     "recipe": "Forceful Thick Armor Kit",
+     "count": 10,
+     "mats": {
+      "Thick Armor Kit": 10,
+      "Vision Dust": 20,
+      "Elixir of Ogre Strength": 20
+     },
+     "raw": {
+      "Vision Dust": 20,
+      "Elixir of Ogre Strength": 20,
+      "Thick Armor Kit": 10
+     },
+     "source": "Vendor",
+     "sell": 45000
+    },
+    {
+     "from": 217,
+     "to": 218,
+     "recipe": "Nightscape Tunic",
+     "count": 5,
+     "mats": {
+      "Thick Leather": 35,
+      "Silken Thread": 10
+     },
+     "raw": {
+      "Thick Leather": 35
+     },
+     "sell": 35000,
+     "de": 16241
+    },
+    {
+     "from": 218,
+     "to": 220,
+     "recipe": "Nightscape Headband",
+     "count": 23,
+     "mats": {
+      "Thick Leather": 115,
+      "Silken Thread": 46
+     },
+     "raw": {
+      "Thick Leather": 115
+     },
+     "sell": 25000,
+     "de": 16241
+    },
+    {
+     "from": 220,
+     "to": 225,
+     "recipe": "Turtle Scale Gloves",
+     "count": 5,
+     "mats": {
+      "Thick Leather": 30,
+      "Turtle Scale": 40,
+      "Heavy Silken Thread": 5
+     },
+     "raw": {
+      "Turtle Scale": 40,
+      "Thick Leather": 30
+     },
+     "source": "Drop, Vendor",
+     "de": 16241
+    },
+    {
+     "from": 225,
+     "to": 233,
+     "recipe": "Wild Leather Helmet",
+     "count": 11,
+     "mats": {
+      "Thick Leather": 110,
+      "Wildvine": 22,
+      "Cured Thick Hide": 11
+     },
+     "raw": {
+      "Thick Leather": 110,
+      "Wildvine": 22,
+      "Thick Hide": 11
+     },
+     "source": "Quest",
+     "sell": 129400,
+     "de": 16241
+    },
+    {
+     "from": 233,
+     "to": 242,
+     "recipe": "Turtle Scale Gloves",
+     "count": 26,
+     "mats": {
+      "Thick Leather": 156,
+      "Turtle Scale": 208,
+      "Heavy Silken Thread": 26
+     },
+     "raw": {
+      "Turtle Scale": 208,
+      "Thick Leather": 156
+     },
+     "source": "Drop, Vendor",
+     "de": 16241
+    },
+    {
+     "from": 242,
+     "to": 249,
+     "recipe": "Turtle Scale Breastplate",
+     "count": 35,
+     "mats": {
+      "Thick Leather": 210,
+      "Turtle Scale": 420,
+      "Heavy Silken Thread": 35
+     },
+     "raw": {
+      "Turtle Scale": 420,
+      "Thick Leather": 210
+     }
+    },
+    {
+     "from": 249,
+     "to": 250,
+     "recipe": "Wild Leather Boots",
+     "count": 2,
+     "mats": {
+      "Thick Leather": 28,
+      "Wildvine": 8,
+      "Cured Thick Hide": 4
+     },
+     "raw": {
+      "Thick Leather": 28,
+      "Wildvine": 8,
+      "Thick Hide": 4
+     },
+     "source": "Quest",
+     "de": 14517
+    },
+    {
+     "from": 250,
+     "to": 255,
+     "recipe": "Cured Rugged Hide",
+     "count": 7,
+     "mats": {
+      "Rugged Hide": 7,
+      "Refined Deeprock Salt": 7
+     },
+     "raw": {
+      "Rugged Hide": 7
+     }
+    },
+    {
+     "from": 255,
+     "to": 280,
+     "recipe": "Tooled Leather Armor",
+     "count": 26,
+     "mats": {
+      "Rugged Leather": 416,
+      "Rune Thread": 26,
+      "Orange Dye": 78,
+      "Cured Rugged Hide": 52,
+      "Stonescale Oil": 156
+     },
+     "raw": {
+      "Rugged Leather": 416,
+      "Rugged Hide": 26
+     },
+     "source": "Vendor",
+     "de": 37292
+    },
+    {
+     "from": 280,
+     "to": 290,
+     "recipe": "Green Dragonscale Gauntlets",
+     "count": 16,
+     "mats": {
+      "Rugged Leather": 320,
+      "Green Dragonscale": 480,
+      "Cured Rugged Hide": 16,
+      "Rune Thread": 32
+     },
+     "raw": {
+      "Green Dragonscale": 480,
+      "Rugged Leather": 320,
+      "Rugged Hide": 8
+     },
+     "de": 133095
+    },
+    {
+     "from": 290,
+     "to": 300,
+     "recipe": "Heavy Timbermaw Belt",
+     "count": 16,
+     "mats": {
+      "Rugged Leather": 192,
+      "Essence of Earth": 48,
+      "Living Essence": 48,
+      "Rune Thread": 16
+     },
+     "raw": {
+      "Rugged Leather": 192,
+      "Essence of Earth": 48,
+      "Living Essence": 48
+     },
+     "source": "Vendor",
+     "de": 133095
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Light Leather": 516,
+      "Deviate Scale": 462,
+      "Slimy Murloc Scale": 220,
+      "Medium Leather": 156,
+      "Perfect Deviate Scale": 110,
+      "Light Hide": 65,
+      "Medium Hide": 45,
+      "Fine Leather Belt": 6
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Heavy Leather": 731,
+      "Thick Leather": 250,
+      "Silk Cloth": 88,
+      "Heavy Hide": 50,
+      "Small Lustrous Pearl": 48,
+      "Large Fang": 48,
+      "Turtle Scale": 40,
+      "Vision Dust": 24,
+      "Elixir of Ogre Strength": 24,
+      "Soul Dust": 22,
+      "Lesser Mana Potion": 22,
+      "Raptor Hide": 12,
+      "Thick Armor Kit": 12,
+      "Heavy Armor Kit": 11,
+      "Iron Buckle": 11,
+      "Moss Agate": 6
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Rugged Leather": 928,
+      "Turtle Scale": 628,
+      "Thick Leather": 504,
+      "Green Dragonscale": 480,
+      "Essence of Earth": 48,
+      "Living Essence": 48,
+      "Rugged Hide": 41,
+      "Wildvine": 30,
+      "Thick Hide": 15
+     }
+    }
+   ],
+   "vendor": {
+    "Black Dye": 28,
+    "Blue Dye": 30,
+    "Coarse Thread": 161,
+    "Deeprock Salt": 15,
+    "Fine Thread": 251,
+    "Gray Dye": 6,
+    "Green Dye": 50,
+    "Heavy Silken Thread": 76,
+    "Orange Dye": 78,
+    "Refined Deeprock Salt": 41,
+    "Rune Thread": 74,
+    "Salt": 260,
+    "Silken Thread": 94,
+    "Stonescale Oil": 156
+   }
+  },
+  "Tailoring": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 11,
+     "recipe": "White Linen Shirt",
+     "count": 10,
+     "mats": {
+      "Bolt of Linen Cloth": 10,
+      "Coarse Thread": 10,
+      "Bleach": 10
+     },
+     "raw": {
+      "Linen Cloth": 20
+     },
+     "sell": 300
+    },
+    {
+     "from": 11,
+     "to": 21,
+     "recipe": "Linen Reagent Bag",
+     "count": 10,
+     "mats": {
+      "Bolt of Linen Cloth": 60,
+      "Coarse Thread": 60
+     },
+     "raw": {
+      "Linen Cloth": 120
+     },
+     "source": "Vendor",
+     "sell": 1200
+    },
+    {
+     "from": 21,
+     "to": 25,
+     "recipe": "Brown Linen Shirt",
+     "count": 4,
+     "mats": {
+      "Bolt of Linen Cloth": 4,
+      "Coarse Thread": 4
+     },
+     "raw": {
+      "Linen Cloth": 8
+     },
+     "sell": 100
+    },
+    {
+     "from": 25,
+     "to": 35,
+     "recipe": "White Linen Robe",
+     "count": 10,
+     "mats": {
+      "Bolt of Linen Cloth": 30,
+      "Coarse Thread": 10,
+      "Bleach": 10
+     },
+     "raw": {
+      "Linen Cloth": 60
+     },
+     "sell": 900,
+     "de": 485
+    },
+    {
+     "from": 35,
+     "to": 45,
+     "recipe": "Green Linen Bracers",
+     "count": 10,
+     "mats": {
+      "Bolt of Linen Cloth": 30,
+      "Coarse Thread": 20,
+      "Green Dye": 10
+     },
+     "raw": {
+      "Linen Cloth": 60
+     },
+     "sell": 900,
+     "de": 485
+    },
+    {
+     "from": 45,
+     "to": 55,
+     "recipe": "Brown Linen Pants",
+     "count": 11,
+     "mats": {
+      "Bolt of Linen Cloth": 22,
+      "Coarse Thread": 11
+     },
+     "raw": {
+      "Linen Cloth": 44
+     },
+     "sell": 500,
+     "de": 485
+    },
+    {
+     "from": 55,
+     "to": 60,
+     "recipe": "Reinforced Linen Cape",
+     "count": 5,
+     "mats": {
+      "Bolt of Linen Cloth": 10,
+      "Coarse Thread": 15
+     },
+     "raw": {
+      "Linen Cloth": 20
+     },
+     "sell": 300,
+     "de": 485
+    },
+    {
+     "from": 60,
+     "to": 69,
+     "recipe": "Azure Stormsewn Vest",
+     "count": 12,
+     "mats": {
+      "Bolt of Linen Cloth": 60,
+      "Coarse Thread": 24
+     },
+     "raw": {
+      "Linen Cloth": 120
+     },
+     "source": "Vendor",
+     "sell": 10000,
+     "de": 485
+    },
+    {
+     "from": 69,
+     "to": 70,
+     "recipe": "Reinforced Linen Cape",
+     "count": 2,
+     "mats": {
+      "Bolt of Linen Cloth": 4,
+      "Coarse Thread": 6
+     },
+     "raw": {
+      "Linen Cloth": 8
+     },
+     "sell": 300,
+     "de": 485
+    },
+    {
+     "from": 70,
+     "to": 80,
+     "recipe": "Woolen Reagent Bag",
+     "count": 11,
+     "mats": {
+      "Bolt of Woolen Cloth": 33,
+      "Fine Thread": 11,
+      "Cerulean Dye": 11
+     },
+     "raw": {
+      "Wool Cloth": 99
+     },
+     "source": "Vendor",
+     "sell": 14500
+    },
+    {
+     "from": 80,
+     "to": 87,
+     "recipe": "Blue Linen Robe",
+     "count": 12,
+     "mats": {
+      "Bolt of Linen Cloth": 48,
+      "Coarse Thread": 24,
+      "Blue Dye": 24
+     },
+     "raw": {
+      "Linen Cloth": 96
+     },
+     "source": "Vendor",
+     "sell": 1300,
+     "de": 485
+    },
+    {
+     "from": 87,
+     "to": 115,
+     "recipe": "Woolen Cape",
+     "count": 138,
+     "mats": {
+      "Bolt of Woolen Cloth": 138,
+      "Fine Thread": 138
+     },
+     "raw": {
+      "Wool Cloth": 414
+     },
+     "sell": 200,
+     "de": 1062
+    },
+    {
+     "from": 115,
+     "to": 124,
+     "recipe": "Greater Adept's Robe",
+     "count": 11,
+     "mats": {
+      "Bolt of Woolen Cloth": 55,
+      "Fine Thread": 33,
+      "Red Dye": 33
+     },
+     "raw": {
+      "Wool Cloth": 165
+     },
+     "source": "Vendor",
+     "sell": 5400,
+     "de": 1070
+    },
+    {
+     "from": 124,
+     "to": 125,
+     "recipe": "Gloves of Meditation",
+     "count": 1,
+     "mats": {
+      "Bolt of Woolen Cloth": 4,
+      "Fine Thread": 3,
+      "Elixir of Wisdom": 1
+     },
+     "raw": {
+      "Wool Cloth": 12,
+      "Elixir of Wisdom": 1
+     },
+     "sell": 1700,
+     "de": 1771
+    },
+    {
+     "from": 125,
+     "to": 135,
+     "recipe": "Silk Reagent Bag",
+     "count": 10,
+     "mats": {
+      "Bolt of Silk Cloth": 30,
+      "Heavy Leather": 20,
+      "Fine Thread": 30,
+      "Cerulean Dye": 30
+     },
+     "raw": {
+      "Silk Cloth": 120,
+      "Heavy Leather": 20
+     },
+     "source": "Quest, Vendor",
+     "sell": 165000
+    },
+    {
+     "from": 135,
+     "to": 144,
+     "recipe": "Phoenix Bindings",
+     "count": 22,
+     "mats": {
+      "Bolt of Woolen Cloth": 132,
+      "Flask of Oil": 44,
+      "Fine Thread": 44
+     },
+     "raw": {
+      "Wool Cloth": 396
+     },
+     "source": "Vendor",
+     "de": 4750
+    },
+    {
+     "from": 144,
+     "to": 148,
+     "recipe": "Gloves of Meditation",
+     "count": 11,
+     "mats": {
+      "Bolt of Woolen Cloth": 44,
+      "Fine Thread": 33,
+      "Elixir of Wisdom": 11
+     },
+     "raw": {
+      "Wool Cloth": 132,
+      "Elixir of Wisdom": 11
+     },
+     "sell": 1700,
+     "de": 1771
+    },
+    {
+     "from": 148,
+     "to": 155,
+     "recipe": "Azure Silk Hood",
+     "count": 7,
+     "mats": {
+      "Bolt of Silk Cloth": 14,
+      "Blue Dye": 14,
+      "Fine Thread": 7
+     },
+     "raw": {
+      "Silk Cloth": 56
+     },
+     "sell": 3500,
+     "de": 1771
+    },
+    {
+     "from": 155,
+     "to": 162,
+     "recipe": "Dark Silk Shirt",
+     "count": 8,
+     "mats": {
+      "Bolt of Silk Cloth": 16,
+      "Gray Dye": 16,
+      "Fine Thread": 8
+     },
+     "raw": {
+      "Silk Cloth": 64
+     },
+     "source": "Vendor",
+     "sell": 8900
+    },
+    {
+     "from": 162,
+     "to": 169,
+     "recipe": "White Swashbuckler's Shirt",
+     "count": 8,
+     "mats": {
+      "Bolt of Silk Cloth": 24,
+      "Bleach": 16,
+      "Silken Thread": 8
+     },
+     "raw": {
+      "Silk Cloth": 96
+     },
+     "sell": 9900
+    },
+    {
+     "from": 169,
+     "to": 172,
+     "recipe": "Silk Headband",
+     "count": 4,
+     "mats": {
+      "Bolt of Silk Cloth": 12,
+      "Fine Thread": 8
+     },
+     "raw": {
+      "Silk Cloth": 48
+     },
+     "sell": 6000,
+     "de": 3940
+    },
+    {
+     "from": 172,
+     "to": 175,
+     "recipe": "Formal White Shirt",
+     "count": 3,
+     "mats": {
+      "Bolt of Silk Cloth": 9,
+      "Bleach": 6,
+      "Fine Thread": 3
+     },
+     "raw": {
+      "Silk Cloth": 36
+     },
+     "sell": 4000
+    },
+    {
+     "from": 175,
+     "to": 183,
+     "recipe": "Azure Silk Belt",
+     "count": 11,
+     "mats": {
+      "Bolt of Silk Cloth": 44,
+      "Elemental Water": 11,
+      "Blue Dye": 22,
+      "Fine Thread": 22,
+      "Iron Buckle": 11
+     },
+     "raw": {
+      "Silk Cloth": 176,
+      "Elemental Water": 11,
+      "Iron Buckle": 11
+     },
+     "sell": 33500,
+     "de": 3940
+    },
+    {
+     "from": 183,
+     "to": 185,
+     "recipe": "Green Silken Shoulders",
+     "count": 3,
+     "mats": {
+      "Bolt of Silk Cloth": 15,
+      "Silken Thread": 6
+     },
+     "raw": {
+      "Silk Cloth": 60
+     },
+     "sell": 7500,
+     "de": 11152
+    },
+    {
+     "from": 185,
+     "to": 190,
+     "recipe": "Crimson Silk Vest",
+     "count": 5,
+     "mats": {
+      "Bolt of Silk Cloth": 20,
+      "Red Dye": 10,
+      "Fine Thread": 10
+     },
+     "raw": {
+      "Silk Cloth": 80
+     },
+     "sell": 8500,
+     "de": 11152
+    },
+    {
+     "from": 190,
+     "to": 195,
+     "recipe": "Long Silken Cloak",
+     "count": 5,
+     "mats": {
+      "Bolt of Silk Cloth": 20,
+      "Mana Potion": 5,
+      "Silken Thread": 5
+     },
+     "raw": {
+      "Silk Cloth": 80,
+      "Mana Potion": 5
+     }
+    },
+    {
+     "from": 195,
+     "to": 200,
+     "recipe": "Crimson Silk Pantaloons",
+     "count": 5,
+     "mats": {
+      "Bolt of Silk Cloth": 20,
+      "Red Dye": 10,
+      "Silken Thread": 10
+     },
+     "raw": {
+      "Silk Cloth": 80
+     },
+     "sell": 5000,
+     "de": 11152
+    },
+    {
+     "from": 200,
+     "to": 207,
+     "recipe": "Black Swashbuckler's Shirt",
+     "count": 8,
+     "mats": {
+      "Bolt of Silk Cloth": 40,
+      "Black Dye": 8,
+      "Silken Thread": 8
+     },
+     "raw": {
+      "Silk Cloth": 160
+     },
+     "source": "Vendor",
+     "sell": 18900
+    },
+    {
+     "from": 207,
+     "to": 210,
+     "recipe": "Long Silken Cloak",
+     "count": 4,
+     "mats": {
+      "Bolt of Silk Cloth": 16,
+      "Mana Potion": 4,
+      "Silken Thread": 4
+     },
+     "raw": {
+      "Silk Cloth": 64,
+      "Mana Potion": 4
+     }
+    },
+    {
+     "from": 210,
+     "to": 220,
+     "recipe": "Crimson Silk Gloves",
+     "count": 10,
+     "mats": {
+      "Bolt of Silk Cloth": 60,
+      "Elemental Fire": 20,
+      "Fire Oil": 20,
+      "Thick Leather": 20,
+      "Red Dye": 40,
+      "Silken Thread": 20
+     },
+     "raw": {
+      "Silk Cloth": 240,
+      "Elemental Fire": 20,
+      "Thick Leather": 20
+     },
+     "de": 16241
+    },
+    {
+     "from": 220,
+     "to": 230,
+     "recipe": "Long Silken Cloak",
+     "count": 32,
+     "mats": {
+      "Bolt of Silk Cloth": 128,
+      "Mana Potion": 32,
+      "Silken Thread": 32
+     },
+     "raw": {
+      "Silk Cloth": 512,
+      "Mana Potion": 32
+     }
+    },
+    {
+     "from": 230,
+     "to": 240,
+     "recipe": "Lavender Mageweave Shirt",
+     "count": 12,
+     "mats": {
+      "Bolt of Mageweave": 24,
+      "Purple Dye": 24,
+      "Heavy Silken Thread": 24
+     },
+     "raw": {
+      "Mageweave Cloth": 120
+     },
+     "source": "Vendor",
+     "sell": 104600
+    },
+    {
+     "from": 240,
+     "to": 245,
+     "recipe": "Simple Black Dress",
+     "count": 7,
+     "mats": {
+      "Bolt of Mageweave": 21,
+      "Black Dye": 7,
+      "Heavy Silken Thread": 7,
+      "Bleach": 7
+     },
+     "raw": {
+      "Mageweave Cloth": 105
+     }
+    },
+    {
+     "from": 245,
+     "to": 254,
+     "recipe": "Shadoweave Mask",
+     "count": 10,
+     "mats": {
+      "Bolt of Mageweave": 20,
+      "Shadow Silk": 80,
+      "Heavy Silken Thread": 20
+     },
+     "raw": {
+      "Mageweave Cloth": 100,
+      "Shadow Silk": 80
+     },
+     "source": "Quest",
+     "de": 14517
+    },
+    {
+     "from": 254,
+     "to": 255,
+     "recipe": "Runecloth Cuffs",
+     "count": 1,
+     "mats": {
+      "Bolt of Runecloth": 5,
+      "Ironweb Spider Silk": 1,
+      "Rune Thread": 1
+     },
+     "raw": {
+      "Runecloth": 25,
+      "Ironweb Spider Silk": 1
+     },
+     "source": "Vendor",
+     "de": 37292
+    },
+    {
+     "from": 255,
+     "to": 285,
+     "recipe": "Runecloth Belt",
+     "count": 36,
+     "mats": {
+      "Bolt of Runecloth": 108,
+      "Rune Thread": 36
+     },
+     "raw": {
+      "Runecloth": 540
+     },
+     "de": 17252
+    },
+    {
+     "from": 285,
+     "to": 293,
+     "recipe": "Venomspew Gloves",
+     "count": 9,
+     "mats": {
+      "Bolt of Runecloth": 36,
+      "Small Brilliant Shard": 9,
+      "Essence of Air": 27,
+      "Rune Thread": 54
+     },
+     "raw": {
+      "Runecloth": 180,
+      "Essence of Air": 27,
+      "Small Brilliant Shard": 9
+     },
+     "source": "Vendor",
+     "de": 133095
+    },
+    {
+     "from": 293,
+     "to": 295,
+     "recipe": "Mooncloth Boots",
+     "count": 3,
+     "mats": {
+      "Bolt of Runecloth": 18,
+      "Mooncloth": 12,
+      "Black Pearl": 6,
+      "Rune Thread": 3
+     },
+     "raw": {
+      "Runecloth": 90,
+      "Mooncloth": 12,
+      "Black Pearl": 6
+     },
+     "source": "Quest",
+     "de": 133095
+    },
+    {
+     "from": 295,
+     "to": 297,
+     "recipe": "Venomspew Footpads",
+     "count": 3,
+     "mats": {
+      "Bolt of Runecloth": 15,
+      "Small Brilliant Shard": 3,
+      "Essence of Air": 9,
+      "Rune Thread": 18
+     },
+     "raw": {
+      "Runecloth": 75,
+      "Essence of Air": 9,
+      "Small Brilliant Shard": 3
+     },
+     "source": "Vendor",
+     "de": 133095
+    },
+    {
+     "from": 297,
+     "to": 300,
+     "recipe": "Argent Boots",
+     "count": 3,
+     "mats": {
+      "Bolt of Runecloth": 18,
+      "Enchanted Leather": 12,
+      "Golden Pearl": 6,
+      "Guardian Stone": 6,
+      "Ironweb Spider Silk": 6
+     },
+     "raw": {
+      "Runecloth": 90,
+      "Enchanted Leather": 12,
+      "Golden Pearl": 6,
+      "Guardian Stone": 6,
+      "Ironweb Spider Silk": 6
+     },
+     "source": "Vendor",
+     "de": 133095
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Wool Cloth": 1218,
+      "Linen Cloth": 556,
+      "Silk Cloth": 176,
+      "Heavy Leather": 20,
+      "Elixir of Wisdom": 12
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Silk Cloth": 1696,
+      "Mana Potion": 41,
+      "Elemental Fire": 20,
+      "Thick Leather": 20,
+      "Elemental Water": 11,
+      "Iron Buckle": 11
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Runecloth": 1000,
+      "Mageweave Cloth": 325,
+      "Shadow Silk": 80,
+      "Essence of Air": 36,
+      "Small Brilliant Shard": 12,
+      "Mooncloth": 12,
+      "Enchanted Leather": 12,
+      "Ironweb Spider Silk": 7,
+      "Black Pearl": 6,
+      "Golden Pearl": 6,
+      "Guardian Stone": 6
+     }
+    }
+   ],
+   "vendor": {
+    "Black Dye": 15,
+    "Bleach": 49,
+    "Blue Dye": 60,
+    "Cerulean Dye": 41,
+    "Coarse Thread": 184,
+    "Fine Thread": 350,
+    "Fire Oil": 20,
+    "Flask of Oil": 44,
+    "Gray Dye": 16,
+    "Green Dye": 10,
+    "Heavy Silken Thread": 51,
+    "Purple Dye": 24,
+    "Red Dye": 93,
+    "Rune Thread": 112,
+    "Silken Thread": 93
+   }
+  },
+  "First Aid": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 11,
+     "recipe": "Linen Bandage",
+     "count": 10,
+     "mats": {
+      "Linen Cloth": 10
+     },
+     "raw": {
+      "Linen Cloth": 10
+     },
+     "sell": 10
+    },
+    {
+     "from": 11,
+     "to": 21,
+     "recipe": "Minor Healing Potion",
+     "count": 10,
+     "mats": {
+      "Empty Vial": 10,
+      "Mild Spices": 10,
+      "Peacebloom": 10
+     },
+     "raw": {
+      "Peacebloom": 10
+     },
+     "sell": 8
+    },
+    {
+     "from": 21,
+     "to": 31,
+     "recipe": "Linen Bandage",
+     "count": 10,
+     "mats": {
+      "Linen Cloth": 10
+     },
+     "raw": {
+      "Linen Cloth": 10
+     },
+     "sell": 10
+    },
+    {
+     "from": 31,
+     "to": 70,
+     "recipe": "Minor Healing Potion",
+     "count": 43,
+     "mats": {
+      "Empty Vial": 43,
+      "Mild Spices": 43,
+      "Peacebloom": 43
+     },
+     "raw": {
+      "Peacebloom": 43
+     },
+     "sell": 8
+    },
+    {
+     "from": 70,
+     "to": 80,
+     "recipe": "Lesser Healing Potion",
+     "count": 10,
+     "mats": {
+      "Empty Vial": 10,
+      "Mild Spices": 20,
+      "Briarthorn": 10
+     },
+     "raw": {
+      "Briarthorn": 10
+     },
+     "sell": 30
+    },
+    {
+     "from": 80,
+     "to": 90,
+     "recipe": "Anti-Venom",
+     "count": 11,
+     "mats": {
+      "Small Venom Sac": 11
+     },
+     "raw": {
+      "Small Venom Sac": 11
+     },
+     "sell": 95
+    },
+    {
+     "from": 90,
+     "to": 100,
+     "recipe": "Simple Poultice",
+     "count": 11,
+     "mats": {
+      "Spider Ichor": 11,
+      "Mild Spices": 11,
+      "Bottle of Dalaran Noir": 11
+     },
+     "raw": {
+      "Spider Ichor": 11,
+      "Bottle of Dalaran Noir": 11
+     },
+     "sell": 69
+    },
+    {
+     "from": 100,
+     "to": 105,
+     "recipe": "Lesser Healing Potion",
+     "count": 9,
+     "mats": {
+      "Empty Vial": 9,
+      "Mild Spices": 18,
+      "Briarthorn": 9
+     },
+     "raw": {
+      "Briarthorn": 9
+     },
+     "sell": 30
+    },
+    {
+     "from": 105,
+     "to": 110,
+     "recipe": "Anti-Venom",
+     "count": 9,
+     "mats": {
+      "Small Venom Sac": 9
+     },
+     "raw": {
+      "Small Venom Sac": 9
+     },
+     "sell": 95
+    },
+    {
+     "from": 110,
+     "to": 120,
+     "recipe": "Healing Potion",
+     "count": 10,
+     "mats": {
+      "Leaded Vial": 10,
+      "Hot Spices": 10,
+      "Bruiseweed": 10
+     },
+     "raw": {
+      "Bruiseweed": 10
+     },
+     "sell": 490
+    },
+    {
+     "from": 120,
+     "to": 123,
+     "recipe": "Anti-Venom",
+     "count": 8,
+     "mats": {
+      "Small Venom Sac": 8
+     },
+     "raw": {
+      "Small Venom Sac": 8
+     },
+     "sell": 95
+    },
+    {
+     "from": 123,
+     "to": 128,
+     "recipe": "Woolen Tourniquet",
+     "count": 6,
+     "mats": {
+      "Wool Cloth": 12,
+      "Fine Thread": 12
+     },
+     "raw": {
+      "Wool Cloth": 12
+     },
+     "sell": 319
+    },
+    {
+     "from": 128,
+     "to": 149,
+     "recipe": "Healing Potion",
+     "count": 24,
+     "mats": {
+      "Leaded Vial": 24,
+      "Hot Spices": 24,
+      "Bruiseweed": 24
+     },
+     "raw": {
+      "Bruiseweed": 24
+     },
+     "sell": 490
+    },
+    {
+     "from": 149,
+     "to": 152,
+     "recipe": "Woolen Tourniquet",
+     "count": 6,
+     "mats": {
+      "Wool Cloth": 12,
+      "Fine Thread": 12
+     },
+     "raw": {
+      "Wool Cloth": 12
+     },
+     "sell": 319
+    },
+    {
+     "from": 152,
+     "to": 154,
+     "recipe": "Healing Potion",
+     "count": 4,
+     "mats": {
+      "Leaded Vial": 4,
+      "Hot Spices": 4,
+      "Bruiseweed": 4
+     },
+     "raw": {
+      "Bruiseweed": 4
+     },
+     "sell": 490
+    },
+    {
+     "from": 154,
+     "to": 163,
+     "recipe": "Silk Bandage",
+     "count": 11,
+     "mats": {
+      "Silk Cloth": 11
+     },
+     "raw": {
+      "Silk Cloth": 11
+     },
+     "sell": 400
+    },
+    {
+     "from": 163,
+     "to": 165,
+     "recipe": "Heavy Wool Bandage",
+     "count": 7,
+     "mats": {
+      "Wool Cloth": 14
+     },
+     "raw": {
+      "Wool Cloth": 14
+     },
+     "sell": 64
+    },
+    {
+     "from": 165,
+     "to": 193,
+     "recipe": "Silk Bandage",
+     "count": 58,
+     "mats": {
+      "Silk Cloth": 58
+     },
+     "raw": {
+      "Silk Cloth": 58
+     },
+     "sell": 400
+    },
+    {
+     "from": 193,
+     "to": 210,
+     "recipe": "Heavy Silk Bandage",
+     "count": 27,
+     "mats": {
+      "Silk Cloth": 54
+     },
+     "raw": {
+      "Silk Cloth": 54
+     },
+     "source": "Vendor",
+     "sell": 888
+    },
+    {
+     "from": 210,
+     "to": 220,
+     "recipe": "Mageweave Bandage",
+     "count": 11,
+     "mats": {
+      "Mageweave Cloth": 11
+     },
+     "raw": {
+      "Mageweave Cloth": 11
+     },
+     "source": "Vendor",
+     "sell": 14000
+    },
+    {
+     "from": 220,
+     "to": 230,
+     "recipe": "Heavy Silk Bandage",
+     "count": 41,
+     "mats": {
+      "Silk Cloth": 82
+     },
+     "raw": {
+      "Silk Cloth": 82
+     },
+     "source": "Vendor",
+     "sell": 888
+    },
+    {
+     "from": 230,
+     "to": 270,
+     "recipe": "Mageweave Bandage",
+     "count": 257,
+     "mats": {
+      "Mageweave Cloth": 257
+     },
+     "raw": {
+      "Mageweave Cloth": 257
+     },
+     "source": "Vendor",
+     "sell": 14000
+    },
+    {
+     "from": 270,
+     "to": 286,
+     "recipe": "Potent Anti-Venom",
+     "count": 91,
+     "mats": {
+      "Swollen Venom Sac": 91
+     },
+     "raw": {
+      "Swollen Venom Sac": 91
+     },
+     "source": "Drop"
+    },
+    {
+     "from": 286,
+     "to": 290,
+     "recipe": "Runecloth Bandage",
+     "count": 8,
+     "mats": {
+      "Runecloth": 8
+     },
+     "raw": {
+      "Runecloth": 8
+     }
+    },
+    {
+     "from": 290,
+     "to": 300,
+     "recipe": "Major Healing Potion",
+     "count": 12,
+     "mats": {
+      "Crystal Vial": 12,
+      "Soothing Spices": 36,
+      "Golden Sansam": 12
+     },
+     "raw": {
+      "Golden Sansam": 12
+     },
+     "source": "Vendor",
+     "sell": 11600
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Peacebloom": 53,
+      "Bruiseweed": 34,
+      "Small Venom Sac": 28,
+      "Wool Cloth": 24,
+      "Linen Cloth": 20,
+      "Briarthorn": 19,
+      "Spider Ichor": 11,
+      "Bottle of Dalaran Noir": 11
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Silk Cloth": 205,
+      "Wool Cloth": 14,
+      "Mageweave Cloth": 11,
+      "Bruiseweed": 4
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Mageweave Cloth": 257,
+      "Swollen Venom Sac": 91,
+      "Golden Sansam": 12,
+      "Runecloth": 8
+     }
+    }
+   ],
+   "vendor": {
+    "Crystal Vial": 12,
+    "Empty Vial": 72,
+    "Fine Thread": 24,
+    "Hot Spices": 38,
+    "Leaded Vial": 38,
+    "Mild Spices": 102,
+    "Soothing Spices": 36
+   }
+  },
+  "Cooking": {
+   "steps": [
+    {
+     "from": 1,
+     "to": 11,
+     "recipe": "Crispy Bat Wing",
+     "count": 10,
+     "mats": {
+      "Meaty Bat Wing": 10,
+      "Mild Spices": 10
+     },
+     "raw": {
+      "Meaty Bat Wing": 10
+     },
+     "source": "Vendor",
+     "sell": 99
+    },
+    {
+     "from": 11,
+     "to": 20,
+     "recipe": "Kaldorei Spider Kabob",
+     "count": 9,
+     "mats": {
+      "Small Spider Leg": 9
+     },
+     "raw": {
+      "Small Spider Leg": 9
+     },
+     "source": "Quest"
+    },
+    {
+     "from": 20,
+     "to": 30,
+     "recipe": "Scorpid Surprise",
+     "count": 10,
+     "mats": {
+      "Scorpid Stinger": 10
+     },
+     "raw": {
+      "Scorpid Stinger": 10
+     },
+     "source": "Vendor",
+     "sell": 75
+    },
+    {
+     "from": 30,
+     "to": 35,
+     "recipe": "Kaldorei Spider Kabob",
+     "count": 5,
+     "mats": {
+      "Small Spider Leg": 5
+     },
+     "raw": {
+      "Small Spider Leg": 5
+     },
+     "source": "Quest"
+    },
+    {
+     "from": 35,
+     "to": 45,
+     "recipe": "Roasted Kodo Meat",
+     "count": 10,
+     "mats": {
+      "Kodo Meat": 10,
+      "Mild Spices": 10
+     },
+     "raw": {
+      "Kodo Meat": 10
+     },
+     "source": "Vendor",
+     "sell": 100
+    },
+    {
+     "from": 45,
+     "to": 83,
+     "recipe": "Kaldorei Spider Kabob",
+     "count": 73,
+     "mats": {
+      "Small Spider Leg": 73
+     },
+     "raw": {
+      "Small Spider Leg": 73
+     },
+     "source": "Quest"
+    },
+    {
+     "from": 83,
+     "to": 93,
+     "recipe": "Rainbow Fin Albacore",
+     "count": 11,
+     "mats": {
+      "Raw Rainbow Fin Albacore": 11
+     },
+     "raw": {
+      "Raw Rainbow Fin Albacore": 11
+     },
+     "source": "Vendor",
+     "sell": 24
+    },
+    {
+     "from": 93,
+     "to": 100,
+     "recipe": "Boiled Clams",
+     "count": 9,
+     "mats": {
+      "Clam Meat": 9,
+      "Refreshing Spring Water": 9
+     },
+     "raw": {
+      "Clam Meat": 9,
+      "Refreshing Spring Water": 9
+     },
+     "sell": 20
+    },
+    {
+     "from": 100,
+     "to": 110,
+     "recipe": "Crispy Lizard Tail",
+     "count": 10,
+     "mats": {
+      "Thunder Lizard Tail": 10,
+      "Hot Spices": 10
+     },
+     "raw": {
+      "Thunder Lizard Tail": 10
+     },
+     "source": "Vendor",
+     "sell": 168
+    },
+    {
+     "from": 110,
+     "to": 120,
+     "recipe": "Lean Venison",
+     "count": 10,
+     "mats": {
+      "Stag Meat": 10,
+      "Mild Spices": 40
+     },
+     "raw": {
+      "Stag Meat": 10
+     },
+     "source": "Vendor",
+     "sell": 249
+    },
+    {
+     "from": 120,
+     "to": 125,
+     "recipe": "Big Bear Steak",
+     "count": 5,
+     "mats": {
+      "Big Bear Meat": 5,
+      "Hot Spices": 5
+     },
+     "raw": {
+      "Big Bear Meat": 5
+     },
+     "source": "Quest, Vendor",
+     "sell": 125
+    },
+    {
+     "from": 125,
+     "to": 135,
+     "recipe": "Lean Wolf Steak",
+     "count": 10,
+     "mats": {
+      "Lean Wolf Flank": 10,
+      "Mild Spices": 10
+     },
+     "raw": {
+      "Lean Wolf Flank": 10
+     },
+     "source": "Vendor",
+     "sell": 498
+    },
+    {
+     "from": 135,
+     "to": 142,
+     "recipe": "Mrrggl Smrrthle",
+     "count": 11,
+     "mats": {
+      "Melon Juice": 11,
+      "Hot Spices": 22,
+      "Murloc Fin": 11
+     },
+     "raw": {
+      "Melon Juice": 11,
+      "Murloc Fin": 11
+     },
+     "source": "Vendor",
+     "sell": 499
+    },
+    {
+     "from": 142,
+     "to": 147,
+     "recipe": "Big Bear Steak",
+     "count": 5,
+     "mats": {
+      "Big Bear Meat": 5,
+      "Hot Spices": 5
+     },
+     "raw": {
+      "Big Bear Meat": 5
+     },
+     "source": "Quest, Vendor",
+     "sell": 125
+    },
+    {
+     "from": 147,
+     "to": 152,
+     "recipe": "Bristle Whisker Catfish",
+     "count": 7,
+     "mats": {
+      "Raw Bristle Whisker Catfish": 7
+     },
+     "raw": {
+      "Raw Bristle Whisker Catfish": 7
+     },
+     "source": "Vendor",
+     "sell": 6
+    },
+    {
+     "from": 152,
+     "to": 162,
+     "recipe": "Goblin Deviled Clams",
+     "count": 10,
+     "mats": {
+      "Tangy Clam Meat": 10,
+      "Hot Spices": 10
+     },
+     "raw": {
+      "Tangy Clam Meat": 10
+     },
+     "sell": 150
+    },
+    {
+     "from": 162,
+     "to": 164,
+     "recipe": "Bristle Whisker Catfish",
+     "count": 5,
+     "mats": {
+      "Raw Bristle Whisker Catfish": 5
+     },
+     "raw": {
+      "Raw Bristle Whisker Catfish": 5
+     },
+     "source": "Vendor",
+     "sell": 6
+    },
+    {
+     "from": 164,
+     "to": 175,
+     "recipe": "Goblin Deviled Clams",
+     "count": 13,
+     "mats": {
+      "Tangy Clam Meat": 13,
+      "Hot Spices": 13
+     },
+     "raw": {
+      "Tangy Clam Meat": 13
+     },
+     "sell": 150
+    },
+    {
+     "from": 175,
+     "to": 185,
+     "recipe": "Barbecued Buzzard Wing",
+     "count": 10,
+     "mats": {
+      "Buzzard Wing": 10,
+      "Hot Spices": 10
+     },
+     "raw": {
+      "Buzzard Wing": 10
+     },
+     "sell": 2898
+    },
+    {
+     "from": 185,
+     "to": 195,
+     "recipe": "Giant Clam Scorcho",
+     "count": 10,
+     "mats": {
+      "Giant Clam Meat": 10,
+      "Hot Spices": 10
+     },
+     "raw": {
+      "Giant Clam Meat": 10
+     },
+     "source": "Vendor",
+     "sell": 14200
+    },
+    {
+     "from": 195,
+     "to": 205,
+     "recipe": "Hot Wolf Ribs",
+     "count": 10,
+     "mats": {
+      "Red Wolf Meat": 10,
+      "Hot Spices": 10
+     },
+     "raw": {
+      "Red Wolf Meat": 10
+     },
+     "source": "Vendor",
+     "sell": 3900
+    },
+    {
+     "from": 205,
+     "to": 215,
+     "recipe": "Jungle Stew",
+     "count": 10,
+     "mats": {
+      "Tiger Meat": 10,
+      "Refreshing Spring Water": 10,
+      "Shiny Red Apple": 20
+     },
+     "raw": {
+      "Shiny Red Apple": 20,
+      "Tiger Meat": 10,
+      "Refreshing Spring Water": 10
+     },
+     "source": "Vendor",
+     "sell": 2000
+    },
+    {
+     "from": 215,
+     "to": 225,
+     "recipe": "Heavy Kodo Stew",
+     "count": 10,
+     "mats": {
+      "Heavy Kodo Meat": 20,
+      "Soothing Spices": 10,
+      "Refreshing Spring Water": 10
+     },
+     "raw": {
+      "Heavy Kodo Meat": 20,
+      "Refreshing Spring Water": 10
+     },
+     "source": "Vendor",
+     "sell": 9890
+    },
+    {
+     "from": 225,
+     "to": 232,
+     "recipe": "Sagefish Delight",
+     "count": 11,
+     "mats": {
+      "Raw Greater Sagefish": 11,
+      "Hot Spices": 11
+     },
+     "raw": {
+      "Raw Greater Sagefish": 11
+     },
+     "source": "Vendor",
+     "sell": 592
+    },
+    {
+     "from": 232,
+     "to": 299,
+     "recipe": "Filet of Redgill",
+     "count": 107,
+     "mats": {
+      "Raw Redgill": 107
+     },
+     "raw": {
+      "Raw Redgill": 107
+     },
+     "source": "Vendor"
+    },
+    {
+     "from": 299,
+     "to": 300,
+     "recipe": "Poached Sunscale Salmon",
+     "count": 2,
+     "mats": {
+      "Raw Sunscale Salmon": 2
+     },
+     "raw": {
+      "Raw Sunscale Salmon": 2
+     },
+     "source": "Vendor"
+    }
+   ],
+   "brackets": [
+    {
+     "from": 1,
+     "to": 150,
+     "mats": {
+      "Small Spider Leg": 87,
+      "Raw Rainbow Fin Albacore": 11,
+      "Melon Juice": 11,
+      "Murloc Fin": 11,
+      "Meaty Bat Wing": 10,
+      "Scorpid Stinger": 10,
+      "Kodo Meat": 10,
+      "Thunder Lizard Tail": 10,
+      "Stag Meat": 10,
+      "Big Bear Meat": 10,
+      "Lean Wolf Flank": 10,
+      "Clam Meat": 9,
+      "Refreshing Spring Water": 9,
+      "Raw Bristle Whisker Catfish": 7
+     }
+    },
+    {
+     "from": 150,
+     "to": 225,
+     "mats": {
+      "Tangy Clam Meat": 23,
+      "Refreshing Spring Water": 20,
+      "Shiny Red Apple": 20,
+      "Heavy Kodo Meat": 20,
+      "Buzzard Wing": 10,
+      "Giant Clam Meat": 10,
+      "Red Wolf Meat": 10,
+      "Tiger Meat": 10,
+      "Raw Bristle Whisker Catfish": 5
+     }
+    },
+    {
+     "from": 225,
+     "to": 300,
+     "mats": {
+      "Raw Redgill": 107,
+      "Raw Greater Sagefish": 11,
+      "Raw Sunscale Salmon": 2
+     }
+    }
+   ],
+   "vendor": {
+    "Hot Spices": 106,
+    "Mild Spices": 70,
+    "Soothing Spices": 10
+   }
+  }
+ }
+}

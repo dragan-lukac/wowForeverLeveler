@@ -1,0 +1,5070 @@
+{
+ "recipes": {
+  "Accurate Scope": {
+   "horde": true,
+   "item": "Schematic: Accurate Scope",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    },
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Mazk Snipeshot",
+     "x": 28.5,
+     "y": 75.12
+    }
+   ]
+  },
+  "Admiral's Hat": {
+   "horde": true,
+   "item": "Pattern: Admiral's Hat",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 7000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Cowardly Crosby",
+     "x": 27.0,
+     "y": 82.48
+    }
+   ]
+  },
+  "Argent Boots": {
+   "horde": true,
+   "item": "Pattern: Argent Boots",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1423,
+     "name": "Quartermaster Miranda Breechlock",
+     "x": 81.62,
+     "y": 60.0
+    },
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1422,
+     "name": "Argent Quartermaster Lightspark",
+     "x": 42.84,
+     "y": 83.72
+    },
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Argent Quartermaster Hasana",
+     "x": 83.26,
+     "y": 68.14
+    }
+   ]
+  },
+  "Argent Shoulders": {
+   "horde": true,
+   "item": "Pattern: Argent Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1423,
+     "name": "Quartermaster Miranda Breechlock",
+     "x": 81.62,
+     "y": 60.0
+    },
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1422,
+     "name": "Argent Quartermaster Lightspark",
+     "x": 42.84,
+     "y": 83.72
+    },
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Argent Quartermaster Hasana",
+     "x": 83.26,
+     "y": 68.14
+    }
+   ]
+  },
+  "Azure Silk Cloak": {
+   "horde": true,
+   "item": "Pattern: Azure Silk Cloak",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1417,
+     "name": "Jun'ha",
+     "x": 72.69,
+     "y": 36.45
+    }
+   ]
+  },
+  "Azure Silk Gloves": {
+   "horde": true,
+   "item": "Pattern: Azure Silk Gloves",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1000,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Kireena",
+     "x": 50.98,
+     "y": 53.55
+    }
+   ]
+  },
+  "Baked Salmon": {
+   "horde": true,
+   "item": "Recipe: Baked Salmon",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1444,
+     "name": "Sheendra Tallgrass",
+     "x": 74.49,
+     "y": 42.73
+    }
+   ]
+  },
+  "Barbaric Bracers": {
+   "horde": true,
+   "item": "Pattern: Barbaric Bracers",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Joseph Moore",
+     "x": 70.07,
+     "y": 58.44
+    }
+   ]
+  },
+  "Barbaric Iron Boots": {
+   "horde": true,
+   "item": "Plans: Barbaric Iron Boots",
+   "quests": [
+    {
+     "from": 32,
+     "id": 2753,
+     "level": 36,
+     "name": "Trampled Under Foot"
+    }
+   ],
+   "vendors": []
+  },
+  "Barbaric Iron Breastplate": {
+   "horde": true,
+   "item": "Plans: Barbaric Iron Breastplate",
+   "quests": [
+    {
+     "from": 32,
+     "id": 2751,
+     "level": 32,
+     "name": "Barbaric Battlements"
+    }
+   ],
+   "vendors": []
+  },
+  "Barbaric Iron Gloves": {
+   "horde": true,
+   "item": "Plans: Barbaric Iron Gloves",
+   "quests": [
+    {
+     "from": 32,
+     "id": 2755,
+     "level": 36,
+     "name": "Joys of Omosh"
+    }
+   ],
+   "vendors": []
+  },
+  "Barbaric Iron Helm": {
+   "horde": true,
+   "item": "Plans: Barbaric Iron Helm",
+   "quests": [
+    {
+     "from": 32,
+     "id": 2754,
+     "level": 36,
+     "name": "Horns of Frenzy"
+    }
+   ],
+   "vendors": []
+  },
+  "Barbaric Iron Shoulders": {
+   "horde": true,
+   "item": "Plans: Barbaric Iron Shoulders",
+   "quests": [
+    {
+     "from": 32,
+     "id": 2752,
+     "level": 32,
+     "name": "On Iron Pauldrons"
+    }
+   ],
+   "vendors": []
+  },
+  "Barbaric Leggings": {
+   "horde": true,
+   "item": "Pattern: Barbaric Leggings",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 650,
+     "limited": true,
+     "mapID": 1441,
+     "name": "Jandia",
+     "x": 46.21,
+     "y": 51.5
+    }
+   ]
+  },
+  "Beer Basted Boar Ribs": {
+   "horde": false,
+   "item": "Recipe: Beer Basted Boar Ribs",
+   "quests": [],
+   "vendors": []
+  },
+  "Big Bear Steak": {
+   "horde": true,
+   "item": "Recipe: Big Bear Steak",
+   "quests": [
+    {
+     "from": 17,
+     "id": 498,
+     "level": 22,
+     "name": "The Rescue"
+    }
+   ],
+   "vendors": [
+    {
+     "cost": 1600,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    }
+   ]
+  },
+  "Black Amnesty": {
+   "horde": true,
+   "item": "Plans: Black Amnesty",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 70000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Black Dragonscale Boots": {
+   "horde": true,
+   "item": "Pattern: Black Dragonscale Boots",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 160000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Black Dragonscale Breastplate": {
+   "horde": true,
+   "item": "Pattern: Black Dragonscale Breastplate",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 22000,
+     "limited": true,
+     "mapID": null,
+     "name": "Plugger Spazzring",
+     "x": 43.89,
+     "y": 48.94
+    }
+   ]
+  },
+  "Black Swashbuckler's Shirt": {
+   "horde": true,
+   "item": "Pattern: Black Swashbuckler's Shirt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Narkk",
+     "x": 28.13,
+     "y": 74.42
+    }
+   ]
+  },
+  "Black Whelp Cloak": {
+   "horde": false,
+   "item": "Pattern: Black Whelp Cloak",
+   "quests": [],
+   "vendors": []
+  },
+  "Black Whelp Tunic": {
+   "horde": false,
+   "item": "Pattern: Black Whelp Tunic",
+   "quests": [],
+   "vendors": []
+  },
+  "Blackfury": {
+   "horde": true,
+   "item": "Plans: Blackfury",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 70000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Blackguard": {
+   "horde": true,
+   "item": "Plans: Blackguard",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 120000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Blazing Rapier": {
+   "horde": true,
+   "item": "Plans: Blazing Rapier",
+   "quests": [
+    {
+     "from": 50,
+     "id": 5307,
+     "level": 60,
+     "name": "Corruption"
+    }
+   ],
+   "vendors": []
+  },
+  "Blood Sausage": {
+   "horde": false,
+   "item": "Recipe: Blood Sausage",
+   "quests": [],
+   "vendors": []
+  },
+  "Blood Tiger Breastplate": {
+   "horde": true,
+   "item": "Pattern: Blood Tiger Breastplate",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Blood Tiger Shoulders": {
+   "horde": true,
+   "item": "Pattern: Blood Tiger Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodsoul Breastplate": {
+   "horde": true,
+   "item": "Plans: Bloodsoul Breastplate",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodsoul Gauntlets": {
+   "horde": true,
+   "item": "Plans: Bloodsoul Gauntlets",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodsoul Shoulders": {
+   "horde": true,
+   "item": "Plans: Bloodsoul Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodvine Boots": {
+   "horde": true,
+   "item": "Pattern: Bloodvine Boots",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodvine Goggles": {
+   "horde": true,
+   "item": "Schematic: Bloodvine Goggles",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 120000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodvine Leggings": {
+   "horde": true,
+   "item": "Pattern: Bloodvine Leggings",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodvine Lens": {
+   "horde": true,
+   "item": "Schematic: Bloodvine Lens",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bloodvine Vest": {
+   "horde": true,
+   "item": "Pattern: Bloodvine Vest",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Blue Dragonscale Breastplate": {
+   "horde": true,
+   "item": "Pattern: Blue Dragonscale Breastplate",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": true,
+     "mapID": 1447,
+     "name": "Blimo Gadgetspring",
+     "x": 45.21,
+     "y": 90.85
+    }
+   ]
+  },
+  "Blue Firework": {
+   "horde": false,
+   "item": "Schematic: Blue Firework",
+   "quests": [],
+   "vendors": []
+  },
+  "Blue Linen Robe": {
+   "horde": true,
+   "item": "Pattern: Blue Linen Robe",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 300,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Wrahk",
+     "x": 52.25,
+     "y": 31.69
+    },
+    {
+     "cost": 300,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Ranik",
+     "x": 61.93,
+     "y": 38.7
+    },
+    {
+     "cost": 300,
+     "limited": true,
+     "mapID": 1421,
+     "name": "Andrew Hilbert",
+     "x": 43.22,
+     "y": 40.66
+    }
+   ]
+  },
+  "Blue Linen Vest": {
+   "horde": true,
+   "item": "Pattern: Blue Linen Vest",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 200,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Constance Brisboise",
+     "x": 52.6,
+     "y": 55.77
+    },
+    {
+     "cost": 200,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Borya",
+     "x": 63.08,
+     "y": 51.45
+    }
+   ]
+  },
+  "Blue Overalls": {
+   "horde": true,
+   "item": "Pattern: Blue Overalls",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 400,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Mallen Swain",
+     "x": 61.9,
+     "y": 20.98
+    },
+    {
+     "cost": 400,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Borya",
+     "x": 63.08,
+     "y": 51.45
+    }
+   ]
+  },
+  "Bright Yellow Shirt": {
+   "horde": false,
+   "item": "Pattern: Bright Yellow Shirt",
+   "quests": [],
+   "vendors": []
+  },
+  "Brilliant Mana Oil": {
+   "horde": true,
+   "item": "Formula: Brilliant Mana Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Brilliant Smallfish": {
+   "horde": true,
+   "item": "Recipe: Brilliant Smallfish",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Sewa Mistrunner",
+     "x": 55.79,
+     "y": 47.02
+    },
+    {
+     "cost": 40,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Martine Tramblay",
+     "x": 65.86,
+     "y": 59.64
+    },
+    {
+     "cost": 40,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Lizbeth Cromwell",
+     "x": 81.04,
+     "y": 30.75
+    },
+    {
+     "cost": 40,
+     "limited": false,
+     "mapID": 1412,
+     "name": "Harn Longcast",
+     "x": 47.51,
+     "y": 55.06
+    }
+   ]
+  },
+  "Brilliant Wizard Oil": {
+   "horde": true,
+   "item": "Formula: Brilliant Wizard Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Bristle Whisker Catfish": {
+   "horde": true,
+   "item": "Recipe: Bristle Whisker Catfish",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1200,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Sewa Mistrunner",
+     "x": 55.79,
+     "y": 47.02
+    },
+    {
+     "cost": 1200,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Ronald Burch",
+     "x": 62.31,
+     "y": 43.09
+    },
+    {
+     "cost": 1200,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Naal Mistrunner",
+     "x": 50.99,
+     "y": 52.45
+    },
+    {
+     "cost": 1200,
+     "limited": false,
+     "mapID": 1413,
+     "name": "Kilxx",
+     "x": 62.77,
+     "y": 38.24
+    },
+    {
+     "cost": 1200,
+     "limited": false,
+     "mapID": 1424,
+     "name": "Derak Nightfall",
+     "x": 63.09,
+     "y": 19.41
+    }
+   ]
+  },
+  "Carrion Surprise": {
+   "horde": true,
+   "item": "Recipe: Carrion Surprise",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Vendor-Tron 1000",
+     "x": 60.3,
+     "y": 38.19
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1445,
+     "name": "Ogg'marr",
+     "x": 36.7,
+     "y": 30.97
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Kireena",
+     "x": 50.98,
+     "y": 53.55
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1435,
+     "name": "Banalash",
+     "x": 44.77,
+     "y": 56.63
+    }
+   ]
+  },
+  "Cenarion Herb Bag": {
+   "horde": true,
+   "item": "Pattern: Cenarion Herb Bag",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Mishta",
+     "x": 49.88,
+     "y": 36.33
+    }
+   ]
+  },
+  "Chimeric Gloves": {
+   "horde": true,
+   "item": "Pattern: Chimeric Gloves",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1447,
+     "name": "Blimo Gadgetspring",
+     "x": 45.21,
+     "y": 90.85
+    }
+   ]
+  },
+  "Chromatic Gauntlets": {
+   "horde": true,
+   "item": "Pattern: Chromatic Gauntlets",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 90000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Clam Chowder": {
+   "horde": false,
+   "item": "Recipe: Clam Chowder",
+   "quests": [],
+   "vendors": []
+  },
+  "Cooked Crab Claw": {
+   "horde": false,
+   "item": "Recipe: Cooked Crab Claw",
+   "quests": [],
+   "vendors": []
+  },
+  "Cooked Glossy Mightfish": {
+   "horde": true,
+   "item": "Recipe: Cooked Glossy Mightfish",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Kelsey Yance",
+     "x": 28.23,
+     "y": 74.34
+    }
+   ]
+  },
+  "Copper Chain Vest": {
+   "horde": false,
+   "item": "Plans: Copper Chain Vest",
+   "quests": [],
+   "vendors": []
+  },
+  "Corehound Belt": {
+   "horde": true,
+   "item": "Pattern: Corehound Belt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 90000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Corehound Boots": {
+   "horde": true,
+   "item": "Pattern: Corehound Boots",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 150000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Crimson Silk Cloak": {
+   "horde": true,
+   "item": "Pattern: Crimson Silk Cloak",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1200,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Xizk Goodstitch",
+     "x": 28.71,
+     "y": 76.89
+    },
+    {
+     "cost": 1200,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    }
+   ]
+  },
+  "Crimson Silk Robe": {
+   "horde": true,
+   "item": "Pattern: Crimson Silk Robe",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": true,
+     "mapID": 1446,
+     "name": "Vizzklick",
+     "x": 51.01,
+     "y": 27.36
+    }
+   ]
+  },
+  "Crispy Bat Wing": {
+   "horde": true,
+   "item": "Recipe: Crispy Bat Wing",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 25,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Abigail Shiel",
+     "x": 61.03,
+     "y": 52.37
+    }
+   ]
+  },
+  "Crispy Lizard Tail": {
+   "horde": true,
+   "item": "Recipe: Crispy Lizard Tail",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1413,
+     "name": "Tari'qa",
+     "x": 51.68,
+     "y": 30.04
+    }
+   ]
+  },
+  "Crocolisk Gumbo": {
+   "horde": true,
+   "item": "Recipe: Crocolisk Gumbo",
+   "quests": [
+    {
+     "from": 18,
+     "id": 471,
+     "level": 26,
+     "name": "Apprentice's Duties"
+    }
+   ],
+   "vendors": []
+  },
+  "Crocolisk Steak": {
+   "horde": false,
+   "item": "Recipe: Crocolisk Steak",
+   "quests": [],
+   "vendors": []
+  },
+  "Curiously Tasty Omelet": {
+   "horde": true,
+   "item": "Recipe: Curiously Tasty Omelet",
+   "quests": [
+    {
+     "from": 22,
+     "id": 296,
+     "level": 29,
+     "name": "Ormer's Revenge"
+    }
+   ],
+   "vendors": [
+    {
+     "cost": 1600,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Nerrist",
+     "x": 32.7,
+     "y": 29.23
+    },
+    {
+     "cost": 1600,
+     "limited": false,
+     "mapID": 1417,
+     "name": "Keena",
+     "x": 74.09,
+     "y": 32.73
+    }
+   ]
+  },
+  "Dark Iron Boots": {
+   "horde": true,
+   "item": "Plans: Dark Iron Boots",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 80000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Dark Iron Bracers": {
+   "horde": true,
+   "item": "Plans: Dark Iron Bracers",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 70000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Dark Iron Destroyer": {
+   "horde": true,
+   "item": "Plans: Dark Iron Destroyer",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 220000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Dark Iron Gauntlets": {
+   "horde": true,
+   "item": "Plans: Dark Iron Gauntlets",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 80000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Dark Iron Helm": {
+   "horde": true,
+   "item": "Plans: Dark Iron Helm",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 60000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Dark Iron Leggings": {
+   "horde": true,
+   "item": "Plans: Dark Iron Leggings",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 180000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Dark Iron Reaver": {
+   "horde": true,
+   "item": "Plans: Dark Iron Reaver",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 220000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Dark Silk Shirt": {
+   "horde": true,
+   "item": "Pattern: Dark Silk Shirt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1100,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    },
+    {
+     "cost": 1100,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Mallen Swain",
+     "x": 61.9,
+     "y": 20.98
+    }
+   ]
+  },
+  "Darksoul Breastplate": {
+   "horde": true,
+   "item": "Plans: Darksoul Breastplate",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Darksoul Leggings": {
+   "horde": true,
+   "item": "Plans: Darksoul Leggings",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Darksoul Shoulders": {
+   "horde": true,
+   "item": "Plans: Darksoul Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Dawn Treaders": {
+   "horde": true,
+   "item": "Pattern: Dawn Treaders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1423,
+     "name": "Quartermaster Miranda Breechlock",
+     "x": 81.62,
+     "y": 60.0
+    },
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1422,
+     "name": "Argent Quartermaster Lightspark",
+     "x": 42.84,
+     "y": 83.72
+    },
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Argent Quartermaster Hasana",
+     "x": 83.26,
+     "y": 68.14
+    }
+   ]
+  },
+  "Dawn's Edge": {
+   "horde": true,
+   "item": "Plans: Dawn's Edge",
+   "quests": [
+    {
+     "from": 50,
+     "id": 5306,
+     "level": 60,
+     "name": "Snakestone of the Shadow Huntress"
+    }
+   ],
+   "vendors": []
+  },
+  "Dawnbringer Shoulders": {
+   "horde": false,
+   "item": "Plans: Dawnbringer Shoulders",
+   "quests": [],
+   "vendors": []
+  },
+  "Deadly Scope": {
+   "horde": true,
+   "item": "Schematic: Deadly Scope",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1428,
+     "name": "Yuka Screwspigot",
+     "x": 66.06,
+     "y": 21.95
+    },
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Knaz Blunderflame",
+     "x": 51.05,
+     "y": 35.23
+    }
+   ]
+  },
+  "Deepdive Helmet": {
+   "horde": true,
+   "item": "Schematic: Deepdive Helmet",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3600,
+     "limited": true,
+     "mapID": 1447,
+     "name": "Jubie Gadgetspring",
+     "x": 45.28,
+     "y": 90.95
+    }
+   ]
+  },
+  "Delicate Arcanite Converter": {
+   "horde": true,
+   "item": "Schematic: Delicate Arcanite Converter",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": true,
+     "mapID": 1452,
+     "name": "Xizzer Fizzbolt",
+     "x": 60.8,
+     "y": 38.6
+    }
+   ]
+  },
+  "Demon Forged Breastplate": {
+   "horde": true,
+   "item": "Plans: Demon Forged Breastplate",
+   "quests": [
+    {
+     "from": 55,
+     "id": 5127,
+     "level": 60,
+     "name": "The Demon Forge"
+    }
+   ],
+   "vendors": []
+  },
+  "Deviate Scale Belt": {
+   "horde": true,
+   "item": "Pattern: Deviate Scale Belt",
+   "quests": [
+    {
+     "from": 15,
+     "id": 1487,
+     "level": 21,
+     "name": "Deviate Eradication"
+    }
+   ],
+   "vendors": []
+  },
+  "Deviate Scale Cloak": {
+   "horde": true,
+   "item": "Pattern: Deviate Scale Cloak",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 550,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Kalldan Felmoon",
+     "x": 45.89,
+     "y": 35.7
+    }
+   ]
+  },
+  "Deviate Scale Gloves": {
+   "horde": true,
+   "item": "Pattern: Deviate Scale Gloves",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Kalldan Felmoon",
+     "x": 45.89,
+     "y": 35.7
+    }
+   ]
+  },
+  "Devilsaur Gauntlets": {
+   "horde": true,
+   "item": "Pattern: Devilsaur Gauntlets",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 22000,
+     "limited": true,
+     "mapID": 1449,
+     "name": "Nergal",
+     "x": 43.27,
+     "y": 7.73
+    }
+   ]
+  },
+  "Dig Rat Stew": {
+   "horde": true,
+   "item": "Recipe: Dig Rat Stew",
+   "quests": [
+    {
+     "from": 15,
+     "id": 862,
+     "level": 23,
+     "name": "Dig Rat Stew"
+    }
+   ],
+   "vendors": []
+  },
+  "Dirge's Kickin' Chimaerok Chops": {
+   "horde": true,
+   "item": "Recipe: Dirge's Kickin' Chimaerok Chops",
+   "quests": [
+    {
+     "from": 60,
+     "id": 8586,
+     "level": 60,
+     "name": "Dirge's Kickin' Chimaerok Chops"
+    }
+   ],
+   "vendors": []
+  },
+  "Dragonbreath Chili": {
+   "horde": true,
+   "item": "Recipe: Dragonbreath Chili",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 7000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    },
+    {
+     "cost": 7000,
+     "limited": false,
+     "mapID": 1445,
+     "name": "Ogg'marr",
+     "x": 36.7,
+     "y": 30.97
+    }
+   ]
+  },
+  "EZ-Thro Dynamite II": {
+   "horde": true,
+   "item": "Schematic: EZ-Thro Dynamite II",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": true,
+     "mapID": 1446,
+     "name": "Blizrik Buckshot",
+     "x": 50.74,
+     "y": 27.53
+    }
+   ]
+  },
+  "Earthen Leather Shoulders": {
+   "horde": true,
+   "item": "Pattern: Earthen Leather Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Zixil",
+     "x": 55.65,
+     "y": 34.78
+    }
+   ]
+  },
+  "Ebon Hand": {
+   "horde": true,
+   "item": "Plans: Ebon Hand",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 120000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Ebon Shiv": {
+   "horde": false,
+   "item": "Plans: Ebon Shiv",
+   "quests": [],
+   "vendors": []
+  },
+  "Egg Nog": {
+   "horde": true,
+   "item": "Recipe: Egg Nog",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 240,
+     "limited": false,
+     "mapID": null,
+     "name": "Wulmort Jinglepocket",
+     "x": 33.7,
+     "y": 67.23
+    },
+    {
+     "cost": 240,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Penney Copperpinch",
+     "x": 53.21,
+     "y": 65.89
+    },
+    {
+     "cost": 240,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Nardstrum Copperpinch",
+     "x": 68.24,
+     "y": 38.86
+    },
+    {
+     "cost": 240,
+     "limited": false,
+     "mapID": null,
+     "name": "Khole Jinglepocket",
+     "x": 55.01,
+     "y": 59.26
+    }
+   ]
+  },
+  "Elixir of Shadow Power": {
+   "horde": true,
+   "item": "Recipe: Elixir of Shadow Power",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 10000,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Algernon",
+     "x": 51.71,
+     "y": 74.67
+    }
+   ]
+  },
+  "Enchant 2H Weapon - Agility": {
+   "horde": false,
+   "item": "Formula: Enchant 2H Weapon - Agility",
+   "quests": [],
+   "vendors": []
+  },
+  "Enchant 2H Weapon - Lesser Intellect": {
+   "horde": true,
+   "item": "Formula: Enchant 2H Weapon - Lesser Intellect",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1456,
+     "name": "Nata Dawnstrider",
+     "x": 44.99,
+     "y": 38.76
+    },
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Kithas",
+     "x": 53.88,
+     "y": 38.02
+    }
+   ]
+  },
+  "Enchant Boots - Minor Agility": {
+   "horde": true,
+   "item": "Formula: Enchant Boots - Minor Agility",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1000,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Zixil",
+     "x": 55.65,
+     "y": 34.78
+    },
+    {
+     "cost": 1000,
+     "limited": true,
+     "mapID": 1456,
+     "name": "Nata Dawnstrider",
+     "x": 44.99,
+     "y": 38.76
+    }
+   ]
+  },
+  "Enchant Bracer - Deflection": {
+   "horde": true,
+   "item": "Formula: Enchant Bracer - Deflection",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5800,
+     "limited": false,
+     "mapID": 1435,
+     "name": "Banalash",
+     "x": 44.77,
+     "y": 56.63
+    }
+   ]
+  },
+  "Enchant Bracer - Lesser Deflection": {
+   "horde": true,
+   "item": "Formula: Enchant Bracer - Lesser Deflection",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1417,
+     "name": "Keena",
+     "x": 74.09,
+     "y": 32.73
+    }
+   ]
+  },
+  "Enchant Bracer - Lesser Strength": {
+   "horde": true,
+   "item": "Formula: Enchant Bracer - Lesser Strength",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2500,
+     "limited": true,
+     "mapID": 1442,
+     "name": "Kulwia",
+     "x": 45.39,
+     "y": 59.33
+    }
+   ]
+  },
+  "Enchant Bracer - Mana Regeneration": {
+   "horde": true,
+   "item": "Formula: Enchant Bracer - Mana Regeneration",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 30000,
+     "limited": false,
+     "mapID": 1423,
+     "name": "Quartermaster Miranda Breechlock",
+     "x": 81.62,
+     "y": 60.0
+    },
+    {
+     "cost": 30000,
+     "limited": false,
+     "mapID": 1422,
+     "name": "Argent Quartermaster Lightspark",
+     "x": 42.84,
+     "y": 83.72
+    },
+    {
+     "cost": 30000,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Argent Quartermaster Hasana",
+     "x": 83.26,
+     "y": 68.14
+    }
+   ]
+  },
+  "Enchant Cloak - Greater Fire Resistance": {
+   "horde": true,
+   "item": "Formula: Enchant Cloak - Greater Fire Resistance",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 100000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Enchant Cloak - Greater Nature Resistance": {
+   "horde": true,
+   "item": "Formula: Enchant Cloak - Greater Nature Resistance",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 100000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Enchant Cloak - Minor Agility": {
+   "horde": true,
+   "item": "Formula: Enchant Cloak - Minor Agility",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 800,
+     "limited": true,
+     "mapID": 1442,
+     "name": "Kulwia",
+     "x": 45.39,
+     "y": 59.33
+    }
+   ]
+  },
+  "Enchant Cloak - Superior Defense": {
+   "horde": true,
+   "item": "Formula: Enchant Cloak - Superior Defense",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": true,
+     "mapID": 1450,
+     "name": "Lorelae Wintersong",
+     "x": 48.24,
+     "y": 40.14
+    }
+   ]
+  },
+  "Enchant Shield - Greater Stamina": {
+   "horde": true,
+   "item": "Formula: Enchant Shield - Greater Stamina",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Daniel Bartlett",
+     "x": 64.05,
+     "y": 37.37
+    }
+   ]
+  },
+  "Enchant Weapon - Agility": {
+   "horde": false,
+   "item": "Formula: Enchant Weapon - Agility",
+   "quests": [],
+   "vendors": []
+  },
+  "Enchant Weapon - Mighty Intellect": {
+   "horde": true,
+   "item": "Formula: Enchant Weapon - Mighty Intellect",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 100000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Enchant Weapon - Mighty Spirit": {
+   "horde": true,
+   "item": "Formula: Enchant Weapon - Mighty Spirit",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 80000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Enchant Weapon - Strength": {
+   "horde": true,
+   "item": "Formula: Enchant Weapon - Strength",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 30000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Enchanted Battlehammer": {
+   "horde": true,
+   "item": "Plans: Enchanted Battlehammer",
+   "quests": [
+    {
+     "from": 50,
+     "id": 5305,
+     "level": 60,
+     "name": "Sweet Serenity"
+    }
+   ],
+   "vendors": []
+  },
+  "Enchanted Mageweave Pouch": {
+   "horde": true,
+   "item": "Pattern: Enchanted Mageweave Pouch",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 6000,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Thaddeus Webb",
+     "x": 62.38,
+     "y": 60.98
+    },
+    {
+     "cost": 6000,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Nata Dawnstrider",
+     "x": 44.99,
+     "y": 38.76
+    },
+    {
+     "cost": 6000,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Lilly",
+     "x": 43.02,
+     "y": 50.82
+    },
+    {
+     "cost": 6000,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Leo Sarn",
+     "x": 53.89,
+     "y": 82.21
+    },
+    {
+     "cost": 6000,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Kithas",
+     "x": 53.88,
+     "y": 38.02
+    },
+    {
+     "cost": 6000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Enchanted Runecloth Bag": {
+   "horde": true,
+   "item": "Pattern: Enchanted Runecloth Bag",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Enchanted Thorium Breastplate": {
+   "horde": true,
+   "item": "Plans: Enchanted Thorium Breastplate",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7649,
+     "level": 60,
+     "name": "Enchanted Thorium Platemail: Volume I"
+    }
+   ],
+   "vendors": []
+  },
+  "Enchanted Thorium Helm": {
+   "horde": true,
+   "item": "Plans: Enchanted Thorium Helm",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7651,
+     "level": 60,
+     "name": "Enchanted Thorium Platemail: Volume III"
+    }
+   ],
+   "vendors": []
+  },
+  "Enchanted Thorium Leggings": {
+   "horde": true,
+   "item": "Plans: Enchanted Thorium Leggings",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7650,
+     "level": 60,
+     "name": "Enchanted Thorium Platemail: Volume II"
+    }
+   ],
+   "vendors": []
+  },
+  "Enchanter's Cowl": {
+   "horde": true,
+   "item": "Pattern: Enchanter's Cowl",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Xizk Goodstitch",
+     "x": 28.71,
+     "y": 76.89
+    },
+    {
+     "cost": 1000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    }
+   ]
+  },
+  "Felcloth Pants": {
+   "horde": true,
+   "item": "Pattern: Felcloth Pants",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": true,
+     "mapID": 1450,
+     "name": "Lorelae Wintersong",
+     "x": 48.24,
+     "y": 40.14
+    }
+   ]
+  },
+  "Festival Dress": {
+   "horde": true,
+   "item": "Pattern: Festival Dress",
+   "quests": [
+    {
+     "from": 50,
+     "id": 8878,
+     "level": 60,
+     "name": "Festive Recipes"
+    }
+   ],
+   "vendors": []
+  },
+  "Fiery Chain Girdle": {
+   "horde": true,
+   "item": "Plans: Fiery Chain Girdle",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 90000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Fiery Chain Shoulders": {
+   "horde": true,
+   "item": "Plans: Fiery Chain Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 200000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Fiery Plate Gauntlets": {
+   "horde": true,
+   "item": "Plans: Fiery Plate Gauntlets",
+   "quests": [
+    {
+     "from": 55,
+     "id": 5124,
+     "level": 60,
+     "name": "Fiery Plate Gauntlets"
+    }
+   ],
+   "vendors": []
+  },
+  "Filet of Redgill": {
+   "horde": true,
+   "item": "Recipe: Filet of Redgill",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Kelsey Yance",
+     "x": 28.23,
+     "y": 74.34
+    }
+   ]
+  },
+  "Fillet of Frenzy": {
+   "horde": false,
+   "item": "Recipe: Fillet of Frenzy",
+   "quests": [],
+   "vendors": []
+  },
+  "Fire Protection Potion": {
+   "horde": true,
+   "item": "Recipe: Fire Protection Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1442,
+     "name": "Jeeda",
+     "x": 47.61,
+     "y": 61.59
+    }
+   ]
+  },
+  "Firework Launcher": {
+   "horde": true,
+   "item": "Schematic: Firework Launcher",
+   "quests": [
+    {
+     "from": 45,
+     "id": 8877,
+     "level": 60,
+     "name": "Firework Launcher"
+    }
+   ],
+   "vendors": []
+  },
+  "Flarecore Gloves": {
+   "horde": true,
+   "item": "Pattern: Flarecore Gloves",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 80000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Flarecore Leggings": {
+   "horde": true,
+   "item": "Pattern: Flarecore Leggings",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 90000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Flarecore Mantle": {
+   "horde": true,
+   "item": "Pattern: Flarecore Mantle",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 180000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Flarecore Robe": {
+   "horde": true,
+   "item": "Pattern: Flarecore Robe",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 60000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Flash Bomb": {
+   "horde": true,
+   "item": "Schematic: Flash Bomb",
+   "quests": [
+    {
+     "from": 30,
+     "id": 1559,
+     "level": 37,
+     "name": "Flash Bomb Recipe"
+    }
+   ],
+   "vendors": []
+  },
+  "Flask of Chromatic Resistance": {
+   "horde": false,
+   "item": "Recipe: Flask of Chromatic Resistance",
+   "quests": [],
+   "vendors": []
+  },
+  "Flask of Distilled Wisdom": {
+   "horde": false,
+   "item": "Recipe: Flask of Distilled Wisdom",
+   "quests": [],
+   "vendors": []
+  },
+  "Flask of Petrification": {
+   "horde": false,
+   "item": "Recipe: Flask of Petrification",
+   "quests": [],
+   "vendors": []
+  },
+  "Flask of Supreme Power": {
+   "horde": false,
+   "item": "Recipe: Flask of Supreme Power",
+   "quests": [],
+   "vendors": []
+  },
+  "Flask of the Titans": {
+   "horde": false,
+   "item": "Recipe: Flask of the Titans",
+   "quests": [],
+   "vendors": []
+  },
+  "Free Action Potion": {
+   "horde": true,
+   "item": "Recipe: Free Action Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1800,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Kor'geld",
+     "x": 56.05,
+     "y": 34.12
+    }
+   ]
+  },
+  "Frost Oil": {
+   "horde": true,
+   "item": "Recipe: Frost Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2500,
+     "limited": false,
+     "mapID": 1416,
+     "name": "Bro'kin",
+     "x": 38.24,
+     "y": 38.87
+    }
+   ]
+  },
+  "Frost Protection Potion": {
+   "horde": true,
+   "item": "Recipe: Frost Protection Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Glyx Brewright",
+     "x": 28.14,
+     "y": 78.11
+    }
+   ]
+  },
+  "Frostsaber Boots": {
+   "horde": true,
+   "item": "Pattern: Frostsaber Boots",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": true,
+     "mapID": 1452,
+     "name": "Qia",
+     "x": 61.2,
+     "y": 37.21
+    }
+   ]
+  },
+  "Gaea's Embrace": {
+   "horde": true,
+   "item": "Pattern: Gaea's Embrace",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 90000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Mishta",
+     "x": 49.88,
+     "y": 36.33
+    }
+   ]
+  },
+  "Gem-studded Leather Belt": {
+   "horde": true,
+   "item": "Pattern: Gem-studded Leather Belt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Rikqiz",
+     "x": 28.49,
+     "y": 76.05
+    }
+   ]
+  },
+  "Ghost Dye": {
+   "horde": true,
+   "item": "Recipe: Ghost Dye",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 9000,
+     "limited": true,
+     "mapID": 1444,
+     "name": "Bronk",
+     "x": 76.06,
+     "y": 43.28
+    }
+   ]
+  },
+  "Giant Clam Scorcho": {
+   "horde": true,
+   "item": "Recipe: Giant Clam Scorcho",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Kelsey Yance",
+     "x": 28.23,
+     "y": 74.34
+    }
+   ]
+  },
+  "Gingerbread Cookie": {
+   "horde": true,
+   "item": "Recipe: Gingerbread Cookie",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 25,
+     "limited": false,
+     "mapID": null,
+     "name": "Wulmort Jinglepocket",
+     "x": 33.7,
+     "y": 67.23
+    },
+    {
+     "cost": 25,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Penney Copperpinch",
+     "x": 53.21,
+     "y": 65.89
+    },
+    {
+     "cost": 25,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Nardstrum Copperpinch",
+     "x": 68.24,
+     "y": 38.86
+    },
+    {
+     "cost": 25,
+     "limited": false,
+     "mapID": null,
+     "name": "Khole Jinglepocket",
+     "x": 55.01,
+     "y": 59.26
+    }
+   ]
+  },
+  "Girdle of the Dawn": {
+   "horde": true,
+   "item": "Plans: Girdle of the Dawn",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1423,
+     "name": "Quartermaster Miranda Breechlock",
+     "x": 81.62,
+     "y": 60.0
+    },
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1422,
+     "name": "Argent Quartermaster Lightspark",
+     "x": 42.84,
+     "y": 83.72
+    },
+    {
+     "cost": 22000,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Argent Quartermaster Hasana",
+     "x": 83.26,
+     "y": 68.14
+    }
+   ]
+  },
+  "Gloves of the Dawn": {
+   "horde": true,
+   "item": "Plans: Gloves of the Dawn",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1423,
+     "name": "Quartermaster Miranda Breechlock",
+     "x": 81.62,
+     "y": 60.0
+    },
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1422,
+     "name": "Argent Quartermaster Lightspark",
+     "x": 42.84,
+     "y": 83.72
+    },
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Argent Quartermaster Hasana",
+     "x": 83.26,
+     "y": 68.14
+    }
+   ]
+  },
+  "Gnomish Cloaking Device": {
+   "horde": true,
+   "item": "Schematic: Gnomish Cloaking Device",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2400,
+     "limited": true,
+     "mapID": 1416,
+     "name": "Zan Shivsproket",
+     "x": 85.95,
+     "y": 79.96
+    }
+   ]
+  },
+  "Gnomish Universal Remote": {
+   "horde": true,
+   "item": "Schematic: Gnomish Universal Remote",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1200,
+     "limited": true,
+     "mapID": 1441,
+     "name": "Jinky Twizzlefixxit",
+     "x": 77.68,
+     "y": 77.9
+    }
+   ]
+  },
+  "Goblin Jumper Cables": {
+   "horde": true,
+   "item": "Schematic: Goblin Jumper Cables",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Zixil",
+     "x": 55.65,
+     "y": 34.78
+    },
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1442,
+     "name": "Veenix",
+     "x": 58.22,
+     "y": 51.74
+    },
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    },
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1431,
+     "name": "Kzixx",
+     "x": 81.82,
+     "y": 19.77
+    }
+   ]
+  },
+  "Golden Mantle of the Dawn": {
+   "horde": true,
+   "item": "Pattern: Golden Mantle of the Dawn",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1423,
+     "name": "Quartermaster Miranda Breechlock",
+     "x": 81.62,
+     "y": 60.0
+    },
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1422,
+     "name": "Argent Quartermaster Lightspark",
+     "x": 42.84,
+     "y": 83.72
+    },
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Argent Quartermaster Hasana",
+     "x": 83.26,
+     "y": 68.14
+    }
+   ]
+  },
+  "Golden Scale Coif": {
+   "horde": true,
+   "item": "Plans: Golden Scale Coif",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4400,
+     "limited": true,
+     "mapID": 1446,
+     "name": "Krinkle Goodsteel",
+     "x": 51.46,
+     "y": 28.81
+    }
+   ]
+  },
+  "Gooey Spider Cake": {
+   "horde": false,
+   "item": "Recipe: Gooey Spider Cake",
+   "quests": [],
+   "vendors": []
+  },
+  "Goretusk Liver Pie": {
+   "horde": false,
+   "item": "Recipe: Goretusk Liver Pie",
+   "quests": [],
+   "vendors": []
+  },
+  "Great Rage Potion": {
+   "horde": true,
+   "item": "Recipe: Great Rage Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Hagrus",
+     "x": 45.99,
+     "y": 45.68
+    }
+   ]
+  },
+  "Greater Adept's Robe": {
+   "horde": true,
+   "item": "Pattern: Greater Adept's Robe",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 800,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Millie Gregorian",
+     "x": 70.59,
+     "y": 30.14
+    }
+   ]
+  },
+  "Green Dragonscale Breastplate": {
+   "horde": true,
+   "item": "Pattern: Green Dragonscale Breastplate",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1435,
+     "name": "Masat T'andr",
+     "x": 26.46,
+     "y": 31.47
+    }
+   ]
+  },
+  "Green Firework": {
+   "horde": true,
+   "item": "Schematic: Green Firework",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1800,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Gagsprocket",
+     "x": 62.64,
+     "y": 36.27
+    },
+    {
+     "cost": 1800,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Crazk Sparks",
+     "x": 28.36,
+     "y": 76.66
+    }
+   ]
+  },
+  "Green Leather Armor": {
+   "horde": true,
+   "item": "Pattern: Green Leather Armor",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": false,
+     "mapID": 1424,
+     "name": "George Candarte",
+     "x": 92.02,
+     "y": 38.23
+    }
+   ]
+  },
+  "Green Whelp Bracers": {
+   "horde": true,
+   "item": "Pattern: Green Whelp Bracers",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2800,
+     "limited": true,
+     "mapID": 1444,
+     "name": "Jangdor Swiftstrider",
+     "x": 74.43,
+     "y": 42.91
+    }
+   ]
+  },
+  "Grilled Squid": {
+   "horde": true,
+   "item": "Recipe: Grilled Squid",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Gikkix",
+     "x": 66.64,
+     "y": 22.08
+    }
+   ]
+  },
+  "Gyrofreeze Ice Reflector": {
+   "horde": true,
+   "item": "Schematic: Gyrofreeze Ice Reflector",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1452,
+     "name": "Xizzer Fizzbolt",
+     "x": 60.8,
+     "y": 38.6
+    }
+   ]
+  },
+  "Hardened Iron Shortsword": {
+   "horde": true,
+   "item": "Plans: Hardened Iron Shortsword",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Sumi",
+     "x": 82.6,
+     "y": 23.96
+    },
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Jutak",
+     "x": 27.46,
+     "y": 77.55
+    }
+   ]
+  },
+  "Heavy Crocolisk Stew": {
+   "horde": true,
+   "item": "Recipe: Heavy Crocolisk Stew",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": false,
+     "mapID": 1445,
+     "name": "Ogg'marr",
+     "x": 36.7,
+     "y": 30.97
+    }
+   ]
+  },
+  "Heavy Kodo Stew": {
+   "horde": true,
+   "item": "Recipe: Heavy Kodo Stew",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 7000,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Vendor-Tron 1000",
+     "x": 60.3,
+     "y": 38.19
+    },
+    {
+     "cost": 7000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Kireena",
+     "x": 50.98,
+     "y": 53.55
+    }
+   ]
+  },
+  "Heavy Leather Ball": {
+   "horde": true,
+   "item": "Pattern: Heavy Leather Ball",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Tamar",
+     "x": 63.05,
+     "y": 45.53
+    }
+   ]
+  },
+  "Heavy Scorpid Bracers": {
+   "horde": true,
+   "item": "Pattern: Heavy Scorpid Bracers",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1451,
+     "name": "Zannok Hidepiercer",
+     "x": 82.0,
+     "y": 17.74
+    }
+   ]
+  },
+  "Heavy Scorpid Helm": {
+   "horde": true,
+   "item": "Pattern: Heavy Scorpid Helm",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 25000,
+     "limited": true,
+     "mapID": 1451,
+     "name": "Zannok Hidepiercer",
+     "x": 82.0,
+     "y": 17.74
+    }
+   ]
+  },
+  "Heavy Silk Bandage": {
+   "horde": true,
+   "item": "Manual: Heavy Silk Bandage",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2200,
+     "limited": false,
+     "mapID": 1445,
+     "name": "Balai Lok'Wein",
+     "x": 36.49,
+     "y": 30.36
+    }
+   ]
+  },
+  "Herbalist's Gloves": {
+   "horde": false,
+   "item": "Pattern: Herbalist's Gloves",
+   "quests": [],
+   "vendors": []
+  },
+  "Holy Protection Potion": {
+   "horde": true,
+   "item": "Recipe: Holy Protection Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 800,
+     "limited": false,
+     "mapID": 1431,
+     "name": "Kzixx",
+     "x": 81.82,
+     "y": 19.77
+    },
+    {
+     "cost": 800,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Hula'mahi",
+     "x": 51.39,
+     "y": 30.2
+    }
+   ]
+  },
+  "Hot Lion Chops": {
+   "horde": true,
+   "item": "Recipe: Hot Lion Chops",
+   "quests": [
+    {
+     "from": 21,
+     "id": 501,
+     "level": 24,
+     "name": "Elixir of Pain"
+    }
+   ],
+   "vendors": [
+    {
+     "cost": 1800,
+     "limited": false,
+     "mapID": 1413,
+     "name": "Zargh",
+     "x": 52.62,
+     "y": 29.84
+    },
+    {
+     "cost": 1800,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Vendor-Tron 1000",
+     "x": 60.3,
+     "y": 38.19
+    }
+   ]
+  },
+  "Hot Smoked Bass": {
+   "horde": true,
+   "item": "Recipe: Hot Smoked Bass",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Kelsey Yance",
+     "x": 28.23,
+     "y": 74.34
+    }
+   ]
+  },
+  "Hot Wolf Ribs": {
+   "horde": true,
+   "item": "Recipe: Hot Wolf Ribs",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1444,
+     "name": "Sheendra Tallgrass",
+     "x": 74.49,
+     "y": 42.73
+    }
+   ]
+  },
+  "Huge Thorium Battleaxe": {
+   "horde": false,
+   "item": "Plans: Huge Thorium Battleaxe",
+   "quests": [],
+   "vendors": []
+  },
+  "Ice Deflector": {
+   "horde": true,
+   "item": "Schematic: Ice Deflector",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1800,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    },
+    {
+     "cost": 1800,
+     "limited": false,
+     "mapID": 1416,
+     "name": "Rizz Loosebolt",
+     "x": 47.3,
+     "y": 35.16
+    }
+   ]
+  },
+  "Icy Cloak": {
+   "horde": true,
+   "item": "Pattern: Icy Cloak",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1445,
+     "name": "Ghok'kah",
+     "x": 35.15,
+     "y": 30.83
+    }
+   ]
+  },
+  "Imperial Plate Belt": {
+   "horde": true,
+   "item": "Plans: Imperial Plate Belt",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7653,
+     "level": 60,
+     "name": "Imperial Plate Belt"
+    }
+   ],
+   "vendors": []
+  },
+  "Imperial Plate Boots": {
+   "horde": true,
+   "item": "Plans: Imperial Plate Boots",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7654,
+     "level": 60,
+     "name": "Imperial Plate Boots"
+    }
+   ],
+   "vendors": []
+  },
+  "Imperial Plate Bracers": {
+   "horde": true,
+   "item": "Plans: Imperial Plate Bracers",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7655,
+     "level": 60,
+     "name": "Imperial Plate Bracer"
+    }
+   ],
+   "vendors": []
+  },
+  "Imperial Plate Chest": {
+   "horde": true,
+   "item": "Plans: Imperial Plate Chest",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7656,
+     "level": 60,
+     "name": "Imperial Plate Chest"
+    }
+   ],
+   "vendors": []
+  },
+  "Imperial Plate Helm": {
+   "horde": true,
+   "item": "Plans: Imperial Plate Helm",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7657,
+     "level": 60,
+     "name": "Imperial Plate Helm"
+    }
+   ],
+   "vendors": []
+  },
+  "Imperial Plate Leggings": {
+   "horde": true,
+   "item": "Plans: Imperial Plate Leggings",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7658,
+     "level": 60,
+     "name": "Imperial Plate Leggings"
+    }
+   ],
+   "vendors": []
+  },
+  "Imperial Plate Shoulders": {
+   "horde": true,
+   "item": "Plans: Imperial Plate Shoulders",
+   "quests": [
+    {
+     "from": 50,
+     "id": 7659,
+     "level": 60,
+     "name": "Imperial Plate Shoulders"
+    }
+   ],
+   "vendors": []
+  },
+  "Ironfeather Shoulders": {
+   "horde": true,
+   "item": "Pattern: Ironfeather Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 14000,
+     "limited": true,
+     "mapID": 1425,
+     "name": "Gigget Zipcoil",
+     "x": 34.46,
+     "y": 38.59
+    }
+   ]
+  },
+  "Ironforge Breastplate": {
+   "horde": false,
+   "item": "Plans: Ironforge Breastplate",
+   "quests": [],
+   "vendors": []
+  },
+  "Jungle Stew": {
+   "horde": true,
+   "item": "Recipe: Jungle Stew",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Vendor-Tron 1000",
+     "x": 60.3,
+     "y": 38.19
+    },
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Nerrist",
+     "x": 32.7,
+     "y": 29.23
+    }
+   ]
+  },
+  "Kaldorei Spider Kabob": {
+   "horde": true,
+   "item": "Recipe: Kaldorei Spider Kabob",
+   "quests": [
+    {
+     "from": 1,
+     "id": 4161,
+     "level": 7,
+     "name": "Recipe of the Kaldorei"
+    }
+   ],
+   "vendors": []
+  },
+  "Kodo Hide Bag": {
+   "horde": true,
+   "item": "Pattern: Kodo Hide Bag",
+   "quests": [
+    {
+     "from": 4,
+     "id": 769,
+     "level": 10,
+     "name": "Kodo Hide Bag"
+    }
+   ],
+   "vendors": []
+  },
+  "Lava Belt": {
+   "horde": true,
+   "item": "Pattern: Lava Belt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 60000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Lavender Mageweave Shirt": {
+   "horde": true,
+   "item": "Pattern: Lavender Mageweave Shirt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4000,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Borya",
+     "x": 63.08,
+     "y": 51.45
+    }
+   ]
+  },
+  "Lean Venison": {
+   "horde": true,
+   "item": "Recipe: Lean Venison",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1200,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Vendor-Tron 1000",
+     "x": 60.3,
+     "y": 38.19
+    }
+   ]
+  },
+  "Lean Wolf Steak": {
+   "horde": true,
+   "item": "Recipe: Lean Wolf Steak",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1600,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    }
+   ]
+  },
+  "Lesser Mana Oil": {
+   "horde": true,
+   "item": "Formula: Lesser Mana Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 10000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Lesser Stoneshield Potion": {
+   "horde": true,
+   "item": "Recipe: Lesser Stoneshield Potion",
+   "quests": [
+    {
+     "from": 35,
+     "id": 715,
+     "level": 37,
+     "name": "Liquid Stone"
+    }
+   ],
+   "vendors": []
+  },
+  "Lesser Wizard Oil": {
+   "horde": true,
+   "item": "Formula: Lesser Wizard Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4000,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Thaddeus Webb",
+     "x": 62.38,
+     "y": 60.98
+    },
+    {
+     "cost": 4000,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Nata Dawnstrider",
+     "x": 44.99,
+     "y": 38.76
+    },
+    {
+     "cost": 4000,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Lilly",
+     "x": 43.02,
+     "y": 50.82
+    },
+    {
+     "cost": 4000,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Leo Sarn",
+     "x": 53.89,
+     "y": 82.21
+    },
+    {
+     "cost": 4000,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Kithas",
+     "x": 53.88,
+     "y": 38.02
+    },
+    {
+     "cost": 4000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Living Action Potion": {
+   "horde": true,
+   "item": "Recipe: Living Action Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Living Shoulders": {
+   "horde": true,
+   "item": "Pattern: Living Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 14000,
+     "limited": true,
+     "mapID": 1444,
+     "name": "Jangdor Swiftstrider",
+     "x": 74.43,
+     "y": 42.91
+    }
+   ]
+  },
+  "Lobster Stew": {
+   "horde": true,
+   "item": "Recipe: Lobster Stew",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1444,
+     "name": "Sheendra Tallgrass",
+     "x": 74.49,
+     "y": 42.73
+    }
+   ]
+  },
+  "Loch Frenzy Delight": {
+   "horde": false,
+   "item": "Recipe: Loch Frenzy Delight",
+   "quests": [],
+   "vendors": []
+  },
+  "Longjaw Mud Snapper": {
+   "horde": true,
+   "item": "Recipe: Longjaw Mud Snapper",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Naal Mistrunner",
+     "x": 50.99,
+     "y": 52.45
+    },
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Lizbeth Cromwell",
+     "x": 81.04,
+     "y": 30.75
+    },
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Killian Sanatha",
+     "x": 33.0,
+     "y": 17.85
+    },
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1412,
+     "name": "Harn Longcast",
+     "x": 47.51,
+     "y": 55.06
+    }
+   ]
+  },
+  "Lovingly Crafted Boomstick": {
+   "horde": true,
+   "item": "Schematic: Lovingly Crafted Boomstick",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1000,
+     "limited": true,
+     "mapID": 1441,
+     "name": "Jinky Twizzlefixxit",
+     "x": 77.68,
+     "y": 77.9
+    }
+   ]
+  },
+  "Mageweave Bandage": {
+   "horde": true,
+   "item": "Manual: Mageweave Bandage",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1445,
+     "name": "Balai Lok'Wein",
+     "x": 36.49,
+     "y": 30.36
+    }
+   ]
+  },
+  "Major Mana Potion": {
+   "horde": false,
+   "item": "Recipe: Major Mana Potion",
+   "quests": [],
+   "vendors": []
+  },
+  "Mantle of the Timbermaw": {
+   "horde": false,
+   "item": "Pattern: Mantle of the Timbermaw",
+   "quests": [],
+   "vendors": []
+  },
+  "Massive Iron Axe": {
+   "horde": true,
+   "item": "Plans: Massive Iron Axe",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4400,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Vharr",
+     "x": 32.36,
+     "y": 27.95
+    },
+    {
+     "cost": 4400,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Jaquilina Dramet",
+     "x": 35.75,
+     "y": 10.66
+    }
+   ]
+  },
+  "Masterwork Target Dummy": {
+   "horde": true,
+   "item": "Schematic: Masterwork Target Dummy",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": true,
+     "mapID": 1452,
+     "name": "Xizzer Fizzbolt",
+     "x": 60.8,
+     "y": 38.6
+    }
+   ]
+  },
+  "Mechanical Dragonling": {
+   "horde": true,
+   "item": "Schematic: Mechanical Dragonling",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 10000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Gnaz Blunderflame",
+     "x": 50.98,
+     "y": 35.21
+    }
+   ]
+  },
+  "Might of the Timbermaw": {
+   "horde": false,
+   "item": "Pattern: Might of the Timbermaw",
+   "quests": [],
+   "vendors": []
+  },
+  "Mightfish Steak": {
+   "horde": true,
+   "item": "Recipe: Mightfish Steak",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1444,
+     "name": "Sheendra Tallgrass",
+     "x": 74.49,
+     "y": 42.73
+    }
+   ]
+  },
+  "Minor Mana Oil": {
+   "horde": true,
+   "item": "Formula: Minor Mana Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Thaddeus Webb",
+     "x": 62.38,
+     "y": 60.98
+    },
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Nata Dawnstrider",
+     "x": 44.99,
+     "y": 38.76
+    },
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Lilly",
+     "x": 43.02,
+     "y": 50.82
+    },
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Leo Sarn",
+     "x": 53.89,
+     "y": 82.21
+    },
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Kithas",
+     "x": 53.88,
+     "y": 38.02
+    },
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Minor Recombobulator": {
+   "horde": true,
+   "item": "Schematic: Minor Recombobulator",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Gagsprocket",
+     "x": 62.64,
+     "y": 36.27
+    }
+   ]
+  },
+  "Minor Wizard Oil": {
+   "horde": true,
+   "item": "Formula: Minor Wizard Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Thaddeus Webb",
+     "x": 62.38,
+     "y": 60.98
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Nata Dawnstrider",
+     "x": 44.99,
+     "y": 38.76
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Lilly",
+     "x": 43.02,
+     "y": 50.82
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Leo Sarn",
+     "x": 53.89,
+     "y": 82.21
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Kithas",
+     "x": 53.88,
+     "y": 38.02
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  },
+  "Mithril Mechanical Dragonling": {
+   "horde": true,
+   "item": "Schematic: Mithril Mechanical Dragonling",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4000,
+     "limited": true,
+     "mapID": 1425,
+     "name": "Ruppo Zipcoil",
+     "x": 34.33,
+     "y": 37.76
+    }
+   ]
+  },
+  "Molten Belt": {
+   "horde": true,
+   "item": "Pattern: Molten Belt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 90000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Molten Helm": {
+   "horde": true,
+   "item": "Pattern: Molten Helm",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 160000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Monster Omelet": {
+   "horde": true,
+   "item": "Recipe: Monster Omelet",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": false,
+     "mapID": 1452,
+     "name": "Himmik",
+     "x": 61.33,
+     "y": 39.16
+    },
+    {
+     "cost": 12000,
+     "limited": false,
+     "mapID": 1448,
+     "name": "Bale",
+     "x": 34.75,
+     "y": 53.23
+    }
+   ]
+  },
+  "Mooncloth": {
+   "horde": true,
+   "item": "Pattern: Mooncloth",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1452,
+     "name": "Qia",
+     "x": 61.2,
+     "y": 37.21
+    }
+   ]
+  },
+  "Mooncloth Robe": {
+   "horde": true,
+   "item": "Pattern: Mooncloth Robe",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40000,
+     "limited": false,
+     "mapID": null,
+     "name": "Shen'dralar Provisioner",
+     "x": 28.73,
+     "y": 68.67
+    }
+   ]
+  },
+  "Moonglow Vest": {
+   "horde": false,
+   "item": "Pattern: Moonglow Vest",
+   "quests": [],
+   "vendors": []
+  },
+  "Moonsteel Broadsword": {
+   "horde": true,
+   "item": "Plans: Moonsteel Broadsword",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4400,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Zarena Cromwind",
+     "x": 28.34,
+     "y": 75.46
+    }
+   ]
+  },
+  "Murloc Fin Soup": {
+   "horde": false,
+   "item": "Recipe: Murloc Fin Soup",
+   "quests": [],
+   "vendors": []
+  },
+  "Murloc Scale Belt": {
+   "horde": true,
+   "item": "Pattern: Murloc Scale Belt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 550,
+     "limited": true,
+     "mapID": 1421,
+     "name": "Andrew Hilbert",
+     "x": 43.22,
+     "y": 40.66
+    }
+   ]
+  },
+  "Murloc Scale Bracers": {
+   "horde": true,
+   "item": "Pattern: Murloc Scale Bracers",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2800,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Blixrez Goodstitch",
+     "x": 28.25,
+     "y": 77.54
+    }
+   ]
+  },
+  "Murloc Scale Breastplate": {
+   "horde": true,
+   "item": "Pattern: Murloc Scale Breastplate",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 600,
+     "limited": true,
+     "mapID": 1421,
+     "name": "Andrew Hilbert",
+     "x": 43.22,
+     "y": 40.66
+    }
+   ]
+  },
+  "Mystery Stew": {
+   "horde": true,
+   "item": "Recipe: Mystery Stew",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Super-Seller 680",
+     "x": 40.49,
+     "y": 79.34
+    }
+   ]
+  },
+  "Nature Protection Potion": {
+   "horde": true,
+   "item": "Recipe: Nature Protection Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Glyx Brewright",
+     "x": 28.14,
+     "y": 78.11
+    },
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1444,
+     "name": "Bronk",
+     "x": 76.06,
+     "y": 43.28
+    },
+    {
+     "cost": 2000,
+     "limited": true,
+     "mapID": 1446,
+     "name": "Alchemist Pestlezugg",
+     "x": 50.89,
+     "y": 26.96
+    }
+   ]
+  },
+  "Nightfall": {
+   "horde": true,
+   "item": "Plans: Nightfall",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 120000,
+     "limited": false,
+     "mapID": null,
+     "name": "Lokhtos Darkbargainer",
+     "x": 44.29,
+     "y": 47.0
+    }
+   ]
+  },
+  "Nightfin Soup": {
+   "horde": true,
+   "item": "Recipe: Nightfin Soup",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Gikkix",
+     "x": 66.64,
+     "y": 22.08
+    }
+   ]
+  },
+  "Nightscape Shoulders": {
+   "horde": true,
+   "item": "Pattern: Nightscape Shoulders",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4000,
+     "limited": true,
+     "mapID": 1444,
+     "name": "Jangdor Swiftstrider",
+     "x": 74.43,
+     "y": 42.91
+    }
+   ]
+  },
+  "Orange Martial Shirt": {
+   "horde": true,
+   "item": "Pattern: Orange Martial Shirt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1456,
+     "name": "Mahu",
+     "x": 43.8,
+     "y": 45.12
+    }
+   ]
+  },
+  "Ornate Mithril Gloves": {
+   "horde": true,
+   "item": "Plans: Ornate Mithril Gloves",
+   "quests": [
+    {
+     "from": 40,
+     "id": 2762,
+     "level": 45,
+     "name": "The Great Silver Deceiver"
+    }
+   ],
+   "vendors": []
+  },
+  "Ornate Mithril Pants": {
+   "horde": true,
+   "item": "Plans: Ornate Mithril Pants",
+   "quests": [
+    {
+     "from": 40,
+     "id": 2761,
+     "level": 45,
+     "name": "Smelt On, Smelt Off"
+    }
+   ],
+   "vendors": []
+  },
+  "Ornate Thorium Handaxe": {
+   "horde": false,
+   "item": "Plans: Ornate Thorium Handaxe",
+   "quests": [],
+   "vendors": []
+  },
+  "Philosopher's Stone": {
+   "horde": true,
+   "item": "Recipe: Philosopher's Stone",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 8000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Alchemist Pestlezugg",
+     "x": 50.89,
+     "y": 26.96
+    }
+   ]
+  },
+  "Pink Mageweave Shirt": {
+   "horde": true,
+   "item": "Pattern: Pink Mageweave Shirt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4000,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Borya",
+     "x": 63.08,
+     "y": 51.45
+    }
+   ]
+  },
+  "Poached Sunscale Salmon": {
+   "horde": true,
+   "item": "Recipe: Poached Sunscale Salmon",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Gikkix",
+     "x": 66.64,
+     "y": 22.08
+    }
+   ]
+  },
+  "Powerful Seaforium Charge": {
+   "horde": true,
+   "item": "Schematic: Powerful Seaforium Charge",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": true,
+     "mapID": 1452,
+     "name": "Xizzer Fizzbolt",
+     "x": 60.8,
+     "y": 38.6
+    }
+   ]
+  },
+  "Primal Batskin Bracers": {
+   "horde": true,
+   "item": "Pattern: Primal Batskin Bracers",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Primal Batskin Gloves": {
+   "horde": true,
+   "item": "Pattern: Primal Batskin Gloves",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Primal Batskin Jerkin": {
+   "horde": true,
+   "item": "Pattern: Primal Batskin Jerkin",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Rin'wosho the Trader",
+     "x": 15.07,
+     "y": 16.0
+    }
+   ]
+  },
+  "Rage Potion": {
+   "horde": true,
+   "item": "Recipe: Rage Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 100,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Ranik",
+     "x": 61.93,
+     "y": 38.7
+    },
+    {
+     "cost": 100,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Hagrus",
+     "x": 45.99,
+     "y": 45.68
+    },
+    {
+     "cost": 100,
+     "limited": false,
+     "mapID": 1436,
+     "name": "Defias Profiteer",
+     "x": 43.47,
+     "y": 66.76
+    }
+   ]
+  },
+  "Rainbow Fin Albacore": {
+   "horde": true,
+   "item": "Recipe: Rainbow Fin Albacore",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1411,
+     "name": "Zansoa",
+     "x": 56.06,
+     "y": 73.39
+    },
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Shankys",
+     "x": 69.99,
+     "y": 29.77
+    },
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Ronald Burch",
+     "x": 62.31,
+     "y": 43.09
+    },
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1413,
+     "name": "Kilxx",
+     "x": 62.77,
+     "y": 38.24
+    },
+    {
+     "cost": 400,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Killian Sanatha",
+     "x": 33.0,
+     "y": 17.85
+    }
+   ]
+  },
+  "Raptor Hide Belt": {
+   "horde": false,
+   "item": "Pattern: Raptor Hide Belt",
+   "quests": [],
+   "vendors": []
+  },
+  "Raptor Hide Harness": {
+   "horde": true,
+   "item": "Pattern: Raptor Hide Harness",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2500,
+     "limited": true,
+     "mapID": 1417,
+     "name": "Tunkk",
+     "x": 74.86,
+     "y": 34.58
+    }
+   ]
+  },
+  "Red Firework": {
+   "horde": false,
+   "item": "Schematic: Red Firework",
+   "quests": [],
+   "vendors": []
+  },
+  "Red Linen Bag": {
+   "horde": true,
+   "item": "Pattern: Red Linen Bag",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 200,
+     "limited": true,
+     "mapID": 1456,
+     "name": "Mahu",
+     "x": 43.8,
+     "y": 45.12
+    },
+    {
+     "cost": 200,
+     "limited": true,
+     "mapID": 1421,
+     "name": "Andrew Hilbert",
+     "x": 43.22,
+     "y": 40.66
+    }
+   ]
+  },
+  "Red Whelp Gloves": {
+   "horde": false,
+   "item": "Pattern: Red Whelp Gloves",
+   "quests": [],
+   "vendors": []
+  },
+  "Red Woolen Bag": {
+   "horde": true,
+   "item": "Pattern: Red Woolen Bag",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Zixil",
+     "x": 55.65,
+     "y": 34.78
+    },
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Yonada",
+     "x": 45.01,
+     "y": 59.33
+    },
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Wrahk",
+     "x": 52.25,
+     "y": 31.69
+    },
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Millie Gregorian",
+     "x": 70.59,
+     "y": 30.14
+    },
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1456,
+     "name": "Mahu",
+     "x": 43.8,
+     "y": 45.12
+    },
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1413,
+     "name": "Kiknikle",
+     "x": 41.79,
+     "y": 38.69
+    },
+    {
+     "cost": 500,
+     "limited": true,
+     "mapID": 1454,
+     "name": "Borya",
+     "x": 63.08,
+     "y": 51.45
+    }
+   ]
+  },
+  "Redridge Goulash": {
+   "horde": false,
+   "item": "Recipe: Redridge Goulash",
+   "quests": [],
+   "vendors": []
+  },
+  "Roast Raptor": {
+   "horde": true,
+   "item": "Recipe: Roast Raptor",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Vendor-Tron 1000",
+     "x": 60.3,
+     "y": 38.19
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1445,
+     "name": "Ogg'marr",
+     "x": 36.7,
+     "y": 30.97
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Nerrist",
+     "x": 32.7,
+     "y": 29.23
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1417,
+     "name": "Keena",
+     "x": 74.09,
+     "y": 32.73
+    }
+   ]
+  },
+  "Roasted Kodo Meat": {
+   "horde": true,
+   "item": "Recipe: Roasted Kodo Meat",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 240,
+     "limited": false,
+     "mapID": 1412,
+     "name": "Wunna Darkmane",
+     "x": 46.18,
+     "y": 58.18
+    }
+   ]
+  },
+  "Rockscale Cod": {
+   "horde": true,
+   "item": "Recipe: Rockscale Cod",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 2200,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Wulan",
+     "x": 26.17,
+     "y": 69.65
+    },
+    {
+     "cost": 2200,
+     "limited": false,
+     "mapID": 1440,
+     "name": "Wik'Tar",
+     "x": 11.71,
+     "y": 34.1
+    },
+    {
+     "cost": 2200,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Shankys",
+     "x": 69.99,
+     "y": 29.77
+    },
+    {
+     "cost": 2200,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Lizbeth Cromwell",
+     "x": 81.04,
+     "y": 30.75
+    },
+    {
+     "cost": 2200,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Kelsey Yance",
+     "x": 28.23,
+     "y": 74.34
+    }
+   ]
+  },
+  "Runecloth Bag": {
+   "horde": true,
+   "item": "Pattern: Runecloth Bag",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1452,
+     "name": "Qia",
+     "x": 61.2,
+     "y": 37.21
+    }
+   ]
+  },
+  "Runecloth Boots": {
+   "horde": false,
+   "item": "Pattern: Runecloth Boots",
+   "quests": [],
+   "vendors": []
+  },
+  "Runecloth Cloak": {
+   "horde": false,
+   "item": "Pattern: Runecloth Cloak",
+   "quests": [],
+   "vendors": []
+  },
+  "Runecloth Gloves": {
+   "horde": false,
+   "item": "Pattern: Runecloth Gloves",
+   "quests": [],
+   "vendors": []
+  },
+  "Runecloth Robe": {
+   "horde": false,
+   "item": "Pattern: Runecloth Robe",
+   "quests": [],
+   "vendors": []
+  },
+  "Runed Arcanite Rod": {
+   "horde": true,
+   "item": "Formula: Runed Arcanite Rod",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 22000,
+     "limited": true,
+     "mapID": 1450,
+     "name": "Lorelae Wintersong",
+     "x": 48.24,
+     "y": 40.14
+    }
+   ]
+  },
+  "Runic Leather Headband": {
+   "horde": false,
+   "item": "Pattern: Runic Leather Headband",
+   "quests": [],
+   "vendors": []
+  },
+  "Sagefish Delight": {
+   "horde": true,
+   "item": "Recipe: Sagefish Delight",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Xen'to",
+     "x": 57.57,
+     "y": 52.9
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Wulan",
+     "x": 26.17,
+     "y": 69.65
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1413,
+     "name": "Tarban Hearthgrain",
+     "x": 55.15,
+     "y": 32.09
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Ronald Burch",
+     "x": 62.31,
+     "y": 43.09
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1425,
+     "name": "Otho Moji'ko",
+     "x": 79.38,
+     "y": 79.08
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Naal Mistrunner",
+     "x": 50.99,
+     "y": 52.45
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Kelsey Yance",
+     "x": 28.23,
+     "y": 74.34
+    },
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1424,
+     "name": "Derak Nightfall",
+     "x": 63.09,
+     "y": 19.41
+    }
+   ]
+  },
+  "Satchel of Cenarius": {
+   "horde": true,
+   "item": "Pattern: Satchel of Cenarius",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 50000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Mishta",
+     "x": 49.88,
+     "y": 36.33
+    }
+   ]
+  },
+  "Scorpid Surprise": {
+   "horde": true,
+   "item": "Recipe: Scorpid Surprise",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 140,
+     "limited": false,
+     "mapID": 1411,
+     "name": "Grimtak",
+     "x": 51.13,
+     "y": 42.63
+    }
+   ]
+  },
+  "Seasoned Wolf Kabob": {
+   "horde": false,
+   "item": "Recipe: Seasoned Wolf Kabob",
+   "quests": [],
+   "vendors": []
+  },
+  "Shadow Oil": {
+   "horde": true,
+   "item": "Recipe: Shadow Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1441,
+     "name": "Montarr",
+     "x": 45.15,
+     "y": 50.79
+    },
+    {
+     "cost": 1500,
+     "limited": true,
+     "mapID": 1431,
+     "name": "Bliztik",
+     "x": 18.04,
+     "y": 54.36
+    }
+   ]
+  },
+  "Shadow Protection Potion": {
+   "horde": true,
+   "item": "Recipe: Shadow Protection Potion",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 900,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Christoph Jeffcoat",
+     "x": 62.29,
+     "y": 19.04
+    }
+   ]
+  },
+  "Shadoweave Mask": {
+   "horde": true,
+   "item": "Pattern: Shadoweave Mask",
+   "quests": [
+    {
+     "from": 40,
+     "id": 3402,
+     "level": 50,
+     "name": "The Undermarket"
+    }
+   ],
+   "vendors": []
+  },
+  "Shadowskin Gloves": {
+   "horde": true,
+   "item": "Pattern: Shadowskin Gloves",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3500,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Rikqiz",
+     "x": 28.49,
+     "y": 76.05
+    }
+   ]
+  },
+  "Slitherskin Mackerel": {
+   "horde": true,
+   "item": "Recipe: Slitherskin Mackerel",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 40,
+     "limited": false,
+     "mapID": 1411,
+     "name": "Zansoa",
+     "x": 56.06,
+     "y": 73.39
+    },
+    {
+     "cost": 40,
+     "limited": false,
+     "mapID": 1420,
+     "name": "Martine Tramblay",
+     "x": 65.86,
+     "y": 59.64
+    }
+   ]
+  },
+  "Smoked Bear Meat": {
+   "horde": true,
+   "item": "Recipe: Smoked Bear Meat",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 250,
+     "limited": false,
+     "mapID": 1421,
+     "name": "Andrew Hilbert",
+     "x": 43.22,
+     "y": 40.66
+    }
+   ]
+  },
+  "Smoked Sagefish": {
+   "horde": true,
+   "item": "Recipe: Smoked Sagefish",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1454,
+     "name": "Xen'to",
+     "x": 57.57,
+     "y": 52.9
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1443,
+     "name": "Wulan",
+     "x": 26.17,
+     "y": 69.65
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1413,
+     "name": "Tarban Hearthgrain",
+     "x": 55.15,
+     "y": 32.09
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1458,
+     "name": "Ronald Burch",
+     "x": 62.31,
+     "y": 43.09
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1425,
+     "name": "Otho Moji'ko",
+     "x": 79.38,
+     "y": 79.08
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1456,
+     "name": "Naal Mistrunner",
+     "x": 50.99,
+     "y": 52.45
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Kelsey Yance",
+     "x": 28.23,
+     "y": 74.34
+    },
+    {
+     "cost": 500,
+     "limited": false,
+     "mapID": 1424,
+     "name": "Derak Nightfall",
+     "x": 63.09,
+     "y": 19.41
+    }
+   ]
+  },
+  "Snake Burst Firework": {
+   "horde": true,
+   "item": "Schematic: Snake Burst Firework",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": false,
+     "mapID": 1444,
+     "name": "Zorbin Fandazzle",
+     "x": 44.81,
+     "y": 43.42
+    }
+   ]
+  },
+  "Solid Iron Maul": {
+   "horde": true,
+   "item": "Plans: Solid Iron Maul",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1443,
+     "name": "Muuran",
+     "x": 55.59,
+     "y": 56.5
+    },
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1418,
+     "name": "Jazzrik",
+     "x": 42.47,
+     "y": 52.5
+    }
+   ]
+  },
+  "Soothing Turtle Bisque": {
+   "horde": true,
+   "item": "Recipe: Soothing Turtle Bisque",
+   "quests": [
+    {
+     "from": 28,
+     "id": 7321,
+     "level": 31,
+     "name": "Soothing Turtle Bisque"
+    }
+   ],
+   "vendors": []
+  },
+  "Soul Pouch": {
+   "horde": true,
+   "item": "Pattern: Soul Pouch",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Vizzklick",
+     "x": 51.01,
+     "y": 27.36
+    }
+   ]
+  },
+  "Spiced Chili Crab": {
+   "horde": true,
+   "item": "Recipe: Spiced Chili Crab",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": false,
+     "mapID": 1434,
+     "name": "Uthok",
+     "x": 31.55,
+     "y": 27.95
+    },
+    {
+     "cost": 12000,
+     "limited": false,
+     "mapID": 1435,
+     "name": "Banalash",
+     "x": 44.77,
+     "y": 56.63
+    }
+   ]
+  },
+  "Spotted Yellowtail": {
+   "horde": true,
+   "item": "Recipe: Spotted Yellowtail",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Gikkix",
+     "x": 66.64,
+     "y": 22.08
+    }
+   ]
+  },
+  "Steam Tonk Controller": {
+   "horde": false,
+   "item": "Schematic: Steam Tonk Controller",
+   "quests": [],
+   "vendors": []
+  },
+  "Stormshroud Pants": {
+   "horde": true,
+   "item": "Pattern: Stormshroud Pants",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": true,
+     "mapID": 1420,
+     "name": "Werg Thickblade",
+     "x": 83.3,
+     "y": 69.72
+    }
+   ]
+  },
+  "Strider Stew": {
+   "horde": true,
+   "item": "Recipe: Strider Stew",
+   "quests": [
+    {
+     "from": 9,
+     "id": 2178,
+     "level": 12,
+     "name": "Easy Strider Living"
+    }
+   ],
+   "vendors": [
+    {
+     "cost": 440,
+     "limited": false,
+     "mapID": 1413,
+     "name": "Tari'qa",
+     "x": 51.68,
+     "y": 30.04
+    }
+   ]
+  },
+  "Succulent Pork Ribs": {
+   "horde": false,
+   "item": "Recipe: Succulent Pork Ribs",
+   "quests": [],
+   "vendors": []
+  },
+  "Superior Mana Potion": {
+   "horde": false,
+   "item": "Recipe: Superior Mana Potion",
+   "quests": [],
+   "vendors": []
+  },
+  "Tasty Lion Steak": {
+   "horde": false,
+   "item": "Recipe: Tasty Lion Steak",
+   "quests": [],
+   "vendors": []
+  },
+  "Tender Wolf Steak": {
+   "horde": true,
+   "item": "Recipe: Tender Wolf Steak",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Innkeeper Fizzgrimble",
+     "x": 52.51,
+     "y": 27.91
+    },
+    {
+     "cost": 12000,
+     "limited": false,
+     "mapID": 1446,
+     "name": "Dirge Quikcleave",
+     "x": 52.63,
+     "y": 28.11
+    }
+   ]
+  },
+  "Thick Murloc Armor": {
+   "horde": true,
+   "item": "Pattern: Thick Murloc Armor",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 650,
+     "limited": true,
+     "mapID": 1424,
+     "name": "Christoph Jeffcoat",
+     "x": 62.29,
+     "y": 19.04
+    },
+    {
+     "cost": 650,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Blixrez Goodstitch",
+     "x": 28.25,
+     "y": 77.54
+    }
+   ]
+  },
+  "Thistle Tea": {
+   "horde": false,
+   "item": "Recipe: Thistle Tea",
+   "quests": [],
+   "vendors": []
+  },
+  "Thorium Grenade": {
+   "horde": false,
+   "item": "Schematic: Thorium Grenade",
+   "quests": [],
+   "vendors": []
+  },
+  "Thorium Tube": {
+   "horde": true,
+   "item": "Schematic: Thorium Tube",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 16000,
+     "limited": true,
+     "mapID": 1452,
+     "name": "Xizzer Fizzbolt",
+     "x": 60.8,
+     "y": 38.6
+    }
+   ]
+  },
+  "Thorium Widget": {
+   "horde": false,
+   "item": "Schematic: Thorium Widget",
+   "quests": [],
+   "vendors": []
+  },
+  "Timbermaw Brawlers": {
+   "horde": false,
+   "item": "Pattern: Timbermaw Brawlers",
+   "quests": [],
+   "vendors": []
+  },
+  "Truesilver Transformer": {
+   "horde": true,
+   "item": "Schematic: Truesilver Transformer",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1434,
+     "name": "Mazk Snipeshot",
+     "x": 28.5,
+     "y": 75.12
+    }
+   ]
+  },
+  "Turtle Scale Gloves": {
+   "horde": true,
+   "item": "Pattern: Turtle Scale Gloves",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3500,
+     "limited": true,
+     "mapID": 1444,
+     "name": "Jangdor Swiftstrider",
+     "x": 74.43,
+     "y": 42.91
+    }
+   ]
+  },
+  "Tuxedo Jacket": {
+   "horde": true,
+   "item": "Pattern: Tuxedo Jacket",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 5000,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Millie Gregorian",
+     "x": 70.59,
+     "y": 30.14
+    }
+   ]
+  },
+  "Tuxedo Pants": {
+   "horde": true,
+   "item": "Pattern: Tuxedo Pants",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4500,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Millie Gregorian",
+     "x": 70.59,
+     "y": 30.14
+    }
+   ]
+  },
+  "Tuxedo Shirt": {
+   "horde": true,
+   "item": "Pattern: Tuxedo Shirt",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 4500,
+     "limited": true,
+     "mapID": 1458,
+     "name": "Millie Gregorian",
+     "x": 70.59,
+     "y": 30.14
+    }
+   ]
+  },
+  "Undermine Clam Chowder": {
+   "horde": true,
+   "item": "Recipe: Undermine Clam Chowder",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 3000,
+     "limited": true,
+     "mapID": 1446,
+     "name": "Jabbey",
+     "x": 67.01,
+     "y": 21.99
+    }
+   ]
+  },
+  "Warbear Harness": {
+   "horde": false,
+   "item": "Pattern: Warbear Harness",
+   "quests": [],
+   "vendors": []
+  },
+  "Warbear Woolies": {
+   "horde": false,
+   "item": "Pattern: Warbear Woolies",
+   "quests": [],
+   "vendors": []
+  },
+  "Westfall Stew": {
+   "horde": false,
+   "item": "Recipe: Westfall Stew",
+   "quests": [],
+   "vendors": []
+  },
+  "White Wedding Dress": {
+   "horde": true,
+   "item": "Pattern: White Wedding Dress",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 10000,
+     "limited": true,
+     "mapID": 1456,
+     "name": "Mahu",
+     "x": 43.8,
+     "y": 45.12
+    }
+   ]
+  },
+  "Wicked Leather Gauntlets": {
+   "horde": true,
+   "item": "Pattern: Wicked Leather Gauntlets",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 12000,
+     "limited": true,
+     "mapID": 1420,
+     "name": "Werg Thickblade",
+     "x": 83.3,
+     "y": 69.72
+    }
+   ]
+  },
+  "Wild Leather Boots": {
+   "horde": true,
+   "item": "Pattern: Wild Leather Boots",
+   "quests": [
+    {
+     "from": 30,
+     "id": 2858,
+     "level": 45,
+     "name": "Wild Leather Boots"
+    }
+   ],
+   "vendors": []
+  },
+  "Wild Leather Cloak": {
+   "horde": true,
+   "item": "Pattern: Wild Leather Cloak",
+   "quests": [
+    {
+     "from": 30,
+     "id": 2860,
+     "level": 45,
+     "name": "Master of the Wild Leather"
+    }
+   ],
+   "vendors": []
+  },
+  "Wild Leather Helmet": {
+   "horde": true,
+   "item": "Pattern: Wild Leather Helmet",
+   "quests": [
+    {
+     "from": 30,
+     "id": 2857,
+     "level": 45,
+     "name": "Wild Leather Helmet"
+    }
+   ],
+   "vendors": []
+  },
+  "Wild Leather Leggings": {
+   "horde": true,
+   "item": "Pattern: Wild Leather Leggings",
+   "quests": [
+    {
+     "from": 30,
+     "id": 2859,
+     "level": 45,
+     "name": "Wild Leather Leggings"
+    }
+   ],
+   "vendors": []
+  },
+  "Wild Leather Shoulders": {
+   "horde": true,
+   "item": "Pattern: Wild Leather Shoulders",
+   "quests": [
+    {
+     "from": 30,
+     "id": 2855,
+     "level": 45,
+     "name": "Wild Leather Shoulders"
+    }
+   ],
+   "vendors": []
+  },
+  "Wild Leather Vest": {
+   "horde": true,
+   "item": "Pattern: Wild Leather Vest",
+   "quests": [
+    {
+     "from": 30,
+     "id": 2856,
+     "level": 45,
+     "name": "Wild Leather Vest"
+    }
+   ],
+   "vendors": []
+  },
+  "Wisdom of the Timbermaw": {
+   "horde": false,
+   "item": "Pattern: Wisdom of the Timbermaw",
+   "quests": [],
+   "vendors": []
+  },
+  "Wizard Oil": {
+   "horde": true,
+   "item": "Formula: Wizard Oil",
+   "quests": [],
+   "vendors": [
+    {
+     "cost": 20000,
+     "limited": false,
+     "mapID": 1451,
+     "name": "Kania",
+     "x": 51.97,
+     "y": 39.7
+    }
+   ]
+  }
+ },
+ "source": "classicdb.ch (Classic data, not checked in Forever)"
+}

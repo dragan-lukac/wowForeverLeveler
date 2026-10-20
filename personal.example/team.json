@@ -1,0 +1,110 @@
+{
+  "note": "Example team. Copy this file to personal/team.json and change the names, races, professions and play order (order 1 = play first). make guide builds everything from it.",
+  "characters": {
+    "hunter": {
+      "name": "Hunter",
+      "lastName": "Example",
+      "race": "Tauren",
+      "group": "g1",
+      "start": true,
+      "order": 1,
+      "profs": [
+        "skin",
+        "herb"
+      ]
+    },
+    "warlock": {
+      "name": "Warlock",
+      "lastName": "Example",
+      "race": "Orc",
+      "group": "g1",
+      "start": true,
+      "order": 2,
+      "profs": [
+        "tail",
+        "ench"
+      ]
+    },
+    "paladin": {
+      "name": "Paladin",
+      "lastName": "Example",
+      "race": "Undead",
+      "group": "g1",
+      "start": true,
+      "order": 3,
+      "profs": [
+        "mine",
+        "skin"
+      ]
+    },
+    "priest": {
+      "name": "Priest",
+      "lastName": "Example",
+      "race": "Undead",
+      "group": "g2",
+      "profs": [
+        "skin",
+        "mine"
+      ]
+    },
+    "shaman": {
+      "name": "Shaman",
+      "lastName": "Example",
+      "race": "Troll",
+      "group": "g2",
+      "order": 4,
+      "profs": [
+        "alch",
+        "leath"
+      ]
+    },
+    "warrior": {
+      "name": "Warrior",
+      "lastName": "Example",
+      "race": "Orc",
+      "group": "g2",
+      "order": 5,
+      "profs": [
+        "mine",
+        "bsmith"
+      ]
+    },
+    "mage": {
+      "name": "Mage",
+      "lastName": "Example",
+      "race": "Undead",
+      "group": "g3",
+      "profs": [
+        "skin",
+        "herb"
+      ]
+    },
+    "rogue": {
+      "name": "Rogue",
+      "lastName": "Example",
+      "race": "Undead",
+      "group": "g3",
+      "order": 6,
+      "profs": [
+        "mine",
+        "eng"
+      ]
+    },
+    "druid": {
+      "name": "Druid",
+      "lastName": "Example",
+      "race": "Skyborne",
+      "group": "g3",
+      "profs": [
+        "alch",
+        "eng"
+      ]
+    }
+  },
+  "bank": {
+    "name": "Banker",
+    "lastName": "Example",
+    "race": "Tauren",
+    "class": "Warrior"
+  }
+}
