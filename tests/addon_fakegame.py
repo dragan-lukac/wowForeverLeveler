@@ -136,6 +136,17 @@ def main():
              'WoWForeverLevelerUI.open_dg = { ["d:Ragefire Chasm"] = true, ["d:Wailing Caverns"] = true }; '
              'local onQuest = C_QuestLog.IsOnQuest; C_QuestLog.IsOnQuest = function(id) return id == 5761 or onQuest(id) end')
         show('Professions tab', 'WoWForeverLevelerUI.tab = "prof2"; WoWForeverLevelerUI.have = { ["Alt-Realm"] = { ["Linen Cloth"] = 88 } }')
+        if CRAFTER:
+            # SkillUp Forever installed: its API steps and reagents replace our craft steps for Tailoring.
+            show('Professions tab (SkillUp Forever)', 'C_Item = C_Item or {}; C_Item.GetItemNameByID = function(id) return ({ [2589] = "Linen Cloth", [2320] = "Coarse Thread" })[id] end; '
+                 'NAVIGATED = nil; SkillUpForever = { API = { version = 1, '
+                 'Professions = function() return { { name = "Tailoring", skillLineID = 197, rank = 60, maxRank = 75, steps = { '
+                 '{ kind = "buy", text = "Buy 10 Coarse Thread", detail = "Krugosh, Razor Hill \194\183 50c", nav = true }, '
+                 '{ kind = "craft", text = "Craft 10 Heavy Linen Gloves", detail = "60 to 70", nav = false }, '
+                 '{ kind = "train", text = "Train Journeyman Tailoring", detail = "Snang, Orgrimmar \194\183 5s", nav = true } }, '
+                 'reagents = { { itemID = 2589, need = 200, have = 40 }, { itemID = 2320, need = 10, have = 0 } } } } end, '
+                 'Navigate = function(line, i) NAVIGATED = i; return true end, OpenRecipes = function() return true end } }; '
+                 'WoWForeverLevelerUI.tab = "prof2"')
         show('Team tab', 'WoWForeverLevelerUI.tab = "team"')
         # The bank character: Next shows market and mail, the Market tab replaces Dungeons and Professions.
         show('Bank: Next tab', 'UnitName = function() return "Banka" end; WoWForeverLevelerUI.tab = "next"')

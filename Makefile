@@ -1,4 +1,4 @@
-.PHONY: help serve sync roster refresh scan gamedata check addon guide quests routes test launch-check
+.PHONY: help serve sync roster refresh scan gamedata check addon guide quests routes test launch-check live
 
 WOW_ROOT ?= /Applications/World of Warcraft
 
@@ -16,6 +16,7 @@ help:
 	@echo "make gamedata  Fetch classes, races and professions from the Blizzard API"
 	@echo "make check     Test the Battle.net API credentials in .env"
 	@echo "make addon     Install the in-game addon into every local WoW client (beta, classic, ...)"
+	@echo "make live      Set up the live client: copy missing addons from the beta, install ours, import settings"
 
 serve:
 	./scripts/serve.sh
@@ -66,3 +67,6 @@ test: guide
 
 launch-check:
 	python3 scripts/launch_check.py
+
+live:
+	python3 scripts/live_setup.py

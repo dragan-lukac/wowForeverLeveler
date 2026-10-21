@@ -51,14 +51,12 @@ trainer lists and positions (open the trainer once), recipe vendors, quests, and
 
 ## Launch day (November 4)
 
-1. Start WoW Forever once and go to character select. This makes the live game folder.
-2. Run `make addon`, then restart the game. At character select → **AddOns**: "WoW Forever Leveler
-   Tracker" must be on.
-3. Create the characters from the grey cards (names and races are there). Reserve the 3 "Play first"
-   names between October 27 and November 3.
-4. On each new character: `/reload` once, then **⟳ Sync**. The live realm appears in the realm menu.
-5. Set the real mount price in `data/guide.json` (`money.mountGoal.gold`).
-6. Follow the 🚀 Launch tab for the rest.
+1. Install the live client in the Battle.net app (it uses the `_forever_` folder, like the stress test).
+2. Close the game and run `make live`: it copies every addon from the beta that live lacks, and installs ours.
+3. Start the game, create the characters, log in on each one once, then close the game.
+4. Run `make live` again: it imports the settings (layout, key bindings, macros, addon settings, graphics).
+5. Point CurseForge at the `_forever_` folder; it finds the copied addons and keeps them updated.
+6. On each character: `/reload` once, then **⟳ Sync**. The live realm appears in the realm menu.
 
 ## Terminal commands
 
@@ -71,6 +69,7 @@ Run these in the project folder.
 | `make guide` | Rebuilds `guide.md`, `data/guide.js` and the addon's item and trainer lists from `data/guide.json`. |
 | `make roster` | Updates the dashboard from the addon save files. |
 | `make addon` | Installs the addon into every WoW client on this Mac (beta, and live at launch). |
+| `make live` | Sets up the live client: missing addons from the beta, ours, then your settings. Game closed. |
 | `make test` | Runs the automatic tests. |
 | `make launch-check` | Checks game folders, addon versions, save files, Blizzard keys, and runs the tests. |
 | `make refresh` / `make sync` | Battle.net login and character sync (Classic Era). |

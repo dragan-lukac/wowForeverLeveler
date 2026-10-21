@@ -954,7 +954,8 @@ local function TrainersToVisit(onlyCity)
         local lines = {}
         for _, npc in ipairs(WoWForeverLevelerNPCPlan[city]) do
             if mine[npc.profession] and not visited[npc.profession] then
-                table.insert(lines, { text = string.format("|cffffd100%s:|r %s (%s)", npc.profession, npc.name, npc.where),
+                local where = (npc.where or ""):gsub(",?%s+%-?%d+%.%d+, %-?%d+%.%d+", "")
+                table.insert(lines, { text = string.format("|cffffd100%s:|r %s (%s)", npc.profession, npc.name, where),
                                       name = npc.name, profession = npc.profession })
             end
         end

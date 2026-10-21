@@ -44,11 +44,10 @@ table.insert(WFL.menu, { text = "This character is the bank", icon = "Interface\
     end })
 
 -- --- Small helpers ------------------------------------------------------------------------------------------------
--- "Zone 52.6, 49.0"; no coordinates when the data has none (-1), no zone when the map is unknown.
+-- Where something is: the zone or city only, never coordinates (click the line for the arrow).
 local function Pos(m, x, y)
     local zone = (m and m > 0) and WFL.MapName(m) or ""
-    if not x or x < 0 or not y or y < 0 then return zone ~= "" and zone or "place not known" end
-    return (zone ~= "" and (zone .. " ") or "") .. string.format("%.1f, %.1f", x, y)
+    return zone ~= "" and zone or "place not known"
 end
 local function Money(c) return WFL.CopperText(math.floor((c or 0) + 0.5)) end
 
@@ -65,8 +64,8 @@ local function Rows(lines, rows)
     for i, r in ipairs(rows) do
         if r.text and r.text ~= "" then
             table.insert(lines, { title = r.label, inline = true, text = (i == 1 and C.WHITE or C.GREY) .. r.text .. "|r",
-                                  titleColor = i == 1 and GREEN_C or GREY_C, point = r.point })
-            if r.where and r.where ~= "" then table.insert(lines, { text = C.GREY .. r.where .. "|r", point = r.point }) end
+                                  titleColor = i == 1 and GREEN_C or GREY_C, point = r.point, click = r.click })
+            if r.where and r.where ~= "" then table.insert(lines, { text = C.GREY .. r.where .. "|r", point = r.point, click = r.click }) end
         end
     end
 end
@@ -361,24 +360,68 @@ end
 
 -- Per profession labelled rows (Rows): planned professions not learned yet (Learn, Buy, Then), crafts (Make, Then),
 -- herbs and ore (Gather, Next), every profession its next rank with the trainer (Train) and missing tools (Buy).
+-- SkillUp Forever (when installed): its public API (SkillUpForever.API, version 1) gives each learned crafting
+-- profession's next steps, best recipes and reagents from its own live route (bags, bank, Auctionator prices, the
+-- game's skill tables). We draw them here; clicks use its arrow or open the profession window.
+local SU_LABEL = { craft = "Craft", buy = "Buy", gather = "Gather", train = "Train" }
+local function SkillUp()
+    local api = SkillUpForever and SkillUpForever.API
+    if not (api and api.version == 1 and api.Professions) then return nil end
+    local ok, list = pcall(api.Professions)
+    if not ok or type(list) ~= "table" then return nil end
+    local by = {}
+    for _, e in ipairs(list) do if e.name then by[e.name] = e end end
+    return by, api
+end
+
+local function SkillUpRows(entry, api)
+    local rows = {}
+    for i, st in ipairs(entry.steps or {}) do
+        local click
+        if st.nav then
+            click = function() WFL.ClearArrows(); api.Navigate(entry.skillLineID, i) end
+        elseif st.kind == "craft" then
+            click = function() api.OpenRecipes(entry.skillLineID) end
+        end
+        table.insert(rows, { label = SU_LABEL[st.kind] or "Next", text = st.text, where = st.detail, click = click })
+    end
+    return rows
+end
+
 local function ProfessionActions()
     local acts, skills = {}, WFL.Skills()
     local level = UnitLevel("player") or 1
     local zone = GetRealZoneText and GetRealZoneText() or ""
     local _, classFile = UnitClass("player")
-    for _, prof in ipairs((((PLAN.classes or {})[classFile or ""]) or {}).profs or {}) do
+    local planned = (((PLAN.classes or {})[classFile or ""]) or {}).profs or {}
+    -- Temporary professions: a gathering (or any main) profession learned that is not in the plan, kept until the
+    -- character reaches the trainer of a planned one it has no slot for (user, 2026-10-21). Paired in order:
+    -- the first temporary one gives way to the first planned one not learned yet.
+    local inPlan, temps, missing = {}, {}, {}
+    for _, p in ipairs(planned) do inPlan[p] = true; if not skills[p] then table.insert(missing, p) end end
+    for p in pairs(skills) do if (CRAFTS[p] or GATHER[p]) and not inPlan[p] then table.insert(temps, p) end end
+    table.sort(temps)
+    local replaces, freeSlots = {}, 2
+    for p in pairs(skills) do if CRAFTS[p] or GATHER[p] then freeSlots = freeSlots - 1 end end
+    for i, p in ipairs(temps) do replaces[p] = missing[i] end
+    for _, prof in ipairs(planned) do
         if not skills[prof] then
             local point, where = TrainerWhere(prof)
+            local drop
+            if freeSlots <= 0 then
+                for t, m in pairs(replaces) do if m == prof then drop = t end end
+            end
             local buy, buyPoint = KitToBuy(prof)
             local st = ((PLAN.craftSteps or {})[prof] or {})[1]
             table.insert(acts, { prof = prof, s = { rank = 0, max = 0 }, learn = true, craft = CRAFTS[prof], gather = GATHER[prof] and true, rows = {
-                { label = "Learn", text = prof .. RankCost(prof, "Apprentice"), point = point, where = where },
+                { label = "Learn", text = prof .. RankCost(prof, "Apprentice") .. (drop and (", after you drop " .. drop) or ""), point = point, where = where },
                 { label = "Buy", text = buy, point = buyPoint },
                 { label = "Gather", text = GatherNow(prof, 1, zone) },
                 { label = "Make", text = st and (CraftsLeft(st, st.from, st.to) .. " " .. st.recipe .. " to " .. st.to) },
             } })
         end
     end
+    local su, api = SkillUp()
     for prof, s in pairs(skills) do
         local buy, buyPoint = KitToBuy(prof)
         local train = TrainText(prof, s, level)
@@ -386,7 +429,19 @@ local function ProfessionActions()
         local trainRow = train and { label = "Train", text = train, point = tPoint, where = tWhere }
         local rows = {}
         local steps = (PLAN.craftSteps or {})[prof]
-        if steps then
+        local sue = su and su[prof]
+        if sue then
+            -- SkillUp's next steps replace our Make / Then / Train / Buy; our market note stays under them.
+            rows = SkillUpRows(sue, api)
+            if #rows == 0 then rows = { { label = "Level", text = "nothing to do now (SkillUp Forever)" } } end
+            local st = steps and steps[1]
+            for item in pairs((st and st.raw) or {}) do
+                local state, why = MarketState(item)
+                if state == "hot" then table.insert(rows, { label = "Market", text = item .. " is hot (" .. why .. "): sell it, craft later" }) break end
+                if state == "flooded" then table.insert(rows, { label = "Market", text = item .. " is cheap (" .. why .. "): buy it for this step" }) break end
+            end
+            table.insert(acts, { prof = prof, s = s, craft = true, gather = GATHER[prof] and true, mats = true, su = sue, rows = rows })
+        elseif steps then
             local i = 1
             for j, x in ipairs(steps) do if s.rank < x.to then i = j break end i = j end
             local st, nx = steps[i], steps[i + 1]
@@ -416,13 +471,25 @@ local function ProfessionActions()
             table.insert(rows, { label = "Gather", text = GatherNow(prof, s.rank, zone) })
             table.insert(rows, { label = "Next", text = NextUnlock(prof, s.rank) })
         end
-        -- Training comes first when it can be done now or the skill is capped.
-        if trainRow then
-            if s.rank >= s.max or train:find(": now$") then table.insert(rows, 1, trainRow) else table.insert(rows, trainRow) end
+        if not sue then
+            -- Training comes first when it can be done now or the skill is capped.
+            if trainRow then
+                if s.rank >= s.max or train:find(": now$") then table.insert(rows, 1, trainRow) else table.insert(rows, trainRow) end
+            end
+            table.insert(rows, { label = "Buy", text = buy, point = buyPoint })
+            if not rows[1] or not rows[1].text then table.insert(rows, 1, { label = "Level", text = "while you play" }) end
+            table.insert(acts, { prof = prof, s = s, craft = steps and true, gather = GATHER[prof] and true, mats = steps and true, rows = rows })
         end
-        table.insert(rows, { label = "Buy", text = buy, point = buyPoint })
-        if not rows[1] or not rows[1].text then table.insert(rows, 1, { label = "Level", text = "while you play" }) end
-        table.insert(acts, { prof = prof, s = s, craft = steps and true, gather = GATHER[prof] and true, mats = steps and true, rows = rows })
+    end
+    -- The temporary row on top: gather now, mail what you gather, drop it at the planned profession's trainer.
+    for _, a in ipairs(acts) do
+        if not a.learn and not inPlan[a.prof] and (CRAFTS[a.prof] or GATHER[a.prof]) then
+            local goal = replaces[a.prof]
+            local _, where = TrainerWhere(goal or "")
+            table.insert(a.rows, 1, { label = "Temporary", text = goal and ("drop it when you reach the " .. goal .. " trainer (" .. where .. "); mail what you gathered first")
+                                                               or "not in your plan; keep it while it pays" })
+            a.temp = true
+        end
     end
     table.sort(acts, function(a, b) return (a.craft and 0 or a.gather and 1 or 2) .. a.prof < (b.craft and 0 or b.gather and 1 or 2) .. b.prof end)
     return acts
@@ -836,7 +903,20 @@ local function ProfessionTabLines(open)
     for _, a in ipairs(pa) do
         if Section(lines, "p:" .. a.prof, open, a.prof .. " " .. (a.learn and "not learned" or (a.s.rank .. "/" .. a.s.max)), "", nil) then
             Rows(lines, a.rows)
-            local b = a.craft and not a.learn and Bracket(a.prof, a.s.rank)
+            local b = a.craft and not a.learn and not a.su and Bracket(a.prof, a.s.rank)
+            if a.su and #(a.su.reagents or {}) > 0 then
+                -- SkillUp's route reagents; have = all characters' bags and banks (mail them over).
+                table.insert(lines, { plain = true, text = C.GREY .. "Materials still needed (SkillUp Forever route)|r" })
+                for _, r in ipairs(a.su.reagents) do
+                    local name = C_Item and C_Item.GetItemNameByID and C_Item.GetItemNameByID(r.itemID)
+                    if name then
+                        local have = math.max(r.have or 0, WFL.MaterialHave(name) or 0)
+                        if have < (r.need or 0) then
+                            table.insert(lines, MatLine(name, have, r.need, { name, a.prof .. ", SkillUp route", "Have = all characters' bags and banks" }))
+                        end
+                    end
+                end
+            end
             if b then
                 table.insert(lines, { plain = true, text = C.GREY .. "Materials still needed to " .. b.to .. "|r" })
                 local items = {}

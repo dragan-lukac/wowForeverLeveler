@@ -427,13 +427,15 @@ local function TrackQuest(point)
     end
 end
 
--- Older versions saved our waypoints in TomTom; remove every waypoint that came from us.
+-- Waypoints from us (older versions saved them) and from SkillUp Forever (its steps open in our window and TomTom
+-- keeps them by default): removed at login, and before another arrow is set, so only one arrow is ever on.
+local ARROW_SOURCES = { ["WoW Forever Leveler"] = true, ["SkillUp Forever"] = true }
 local function ClearOldWaypoints()
     if not (TomTom and TomTom.waypoints and TomTom.RemoveWaypoint) then return end
     local old = {}
     for _, list in pairs(TomTom.waypoints) do
         for _, uid in pairs(list) do
-            if type(uid) == "table" and uid.from == "WoW Forever Leveler" then table.insert(old, uid) end
+            if type(uid) == "table" and ARROW_SOURCES[uid.from] then table.insert(old, uid) end
         end
     end
     for _, uid in ipairs(old) do pcall(TomTom.RemoveWaypoint, TomTom, uid) end
@@ -444,6 +446,7 @@ local function SetArrow(point)
     if not (TomTom and TomTom.AddWaypoint) then return end
     if arrowUid and TomTom.RemoveWaypoint then pcall(TomTom.RemoveWaypoint, TomTom, arrowUid) end
     arrowUid = nil
+    pcall(ClearOldWaypoints) -- a SkillUp Forever arrow goes too: one arrow at a time
     if point then
         arrowUid = TomTom:AddWaypoint(point.mapID, point.x / 100, point.y / 100, { title = point.title,
             from = "WoW Forever Leveler", world = true, minimap = true, crazy = true, persistent = false, cleardistance = 8 })
@@ -482,6 +485,15 @@ end
 -- WoWForeverLevelerUI.lv.
 
 local windows = {}
+
+-- " 56.7, 73.7" and "(56.7, 73.7)" out of a text; the comma before them too.
+local function NoCoords(text)
+    if type(text) ~= "string" then return text end
+    text = text:gsub("%s*%(%-?%d+%.?%d*, %-?%d+%.?%d*%)", "")
+    text = text:gsub(",?%s+%-?%d+%.%d+, %-?%d+%.%d+", "")
+    return text
+end
+WFL_NoCoords = NoCoords
 
 local function WinSettings(win)
     local s = Settings()
@@ -578,7 +590,12 @@ local function RefreshWindow(win)
     local y = 0
     for i, line in ipairs(lines) do
         local r = win.row(i)
+        -- No coordinates anywhere (user, 2026-10-21): the zone name and the arrow are enough. Data texts can carry
+        -- them ("Durotar 56.7, 73.7"), so they are taken out here, for every line.
+        if line.text then line.text = NoCoords(line.text) end
+        if line.title then line.title = NoCoords(line.title) end
         r.point, r.section, r.open, r.skipId, r.tip, r.item = line.point, line.section, line.open, line.skipId, line.tip, line.item
+        r.click = line.click
         SetFontSafe(r.text, FONT, font)
         -- Title rows: the topic icon and the instruction; detail rows are indented.
         local indent = 0
@@ -826,6 +843,11 @@ local function MakeRow(win, i)
             end
             return
         end
+        -- A row with its own action (a SkillUp Forever step: its arrow, or the profession window).
+        if self.click then
+            pcall(self.click)
+            return
+        end
         -- A material line (an item without its own place): find the nearest vendor that sells it.
         if self.item and not self.point and not self.section then
             FindVendor(self.item)
@@ -857,7 +879,7 @@ local function MakeRow(win, i)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
         local sel = Settings().selected
         local on = sel and sel.key == PointKey(b.point)
-        GameTooltip:AddLine((on and "Clear: " or "Select: ") .. b.point.title .. " (" .. b.point.x .. ", " .. b.point.y .. ")")
+        GameTooltip:AddLine((on and "Clear: " or "Select: ") .. b.point.title)
         GameTooltip:AddLine("Arrow and the WFL Prof macro point here.", 1, 1, 1)
         GameTooltip:Show()
     end)
@@ -1216,7 +1238,7 @@ local function StepLine(st)
     local npc = st.npc and (GREY .. "- " .. st.npc .. ((st.z and st.z ~= "") and (" (" .. st.z .. ")") or "") .. "|r") or ""
     local tip = { st.n }
     if st.npc then table.insert(tip, "NPC: " .. st.npc) end
-    if point then table.insert(tip, MapName(st.m) .. "  " .. st.x .. ", " .. st.y) end
+    if point then table.insert(tip, MapName(st.m)) end
     table.insert(tip, "Right-click: skip this quest (all characters)")
     local line = { point = point, skipId = st.id, tip = tip, title = st.n, inline = true }
     if st.k == "a" then
@@ -1389,7 +1411,7 @@ DungeonLines = function(d, level, open)
     if not open[id] then return lines end
     -- Where: the entrance (arrow), run levels, and every quest with its giver, zone and spot (3.33.1, user:
     -- "I need the quests listed and where to find them"). Quests sorted by zone, so one trip per city.
-    local function where(m, x, y) return MapName(m) .. " " .. string.format("%.1f, %.1f", x, y) end
+    local function where(m) return MapName(m) end
     local e = r.entrance
     table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_Key_03", title = "Entrance", inline = true,
                           text = GREY .. (e and where(e.m, e.x, e.y) or (r.zone ~= "" and r.zone or "?")) .. ", run at " .. r.runFrom .. "-" .. r.runTo .. "|r",
@@ -1414,7 +1436,7 @@ DungeonLines = function(d, level, open)
             table.insert(lines, { icon = ICON_TAKE, title = "Start: " .. st.n, inline = false,
                                   text = GREY .. st.npc .. ", " .. where(st.m, st.x, st.y) .. "|r" .. tag .. "\n" .. GREY .. "leads to " .. q.quest .. "|r",
                                   point = { mapID = st.m, x = st.x, y = st.y, title = st.npc, npc = st.npc, questID = st.id },
-                                  tip = { "Start chain: " .. st.n, "NPC: " .. st.npc, MapName(st.m) .. "  " .. st.x .. ", " .. st.y, "Leads to: " .. q.quest } })
+                                  tip = { "Start chain: " .. st.n, "NPC: " .. st.npc, MapName(st.m), "Leads to: " .. q.quest } })
         end
     end
     for _, q in ipairs(todo) do
@@ -1427,7 +1449,7 @@ DungeonLines = function(d, level, open)
         table.insert(lines, { icon = InLog(q.id) and ICON_TURNIN or ICON_TAKE, desat = InLog(q.id) and true or nil,
                               title = q.quest, inline = false, text = detail,
                               point = { mapID = q.mapID, x = q.x, y = q.y, title = q.npc, npc = q.npc, questID = q.id },
-                              tip = { q.quest, "NPC: " .. q.npc, MapName(q.mapID) .. "  " .. q.x .. ", " .. q.y } })
+                              tip = { q.quest, "NPC: " .. q.npc, MapName(q.mapID) } })
     end
     return lines
 end
@@ -2056,8 +2078,8 @@ FindVendor = function(item)
     end
     local e = list[1]
     local far = e.d < 10000 and string.format(" (%d yd)", e.d) or ""
-    print(string.format("|cffffd100WFL:|r %s: %s%s, %s %.1f, %.1f%s. Arrow on.", item, e.v.n,
-                        e.v.sub ~= "" and (" <" .. e.v.sub .. ">") or "", MapName(e.m), e.x, e.y, far))
+    print(string.format("|cffffd100WFL:|r %s: %s%s, %s%s. Arrow on.", item, e.v.n,
+                        e.v.sub ~= "" and (" <" .. e.v.sub .. ">") or "", MapName(e.m), far))
     -- The arrow to the nearest (kept selected, so a second press does not turn it off).
     local point = { mapID = e.m, x = e.x, y = e.y, title = e.v.n .. " (" .. item .. ")", npc = e.v.n }
     local st = Settings()
@@ -2145,6 +2167,13 @@ WFL.OwnCount, WFL.ShopPrice, WFL.ItemVendorPoint, WFL.VendorPoint = OwnCount, Sh
 WFL.FindVendor, WFL.FindVendorByName, WFL.NamedTrainerPoint = FindVendor, FindVendorByName, NamedTrainerPoint
 -- Select a map point (arrow, map pin, WFL Prof macro); the same point again clears it.
 WFL.Select = function(point) Select(point) end
+-- No arrow at all: our selection cleared and every waypoint from us or SkillUp Forever removed.
+WFL.ClearArrows = function()
+    local st = Settings()
+    if st.selected then st.selected = nil; SetArrow(nil); UpdateProfMacro() end
+    pcall(ClearOldWaypoints)
+    if Refresh then pcall(Refresh) end
+end
 WFL.IsSelected = function(point) local sel = Settings().selected; return point and sel and sel.key == PointKey(point) or false end
 WFL.AuctionPrice, WFL.MaterialHave, WFL.ItemIcon, WFL.QuestObjectives, WFL.Complete = AuctionPrice, MaterialHave, ItemIcon, QuestObjectives, Complete
 WFL.Refresh = function() if Refresh then Refresh() end end

@@ -606,9 +606,11 @@ scanned prices are per character, not fixed). Forever-only quests seen: 91899,
 **Launch (the 🚀 Launch tab has the full list):**
 5. Rotate the Battle.net client secret (shown in an early chat); put it in `.env`.
 6. Reserve Lovac Kasapin, Vestac Zla, Pala Rifle (2026-10-27 to 11-03).
-7. Launch day: start the live client once, `make addon`, install the needed addons (Auctionator, Forever Loot,
-   Questie + QuestieDB), restart, create all characters, Banka runs to Thunder Bluff for bags, Sync.
-   Then set the real mount price (`money.mountGoal.gold`) and say "launch check".
+7. Launch day (updated 2026-10-21): install the live client, `make live` (addons from the beta or the saved
+   pack, plus ours), create all characters and log in on each once, close the game, `make live` again (settings
+   import). Point CurseForge at `_forever_`. Banka runs to Thunder Bluff for bags, Sync. Then set the real mount
+   price (`money.mountGoal.gold`) and say "launch check". Update personal/team.json first if names differ.
+8. Next session (user, 2026-10-21): make our addon's text prettier and easier to read.
 
 **Next (user's priority, 2026-10-13):** (gold tips from Gillee's video are built: First Aid bandage profit line,
 level 60 "quests give gold" note, "best Tue/Thu evening" on the AH tooltip line)
@@ -714,6 +716,92 @@ Newest first. One short entry per session.
   Automatic since then: scripts/refresh_data.py reruns dungeon_givers.py and vendor_items.py (about 3 s) on every
   Sync (server.py SYNC_SCRIPTS, before build_guide.py) and every `make guide`. Without QuestieDB it keeps the last
   files. Nothing to run by hand after a QuestieDB or Forever Loot update.
+  Edit Mode Tweaks: its rules are account-wide (SavedVariables/EditModeTweaks.lua, in the account export); the
+  per-character copy in settings_transfer.py is gone. Every left click in Edit Mode picks the frame under the mouse,
+  so the user's first try saved the rules on EditModeSystemSettingsDialog instead of PlayerFrame. Fix in game:
+  /emt reset, pick PlayerFrame and PetFrame, tick boxes in the EMT panel only, save; /emt debug lists the frames.
+  Launch-day plan agreed (2026-10-21): the user installs on live the addons that are on beta now (Auctionator,
+  AutoLayer, Edit Mode Tweaks, Polestar with Codex/Guides/ItemDB/Nav/QuestDB, Questie + QuestieDB, TomTom; ours via
+  `make addon`), logs in each character once, closes the game, then says "import": run
+  `python3 scripts/settings_transfer.py import` (latest export: newest folder in personal/settings-backup/). Update
+  personal/team.json first if live names differ.
+  Addons installed for testing (2026-10-21): NKThreat, Threat Plates, Gear Quest Forever (+ class packs), SkillUp
+  Forever, OPie. SkillUp Forever (GPL-3, data from the Forever client tables, build 1.60.1.70450): live leveling
+  route in the profession window from bags, bank and Auctionator prices. Its colours match ours for 1892 recipes,
+  differ for 356 (ours has gaps or website values), 144 of ours it lacks.
+  Planner 2.7.0 + core 3.39.0: SkillUp Forever hooked up live through its public API (SkillUpForever.API v1:
+  Professions(), Navigate(skillLine, step), OpenRecipes(skillLine)). With it installed, a learned crafting
+  profession shows SkillUp's next 3 steps (Craft / Buy / Gather / Train) plus our Market note; materials come from
+  its route reagents with have = all characters. Clicks: a step with a place -> WFL.ClearArrows + api.Navigate;
+  a craft step -> api.OpenRecipes. Rows take `click` (UI.lua). SkillUp's TomTom waypoints count as ours: cleared
+  at login and when another arrow is set. Without SkillUp our own steps stay. Not checked in game yet.
+  No coordinates anywhere (user, 2026-10-21): Planner Pos() = zone only; core 3.39.1 NoCoords() strips
+  "12.3, 45.6" from every window line (data texts carry them), tooltips, the vendor chat line and /wfl todo.
+  Points keep x/y for the arrow. Planner 2.7.1.
+  Bug in 2.7.1: a leftover line made Planner.lua fail to compile, so the game skipped it (no window, no minimap
+  button, no error in our log). Fixed in 2.7.2. New tests/test_lua_syntax.py (in `make test`) compiles every addon
+  .lua file with Lua 5.1 (lupa.lua51 via the /tmp/wfl-lua venv). The reagents under the Questie tracker are
+  SkillUp Forever's tracker: /su, turn off "Show tracked professions".
+  Questie: the user tests playing without it (Polestar may cover it); moved to optional. Our addon does not use it
+  in game; our scripts need only the QuestieDB folder on disk (it can be off in the game's addon list).
+  Uninstalling Questie also removed the QuestieDB folder. build_routes.py now keeps data/routes.js and exits 0
+  without QuestieDB (it stopped the Sync before); refresh_data.py already kept its files. Ask the user to put
+  QuestieDB back (its data refreshes routes, givers, vendors). Gear Quest: needed (user likes it), used on its own, no API.
+  settings_transfer.py export now also saves addons.txt (installed addon folders, versions, titles) and per-character
+  addon settings: MinimapButtonForever, OPie and Auctionator copied from the template to all; GearQuestForever per
+  class. Tested on a copy of the beta folders (game was running). Kept: NKThreat, SkillUp Forever (needed);
+  AutoLayer (the user's "Layer Swap") kept for live, on the needed list.
+  Error flood (2026-10-21 18:32): all 1579 Lua errors in Logs/General.log came from Follow The Arrow (Arrow.lua:123,
+  "attempt to compare ... a secret number value"). Dropped (notNeeded). The game's Lua errors are in
+  _classic_beta_/Logs/General.log ("[E][Lua] Lua Error:"); read it first when the user reports errors.
+  Leveling: Polestar only (user, 2026-10-21); Forever Guide and Follow The Arrow not used.
+  After the game closed (18:37, backup wtf-beta-20261021-1837-before-tracker.tar.gz): SkillUp showTracker = false,
+  trackedProfessions emptied; Blizzard_ObjectiveTracker disabled in AddOns.txt for the 10 team characters (quest
+  sidebar off; Polestar shows the quest steps). Fresh export made, includes both.
+  Stress test (2026-10-21): it is the `_forever_` folder (product wowf, 1.60.1.70245), the live client. Copied 43
+  beta addon folders into it (not FollowTheArrow, ForeverGuide) and ran make addon. Import waits until the user
+  has started it and logged in: `python3 scripts/settings_transfer.py import --client forever --all` (new --all:
+  every character folder, for names not in team.json; class files only for team names). HandyNotes + Books kept.
+  Imported into the stress test (account ACA10, realm folder 93: Lovac-Kasapin hunter, Pala-Rfile paladin,
+  Vestac-Zla warlock; backup wtf-forever-20261021-2029-before-import.tar.gz). With --all the classes come from our
+  addon's save there (classes_from_save). Checked: Main only layout, all on layout 3, quest sidebar off, Cooldown
+  Manager files, Edit Mode Tweaks rules, SkillUp tracker off. Not checked in game yet.
+  Bug found by the user: no addon was on in the stress test. Kasapin's beta AddOns.txt was all "disabled" (the
+  game's "disable all" after the error flood) and the import copied it. AddOns.txt is no longer copied:
+  addon_list() writes every installed addon enabled except ADDONS_OFF (dropped addons, Blizzard_ObjectiveTracker).
+  Fixed 20:32 with the game closed: fresh AddOns.txt for the 3 stress test and 10 beta characters (backups *-2032-before-addons).
+  Stress test logs checked (20:35): General.log empty (no Lua errors), our log has no errors, EditMode.log shows
+  "Main" and layout 3 loaded at 20:30, AccountData.log shows no server download after the import: the game kept our
+  files and saved them to Blizzard's server copy. The import approach works for live.
+  Quest list: disabling Blizzard_ObjectiveTracker in AddOns.txt does not hide it in game. The user hides it by
+  tracking no quests; import now always sets account CVars autoQuestWatch 0 and autoQuestProgress 0
+  (ACCOUNT_CVARS in settings_transfer.py), so new quests are not tracked. In game: /console autoQuestWatch 0.
+  CurseForge installs into _classic_beta_; the user plays the stress test (_forever_). Copied ShotWindow and
+  ImprovedAutoShotTimer over (hunter Auto Shot aim timers, on the try list). On live, point CurseForge at _forever_.
+  `make live` (scripts/live_setup.py): copies every beta addon folder the target lacks (never overwrites, skips
+  ADDONS_OFF and ours), runs make addon, then settings import --all once the WTF folder exists. Run it before and
+  after the first login on live. Tested on a fake folder. README launch-day steps updated.
+  Exports now go to personal/settings-backup/<date>-<client> (the beta one renamed to 2026-10-21-classic_beta);
+  import takes the newest by time. Export maps other character names to classes from our save file (stress test).
+  Shot Window settings saved per class.
+  Saved from the stress test (game closed): personal/settings-backup/2026-10-21-forever, template Lovac-Kasapin;
+  hunter, paladin, warlock class files from it, the other classes and the bank copied from the beta save. Checked:
+  Main layout, hide rules, autoQuestWatch/autoQuestProgress 0, SkillUp tracker off, 48 addons incl. Shot Window.
+  This is now the newest save, so `make live` imports it.
+  Temporary professions (user plan, 2026-10-21): gather until reaching the trainer of a planned craft. Planner
+  2.8.0: a learned main profession not in the class plan gets a "Temporary" row (drop it at the trainer of the
+  planned one it gives way to, mail the gathered materials first); a planned one with no free slot says "after
+  you drop X". Pairing: sorted temporary ones to planned not-learned ones, in plan order.
+  Re-saved from the stress test (2026-10-21 23:05, game closed): addon and Blizzard settings, Brightness 60. The
+  other classes from the beta save stay in the folder (export does not delete it).
+  Export now also saves (2026-10-21 23:3x): account/partial/ with only the settings tables of WoWForeverLeveler
+  (WoWForeverLevelerUI without "have" and "selected": window spot, size, text size, minimap angle) and Auctionator
+  (AUCTIONATOR_CONFIG, _SHOPPING_LISTS, _SELLING_GROUPS); import merges them into the files there and keeps their
+  data. And addons.tar.gz (45 addon folders, 84 MB; not ours, not ADDONS_OFF, no QuestieDB as it is uninstalled):
+  make live unpacks it when the beta folder is gone. read()/write() use surrogateescape (Auctionator has non-UTF-8).
+  Questie + QuestieDB reinstalled in _forever_ (CurseForge now installs there). Data rebuilt from it (routes,
+  givers, vendors). Both installed but off: ADDONS_DROPPED (not copied or packed) vs ADDONS_OFF (= dropped +
+  Questie, QuestieDB, Blizzard_ObjectiveTracker; off in AddOns.txt). Re-saved; the pack now has 47 folders.
   Alliance check: all 144 dungeon pickups and their chain steps are Horde-takeable (QuestieDB races, Forever
   race bits: Horde 0x2000000B2, Alliance 0x10000004D; giver NPC factions). Only 3 Alliance-only quests exist in
   the data and none has a map spot, so none shows. User confirmed: no Alliance quests, they only sounded like it.

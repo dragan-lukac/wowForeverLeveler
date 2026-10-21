@@ -7769,14 +7769,39 @@
         "why": "Auction house prices for the dashboard. Run its full scan at the auction house."
       },
       {
-        "name": "Questie",
-        "folder": "Questie",
-        "why": "Shows quests on the map and minimap. It comes with a second folder, QuestieDB: keep both. Our dungeon chains and entrances come from QuestieDB."
-      },
-      {
         "name": "QuestieDB",
         "folder": "QuestieDB",
-        "why": "Questie's quest database. Comes with Questie."
+        "why": "Keep the folder installed even without Questie (uninstalling Questie can remove it too): Sync reads its files for quest routes, dungeon givers, vendors and trainers. Without it the last data stays. It can be turned off in the game's addon list."
+      },
+      {
+        "name": "Edit Mode Tweaks",
+        "why": "Hides the player and pet portraits out of combat; they show on mouse-over and in combat. Rules are account-wide, in the settings export. Tested 2026-10-21.",
+        "folder": "EditModeTweaks"
+      },
+      {
+        "name": "Gear Quest",
+        "why": "Best item per slot for your level and where to get it: right-click a slot in the character window. Install the class packs too (GearQuestForever_<CLASS>). Kept (user, 2026-10-21).",
+        "folder": "GearQuestForever"
+      },
+      {
+        "name": "NKThreat",
+        "why": "Threat meter; the game has none. Needed for dungeons. Kept (user, 2026-10-21).",
+        "folder": "NKThreat"
+      },
+      {
+        "name": "SkillUp Forever",
+        "why": "Leveling route per profession from the game's own skill data. Our Planner shows its next steps and materials in the Professions tab. Turn off its own tracker: /su, untick \"Show tracked professions\".",
+        "folder": "SkillUpForever"
+      },
+      {
+        "name": "AutoLayer",
+        "folder": "AutoLayer",
+        "why": "Change layer (a copy of the zone) to find free mobs and nodes. Kept for live, where the zones are full (user, 2026-10-21)."
+      },
+      {
+        "name": "HandyNotes + Books",
+        "folder": "HandyNotes",
+        "why": "Map pins for the library book quest: 10, 20 and 30 tomes give blue rewards. Kept (user, 2026-10-21)."
       }
     ],
     "dataOnly": [
@@ -7796,6 +7821,11 @@
         "name": "TomTom",
         "folder": "TomTom",
         "why": "Arrow with distance. Click a ➜ line in our panel, or right-click a quest in Questie and set a TomTom waypoint."
+      },
+      {
+        "name": "Questie",
+        "folder": "Questie",
+        "why": "Installed but turned off in the game (needed only as the home of QuestieDB). Polestar guides the quests."
       }
     ],
     "later": [
@@ -7832,36 +7862,14 @@
     ],
     "toTry": [
       {
-        "name": "SkillUp Forever",
-        "why": "Best craft per skill point, with the auction house cost. Try it with its first setup when the servers are up."
-      },
-      {
-        "name": "HandyNotes + Books",
-        "folder": "HandyNotes",
-        "why": "Map pins for the library book quest: 10/20/30 Tomes give blue rewards. Try it with its first setup when the servers are up."
-      },
-      {
-        "name": "Layer Swap",
-        "why": "Change layer (a copy of the zone) to find free mobs and nodes. Try it with its first setup when the servers are up."
-      },
-      {
         "name": "OPie",
         "folder": "OPie",
         "why": "Ring menus: mounts, hearthstone, profession spells on one key. Try it with its first setup when the servers are up."
       },
       {
-        "name": "Edit Mode Tweaks",
-        "why": "Hides any frame (player, pet, target, action bars) until mouse-over, combat or a target; per frame, set in Edit Mode. Supports Forever (CurseForge, 2026-10-21). Its settings are per character: the settings script copies them.",
-        "folder": "EditModeTweaks"
-      },
-      {
         "name": "Threat Plates",
         "folder": "TidyPlates_ThreatPlates",
         "why": "Better enemy nameplates; a bright arrow on your current target. /tptp opens it. (from the PLC UI video, 2026-10-21)"
-      },
-      {
-        "name": "NKThreat",
-        "why": "Threat meter. The game has no own threat meter. Needed for dungeons. (from the PLC UI video, 2026-10-21)"
       },
       {
         "name": "Lore Forever",
@@ -7872,17 +7880,16 @@
         "why": "Quests new in Forever get a blue tint on the quest window. (from the PLC UI video, 2026-10-21)"
       },
       {
-        "name": "Gear Quest",
-        "why": "Best item per slot for your level and where to get it (right-click a slot). (from the PLC UI video, 2026-10-21)"
+        "name": "Minimap Button Forever",
+        "why": "Collects the minimap buttons of all addons in one place. Being tried (2026-10-21)."
       },
       {
-        "name": "Forever Guide",
-        "why": "In-game Wowhead: quests, dungeons, drops. May overlap with Polestar Codex and DFL. (from the PLC UI video, 2026-10-21)"
+        "name": "Shot Window",
+        "why": "Hunter: a red zone on the game's own ranged swing timer shows when to stand still for Auto Shot (the 0.5 s aim). Turn on the game's swing timer first (Options, search \"swing\"). Being tried (2026-10-21)."
       },
       {
-        "name": "Follow The Arrow",
-        "folder": "FollowTheArrow",
-        "why": "Free leveling guide by Harldan (speedrunner): hand-tested routes 1-30 at launch, first dungeon clears in the route, picks quest rewards per class. A choice instead of Polestar: test one character with it. Only the 6 start zones in the beta version (video 2026-10-21)."
+        "name": "Improved Auto Shot Timer",
+        "why": "Hunter: a \"stop moving\" bar on top of the game's ranged swing timer, for kiting. Alternative to Shot Window."
       }
     ],
     "notNeeded": [
@@ -7900,6 +7907,15 @@
         "name": "RestedXP",
         "folder": "RXPGuides",
         "why": "Leveling guide from the beta test. Polestar does the same for free: turn it off or delete the folder."
+      },
+      {
+        "name": "Follow The Arrow",
+        "folder": "FollowTheArrow",
+        "why": "Dropped (2026-10-21): its arrow threw about 27 Lua errors a second on the beta (\"secret number\" from the game, Arrow.lua line 123), with the error sound and the game asking to disable addons. Same job as Polestar anyway."
+      },
+      {
+        "name": "Forever Guide",
+        "why": "Not used (user, 2026-10-21): Polestar stays the leveling and quest addon."
       }
     ]
   },

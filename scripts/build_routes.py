@@ -512,7 +512,10 @@ def finish_steps(world, zone, steps):
 def build():
     toc = questie_db.toc_path()
     if not toc:
-        sys.exit('QuestieDB addon not found (QuestieDB_Forever.toc)')
+        # Without the QuestieDB folder (Questie uninstalled with it): keep the last data/routes.js and let the sync
+        # go on. Reinstall QuestieDB to refresh the routes.
+        print('[routes] QuestieDB addon not found (QuestieDB_Forever.toc): data/routes.js kept as it is')
+        return None
     db = questie_db.load(toc)
     world = World(db, area_maps(toc))
     xpdb = quest_xp(toc)
