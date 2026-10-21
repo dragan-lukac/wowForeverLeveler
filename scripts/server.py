@@ -82,7 +82,8 @@ def run_script(name, timeout):
     return proc.returncode, (proc.stdout + proc.stderr).strip()
 
 
-SYNC_SCRIPTS = ("build_roster.py", "quest_report.py", "build_routes.py", "build_guide.py")
+# refresh_data.py: the QuestieDB-built files (dungeon givers, vendors) stay current after an addon update.
+SYNC_SCRIPTS = ("build_roster.py", "quest_report.py", "build_routes.py", "refresh_data.py", "build_guide.py")
 WATCH_EVERY = 5  # seconds between checks of the save file
 
 

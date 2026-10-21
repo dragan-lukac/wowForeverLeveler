@@ -180,6 +180,9 @@ SlashCmdList["WOWFOREVERLEVELER"] = function(msg)
     local cmd = strtrim(msg or ""):lower()
     if cmd == "todo" then
         ToggleTodo()
+    elseif cmd:match("^buy ") then
+        -- /wfl buy <item>: the nearest vendors that sell it (UI.lua vendor search).
+        if WFL and WFL.FindVendorByName then WFL.FindVendorByName(strtrim(msg):sub(5)) end
     elseif cmd == "check" then
         local function has(v) return v and "|cff00ff00yes|r" or "|cffff4040no|r" end
         Log("|cffffd100WoW Forever Leveler:|r client API check")
@@ -193,7 +196,7 @@ SlashCmdList["WOWFOREVERLEVELER"] = function(msg)
         Log(string.format("  Auctionator prices: %s (%s, %d items) | item names saved: %d",
             has(realm), tostring(realm), items, named))
     else
-        Log("|cffffd100WoW Forever Leveler:|r auction prices come from Auctionator: scan with it, then /reload and Sync. /wfl check - show which game systems this client has. /wfl todo - show or hide the trainers you still need to visit.")
+        Log("|cffffd100WoW Forever Leveler:|r auction prices come from Auctionator: scan with it, then /reload and Sync. /wfl check - show which game systems this client has. /wfl todo - show or hide the trainers you still need to visit. /wfl buy <item> - the nearest vendors that sell it.")
     end
 end
 
@@ -951,7 +954,8 @@ local function TrainersToVisit(onlyCity)
         local lines = {}
         for _, npc in ipairs(WoWForeverLevelerNPCPlan[city]) do
             if mine[npc.profession] and not visited[npc.profession] then
-                table.insert(lines, string.format("|cffffd100%s:|r %s (%s)", npc.profession, npc.name, npc.where))
+                table.insert(lines, { text = string.format("|cffffd100%s:|r %s (%s)", npc.profession, npc.name, npc.where),
+                                      name = npc.name, profession = npc.profession })
             end
         end
         if #lines > 0 then table.insert(result, { city = city, lines = lines }) end
@@ -960,6 +964,7 @@ local function TrainersToVisit(onlyCity)
 end
 
 -- A small movable window. In a city it lists that city; elsewhere every city. Its position is kept.
+-- Click a trainer line: the arrow and a map pin point there (click again to clear).
 local todoFrame
 local function EnsureTodoFrame()
     if todoFrame then return todoFrame end
@@ -974,14 +979,42 @@ local function EnsureTodoFrame()
     todoFrame:SetClampedToScreen(true)
     todoFrame.title = todoFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     todoFrame.title:SetPoint("TOP", todoFrame, "TOP", 0, -5)
-    todoFrame.text = todoFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
-    todoFrame.text:SetPoint("TOPLEFT", todoFrame, "TOPLEFT", 14, -32)
-    todoFrame.text:SetWidth(352)
-    todoFrame.text:SetJustifyH("LEFT")
-    todoFrame.text:SetJustifyV("TOP")
-    todoFrame.text:SetSpacing(3)
+    todoFrame.rows = {}
     todoFrame:Hide()
     return todoFrame
+end
+
+local function TodoRow(i)
+    local r = todoFrame.rows[i]
+    if r then return r end
+    r = CreateFrame("Button", nil, todoFrame)
+    r:SetPoint("LEFT", todoFrame, "LEFT", 10, 0)
+    r:SetWidth(360)
+    r.mark = r:CreateTexture(nil, "OVERLAY")
+    r.mark:SetSize(14, 14)
+    r.mark:SetPoint("TOPLEFT", 0, -1)
+    r.mark:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
+    r.text = r:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    r.text:SetPoint("TOPLEFT", 18, 0)
+    r.text:SetWidth(342)
+    r.text:SetJustifyH("LEFT")
+    r.text:SetJustifyV("TOP")
+    r.hl = r:CreateTexture(nil, "HIGHLIGHT")
+    r.hl:SetAllPoints()
+    r.hl:SetColorTexture(1, 1, 1, 0.08)
+    r:SetScript("OnClick", function(self)
+        if self.point and WFL and WFL.Select then WFL.Select(self.point); RefreshTodo() end
+    end)
+    r:SetScript("OnEnter", function(self)
+        if not self.point then return end
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        local on = WFL and WFL.IsSelected and WFL.IsSelected(self.point)
+        GameTooltip:AddLine((on and "Clear: " or "Arrow to: ") .. self.point.title)
+        GameTooltip:Show()
+    end)
+    r:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    todoFrame.rows[i] = r
+    return r
 end
 
 RefreshTodo = function()
@@ -991,17 +1024,31 @@ RefreshTodo = function()
     local groups = TrainersToVisit(inCity and zone or nil)
     local out = {}
     for _, g in ipairs(groups) do
-        if not inCity then table.insert(out, "|cff80c0ff" .. g.city .. "|r") end
+        if not inCity then table.insert(out, { text = "|cff80c0ff" .. g.city .. "|r" }) end
         for _, line in ipairs(g.lines) do table.insert(out, line) end
     end
     if #out == 0 then
-        table.insert(out, inCity and "All your trainers here are visited." or "All your trainers in the cities are visited.")
+        table.insert(out, { text = inCity and "All your trainers here are visited." or "All your trainers in the cities are visited." })
     else
-        table.insert(out, "|cff999999Names are from Classic; ask a guard if one is missing.|r")
+        table.insert(out, { text = "|cff999999Click a trainer: arrow and map pin. Click again to clear.|r" })
     end
     todoFrame.title:SetText(inCity and ("Trainers to visit: " .. zone) or "Trainers to visit")
-    todoFrame.text:SetText(table.concat(out, "\n"))
-    todoFrame:SetHeight(todoFrame.text:GetStringHeight() + 48)
+    local y = -32
+    for i, line in ipairs(out) do
+        local r = TodoRow(i)
+        r.point = line.name and WFL and WFL.NamedTrainerPoint and WFL.NamedTrainerPoint(line.name, line.profession) or nil
+        r.text:SetText(line.text)
+        r.mark:SetShown(r.point and WFL.IsSelected(r.point) or false)
+        r:EnableMouse(r.point ~= nil)
+        local h = r.text:GetStringHeight() + 3
+        r:SetHeight(h)
+        r:ClearAllPoints()
+        r:SetPoint("TOPLEFT", todoFrame, "TOPLEFT", 10, y)
+        r:Show()
+        y = y - h
+    end
+    for i = #out + 1, #todoFrame.rows do todoFrame.rows[i]:Hide() end
+    todoFrame:SetHeight(-y + 16)
 end
 
 ToggleTodo = function()

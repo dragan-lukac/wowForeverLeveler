@@ -1,0 +1,5 @@
+<Bindings>
+	<!-- Hover an item (bags, profession window, chat link) and press the key: the nearest vendors in chat, an arrow
+	     to the first. Set a key in the game's Key Bindings (AddOns) if you want one; Ctrl + right-click on an item does the same. -->
+	<Binding name="WFL_FIND_VENDOR" header="WFL" category="ADDONS">WFL_FindVendorHovered()</Binding>
+</Bindings>

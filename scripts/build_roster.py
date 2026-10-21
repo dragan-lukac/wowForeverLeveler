@@ -347,8 +347,14 @@ def build():
         f.write(";\n")
     print(f"[+] Trainers and vendors on the map: {sum(len(n) for n in npcs.values())}")
 
-    # Dungeon quests come from the dungeon addons' own data files, read fresh on every sync.
+    # Dungeon quests come from the dungeon addons' own data files, read fresh on every sync. A client whose
+    # addon folders are gone keeps its last data, so the two addons can be removed from the game.
     dungeons = {}
+    if os.path.exists(DUNGEONS_OUTPUT):
+        with open(DUNGEONS_OUTPUT, encoding='utf-8') as f:
+            text = f.read()
+        if 'window.DUNGEONS = ' in text:
+            dungeons = json.loads(text.split('window.DUNGEONS = ', 1)[1].rstrip().rstrip(';'))
     for root in WOW_ROOTS:
         for addons_dir in glob.glob(os.path.join(root, "_*_", "Interface", "AddOns")):
             flavor = addons_dir[len(root) + 1:].split(os.sep)[0].strip('_')

@@ -27,6 +27,7 @@ roster:
 	python3 scripts/build_roster.py
 
 guide:
+	python3 scripts/refresh_data.py
 	python3 scripts/build_guide.py
 
 quests:

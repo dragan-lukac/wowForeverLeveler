@@ -3,6 +3,7 @@
 ## Notes: The quest window: Now (Do next, professions), Route (zones and dungeons), Materials. Needs WoW Forever Leveler.
 ## Author: Antigravity
 ## Version: 1.0.1
+## IconTexture: Interface\Icons\INV_Misc_Spyglass_02
 ## Dependencies: WoWForeverLeveler
 
 Quests.lua

@@ -1,0 +1,1943 @@
+{
+ "1013": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Keeper Bel'dugur",
+  "x": 53.7,
+  "y": 54.5
+ },
+ "1014": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1421,
+  "name": "Dalar Dawnweaver",
+  "x": 44.2,
+  "y": 39.8
+ },
+ "1048": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Varimathras",
+  "x": 56.2,
+  "y": 92.2
+ },
+ "1049": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Sage Truthseeker",
+  "x": 34.4,
+  "y": 46.9
+ },
+ "1051": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Vorrel Sengutz"
+ },
+ "1098": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1421,
+  "name": "High Executor Hadrec",
+  "x": 43.4,
+  "y": 40.9
+ },
+ "1102": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Auld Stonespire",
+  "x": 36.0,
+  "y": 59.9
+ },
+ "1109": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Master Apothecary Faranell",
+  "x": 48.8,
+  "y": 69.3
+ },
+ "1113": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Master Apothecary Faranell",
+  "x": 48.8,
+  "y": 69.3
+ },
+ "1144": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Willix the Importer"
+ },
+ "1160": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Parqual Fintallas",
+  "x": 57.8,
+  "y": 65.4
+ },
+ "1193": {
+  "inside": true,
+  "kind": "object",
+  "name": "Broken Trap"
+ },
+ "1221": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1413,
+  "name": "Mebok Mizzyrix",
+  "x": 62.4,
+  "y": 37.6
+ },
+ "1445": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1435,
+  "name": "Fel'zerul",
+  "x": 47.9,
+  "y": 54.8
+ },
+ "1446": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1425,
+  "name": "Atal'ai Exile",
+  "x": 33.8,
+  "y": 75.2
+ },
+ "1486": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1413,
+  "name": "Nalpak",
+  "x": 46.0,
+  "y": 35.7
+ },
+ "1487": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1413,
+  "name": "Ebru",
+  "x": 46.0,
+  "y": 35.7
+ },
+ "1489": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1413,
+  "name": "Tonga Runetotem",
+  "x": 52.3,
+  "y": 31.9
+ },
+ "1490": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Arch Druid Hamuul Runetotem",
+  "x": 78.6,
+  "y": 28.6
+ },
+ "1491": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1413,
+  "name": "Mebok Mizzyrix",
+  "x": 62.4,
+  "y": 37.6
+ },
+ "1500": {
+  "skip": true
+ },
+ "2202": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Jarkal Mossmeld",
+  "x": 2.4,
+  "y": 46.1
+ },
+ "2278": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Discs of Norgannon"
+ },
+ "2280": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Discs of Norgannon"
+ },
+ "2283": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Dran Droffers",
+  "x": 59.5,
+  "y": 36.6
+ },
+ "2284": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Dran Droffers",
+  "x": 59.5,
+  "y": 36.6
+ },
+ "2318": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Remains of a Paladin"
+ },
+ "2338": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Jarkal Mossmeld",
+  "x": 2.4,
+  "y": 46.1
+ },
+ "2339": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Jarkal Mossmeld",
+  "x": 2.4,
+  "y": 46.1
+ },
+ "2340": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Jarkal Mossmeld",
+  "x": 2.4,
+  "y": 46.1
+ },
+ "2341": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Dran Droffers",
+  "x": 59.5,
+  "y": 36.6
+ },
+ "2342": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Patrick Garrett",
+  "x": 62.3,
+  "y": 48.6
+ },
+ "2418": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Rigglefuzz",
+  "x": 42.4,
+  "y": 52.9
+ },
+ "2768": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Chief Engineer Bilgewhizzle",
+  "x": 52.5,
+  "y": 28.5
+ },
+ "2770": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1441,
+  "name": "Wizzle Brassbolts",
+  "x": 78.1,
+  "y": 77.1
+ },
+ "2841": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Nogg",
+  "x": 76.0,
+  "y": 25.4
+ },
+ "2842": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Sovik",
+  "x": 75.5,
+  "y": 25.4
+ },
+ "2843": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1434,
+  "name": "Scooty",
+  "x": 27.6,
+  "y": 77.5
+ },
+ "2846": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1445,
+  "name": "Tabetha",
+  "x": 46.1,
+  "y": 57.1
+ },
+ "2861": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Anastasia Hartwell",
+  "x": 85.1,
+  "y": 10.0
+ },
+ "2864": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1434,
+  "name": "Krazek",
+  "x": 26.9,
+  "y": 77.2
+ },
+ "2865": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Tran'rek",
+  "x": 51.6,
+  "y": 26.8
+ },
+ "2904": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Kernobee"
+ },
+ "2936": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1411,
+  "name": "Master Gadrin",
+  "x": 56.0,
+  "y": 74.7
+ },
+ "2945": {
+  "drop": "Dark Iron Agent",
+  "inside": true,
+  "kind": "item",
+  "name": "Grime-Encrusted Ring"
+ },
+ "2949": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "2951": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "2952": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "2953": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "3042": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Trenton Lighthammer",
+  "x": 51.4,
+  "y": 28.8
+ },
+ "3341": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Andrew Brownell",
+  "x": 74.0,
+  "y": 33.3
+ },
+ "3366": {
+  "skip": true
+ },
+ "3373": {
+  "drop": "Shade of Eranikus",
+  "inside": true,
+  "kind": "item",
+  "name": "Essence of Eranikus"
+ },
+ "3380": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1444,
+  "name": "Witch Doctor Uzer'i",
+  "x": 74.4,
+  "y": 43.4
+ },
+ "3446": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Marvon Rivetseeker",
+  "x": 52.7,
+  "y": 45.9
+ },
+ "3447": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Marvon Rivetseeker",
+  "x": 52.7,
+  "y": 45.9
+ },
+ "3523": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Belnistrasz"
+ },
+ "3525": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Belnistrasz"
+ },
+ "3527": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Yeh'kinya",
+  "x": 67.0,
+  "y": 22.4
+ },
+ "3528": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Yeh'kinya",
+  "x": 67.0,
+  "y": 22.4
+ },
+ "3801": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Franclorn Forgewright",
+  "x": 29.0,
+  "y": 28.9
+ },
+ "3802": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Franclorn Forgewright",
+  "x": 29.0,
+  "y": 28.9
+ },
+ "3907": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Thunderheart",
+  "x": 3.3,
+  "y": 48.3
+ },
+ "3911": {
+  "skip": true
+ },
+ "3981": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Galamav the Marksman",
+  "x": 6.0,
+  "y": 47.7
+ },
+ "3982": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Commander Gor'shak"
+ },
+ "4001": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Commander Gor'shak"
+ },
+ "4002": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Thrall",
+  "x": 31.7,
+  "y": 37.8
+ },
+ "4003": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Thrall",
+  "x": 31.7,
+  "y": 37.8
+ },
+ "4004": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Princess Moira Bronzebeard"
+ },
+ "4024": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Cyrus Therepentous",
+  "x": 95.1,
+  "y": 31.6
+ },
+ "4063": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Lotwil Veriatus",
+  "x": 25.9,
+  "y": 44.9
+ },
+ "4081": {
+  "inside": false,
+  "kind": "object",
+  "m": 1418,
+  "name": "WANTED",
+  "x": 3.7,
+  "y": 47.4
+ },
+ "4082": {
+  "inside": false,
+  "kind": "object",
+  "m": 1418,
+  "name": "KILL ON SIGHT",
+  "x": 3.9,
+  "y": 46.7
+ },
+ "4083": {
+  "inside": true,
+  "kind": "object",
+  "name": "Spectral Chalice"
+ },
+ "4121": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Grark Lorkrub",
+  "x": 40.2,
+  "y": 34.2
+ },
+ "4122": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Lexlort",
+  "x": 5.9,
+  "y": 47.6
+ },
+ "4123": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Maxwort Uberglint",
+  "x": 65.2,
+  "y": 23.9
+ },
+ "4132": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Warlord Goretooth",
+  "x": 5.8,
+  "y": 47.5
+ },
+ "4133": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Apothecary Zinge",
+  "x": 50.1,
+  "y": 68.0
+ },
+ "4134": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Shadowmage Vivian Lagrave",
+  "x": 2.9,
+  "y": 47.8
+ },
+ "4136": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Yuka Screwspigot",
+  "x": 66.1,
+  "y": 21.9
+ },
+ "4201": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Mistress Nagmara"
+ },
+ "4295": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Private Rocknot"
+ },
+ "4324": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Yorba Screwspigot",
+  "x": 67.0,
+  "y": 24.0
+ },
+ "4601": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "4602": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "4603": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "4604": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "4605": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "4606": {
+  "inside": true,
+  "kind": "object",
+  "name": "The Sparklematic 5200"
+ },
+ "4724": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Galamav the Marksman",
+  "x": 6.0,
+  "y": 47.7
+ },
+ "4729": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Kibler",
+  "x": 65.9,
+  "y": 21.9
+ },
+ "4734": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Tinkee Steamboil",
+  "x": 65.2,
+  "y": 24
+ },
+ "4735": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Tinkee Steamboil",
+  "x": 65.2,
+  "y": 24
+ },
+ "4742": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Scarshield Infiltrator"
+ },
+ "4743": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Scarshield Infiltrator"
+ },
+ "4768": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Shadowmage Vivian Lagrave",
+  "x": 2.9,
+  "y": 47.8
+ },
+ "4769": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Apothecary Zinge",
+  "x": 50.1,
+  "y": 68.0
+ },
+ "4771": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Betina Bigglezink",
+  "x": 71.7,
+  "y": 49.9
+ },
+ "4788": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Prospector Ironboot",
+  "x": 66.9,
+  "y": 24.0
+ },
+ "4862": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Kibler",
+  "x": 65.9,
+  "y": 21.9
+ },
+ "4866": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Ragged John",
+  "x": 65.0,
+  "y": 23.8
+ },
+ "4867": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Warosh"
+ },
+ "4903": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Warlord Goretooth",
+  "x": 5.8,
+  "y": 47.5
+ },
+ "4907": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1452,
+  "name": "Felnok Steelspring",
+  "x": 61.6,
+  "y": 38.6
+ },
+ "4974": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Thrall",
+  "x": 31.7,
+  "y": 37.8
+ },
+ "4981": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Lexlort",
+  "x": 5.9,
+  "y": 47.6
+ },
+ "4982": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bijou"
+ },
+ "4983": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bijou"
+ },
+ "5047": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Pip Quickwit"
+ },
+ "5103": {
+  "inside": true,
+  "kind": "object",
+  "name": "Human Remains"
+ },
+ "5122": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Aurius"
+ },
+ "5125": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Aurius"
+ },
+ "5127": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1452,
+  "name": "Lorax",
+  "x": 63.8,
+  "y": 73.8
+ },
+ "5160": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Awbee"
+ },
+ "5212": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Betina Bigglezink",
+  "x": 71.7,
+  "y": 49.9
+ },
+ "5213": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Betina Bigglezink",
+  "x": 71.7,
+  "y": 49.9
+ },
+ "5214": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Smokey LaRue",
+  "x": 70.9,
+  "y": 48.4
+ },
+ "5243": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Leonid Barthalomew the Revered",
+  "x": 71.9,
+  "y": 48.3
+ },
+ "5251": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Duke Nicholas Zverenhoff",
+  "x": 71.6,
+  "y": 50.1
+ },
+ "5262": {
+  "drop": "Grand Crusader Dathrohan",
+  "inside": true,
+  "kind": "item",
+  "name": "Head of Balnazzar"
+ },
+ "5263": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Duke Nicholas Zverenhoff",
+  "x": 71.6,
+  "y": 50.1
+ },
+ "5282": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Egan",
+  "x": 11.4,
+  "y": 26.6
+ },
+ "5341": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1420,
+  "name": "Alexi Barov",
+  "x": 83.1,
+  "y": 71.6
+ },
+ "5382": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1422,
+  "name": "Eva Sarkhoff",
+  "x": 70.2,
+  "y": 73.7
+ },
+ "5384": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1422,
+  "name": "Eva Sarkhoff",
+  "x": 70.2,
+  "y": 73.7
+ },
+ "5463": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Leonid Barthalomew the Revered",
+  "x": 71.9,
+  "y": 48.3
+ },
+ "5464": {
+  "inside": true,
+  "kind": "object",
+  "name": "Menethil's Gift"
+ },
+ "5466": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1422,
+  "name": "Magistrate Marduke",
+  "x": 70.6,
+  "y": 74.1
+ },
+ "5515": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1422,
+  "name": "Eva Sarkhoff",
+  "x": 70.2,
+  "y": 73.7
+ },
+ "5518": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Knot Thimblejack"
+ },
+ "5519": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Knot Thimblejack"
+ },
+ "5525": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Knot Thimblejack"
+ },
+ "5528": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Stomper Kreeg"
+ },
+ "5529": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Betina Bigglezink",
+  "x": 71.7,
+  "y": 49.9
+ },
+ "5531": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Leonid Barthalomew the Revered",
+  "x": 71.9,
+  "y": 48.3
+ },
+ "5582": {
+  "drop": "Plagued Hatchling",
+  "inside": true,
+  "kind": "item",
+  "name": "Healthy Dragon Scale"
+ },
+ "5722": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Rahauro",
+  "x": 70.1,
+  "y": 29.5
+ },
+ "5723": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Rahauro",
+  "x": 70.1,
+  "y": 29.5
+ },
+ "5724": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Maur Grimtotem"
+ },
+ "5725": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Varimathras",
+  "x": 56.2,
+  "y": 92.2
+ },
+ "5728": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Thrall",
+  "x": 31.7,
+  "y": 37.8
+ },
+ "5761": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Neeru Fireblade",
+  "x": 49.5,
+  "y": 50.6
+ },
+ "5848": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1422,
+  "name": "Artist Renfray",
+  "x": 65.8,
+  "y": 75.4
+ },
+ "6163": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Nathanos Blightcaller",
+  "x": 22.2,
+  "y": 63.5
+ },
+ "6521": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Varimathras",
+  "x": 56.2,
+  "y": 92.2
+ },
+ "6522": {
+  "drop": "Charlga Razorflank",
+  "inside": true,
+  "kind": "item",
+  "name": "Small Scroll"
+ },
+ "6561": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Argent Guard Thaelrid"
+ },
+ "6562": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1442,
+  "name": "Tsunaman",
+  "x": 47.4,
+  "y": 64.2
+ },
+ "6563": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1440,
+  "name": "Je'neu Sancrea",
+  "x": 11.6,
+  "y": 34.3
+ },
+ "6564": {
+  "drop": "Blackfathom Tide Priestess",
+  "inside": true,
+  "kind": "item",
+  "name": "Damp Note"
+ },
+ "6565": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1440,
+  "name": "Je'neu Sancrea",
+  "x": 11.6,
+  "y": 34.3
+ },
+ "6569": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1422,
+  "name": "Myranda the Hag",
+  "x": 50.8,
+  "y": 77.8
+ },
+ "6602": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1443,
+  "name": "Rexxar",
+  "x": 54,
+  "y": 2
+ },
+ "6626": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1413,
+  "name": "Myriam Moonsinger",
+  "x": 49.0,
+  "y": 94.9
+ },
+ "6642": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lokhtos Darkbargainer"
+ },
+ "6643": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lokhtos Darkbargainer"
+ },
+ "6644": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lokhtos Darkbargainer"
+ },
+ "6645": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lokhtos Darkbargainer"
+ },
+ "6646": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lokhtos Darkbargainer"
+ },
+ "6921": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1440,
+  "name": "Je'neu Sancrea",
+  "x": 11.6,
+  "y": 34.3
+ },
+ "6922": {
+  "drop": "Baron Aquanis",
+  "inside": true,
+  "kind": "item",
+  "name": "Strange Water Globe"
+ },
+ "6981": {
+  "drop": "Mutanus the Devourer",
+  "inside": true,
+  "kind": "item",
+  "name": "Glowing Shard"
+ },
+ "7028": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1443,
+  "name": "Willow",
+  "x": 62.2,
+  "y": 39.6
+ },
+ "7029": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1443,
+  "name": "Vark Battlescar",
+  "x": 23.2,
+  "y": 70.3
+ },
+ "7044": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1443,
+  "name": "Cavindra",
+  "x": 31.9,
+  "y": 63.8
+ },
+ "7046": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Celebras the Redeemed"
+ },
+ "7064": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1443,
+  "name": "Selendra",
+  "x": 26.9,
+  "y": 77.7
+ },
+ "7066": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Zaetar's Spirit"
+ },
+ "7067": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1443,
+  "name": "Centaur Pariah",
+  "x": 50.4,
+  "y": 86.7
+ },
+ "7068": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Uthel'nay",
+  "x": 39.2,
+  "y": 86.3
+ },
+ "709": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Theldurin the Lost",
+  "x": 51.4,
+  "y": 76.9
+ },
+ "7201": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1418,
+  "name": "Shadowmage Vivian Lagrave",
+  "x": 2.9,
+  "y": 47.8
+ },
+ "7429": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Knot Thimblejack"
+ },
+ "7441": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1444,
+  "name": "Azj'Tordin",
+  "x": 76.9,
+  "y": 37.4
+ },
+ "7461": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Shen'dralar Ancient"
+ },
+ "7462": {
+  "skip": true
+ },
+ "7463": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lorekeeper Lydros"
+ },
+ "7481": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1444,
+  "name": "Sage Korolusk",
+  "x": 74.4,
+  "y": 44
+ },
+ "7483": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lorekeeper Lydros"
+ },
+ "7484": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lorekeeper Lydros"
+ },
+ "7485": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lorekeeper Lydros"
+ },
+ "7487": {
+  "skip": true
+ },
+ "7489": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1444,
+  "name": "Talo Thornhoof",
+  "x": 76.2,
+  "y": 43.8
+ },
+ "7492": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Harbinger Balthazad",
+  "x": 63.9,
+  "y": 44.1
+ },
+ "7498": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "Garona: A Study on Stealth and Treachery"
+ },
+ "7499": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "Codex of Defense"
+ },
+ "7500": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "The Arcanist's Cookbook"
+ },
+ "7502": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "Harnessing Shadows"
+ },
+ "7503": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "The Greatest Race of Hunters"
+ },
+ "7504": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "Holy Bologna: What the Light Won't Tell You"
+ },
+ "7505": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "Frost Shock and You"
+ },
+ "7506": {
+  "drop": "Captain Kromcrush, A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "The Emerald Dream"
+ },
+ "7507": {
+  "drop": "A Dusty Tome",
+  "inside": true,
+  "kind": "item",
+  "name": "Nostro's Compendium of Dragon Slaying"
+ },
+ "7508": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "A Dull and Flat Elven Blade"
+ },
+ "7509": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Lorekeeper Lydros"
+ },
+ "7604": {
+  "drop": "Lokhtos Darkbargainer",
+  "inside": true,
+  "kind": "item",
+  "name": "Thorium Brotherhood Contract"
+ },
+ "7631": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1428,
+  "name": "Mor'zul Bloodbringer",
+  "x": 12.7,
+  "y": 31.6
+ },
+ "7632": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Majordomo Executus"
+ },
+ "7649": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "Enchanted Thorium Platemail"
+ },
+ "7650": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "Enchanted Thorium Platemail"
+ },
+ "7651": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "Enchanted Thorium Platemail"
+ },
+ "7703": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Captain Kromcrush"
+ },
+ "7761": {
+  "drop": "Scarshield Quartermaster",
+  "inside": true,
+  "kind": "item",
+  "name": "Blackhand's Command"
+ },
+ "7783": {
+  "drop": "Nefarian",
+  "inside": true,
+  "kind": "item",
+  "name": "Head of Nefarian"
+ },
+ "7848": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1427,
+  "name": "Lothos Riftwaker",
+  "x": 32.1,
+  "y": 94.7
+ },
+ "7877": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Shen'dralar Ancient"
+ },
+ "7938": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "Sayge's Fortune #24"
+ },
+ "7944": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "Sayge's Fortune #25"
+ },
+ "8181": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1446,
+  "name": "Prospector Ironboot",
+  "x": 66.9,
+  "y": 24.0
+ },
+ "8183": {
+  "drop": "Hakkar",
+  "inside": true,
+  "kind": "item",
+  "name": "Heart of Hakkar"
+ },
+ "8201": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1434,
+  "name": "Exzhal",
+  "x": 15.3,
+  "y": 15.5
+ },
+ "8227": {
+  "inside": true,
+  "kind": "object",
+  "name": "Battered Tackle Box"
+ },
+ "8243": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1434,
+  "name": "Rin'wosho the Trader",
+  "x": 15.1,
+  "y": 16
+ },
+ "8246": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1434,
+  "name": "Rin'wosho the Trader",
+  "x": 15.1,
+  "y": 16
+ },
+ "8288": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1451,
+  "name": "Baristolth of the Shifting Sands",
+  "x": 49.5,
+  "y": 36.5
+ },
+ "8578": {
+  "inside": false,
+  "kind": "object",
+  "m": 1421,
+  "name": "Inconspicuous Crate",
+  "x": 46.2,
+  "y": 86.7
+ },
+ "8579": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Kandrostrasz"
+ },
+ "8595": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Kandrostrasz"
+ },
+ "8619": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Elder Morndeep"
+ },
+ "8635": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Elder Splitrock"
+ },
+ "8644": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Elder Stonefort"
+ },
+ "8676": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Elder Wildmane"
+ },
+ "8713": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Elder Starsong"
+ },
+ "8727": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Elder Farwhisper"
+ },
+ "8730": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Vaelastrasz the Corrupt"
+ },
+ "8733": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Malfurion Stormrage"
+ },
+ "8784": {
+  "drop": "Vekniss Soldier, Vekniss Warrior",
+  "inside": true,
+  "kind": "item",
+  "name": "Ancient Qiraji Artifact"
+ },
+ "8789": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Arygos"
+ },
+ "8790": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Merithra of the Dream"
+ },
+ "8791": {
+  "drop": "Ossirian the Unscarred",
+  "inside": true,
+  "kind": "item",
+  "name": "Head of Ossirian the Unscarred"
+ },
+ "8801": {
+  "drop": "C'Thun",
+  "inside": true,
+  "kind": "item",
+  "name": "Eye of C'Thun"
+ },
+ "8802": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Caelestrasz"
+ },
+ "8945": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "8946": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Ysida Harmon"
+ },
+ "8948": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "8949": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Falrin Treeshaper"
+ },
+ "8950": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Falrin Treeshaper"
+ },
+ "8953": {
+  "skip": true
+ },
+ "8957": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "8966": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8967": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8968": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8969": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8989": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8990": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8991": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8992": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8995": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Bodley"
+ },
+ "8996": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Spirit of Lord Valthalak"
+ },
+ "9015": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Falrin Treeshaper"
+ },
+ "9016": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "9017": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "9019": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "9020": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "9021": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "9022": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Anthion Harmon",
+  "x": 26.1,
+  "y": 11.3
+ },
+ "9033": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Commander Eligor Dawnbringer",
+  "x": 71.7,
+  "y": 48.6
+ },
+ "909": {
+  "skip": true
+ },
+ "9120": {
+  "drop": "Kel'Thuzad",
+  "inside": true,
+  "kind": "item",
+  "name": "The Phylactery of Kel'Thuzad"
+ },
+ "914": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Nara Wildmane",
+  "x": 75.7,
+  "y": 31.6
+ },
+ "9229": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Korfax, Champion of the Light",
+  "x": 72.0,
+  "y": 48.5
+ },
+ "9230": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Korfax, Champion of the Light",
+  "x": 72.0,
+  "y": 48.5
+ },
+ "9232": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Craftsman Wilhelm",
+  "x": 71.2,
+  "y": 49.9
+ },
+ "9233": {
+  "drop": "Master Craftsman Omarion",
+  "inside": true,
+  "kind": "item",
+  "name": "Omarion's Handbook"
+ },
+ "92401": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1421,
+  "name": "Tabitha Heartweaver",
+  "x": 44.5,
+  "y": 43.0
+ },
+ "92421": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Morbin Lightbane",
+  "x": 57.7,
+  "y": 89.1
+ },
+ "92422": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1420,
+  "name": "Deathguard Kristof",
+  "x": 65.2,
+  "y": 60.2
+ },
+ "9243": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Craftsman Wilhelm",
+  "x": 71.2,
+  "y": 49.9
+ },
+ "9246": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1423,
+  "name": "Craftsman Wilhelm",
+  "x": 71.2,
+  "y": 49.9
+ },
+ "95204": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "Crest of Lordaeron"
+ },
+ "95216": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Theodore Griffs",
+  "x": 46.3,
+  "y": 71.9
+ },
+ "95663": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1417,
+  "name": "Zaruk",
+  "x": 74.5,
+  "y": 35.6
+ },
+ "95664": {
+  "drop": "",
+  "inside": true,
+  "kind": "item",
+  "name": "Titan Relic"
+ },
+ "95682": {
+  "inside": true,
+  "kind": "npc",
+  "name": "Deathstalker Agent"
+ },
+ "95697": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1454,
+  "name": "Borstan",
+  "x": 57.2,
+  "y": 53.3
+ },
+ "959": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1413,
+  "name": "Crane Operator Bigglefuzz",
+  "x": 63.1,
+  "y": 37.6
+ },
+ "962": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Apothecary Zamah",
+  "x": 22.8,
+  "y": 20.9
+ },
+ "96395": {
+  "skip": true
+ },
+ "96984": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1421,
+  "name": "Image of Archmage Modera",
+  "x": 68.6,
+  "y": 45.2
+ },
+ "96986": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1424,
+  "name": "Melisara",
+  "x": 62.6,
+  "y": 20.6
+ },
+ "96988": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Doctor Martin Felben",
+  "x": 46.6,
+  "y": 74.1
+ },
+ "97287": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1424,
+  "name": "Magus Wordeen Voidglare",
+  "x": 61.6,
+  "y": 20.9
+ },
+ "97288": {
+  "drop": "The Baron",
+  "inside": true,
+  "kind": "item",
+  "name": "Abominable Head"
+ },
+ "97289": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Master Apothecary Faranell",
+  "x": 48.8,
+  "y": 69.3
+ },
+ "97291": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Master Apothecary Faranell",
+  "x": 48.8,
+  "y": 69.3
+ },
+ "97292": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1458,
+  "name": "Master Apothecary Faranell",
+  "x": 48.8,
+  "y": 69.3
+ },
+ "98823": {
+  "inside": false,
+  "kind": "npc",
+  "m": 1456,
+  "name": "Bashana Runetotem",
+  "x": 71.1,
+  "y": 34.2
+ },
+ "999": {
+  "skip": true
+ }
+}

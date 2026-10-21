@@ -28,7 +28,7 @@ lives on as the Quests window addon.
 **Three addons (`make addon` installs every folder under addon/):**
 | Folder | Version | What |
 |---|---|---|
-| `addon/WoWForeverLeveler/` | 3.37.2 | **Core.** Data collection (WoWForeverLeveler.lua: character state, quests + journey log, recipes, trainers, vendors, prices, rested XP), saved variables (unchanged names, so beta data stays), Plan.lua (generated), fonts (Noto Sans, OFL), and **all shared window code** in UI.lua exported as global `WFL` (window, rows, check boxes = TomTom arrow + Blizzard quest tracking, minimap icon + menu, item tooltip "WFL:" lines, bag/bank counting, dungeon helpers). Without a window addon: no window, data still recorded. |
+| `addon/WoWForeverLeveler/` | 3.38.4 | **Core.** Data collection (WoWForeverLeveler.lua: character state, quests + journey log, recipes, trainers, vendors, prices, rested XP), saved variables (unchanged names, so beta data stays), Plan.lua (generated), fonts (Noto Sans, OFL), and **all shared window code** in UI.lua exported as global `WFL` (window, rows, check boxes = TomTom arrow + Blizzard quest tracking, minimap icon + menu, item tooltip "WFL:" lines, bag/bank counting, dungeon helpers). Without a window addon: no window, data still recorded. |
 | `addon/WoWForeverLeveler_Planner/` | 2.5.0 | **The window the user uses.** Planner.lua registers tabs via `WFL.RegisterTabs`. Leveling characters: **Next \| Dungeons \| Professions \| Team**; bank character: **Next \| Market \| Team** (tabs hide via `tab.visible`). |
 | `addon/WoWForeverLeveler_Quests/` | 1.0.1 | The old quest window (Now / Route / Materials, Do next, zone routes). Registers nothing when the Planner is loaded or enabled (both gave 7 tabs). |
 
@@ -675,6 +675,104 @@ and update section 3 if Blizzard changed an API.
 ## 9. Session Log
 
 Newest first. One short entry per session.
+
+- **2026-10-21** (Claude, addons): Edit Mode Tweaks supports Forever (1.60.1); `settings_transfer.py` also copies
+  its per-character file (guessed name SavedVariables/EditModeTweaks.lua, check after install). Forever Loot and DFL
+  Dungeon Journal are not needed in game: Sync (build_roster.py) now keeps the last data/dungeons.js data for a
+  client whose addon folders are gone (data/dungeons.js is git-ignored, so it lives only on this Mac).
+  Planner 2.5.1: every dungeon is listed on its own too, not only inside its chain (Stratholme, Scholomance).
+  Planner 2.5.2: a chain section is short: Order, Pick up (first open step of each quest, grouped by zone,
+  clickable), Run (dungeons with entrance). Full quest lists stay in each dungeon's own section.
+  Core 3.38.6: the mouse wheel scrolls about 3 lines (3 x (font + 4) px), not half a window.
+  Planner 2.5.3: Dungeons tab in two groups, each in level order: "Dungeon chains", then "Dungeons".
+  Planner 2.5.4: chain section = Run (in this order, entrances), then Pick up N quests; no Order line or note.
+  Planner 2.5.5 + core 3.38.7: dungeon headers read "lvl: 15 - (run: 15-16)" (green when due), joined with
+  no-break spaces so a narrow window moves it under the name whole. Rows take `stripe` (light band on every
+  second quest) and `gap` (space above, before zone headings and each quest group).
+  Planner 2.5.6: a chain shows only "Run in this order" (gold) and its numbered dungeons with run levels and
+  entrances; the quests to pick up are only in each dungeon's own section.
+  Planner 2.5.7: a dungeon's section = Entrance (zone, click for arrow), then its quests under zone headings
+  (one city at a time): quest name and giver only, the next open step of each chain; grey = not yet your
+  level. No coordinates, level numbers or "dungeon" tags. Fake-game test now opens Ragefire Chasm and WC.
+  Level check (2026-10-21): every dungeon's quests open before its run levels (RFC quests 9, run 15-16), so
+  the start level is the run start. Core 3.38.8: allFrom ignores quests above the run's end (Shrewd Negotiations
+  24 for Ruins of Lordaeron 17-18). Planner 2.5.8: headers show one range "lvl: 17-18"; the Next tab's dungeon
+  steps name the zone only, no coordinates.
+  Planner 2.6.0: a dungeon quest in your log shows its task text under it (Forever Loot objective, pickups
+  `obj` in Plan.lua; 263 of 300 quests have one). No arrow inside dungeons: the game gives addons no player
+  position there.
+  Planner 2.6.1: "Inside the dungeon" heading per dungeon: quests started inside (person, object, looted item;
+  135 of 265 dungeon quests had no outside giver and were hidden). Lunar Festival Elders and Darkmoon card quests
+  left out; other classes' quests hidden (QuestieDB class mask). Built in build_guide.py as runs[].inside.
+  Chain levels: you run the dungeons back to back; their XP carries you to the next (Ceedsy, chain 1).
+  Planner 2.6.2: inside quests show "after <quest>" (Forever Loot chainFirst) and always their task text.
+  New scripts/dungeon_givers.py (run by hand, then make guide) writes data/dungeon_givers.json from QuestieDB:
+  each dungeon quest's real giver. 16 givers marked inside stand outside (Nalpak and Ebru above the Wailing
+  Caverns entrance) and now show under their zone with an arrow; 35 quests start from a dropped item ("drops
+  from Mutanus the Devourer"); 9 quests not in Forever's QuestieDB or Alliance-only are left out. QuestieDB
+  startedBy is a dict {3: [...]} when only items start it. Planner 2.6.3.
+  Automatic since then: scripts/refresh_data.py reruns dungeon_givers.py and vendor_items.py (about 3 s) on every
+  Sync (server.py SYNC_SCRIPTS, before build_guide.py) and every `make guide`. Without QuestieDB it keeps the last
+  files. Nothing to run by hand after a QuestieDB or Forever Loot update.
+  Alliance check: all 144 dungeon pickups and their chain steps are Horde-takeable (QuestieDB races, Forever
+  race bits: Horde 0x2000000B2, Alliance 0x10000004D; giver NPC factions). Only 3 Alliance-only quests exist in
+  the data and none has a map spot, so none shows. User confirmed: no Alliance quests, they only sounded like it.
+- **2026-10-21** (Claude, settings): New `scripts/settings_transfer.py` (apply / export / import). Edit Mode
+  layouts and key bindings are account-wide; each character only stores its layout number. `apply --from
+  Kaspin-Lovac` set the 9 other team characters to Kasapin's layout ("Main", renamed from "Lovac"; since the import test it is the only layout, number 3), extra bars, Cooldown
+  Manager on, window positions, chat, click bindings, addon list. Backup: personal/backups/wtf-beta-20261021-1249.tar.gz.
+  `export` saved it for live in personal/settings-backup/2026-10-21 (plus addon settings and 133 graphics lines).
+  Launch day: start live once, log in each character once, close the game, `python3 scripts/settings_transfer.py import`.
+  Checked in game (user): every character loads "Main". The script now keeps the game's line endings, and
+  `export` also saves each class's Cooldown Manager spells and character macros (`import` puts them on the
+  character of the same class in personal/team.json). Re-run `export` after in-game changes, with the game closed.
+- **2026-10-20** (Claude, arrow): Core 3.38.5. No arrow at login: the last selection is forgotten and old WFL
+  waypoints that TomTom saved are removed; the arrow shows only after you select something. The selected
+  target also gets a TomTom pin on the world map and minimap. Trainers-to-visit window (`/wfl todo`): click a
+  trainer line for the arrow and pin, click again to clear. Vendor search prints only the closest vendor.
+  Fact: Polestar has its own arrow (nav.arrow) and "Mirror to TomTom" (nav.tomtom), both on by default; those
+  are the quest arrows at login. Turn them off in Polestar options, Arrow & routes.
+- **2026-10-20** (Claude): Core 3.38.4: the vendor click also takes Alt (Option) and Command (IsMetaKeyDown), not
+  only Ctrl: the user's Mac has Control and Command swapped. Clicking a material line in our window works (user).
+  **Confirmed in game (user): Option + click in the profession window finds the vendors.**
+
+- **2026-10-20** (Claude): Core 3.38.3: Ctrl + click in the profession window did nothing (user): the Forever
+  client has the modern profession window (C_TradeSkillUI; log "Classic recipes: no"), whose reagent buttons do
+  not call HandleModifiedItemClick. Now the GLOBAL_MOUSE_DOWN event: Ctrl held (not Shift) + an item in the
+  GameTooltip (not wearable) -> FindVendor, once per 0.3 s. Fallback to the HandleModifiedItemClick hook when the
+  event is missing; the log says which ("vendor click: ..."). Not seen in game.
+
+- **2026-10-20** (Claude): Core 3.38.2. **Forever trainers from QuestieDB**: vendor_items.py also writes Horde-
+  friendly profession trainers (111, by title: "Journeyman Enchanter", "Junior Herbalism Trainer", ...), and
+  build_guide adds them after our own scans and before ClassicDB. The user's "Enchanting trainer in Sen'jin?" =
+  **Pa'zula, Journeyman Enchanter**, new in Forever, Durotar 56.7, 73.7 (guide texts named now). Vendor search on
+  **Ctrl + click (left or right) on a material** (the user wants it in the profession window, whose reagent buttons
+  take only the left button); wearable items keep the dressing room. Not seen in game.
+
+- **2026-10-20** (Claude): Core 3.38.1: vendor search also on **Ctrl + right-click** on any item (hooksecurefunc
+  HandleModifiedItemClick + GetMouseButtonClicked; Ctrl + left-click stays the dressing room); the Alt+V default is
+  gone (the user's Alt+V is nameplates; the binding stays, without a key). Minimap and addon-list icon now
+  INV_Misc_Spyglass_02 (the book INV_Misc_Book_09 is Forever Loot's). Guide comparison: in the journey logs
+  Polestar characters took 1-2 quests 3+ levels above them (lvl 1-12), old Pala on RestedXP 5 (avg +0.4).
+
+- **2026-10-20** (Claude): **Vendor search** (user: "where do I buy Coarse Thread in Razor Hill"). New
+  `scripts/vendor_items.py` -> `data/vendor_items.json` (run by hand after a QuestieDB update, then make guide):
+  QuestieDB item field 14 = vendors, Horde-friendly NPCs (friendlyToFaction H/AH) with spawns via areaIdToUiMapId,
+  for every recipe reagent, profession kit item and shopping item (98 items, 299 vendors; Coarse Thread 67, in
+  Razor Hill: Flakk, Durotar 53.0, 42.0). Plan.lua `vendors` (id as string -> {n, sub, at}) and `vendorItems`.
+  Core 3.38.0 UI.lua FindVendor(item): nearest 3 (world yards via C_Map.GetWorldPosFromMapPos, else your zone,
+  then your continent) in chat, arrow + selection to the nearest. Ways in: **Bindings.xml** "Find the nearest
+  vendor of the hovered item" (WFL_FindVendorHovered, GameTooltip/ItemRefTooltip:GetItem; default Alt+V set once
+  when free, Settings().vendorKeyDone), a **click on a material line** (item without its own place), and
+  **/wfl buy <item>** (exact, else first name containing the text). New file: full game restart needed. User will
+  try both and decide what to keep.
+
+- **2026-10-20** (Claude): Dashboard characters page: cards first, Rested XP and Legacy boxes below them;
+  each card shows a rested bar ("0.5 levels rested · not in an inn"; not for the bank); cards in plan order by
+  default (#1-#6, open ones, the bank last), a sort menu "Plan order / Level / Rested XP" (kept in the browser,
+  wow_char_sort; the bank always last). Vendor search design proposed (QuestieDB item field 14 = vendors, e.g.
+  122 for Coarse Thread with faction and spawns): Professions Buy line with the nearest vendor, tooltip line,
+  `/wfl buy <item>`; waiting for the user's go.
 
 - **2026-10-20** (Claude): Fresh history pushed to the public remote https://github.com/dragan-lukac/wowForeverLeveler
   (main = one clean commit). The old 117 commits and the tag own-3.31.0 are packed in

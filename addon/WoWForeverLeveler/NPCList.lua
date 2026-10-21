@@ -2,7 +2,7 @@
 -- Trainers to visit per city; the addon reminds you when you enter the city.
 WoWForeverLevelerNPCPlan = {
     ["Durotar"] = {
-        { name = "Enchanting trainer (Forever, name not known)", profession = "Enchanting", where = "Sen'jin Village" },
+        { name = "Pa'zula (Journeyman Enchanter, new in Forever)", profession = "Enchanting", where = "Sen'jin Village, Durotar 56.7, 73.7" },
     },
     ["Orgrimmar"] = {
         { name = "Yelmak", profession = "Alchemy", where = "The Drag" },

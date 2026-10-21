@@ -44,7 +44,12 @@ table.insert(WFL.menu, { text = "This character is the bank", icon = "Interface\
     end })
 
 -- --- Small helpers ------------------------------------------------------------------------------------------------
-local function Pos(m, x, y) return WFL.MapName(m) .. " " .. string.format("%.1f, %.1f", x or 0, y or 0) end
+-- "Zone 52.6, 49.0"; no coordinates when the data has none (-1), no zone when the map is unknown.
+local function Pos(m, x, y)
+    local zone = (m and m > 0) and WFL.MapName(m) or ""
+    if not x or x < 0 or not y or y < 0 then return zone ~= "" and zone or "place not known" end
+    return (zone ~= "" and (zone .. " ") or "") .. string.format("%.1f, %.1f", x, y)
+end
 local function Money(c) return WFL.CopperText(math.floor((c or 0) + 0.5)) end
 
 -- "Now" and "After" lines; the Now line can carry an arrow (point) and a "where" line under it.
@@ -102,7 +107,8 @@ end
 local function Pct(r) return math.floor(r * 100 + 0.5) .. "%" end
 
 -- --- Dungeons -----------------------------------------------------------------------------------------------------
--- Stops: dungeons with open quests you can still run, a dungeon chain as one stop, the nearest first.
+-- Stops: dungeons with open quests you can still run, the nearest first. A dungeon chain is one more stop; its
+-- dungeons are listed on their own as well.
 local function Stops(level)
     local inChain = {}
     for _, ch in ipairs(PLAN.dungeonChains or {}) do
@@ -124,16 +130,21 @@ local function Stops(level)
                 end
                 e.slots[c.i] = d
                 e.at = math.min(e.at, d.allFrom)
-            else
-                table.insert(list, { name = d.name, slots = { d }, at = d.allFrom })
             end
+            -- Every dungeon also on its own (user, 2026-10-21: Stratholme and Scholomance were only in a chain).
+            table.insert(list, { name = d.name, slots = { d }, at = d.allFrom })
         end
     end
     for _, s in ipairs(list) do
         s.members = {}
         for i = 1, 10 do if s.slots[i] then table.insert(s.members, s.slots[i]) end end
     end
-    table.sort(list, function(a, b) return a.at < b.at end)
+    -- Level order; at the same level a chain comes before its own dungeons.
+    table.sort(list, function(a, b)
+        if a.at ~= b.at then return a.at < b.at end
+        if (a.chain ~= nil) ~= (b.chain ~= nil) then return a.chain ~= nil end
+        return a.name < b.name
+    end)
     return list
 end
 
@@ -143,7 +154,7 @@ local function ChainGroups(d)
     for _, pk in ipairs(d.quests) do
         local seq = {}
         for _, c in ipairs(pk.chain or {}) do table.insert(seq, { id = c.id, n = c.n, npc = c.npc, m = c.m, x = c.x, y = c.y, r = c.r }) end
-        table.insert(seq, { id = pk.id, n = pk.quest, npc = pk.npc, m = pk.mapID, x = pk.x, y = pk.y, r = pk.from, dungeon = true })
+        table.insert(seq, { id = pk.id, n = pk.quest, npc = pk.npc, m = pk.mapID, x = pk.x, y = pk.y, r = pk.from, dungeon = true, o = pk.obj })
         local k = seq[1].id
         if not groups[k] then groups[k] = {}; table.insert(order, k) end
         table.insert(groups[k], seq)
@@ -156,7 +167,7 @@ local function ChainGroups(d)
         for _, seq in ipairs(seqs) do
             for _, q in ipairs(seq) do
                 if not byId[q.id] then byId[q.id] = q; table.insert(ids, q.id)
-                elseif q.dungeon then byId[q.id].dungeon = true end
+                elseif q.dungeon then byId[q.id].dungeon = true; byId[q.id].o = q.o end
             end
         end
         -- Steps of one chain often share a name (Hidden Enemies three times): show the first open step once, with
@@ -179,6 +190,9 @@ local function ChainGroups(d)
     return out
 end
 
+-- The zone or city of a map spot, no coordinates (click the line for the arrow).
+local function Zone(m) return (m and m > 0) and WFL.MapName(m) or "place not known" end
+
 local function QPoint(q) return q.m and q.m > 0 and { mapID = q.m, x = q.x, y = q.y, title = q.npc ~= "" and q.npc or q.n, npc = q.npc ~= "" and q.npc or nil, questID = q.id } or nil end
 
 -- The dungeon steps in order: per chain its first open quest (hand in, finish, take; starts in your zone first),
@@ -199,11 +213,11 @@ local function DungeonActions(level, zone)
         for _, g in ipairs(groups) do
             local q = g[1]
             if WFL.InLog(q.id) and WFL.Complete(q.id) then
-                table.insert(acts, { text = "Hand in " .. q.n .. " to " .. q.npc, where = Pos(q.m, q.x, q.y), point = QPoint(q) })
+                table.insert(acts, { text = "Hand in " .. q.n .. " to " .. q.npc, where = Zone(q.m), point = QPoint(q) })
             elseif WFL.InLog(q.id) then
-                table.insert(acts, { text = "Finish " .. q.n, where = "then " .. q.npc .. ", " .. Pos(q.m, q.x, q.y), point = QPoint(q) })
+                table.insert(acts, { text = "Finish " .. q.n, where = "then " .. q.npc .. ", " .. Zone(q.m), point = QPoint(q) })
             elseif (q.r or 1) <= level then
-                table.insert(acts, { text = "Take " .. q.n .. " from " .. q.npc, where = Pos(q.m, q.x, q.y), point = QPoint(q) })
+                table.insert(acts, { text = "Take " .. q.n .. " from " .. q.npc, where = Zone(q.m), point = QPoint(q) })
             end
         end
         local allIn, any = true, false
@@ -212,7 +226,7 @@ local function DungeonActions(level, zone)
         end
         if any and allIn then
             local e = d.run.entrance
-            table.insert(acts, { text = "Run " .. d.name .. " until its quests are done", where = e and ("entrance " .. Pos(e.m, e.x, e.y)) or nil,
+            table.insert(acts, { text = "Run " .. d.name .. " until its quests are done", where = e and ("entrance " .. Zone(e.m)) or nil,
                                  point = e and { mapID = e.m, x = e.x, y = e.y, title = d.name .. " entrance" } or nil })
         end
     end
@@ -707,41 +721,107 @@ local function DungeonTabLines(open)
     local lines, level = {}, UnitLevel("player") or 1
     local stops = Stops(level)
     if #stops == 0 then return { { text = C.GREY .. "No dungeon quests open for level " .. level .. ".|r" } } end
-    for si = 1, #stops do
-        local s = stops[si]
+    -- Two groups, each in level order: the chains (what to pick up for a run of dungeons), then every dungeon.
+    local ordered, first = {}, {}
+    for _, want in ipairs({ true, false }) do
+        for _, st in ipairs(stops) do
+            if (st.chain ~= nil) == want then
+                if not first[want] then first[want] = st end
+                table.insert(ordered, st)
+            end
+        end
+    end
+    for si = 1, #ordered do
+        local s = ordered[si]
+        if first[true] == s then table.insert(lines, { plain = true, text = C.GOLD .. "Dungeon chains|r" .. C.GREY .. "  dungeons to run one after another|r" }) end
+        if first[false] == s then table.insert(lines, { plain = true, text = C.GOLD .. "Dungeons|r" .. C.GREY .. "  each on its own, all its quests|r" }) end
         local due = level >= s.at
         -- Folded line: when the quests open and the run levels of its dungeons.
         local lo, hi = 99, 0
         for _, m in ipairs(s.members) do lo = math.min(lo, m.run.runFrom or 99); hi = math.max(hi, m.run.runTo or 0) end
-        local runs = hi > 0 and (", run at " .. lo .. "-" .. hi) or ""
-        if Section(lines, "d:" .. s.name, open, s.name, (due and "collect the quests now" or ("quests from " .. s.at)) .. runs, "Interface\\Icons\\INV_Misc_Key_14", si == 1) then
+        -- "lvl: 15-16": when to run it, with all its quests in hand (green when you are there).
+        -- Joined with no-break spaces, so a narrow window moves it under the name whole instead of splitting it.
+        local range = hi > 0 and (math.max(s.at, lo) .. "-" .. hi) or tostring(s.at)
+        local summary = ((due and C.GREEN or "") .. "lvl: " .. range .. (due and "|r" or "")):gsub(" ", "\194\160")
+        if Section(lines, "d:" .. s.name, open, s.name, summary, "Interface\\Icons\\INV_Misc_Key_14", si == 1) then
             if s.chain then
-                local names = {}
-                for _, m in ipairs(s.members) do table.insert(names, m.name) end
-                table.insert(lines, { title = "Order", inline = true, titleColor = GREY_C, text = C.WHITE .. table.concat(names, " > ") .. "|r" })
-                -- The note, one sentence per line.
-                for sentence in ((s.chain.note or "") .. " "):gmatch("(.-%.)%s+") do
-                    table.insert(lines, { text = C.GREY .. sentence .. "|r" })
+                -- A chain: only the dungeons in run order, with entrances. Where to pick up the quests is in each
+                -- dungeon's own section (user, 2026-10-21: a chain's full quest list is too long, levels differ).
+                table.insert(lines, { plain = true, text = C.GOLD .. "Run in this order|r" })
+                for i, d in ipairs(s.members) do
+                    local e = d.run.entrance
+                    table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_Key_03", title = i .. ". " .. d.name, inline = false,
+                                          text = C.GREY .. "lvl: " .. d.run.runFrom .. "-" .. d.run.runTo .. ", entrance " .. (e and Zone(e.m) or (d.run.zone or "?")) .. "|r",
+                                          point = e and { mapID = e.m, x = e.x, y = e.y, title = d.name .. " entrance" } or nil, stripe = i % 2 == 0 })
                 end
-            end
+            else
             for _, d in ipairs(s.members) do
                 local e = d.run.entrance
-                table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_Key_03", title = d.name, inline = false,
-                                      text = C.GREY .. "Level " .. d.run.from .. "-" .. d.run.to .. ", run at " .. d.run.runFrom .. "-" .. d.run.runTo
-                                             .. "\nEntrance " .. (e and Pos(e.m, e.x, e.y) or (d.run.zone or "?")) .. "|r",
+                table.insert(lines, { title = "Entrance", inline = true, titleColor = GREY_C,
+                                      text = C.WHITE .. (e and WFL.MapName(e.m) or (d.run.zone or "?")) .. "|r",
                                       point = e and { mapID = e.m, x = e.x, y = e.y, title = d.name .. " entrance" } or nil })
+                -- The quests by zone: what to pick up in one city at once. Per quest chain only its next open step;
+                -- the name and who gives it (click for the arrow). Grey: you cannot take it yet.
+                local list = {}
                 for _, g in ipairs(ChainGroups(d)) do
-                    for i, q in ipairs(g) do
-                        local icon, desat
-                        if WFL.InLog(q.id) then icon, desat = WFL.icons.turnin, not WFL.Complete(q.id)
-                        elseif i == 1 then icon = WFL.icons.take end
-                        local tag = (q.r or 1) > level and (C.GREY .. "  level " .. q.r .. "|r") or ((i == 1 and not WFL.InLog(q.id)) and (C.GREEN .. "  now|r") or "")
-                        table.insert(lines, { icon = icon, desat = desat, title = (i > 1 and "then " or "") .. q.n, inline = false,
-                                              text = C.GREY .. (q.npc ~= "" and q.npc or "?") .. ", " .. Pos(q.m, q.x, q.y) .. "|r" .. tag
-                                                     .. (q.steps and (C.GREY .. "  " .. q.steps .. " steps|r") or "") .. (q.dungeon and ("  " .. C.GREEN .. "dungeon|r") or ""),
-                                              point = QPoint(q), skipId = q.id })
+                    local q = g[1]
+                    table.insert(list, { q = q, zone = (q.m and q.m > 0) and WFL.MapName(q.m) or "" })
+                end
+                table.sort(list, function(x, y)
+                    if x.zone ~= y.zone then
+                        if x.zone == "" or y.zone == "" then return y.zone == "" end
+                        return x.zone < y.zone
+                    end
+                    return (x.q.r or 1) < (y.q.r or 1)
+                end)
+                local zone, n = nil, 0
+                for _, x in ipairs(list) do
+                    local q = x.q
+                    if x.zone ~= zone then
+                        zone, n = x.zone, 0
+                        table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. (zone ~= "" and zone or "Other") .. "|r" })
+                    end
+                    n = n + 1
+                    local icon, desat, state = WFL.icons.take, false, ""
+                    if WFL.InLog(q.id) then
+                        icon, desat = WFL.icons.turnin, not WFL.Complete(q.id)
+                        state = WFL.Complete(q.id) and (C.GREEN .. "  hand in|r") or (C.GREY .. "  in your log|r")
+                    end
+                    local later = not WFL.InLog(q.id) and (q.r or 1) > level
+                    table.insert(lines, { icon = icon, desat = desat or later, title = q.n, inline = true, titleColor = later and GREY_C or nil,
+                                          text = C.GREY .. (q.npc ~= "" and q.npc or "?") .. "|r" .. state,
+                                          point = QPoint(q), skipId = q.id, stripe = n % 2 == 0 })
+                    -- What to do in the dungeon, once the quest is in your log (no arrow works inside a dungeon).
+                    if q.o and WFL.InLog(q.id) and not WFL.Complete(q.id) then
+                        table.insert(lines, { text = C.GREY .. q.o .. "|r", stripe = n % 2 == 0 })
                     end
                 end
+                -- Quests you pick up inside the dungeon (a person, an object or a looted item there): no arrow.
+                local ins = {}
+                for _, q in ipairs(d.run.inside or {}) do
+                    if WFL.ClassFits(q.c) and not WFL.QuestDone(q.id) then table.insert(ins, q) end
+                end
+                table.sort(ins, function(x, y) return (x.from or 1) < (y.from or 1) end)
+                if #ins > 0 then
+                    table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. "Inside the dungeon|r" })
+                end
+                for k, q in ipairs(ins) do
+                    local icon, desat, state = WFL.icons.take, false, ""
+                    if WFL.InLog(q.id) then
+                        icon, desat = WFL.icons.turnin, not WFL.Complete(q.id)
+                        state = WFL.Complete(q.id) and (C.GREEN .. "  hand in|r") or (C.GREY .. "  in your log|r")
+                    end
+                    local later = not WFL.InLog(q.id) and (q.from or 1) > level
+                    table.insert(lines, { icon = icon, desat = desat or later, title = q.quest, inline = true, titleColor = later and GREY_C or nil,
+                                          text = C.GREY .. (q.kind == "item" and (q.npc ~= "" and q.npc or "an item") .. (q.drop and (", drops from " .. q.drop) or "")
+                                                 or (q.npc ~= "" and q.npc or "giver not known"))
+                                                 .. (q.after and (", after " .. q.after) or "") .. "|r" .. state, skipId = q.id, stripe = k % 2 == 0 })
+                    -- No arrow inside a dungeon, so the task is always shown here (until it is ready to hand in).
+                    if q.obj and not WFL.Complete(q.id) then
+                        table.insert(lines, { text = C.GREY .. q.obj .. "|r", stripe = k % 2 == 0 })
+                    end
+                end
+            end
             end
         end
     end

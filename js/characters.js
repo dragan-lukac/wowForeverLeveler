@@ -80,6 +80,16 @@ function renderCharacterGrid() {
     return meta.group === currentGroupFilter;
   });
 
+  // Plan order by default (guide order #1-#6, then the open ones, the bank last); or level / rested XP, highest
+  // first (planned characters last). The choice is kept in this browser.
+  const plan = c => CHAR_DATA_BLUEPRINT[c.key] || {};
+  const planRank = c => plan(c).bank ? 999 : (plan(c).order || 100 + PLAN_CHARACTERS.indexOf(plan(c)));
+  const sortBy = charSort();
+  const score = c => plan(c).bank ? -2 : c.planned ? -1 : sortBy === 'level' ? (parseInt(c.level, 10) || 0) : sortBy === 'rested' ? ((restedNow(c) || {}).levels || 0) : 0;
+  filteredChars.sort((a, b) => (sortBy === 'order' ? 0 : score(b) - score(a)) || planRank(a) - planRank(b));
+  const sel = document.getElementById('charSort');
+  if (sel) sel.value = sortBy;
+
   if (filteredChars.length === 0) {
     container.innerHTML = `<div class="col-span-3 py-12 text-center text-slate-500 text-xs">No characters found for this filter on ${realmData.title}.</div>`;
     return;
@@ -115,6 +125,7 @@ function renderCharacterGrid() {
             </span>
           </div>
 
+          ${restedLine(c)}
           ${cardSteps(c, meta, displayLvl)}
         </div>
 
@@ -131,6 +142,27 @@ function renderCharacterGrid() {
       </div>
     `;
   }).join('');
+}
+
+// Card sort: 'order' (plan order, the default), 'level' or 'rested'; kept in this browser.
+const CHAR_SORT_KEY = 'wow_char_sort';
+function charSort() {
+  try { return localStorage.getItem(CHAR_SORT_KEY) || 'order'; } catch (e) { return 'order'; }
+}
+function setCharSort(value) {
+  try { localStorage.setItem(CHAR_SORT_KEY, value); } catch (e) {}
+  renderCharacterGrid();
+}
+
+// Rested XP on a card: a small bar and "0.4 levels rested · not in an inn" (js/legacy.js restedNow).
+function restedLine(c) {
+  const r = typeof restedNow === 'function' ? restedNow(c) : null;
+  if (!r || (CHAR_DATA_BLUEPRINT[c.key] || {}).bank) return '';
+  return `<div class="mt-2 flex items-center gap-2 text-xs text-slate-400">
+      <span>😴</span>
+      <div class="w-16 bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-sky-400 h-full" style="width: ${Math.round(r.levels / r.capLevels * 100)}%"></div></div>
+      <span>${r.levels.toFixed(1)} levels rested${c.resting ? '' : ' · <span class="text-amber-400">not in an inn</span>'}</span>
+    </div>`;
 }
 
 // The next two route steps, one line each.

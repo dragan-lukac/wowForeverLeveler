@@ -153,16 +153,21 @@
           <button onclick="filterGroup('g1')" id="tab-g1" class="px-3 py-1 rounded text-slate-400 hover:text-slate-200">Group 1</button>
           <button onclick="filterGroup('g2')" id="tab-g2" class="px-3 py-1 rounded text-slate-400 hover:text-slate-200">Group 2</button>
           <button onclick="filterGroup('g3')" id="tab-g3" class="px-3 py-1 rounded text-slate-400 hover:text-slate-200">Group 3</button>
+          <select id="charSort" onchange="setCharSort(this.value)" class="ml-2 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-slate-300" title="Sort the characters">
+            <option value="order">Plan order</option>
+            <option value="level">Level</option>
+            <option value="rested">Rested XP</option>
+          </select>
         </div>
       </div>
-
-      <!-- Rested XP and Legacy points (js/legacy.js) -->
-      <div id="accountCards" class="grid grid-cols-1 xl:grid-cols-2 gap-4"></div>
 
       <!-- Cards Grid -->
       <div id="characterCardsContainer" class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-4">
         <!-- Injected via JavaScript -->
       </div>
+
+      <!-- Rested XP and Legacy points (js/legacy.js), below the cards -->
+      <div id="accountCards" class="grid grid-cols-1 xl:grid-cols-2 gap-4"></div>
     </section>
 
     <!-- VIEW B: Character Focus Drilldown (Hidden by default) -->

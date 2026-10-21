@@ -5565,7 +5565,7 @@
         "steps": [
           "Orc or Troll: do the Cactus Apple quest early. In Forever it gives an item that lets you skin. Skin every beast, also ones other players left, and sell the Ruined Leather Scraps.",
           "Do the first Durotar quests for about 10 silver of starting money.",
-          "Learn Enchanting in Sen'jin Village (Forever has a trainer there, with an enchanter quest) and Tailoring in Orgrimmar.",
+          "Learn Enchanting from Pa'zula in Sen'jin Village (Durotar 56.7, 73.7, new in Forever; QuestieDB) and Tailoring in Orgrimmar.",
           "Buy Linen Cloth only up to 50 copper each. Make Bolts of Linen Cloth until Tailoring 30.",
           "Make Brown Linen Pants and disenchant every pair.",
           "Sell Strange Dust on the auction house. Sell Lesser Magic Essence there too, or make Lesser Magic Wands for the vendor: the card below says which pays more.",
@@ -6159,8 +6159,8 @@
       {
         "city": "Durotar",
         "profession": "Enchanting",
-        "name": "Enchanting trainer (Forever, name not known)",
-        "where": "Sen'jin Village"
+        "name": "Pa'zula (Journeyman Enchanter, new in Forever)",
+        "where": "Sen'jin Village, Durotar 56.7, 73.7"
       },
       {
         "city": "Orgrimmar",
@@ -7783,12 +7783,12 @@
       {
         "name": "Forever Loot",
         "folder": "ForeverLoot",
-        "why": "Our Planner already shows its dungeon quests. Keep the folder: Sync reads its data. You can turn it off in the game's addon list."
+        "why": "Not needed in the game: our Planner shows its dungeon quests. Its data is saved in data/dungeons.js (Sync keeps it when the folder is gone). Install it again only to refresh the data after an update."
       },
       {
         "name": "DFL Dungeon Journal",
         "folder": "DFLDungeonJournal",
-        "why": "Quest rewards (XP, money, items) for our dungeon data. Keep the folder: Sync reads its data. You can turn it off in the game's addon list."
+        "why": "Not needed in the game: its quest rewards (XP, money, items) are saved in data/dungeons.js (Sync keeps them when the folder is gone). Install it again only to refresh the data after an update."
       }
     ],
     "optional": [
@@ -7848,6 +7848,41 @@
         "name": "OPie",
         "folder": "OPie",
         "why": "Ring menus: mounts, hearthstone, profession spells on one key. Try it with its first setup when the servers are up."
+      },
+      {
+        "name": "Edit Mode Tweaks",
+        "why": "Hides any frame (player, pet, target, action bars) until mouse-over, combat or a target; per frame, set in Edit Mode. Supports Forever (CurseForge, 2026-10-21). Its settings are per character: the settings script copies them.",
+        "folder": "EditModeTweaks"
+      },
+      {
+        "name": "Threat Plates",
+        "folder": "TidyPlates_ThreatPlates",
+        "why": "Better enemy nameplates; a bright arrow on your current target. /tptp opens it. (from the PLC UI video, 2026-10-21)"
+      },
+      {
+        "name": "NKThreat",
+        "why": "Threat meter. The game has no own threat meter. Needed for dungeons. (from the PLC UI video, 2026-10-21)"
+      },
+      {
+        "name": "Lore Forever",
+        "why": "/lore: the story of the zone or town you enter, with a Listen button. (from the PLC UI video, 2026-10-21)"
+      },
+      {
+        "name": "Forever Quest Tint",
+        "why": "Quests new in Forever get a blue tint on the quest window. (from the PLC UI video, 2026-10-21)"
+      },
+      {
+        "name": "Gear Quest",
+        "why": "Best item per slot for your level and where to get it (right-click a slot). (from the PLC UI video, 2026-10-21)"
+      },
+      {
+        "name": "Forever Guide",
+        "why": "In-game Wowhead: quests, dungeons, drops. May overlap with Polestar Codex and DFL. (from the PLC UI video, 2026-10-21)"
+      },
+      {
+        "name": "Follow The Arrow",
+        "folder": "FollowTheArrow",
+        "why": "Free leveling guide by Harldan (speedrunner): hand-tested routes 1-30 at launch, first dungeon clears in the route, picks quest rewards per class. A choice instead of Polestar: test one character with it. Only the 6 start zones in the beta version (video 2026-10-21)."
       }
     ],
     "notNeeded": [

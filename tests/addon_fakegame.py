@@ -132,6 +132,9 @@ def main():
     if PLANNER:
         show('Next tab', 'WoWForeverLevelerUI.tab = "next"')
         show('Dungeons tab', 'WoWForeverLevelerUI.tab = "dg"')
+        show('Dungeons tab (Ragefire Chasm open)', 'WoWForeverLevelerUI.tab = "dg"; '
+             'WoWForeverLevelerUI.open_dg = { ["d:Ragefire Chasm"] = true, ["d:Wailing Caverns"] = true }; '
+             'local onQuest = C_QuestLog.IsOnQuest; C_QuestLog.IsOnQuest = function(id) return id == 5761 or onQuest(id) end')
         show('Professions tab', 'WoWForeverLevelerUI.tab = "prof2"; WoWForeverLevelerUI.have = { ["Alt-Realm"] = { ["Linen Cloth"] = 88 } }')
         show('Team tab', 'WoWForeverLevelerUI.tab = "team"')
         # The bank character: Next shows market and mail, the Market tab replaces Dungeons and Professions.
@@ -146,6 +149,8 @@ def main():
     print('\n=== Macros')
     for name, body in g.MACROS.items():
         print(f'{name}: {body!r}')
+    print('\n=== Vendor search (/wfl buy coarse thread, then a material line click)')
+    lua.execute('WFL.FindVendorByName("coarse thread"); WFL.FindVendor("Empty Vial"); WFL.FindVendorByName("no such thing")')
     print('\n=== Item tooltip lines')
     for item in ('Small Spider Leg', 'Stringy Wolf Meat', 'Wool Cloth', 'Silk Cloth', 'Briarthorn', 'Copper Ore', 'Tin Ore'):
         print(f'{item}: {plain(lua.eval(f"tooltipLine({item!r})") or "nothing")}')

@@ -508,7 +508,15 @@ def addon_plan(g):
         names = {t['name'] for t in trainers}
     else:
         names = set()
-    # Then every Horde trainer from ClassicDB (guide.json trainerDB, scripts/trainers_db.py) not seen in game yet.
+    # Then the Forever trainers from QuestieDB (data/vendor_items.json: Pa'zula in Sen'jin Village, Junior trainers),
+    # then every Horde trainer from ClassicDB (guide.json trainerDB, scripts/trainers_db.py) not seen in game yet.
+    vpath = os.path.join(ROOT, 'data', 'vendor_items.json')
+    if os.path.exists(vpath):
+        with open(vpath, encoding='utf-8') as f:
+            for t in json.load(f).get('trainers', []):
+                if t['name'] not in names:
+                    names.add(t['name'])
+                    trainers.append(dict(t))
     for t in g.get('trainerDB', {}).get('list', []):
         if t['name'] not in names:
             names.add(t['name'])
@@ -524,6 +532,9 @@ def addon_plan(g):
                 "Un'Goro Crater": 1449, 'Winterspring': 1452, 'Silithus': 1451, 'Azshara': 1447, 'Wetlands': 1437,
                 'Searing Gorge': 1427, 'Burning Steppes': 1428, 'Blasted Lands': 1419}
     pickups, runs = {}, []
+    zone_name = {m: z for z, m in zone_map.items()}
+    gpath = os.path.join(ROOT, 'data', 'dungeon_givers.json')
+    givers = json.load(open(gpath, encoding='utf-8')) if os.path.exists(gpath) else {}
     dpath = os.path.join(ROOT, 'data', 'dungeons.js')
     if os.path.exists(dpath):
         with open(dpath, encoding='utf-8') as f:
@@ -538,14 +549,45 @@ def addon_plan(g):
             if lo:
                 runs.append({'name': d['name'], 'from': lo, 'to': hi, 'zone': dg.get('zoneOf', {}).get(d['name'], ''),
                              'runFrom': lo + round(0.3 * (hi - lo)), 'runTo': lo + round(0.6 * (hi - lo))})
-            seen = set()
+            seen, inside = set(), []
             for q in d.get('quests', []):
-                st = q.get('start') or {}
-                if st.get('zone') in zone_map and st.get('x') is not None and q['name'] not in seen:
+                st = dict(q.get('start') or {})
+                # Where the giver really is (scripts/dungeon_givers.py, QuestieDB): a giver Forever Loot has no spot
+                # for, but who stands outside (Nalpak above the Wailing Caverns entrance), gets that zone and spot.
+                gv = givers.get(str(q['id'])) or {}
+                if gv.get('skip'):
+                    continue
+                if st.get('x') is None and not gv.get('inside', True) and gv.get('m') in zone_name:
+                    st.update(zone=zone_name[gv['m']], x=gv['x'], y=gv['y'], name=gv.get('name') or st.get('name'))
+                if not (st.get('zone') in zone_map and st.get('x') is not None):
+                    # Started inside the dungeon (a person, an object, a looted item): no map spot. The Lunar Festival
+                    # "... the Elder" quests and the Darkmoon Faire card quests are left out.
+                    if not re.search(r'the Elder$|^Your Fortune Awaits You', q['name']):
+                        inside.append(q)
+                    continue
+                if q['name'] not in seen:
                     seen.add(q['name'])
                     pickups.setdefault(st['zone'], []).append({
                         'dungeon': d['name'], 'quest': q['name'], 'id': q['id'], 'npc': st.get('name', ''),
-                        'mapID': zone_map[st['zone']], 'x': st['x'], 'y': st['y'], 'from': q.get('minLevel') or q.get('level', 1)})
+                        'mapID': zone_map[st['zone']], 'x': st['x'], 'y': st['y'], 'from': q.get('minLevel') or q.get('level', 1),
+                        **({'obj': re.sub(r'([.!?])(?=[A-Z])', r'\1 ', q['objective'])} if q.get('objective') else {})})
+            # Quests picked up inside the dungeon, once per name and not already shown as a pickup outside.
+            ins, names = [], set()
+            for q in inside:
+                if q['name'] in seen or q['name'] in names:
+                    continue
+                names.add(q['name'])
+                st = q.get('start') or {}
+                gv = givers.get(str(q['id'])) or {}
+                ins.append({'quest': q['name'], 'id': q['id'], 'npc': st.get('name') or gv.get('name') or '',
+                            'kind': st.get('type') or gv.get('kind') or '',
+                            **({'drop': gv['drop']} if gv.get('drop') else {}),
+                            'from': q.get('minLevel') or q.get('level', 1),
+                            **({'obj': re.sub(r'([.!?])(?=[A-Z])', r'\1 ', q['objective'])} if q.get('objective') else {}),
+                            **({'after': q['chainFirst']['name']} if q.get('chainFirst') else {}),
+                            **({'c': class_mask[str(q['id'])]} if class_mask.get(str(q['id'])) else {})})
+            if ins and runs and runs[-1]['name'] == d['name']:
+                runs[-1]['inside'] = ins
     # Dungeon entrances (QuestieDB) on each run, for an arrow to the door.
     for r in runs:
         e = entrances.get(r['name'])
@@ -667,6 +709,9 @@ def addon_plan(g):
             # Legacy "Spelunker" points: the dungeons of each tier (guide.json legacy.spelunker, not checked).
             'spelunker': [{'name': t, 'dungeons': d} for t, d in ((g.get('legacy') or {}).get('spelunker') or {}).get('tiers', {}).items()],
             'profCosts': prof_costs(),
+            # Vendor search (data/vendor_items.json, scripts/vendor_items.py from QuestieDB): vendors by NPC id
+            # {n, sub, at = {{mapID, x, y}}} and per material the NPC ids that sell it.
+            **vendor_search(),
             'profKit': {profs[c]['name']: {**profs[c]['kit'], 'prices': {i: (g['shopping']['items'].get(i) or {}).get('price')
                         for i in profs[c]['kit'].get('tools', []) + ([profs[c]['kit']['bag']] if profs[c]['kit'].get('bag') else [])}}
                         for c in profs if profs[c].get('kit')},
@@ -739,6 +784,16 @@ def trainer_costs():
                         if r.get('cost') is not None:
                             _TRAINER_COSTS[name] = r['cost']
     return _TRAINER_COSTS
+
+
+def vendor_search():
+    """{'vendors': {id: {n, sub, at}}, 'vendorItems': {item: [ids]}} from data/vendor_items.json, or {}."""
+    path = os.path.join(ROOT, 'data', 'vendor_items.json')
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding='utf-8') as f:
+        d = json.load(f)
+    return {'vendors': {int(k): v for k, v in d['vendors'].items()}, 'vendorItems': d['items']}
 
 
 def recipe_vendors():

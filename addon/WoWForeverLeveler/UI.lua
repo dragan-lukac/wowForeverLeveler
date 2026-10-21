@@ -5,6 +5,7 @@
 
 local PLAN = WoWForeverLevelerPlan or {}
 local Refresh -- the window's redraw, defined further down
+local FindVendor -- the vendor search, defined further down (a click on a material line uses it)
 local SECONDARY = { "First Aid", "Cooking", "Fishing" }
 -- Quest-dialog theme: the quest window's parchment with its own text colors, read from the game's quest fonts
 -- (QuestFont for text, QuestTitleFont for titles); fixed parchment colors if a font object is missing.
@@ -112,6 +113,20 @@ local function TrainerPoint(prof)
         end
     end
     return best or other
+end
+
+-- A named trainer's map spot. The name may carry a note ("Pa'zula (Journeyman Enchanter, new in Forever)").
+-- Unknown name: the nearest trainer of that profession.
+local function NamedTrainerPoint(name, prof)
+    local short = name and (name:match("^(.-)%s*%(") or name)
+    local n = (WoWForeverLevelerNPCs or {})[short]
+    if not (n and n.mapID and n.x) then
+        for _, t in ipairs(PLAN.trainers or {}) do
+            if t.name == short and t.mapID then n = t break end
+        end
+    end
+    if n and n.mapID and n.x then return { mapID = n.mapID, x = n.x, y = n.y, title = short .. " (" .. prof .. ")", npc = short } end
+    return TrainerPoint(prof)
 end
 
 -- Where a vendor stands: our recipe-vendor and bag-vendor scans (WoWForeverLevelerNPCs, ...BagVendors).
@@ -374,8 +389,9 @@ local function SearchLines(text)
     return lines
 end
 
--- Selection: one profession target at a time. Selecting sets a TomTom arrow (arrow only, no map pins) and
--- points the "WFL Prof" macro at the NPC; selecting it again clears both. Kept in WoWForeverLevelerUI.selected.
+-- Selection: one profession target at a time. Selecting sets a TomTom arrow with a pin on the world map and the
+-- minimap, and points the "WFL Prof" macro at the NPC; selecting it again clears both. Kept in
+-- WoWForeverLevelerUI.selected until logout or reload: nothing is selected at login.
 local PROF_MACRO = "WFL Prof"
 local arrowUid
 local pendingProf
@@ -411,6 +427,18 @@ local function TrackQuest(point)
     end
 end
 
+-- Older versions saved our waypoints in TomTom; remove every waypoint that came from us.
+local function ClearOldWaypoints()
+    if not (TomTom and TomTom.waypoints and TomTom.RemoveWaypoint) then return end
+    local old = {}
+    for _, list in pairs(TomTom.waypoints) do
+        for _, uid in pairs(list) do
+            if type(uid) == "table" and uid.from == "WoW Forever Leveler" then table.insert(old, uid) end
+        end
+    end
+    for _, uid in ipairs(old) do pcall(TomTom.RemoveWaypoint, TomTom, uid) end
+end
+
 local function SetArrow(point)
     pcall(TrackQuest, point)
     if not (TomTom and TomTom.AddWaypoint) then return end
@@ -418,7 +446,7 @@ local function SetArrow(point)
     arrowUid = nil
     if point then
         arrowUid = TomTom:AddWaypoint(point.mapID, point.x / 100, point.y / 100, { title = point.title,
-            from = "WoW Forever Leveler", world = false, minimap = false, crazy = true, persistent = false, cleardistance = 8 })
+            from = "WoW Forever Leveler", world = true, minimap = true, crazy = true, persistent = false, cleardistance = 8 })
     end
 end
 
@@ -647,9 +675,11 @@ local function RefreshWindow(win)
         local h = math.max(textH, font + (line.bar and 5 or 0)) + (line.section and 8 or 4)
         r:SetSize(width, h)
         if line.section then r.band:Show() else r.band:Hide() end
+        if line.stripe and not line.section then r.stripe:Show() else r.stripe:Hide() end
         if line.section and i > 2 then r.sep:Show() else r.sep:Hide() end
         r:ClearAllPoints()
         if line.section and i > 2 then y = y + 4 end
+        if line.gap then y = y + line.gap end
         r:SetPoint("TOPLEFT", win.child, "TOPLEFT", 2, -y)
         r:Show()
         y = y + h
@@ -721,6 +751,10 @@ local function MakeRow(win, i)
     b.band = b:CreateTexture(nil, "BACKGROUND")
     b.band:SetAllPoints()
     b.band:SetColorTexture(0.55, 0.35, 0.1, 0.12)
+    -- Every second entry of a long list (line.stripe): a lighter band, easier to read than a wall of text.
+    b.stripe = b:CreateTexture(nil, "BACKGROUND")
+    b.stripe:SetAllPoints()
+    b.stripe:SetColorTexture(0.55, 0.35, 0.1, 0.06)
     -- Plus / minus in front of every title row: open or closed at a glance.
     b.fold = b:CreateTexture(nil, "ARTWORK")
     b.fold:SetPoint("TOPLEFT", 0, -2)
@@ -790,6 +824,11 @@ local function MakeRow(win, i)
                 s.skip[self.skipId] = (not s.skip[self.skipId]) or nil
                 RefreshWindow(win)
             end
+            return
+        end
+        -- A material line (an item without its own place): find the nearest vendor that sells it.
+        if self.item and not self.point and not self.section then
+            FindVendor(self.item)
             return
         end
         if self.section then
@@ -952,6 +991,13 @@ local function MakeWindow(cfg)
     child:SetSize(300, 100)
     scroll:SetScrollChild(child)
     scroll:SetScript("OnSizeChanged", function() child:SetWidth(scroll:GetWidth()); RefreshWindow(win) end)
+    -- The mouse wheel moves about 3 lines, not half a window (the template's step).
+    scroll:EnableMouseWheel(true)
+    scroll:SetScript("OnMouseWheel", function(self, delta)
+        local step = 3 * ((ws.font or 13) + 4)
+        local max = self:GetVerticalScrollRange() or 0
+        self:SetVerticalScroll(math.max(0, math.min(max, self:GetVerticalScroll() - delta * step)))
+    end)
 
     local grip = CreateFrame("Button", nil, panel)
     grip:SetSize(16, 16)
@@ -1310,8 +1356,13 @@ DungeonEntries = function(level)
     for _, r in ipairs(PLAN.runs or {}) do
         local quests = byName[r.name] or {}
         table.sort(quests, function(a, b) return (a.from or 1) < (b.from or 1) end)
+        -- When you have all its quests: every quest opens before the run levels (2026-10-21 check), so this is the
+        -- run start; a quest above the run's end (Shrewd Negotiations, 24, for a 17-18 run) is for later and does
+        -- not move it.
         local all = r.runFrom or r.from
-        for _, q in ipairs(quests) do all = math.max(all, q.from or 1) end
+        for _, q in ipairs(quests) do
+            if (q.from or 1) <= (r.runTo or r.to or 60) then all = math.max(all, q.from or 1) end
+        end
         table.insert(out, { name = r.name, run = r, quests = quests, allFrom = all, at = math.max(all, r.runFrom or r.from) })
     end
     return out
@@ -1951,6 +2002,134 @@ end
 -- Professions) load after it and call WFL.RegisterTabs. Without a window addon there is no window; data
 -- collection and the item tooltip still work.
 WFL = WFL or {}
+-- --- Vendor search: who sells a material, nearest first ------------------------------------------------------------
+-- Plan.lua vendors (NPC id -> { n, sub, at = { { mapID, x, y } } }) and vendorItems (item -> NPC ids), from QuestieDB
+-- (scripts/vendor_items.py, Horde-friendly). Ctrl + click a material (profession window, bags, chat links), click a
+-- material line in the window, press the WFL key (Key Bindings, no default key: Alt+V is the user's nameplates), or
+-- type /wfl buy <item>: chat lists the 3 nearest, the arrow points at the first.
+local function WorldXY(mapID, x, y)
+    if not (C_Map and C_Map.GetWorldPosFromMapPos and CreateVector2D) then return nil end
+    local ok, cont, pos = pcall(C_Map.GetWorldPosFromMapPos, mapID, CreateVector2D(x / 100, y / 100))
+    if ok and cont and pos then return cont, pos.x, pos.y end
+end
+
+local function NearestVendors(item, count)
+    local ids = (PLAN.vendorItems or {})[item]
+    if not ids then return {} end
+    local here = C_Map and C_Map.GetBestMapForUnit and C_Map.GetBestMapForUnit("player")
+    local px, py, pc, wx, wy
+    if here and C_Map.GetPlayerMapPosition then
+        local pos = C_Map.GetPlayerMapPosition(here, "player")
+        if pos then px, py = pos:GetXY(); px, py = px * 100, py * 100; pc, wx, wy = WorldXY(here, px, py) end
+    end
+    local myCont = Continent(here)
+    local list = {}
+    for _, id in ipairs(ids) do
+        local v = (PLAN.vendors or {})[tostring(id)]
+        for _, at in ipairs(v and v.at or {}) do
+            local m, x, y = at[1], at[2], at[3]
+            -- Yards on the world map when the client knows them; else your zone first, then your continent.
+            local d
+            local c2, vx, vy = WorldXY(m, x, y)
+            if pc and c2 == pc then d = math.sqrt((vx - wx) ^ 2 + (vy - wy) ^ 2)
+            elseif m == here and px then d = 10000 + math.sqrt((x - px) ^ 2 + (y - py) ^ 2)
+            elseif myCont and Continent(m) == myCont then d = 100000
+            else d = 1000000 end
+            table.insert(list, { v = v, m = m, x = x, y = y, d = d })
+        end
+    end
+    table.sort(list, function(a, b) return a.d < b.d end)
+    local out, seen = {}, {}
+    for _, e in ipairs(list) do
+        if not seen[e.v.n] then seen[e.v.n] = true; table.insert(out, e) end
+        if #out >= (count or 3) then break end
+    end
+    return out
+end
+
+FindVendor = function(item)
+    if not item then return end
+    local list = NearestVendors(item, 1)
+    if #list == 0 then
+        print("|cffffd100WFL:|r no vendor known for " .. item .. ".")
+        return
+    end
+    local e = list[1]
+    local far = e.d < 10000 and string.format(" (%d yd)", e.d) or ""
+    print(string.format("|cffffd100WFL:|r %s: %s%s, %s %.1f, %.1f%s. Arrow on.", item, e.v.n,
+                        e.v.sub ~= "" and (" <" .. e.v.sub .. ">") or "", MapName(e.m), e.x, e.y, far))
+    -- The arrow to the nearest (kept selected, so a second press does not turn it off).
+    local point = { mapID = e.m, x = e.x, y = e.y, title = e.v.n .. " (" .. item .. ")", npc = e.v.n }
+    local st = Settings()
+    st.selected = { key = PointKey(point), mapID = point.mapID, x = point.x, y = point.y, title = point.title, npc = point.npc }
+    SetArrow(point)
+    if Refresh then pcall(Refresh) end
+end
+
+-- /wfl buy <item>: the item by name (exact, else the first that contains the text).
+local function FindVendorByName(text)
+    text = string.lower((text or ""):gsub("^%s+", ""):gsub("%s+$", ""))
+    if text == "" then return end
+    local best
+    for item in pairs(PLAN.vendorItems or {}) do
+        local low = string.lower(item)
+        if low == text then best = item break end
+        if not best and low:find(text, 1, true) then best = item end
+    end
+    if best then FindVendor(best) else print("|cffffd100WFL:|r no vendor known for " .. text .. ".") end
+end
+
+-- The key binding (Bindings.xml): the item under the mouse in any item tooltip (bags, profession window, chat links).
+function WFL_FindVendorHovered()
+    for _, tip in ipairs({ GameTooltip, ItemRefTooltip }) do
+        if tip and tip:IsShown() and tip.GetItem then
+            local name = tip:GetItem()
+            if name and name ~= "" then FindVendor(name) return end
+        end
+    end
+    print("|cffffd100WFL:|r hover an item first, then press the key.")
+end
+BINDING_HEADER_WFL = "WoW Forever Leveler"
+BINDING_NAME_WFL_FIND_VENDOR = "Find the nearest vendor of the hovered item"
+
+-- Ctrl, Alt (Option) or Command + click on a material: the vendor search, wherever its tooltip shows (the modern profession
+-- window's reagent buttons, bags, auction house, chat links). The game's GLOBAL_MOUSE_DOWN event comes for every
+-- click; with Ctrl held and an item in the tooltip, that item is searched. The modern profession window does not go
+-- through HandleModifiedItemClick (3.38.2 listened there and saw nothing). Items you can wear keep Ctrl + click
+-- (dressing room); Ctrl + Shift is left alone.
+local lastVendorClick = 0
+local function VendorClick()
+    -- Ctrl, Alt (Option on a Mac) or Command: a Mac with Control and Command swapped sends another key than Ctrl.
+    local held = (IsControlKeyDown and IsControlKeyDown()) or (IsAltKeyDown and IsAltKeyDown()) or (IsMetaKeyDown and IsMetaKeyDown())
+    if not held or (IsShiftKeyDown and IsShiftKeyDown()) then return end
+    local tip = GameTooltip
+    if not (tip and tip:IsShown() and tip.GetItem) then return end
+    local name, link = tip:GetItem()
+    if not name or name == "" then return end
+    local equip = (C_Item and C_Item.IsEquippableItem) or IsEquippableItem
+    if equip and link then
+        local ok, wear = pcall(equip, link)
+        if ok and wear then return end
+    end
+    local now = GetTime and GetTime() or 0
+    if now - lastVendorClick < 0.3 then return end -- one search per click
+    lastVendorClick = now
+    FindVendor(name)
+end
+
+local function HookVendorClick()
+    local f = CreateFrame("Frame")
+    pcall(f.RegisterEvent, f, "GLOBAL_MOUSE_DOWN")
+    f:SetScript("OnEvent", function() local ok, err = pcall(VendorClick); if not ok then LogError("vendor click", err) end end)
+    local ok = f.IsEventRegistered and f:IsEventRegistered("GLOBAL_MOUSE_DOWN")
+    -- Without that event (older clients): item clicks that go through HandleModifiedItemClick (bags, chat links).
+    if not ok and hooksecurefunc and HandleModifiedItemClick then
+        hooksecurefunc("HandleModifiedItemClick", function() pcall(VendorClick) end)
+    end
+    WoWForeverLevelerLog = WoWForeverLevelerLog or {}
+    table.insert(WoWForeverLevelerLog, date("%Y-%m-%d %H:%M:%S") .. "  vendor click: " .. (ok and "GLOBAL_MOUSE_DOWN" or "HandleModifiedItemClick fallback"))
+end
+
 WFL.tabs = WFL.tabs or {}
 function WFL.RegisterTabs(tabs)
     for _, t in ipairs(tabs) do table.insert(WFL.tabs, t) end
@@ -1963,6 +2142,10 @@ WFL.colors = { GOLD = GOLD, WHITE = WHITE, GREY = GREY, GREEN = GREEN_, RED = RE
 WFL.menu = MENU
 WFL.ItemLink, WFL.InsertItem, WFL.TrainerPoint = ItemLink, InsertItem, TrainerPoint
 WFL.OwnCount, WFL.ShopPrice, WFL.ItemVendorPoint, WFL.VendorPoint = OwnCount, ShopPrice, ItemVendorPoint, VendorPoint
+WFL.FindVendor, WFL.FindVendorByName, WFL.NamedTrainerPoint = FindVendor, FindVendorByName, NamedTrainerPoint
+-- Select a map point (arrow, map pin, WFL Prof macro); the same point again clears it.
+WFL.Select = function(point) Select(point) end
+WFL.IsSelected = function(point) local sel = Settings().selected; return point and sel and sel.key == PointKey(point) or false end
 WFL.AuctionPrice, WFL.MaterialHave, WFL.ItemIcon, WFL.QuestObjectives, WFL.Complete = AuctionPrice, MaterialHave, ItemIcon, QuestObjectives, Complete
 WFL.Refresh = function() if Refresh then Refresh() end end
 -- After a change that shows or hides tabs (the bank switch): lay the tabs out again and redraw.
@@ -1988,15 +2171,18 @@ events:SetScript("OnEvent", function(_, event)
             -- The tabs come from the window addons that are enabled (both: all their tabs, in load order).
             if #WFL.tabs > 0 then
                 local main = MakeWindow({ key = "main", frame = "WoWForeverLevelerPanel", title = WFL.title or "WoW Forever Leveler", tabs = WFL.tabs })
-                BuildMinimapButton(main, "WoWForeverLevelerMinimapButton", "Interface\\Icons\\INV_Misc_Book_09", "WoW Forever Leveler")
+                BuildMinimapButton(main, "WoWForeverLevelerMinimapButton", "Interface\\Icons\\INV_Misc_Spyglass_02", "WoW Forever Leveler")
             end
             BuildTargetButton()
             HookTooltips()
+            pcall(HookVendorClick)
         end)
         if not ok then print("|cffff4040WoW Forever Leveler:|r panel error: " .. tostring(err)); LogError("panel", err) end
         if C_Timer then C_Timer.After(3, function() pcall(UpdateTargets); pcall(CountMaterials) end) end
-        -- The selection survives a reload: put its arrow back once TomTom is ready.
-        if C_Timer then C_Timer.After(6, function() local sel = Settings().selected; if sel then pcall(SetArrow, sel) end end) end
+        -- No arrow at login: the arrow shows only after you select something. Forget the last selection and
+        -- remove our waypoints that older versions saved in TomTom.
+        Settings().selected = nil
+        if C_Timer then C_Timer.After(6, function() pcall(ClearOldWaypoints); pcall(UpdateProfMacro) end) end
         return
     end
     if event == "BAG_UPDATE_DELAYED" or event == "BANKFRAME_CLOSED" or event == "MAIL_CLOSED" then
