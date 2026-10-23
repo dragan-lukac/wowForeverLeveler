@@ -52,20 +52,96 @@ end
 local function Money(c) return WFL.CopperText(math.floor((c or 0) + 0.5)) end
 
 -- "Now" and "After" lines; the Now line can carry an arrow (point) and a "where" line under it.
-local function Pair(lines, now, after, point, where)
-    table.insert(lines, { title = "Now", inline = true, text = C.WHITE .. now .. "|r", titleColor = GREEN_C, point = point })
-    if where and where ~= "" then table.insert(lines, { text = C.GREY .. where .. "|r" }) end
-    if after and after ~= "" then table.insert(lines, { title = "After", inline = true, text = C.GREY .. after .. "|r", titleColor = GREY_C }) end
+-- Links between tabs (user, 2026-10-22: no extra link lines): the rows added since `from` that have no arrow or
+-- action of their own open another tab with one card expanded (WFL.OpenTab).
+-- match: what to highlight in the opened card (WFL.OpenTab), a text or a function(line) -> text (true: the card
+-- itself); a line's own l.match wins. A row without a match does not link.
+local function LinkRows(lines, from, key, section, match)
+    for i = from + 1, #lines do
+        local l = lines[i]
+        if not l.point and not l.click and not l.section then
+            -- Only a row with something to show in the other tab links (user, 2026-10-22: no links to nothing).
+            local m = l.match or (type(match) == "function" and match(l)) or (type(match) == "string" and match) or nil
+            if m == true then l.click = function() WFL.OpenTab(key, section) end
+            elseif m then l.click = function() WFL.OpenTab(key, section, m) end end
+        end
+    end
+end
+
+local function Pair(lines, now, after, point, where, icon)
+    -- What to do now and what comes after, told apart by look, not by words (user, 2026-10-22): now = full colour,
+    -- bold, icon in colour, the place in grey under it; after = one quiet grey line with a faded icon.
+    table.insert(lines, { icon = icon or "Interface\\Icons\\INV_Misc_Note_01", title = now, inline = false, titleColor = GREEN_C,
+                          text = (where and where ~= "") and (C.GREY .. where .. "|r") or nil, point = point })
+    if after and after ~= "" then
+        table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_PocketWatch_01", desat = true, title = after, inline = true,
+                              titleColor = GREY_C })
+    end
 end
 
 -- Labelled rows, one per line: { label, text, point, where }. The first label is green, the others grey; a
 -- "where" (trainer, vendor) goes on its own grey line under its row.
-local function Rows(lines, rows)
-    for i, r in ipairs(rows) do
+-- --- Icons for profession and step rows (all tabs) ----------------------------------------------------------------
+local PROF_ICON = {
+    Alchemy = "Trade_Alchemy", Blacksmithing = "Trade_BlackSmithing", Enchanting = "Trade_Engraving",
+    Engineering = "Trade_Engineering", Herbalism = "Spell_Nature_NatureTouchGrow", Leatherworking = "INV_Misc_ArmorKit_17",
+    Mining = "Trade_Mining", Skinning = "INV_Misc_Pelt_Wolf_01", Tailoring = "Trade_Tailoring",
+    Cooking = "INV_Misc_Food_15", ["First Aid"] = "Spell_Holy_SealOfSacrifice", Fishing = "Trade_Fishing",
+}
+-- A class's round icon ("HUNTER" -> ClassIcon_Hunter).
+local function ClassIcon(classFile)
+    local c = (classFile or ""):lower():gsub("^%l", string.upper)
+    return c ~= "" and ("Interface\\Icons\\ClassIcon_" .. c) or "Interface\\Icons\\INV_Misc_QuestionMark"
+end
+local function ProfIcon(prof) return "Interface\\Icons\\" .. (PROF_ICON[prof] or "INV_Misc_QuestionMark") end
+local STEP_ICON = {
+    Learn = "INV_Misc_Book_11", Train = "INV_Misc_Book_11", Buy = "INV_Misc_Coin_01", Gather = "INV_Misc_Bag_10",
+    Next = "INV_Misc_Note_01", Level = "Spell_Holy_BlessingOfStrength", Temporary = "INV_Misc_Note_02",
+    Market = "INV_Misc_Coin_02",
+}
+-- Rows about buying are blue, about selling red (the same colours as the Market tab's headers).
+-- Buy and sell show by text colour only (user, 2026-10-22: no coloured boxes inside cards, like the Team tab).
+local SELL_C, BUY_C, TEMP_C = { 0.70, 0.16, 0.10 }, { 0.12, 0.33, 0.60 }, { 0.55, 0.35, 0.00 }
+-- "Hot": a small flame and a burning red word (user, 2026-10-22: hot was green).
+local FLAME = "|TInterface\\Icons\\Spell_Fire_Fire:14:14|t"
+local HOT = FLAME .. " |cffe0301ehot|r"
+-- "Linen Cloth is hot (66c, usual 19c, 11400 listed): sell it, craft later" -> "Linen Cloth high: sell now".
+-- The grey line under a row: its kind, the place, extras; the kind is left out when the bold line already starts
+-- with it ("Learn Mining" over "Learn · ...").
+local function Detail(r, ...)
+    local parts = {}
+    if not (r.text or ""):find("^" .. (r.label or "")) then table.insert(parts, r.label) end
+    for _, x in ipairs({ ... }) do if x and x ~= "" then table.insert(parts, x) end end
+    return table.concat(parts, " \194\183 ")
+end
+local function MarketShort(text)
+    local item, state = (text or ""):match("^(.-) is (%a+)")
+    if state == "hot" then return FLAME .. " " .. item .. " price high: sell now" end
+    if state == "cheap" then return item .. " cheap: buy now" end
+    return text
+end
+local function MarketNote(text)
+    if (text or ""):find("is hot") or (text or ""):find("[Ss]ell") then return "hot" end
+    if (text or ""):find("is cheap") then return "cold" end
+end
+local function RankName(max)
+    return (max or 0) <= 0 and "not learned" or max <= 75 and "Apprentice" or max <= 150 and "Journeyman"
+        or max <= 225 and "Expert" or "Artisan"
+end
+local SKILL_GREEN = { 0.25, 0.6, 0.2 }
+
+local function Rows(lines, rows, prof)
+    for _, r in ipairs(rows) do
         if r.text and r.text ~= "" then
-            table.insert(lines, { title = r.label, inline = true, text = (i == 1 and C.WHITE or C.GREY) .. r.text .. "|r",
-                                  titleColor = i == 1 and GREEN_C or GREY_C, point = r.point, click = r.click })
-            if r.where and r.where ~= "" then table.insert(lines, { text = C.GREY .. r.where .. "|r", point = r.point, click = r.click }) end
+            -- One block per row, like the Team tab (user, 2026-10-22): icon, the text in bold, one grey line under it
+            -- with the kind of row and the place. Buy rows and market rows show by text colour (blue buy, red sell).
+            local icon = r.icon or (STEP_ICON[r.label] and ("Interface\\Icons\\" .. STEP_ICON[r.label]))
+                         or ((prof or (r.text:match("^(%a+)"))) and PROF_ICON[prof or r.text:match("^(%a+)")] and ProfIcon(prof or r.text:match("^(%a+)")))
+            local kind = r.label == "Market" and (MarketNote(r.text) or "cold") or r.label == "Buy" and "cold" or r.label == "Temporary" and "temp" or nil
+            local color = kind == "hot" and SELL_C or kind == "cold" and BUY_C or kind == "temp" and TEMP_C or { 0.35, 0.18, 0 }
+            local detail = Detail(r, r.where, r.extra)
+            table.insert(lines, { icon = icon, title = r.label == "Market" and MarketShort(r.text) or r.text, inline = false, titleColor = color,
+                                  text = C.GREY .. detail .. "|r", point = r.point, click = r.click, match = r.match })
         end
     end
 end
@@ -212,11 +288,11 @@ local function DungeonActions(level, zone)
         for _, g in ipairs(groups) do
             local q = g[1]
             if WFL.InLog(q.id) and WFL.Complete(q.id) then
-                table.insert(acts, { text = "Hand in " .. q.n .. " to " .. q.npc, where = Zone(q.m), point = QPoint(q) })
+                table.insert(acts, { quest = q.n, text = "Hand in " .. q.n .. " to " .. q.npc, where = Zone(q.m), point = QPoint(q) })
             elseif WFL.InLog(q.id) then
-                table.insert(acts, { text = "Finish " .. q.n, where = "then " .. q.npc .. ", " .. Zone(q.m), point = QPoint(q) })
+                table.insert(acts, { quest = q.n, text = "Finish " .. q.n, where = "then " .. q.npc .. ", " .. Zone(q.m), point = QPoint(q) })
             elseif (q.r or 1) <= level then
-                table.insert(acts, { text = "Take " .. q.n .. " from " .. q.npc, where = Zone(q.m), point = QPoint(q) })
+                table.insert(acts, { quest = q.n, text = "Take " .. q.n .. " from " .. q.npc, where = Zone(q.m), point = QPoint(q) })
             end
         end
         local allIn, any = true, false
@@ -354,8 +430,8 @@ local function LearnRow(prof, st)
                  point = bestPoint, where = best.zone or (bestPoint and Pos(bestPoint.mapID, bestPoint.x, bestPoint.y)) }
     end
     local q = l.quests and l.quests[1]
-    if q then return { label = "Learn", text = item .. ": quest " .. q.n .. (q.level and (" (level " .. q.level .. ")") or "") } end
-    return { label = "Learn", text = item .. ": " .. string.lower(l.source or "") .. ", where not known yet" }
+    if q then return { label = "Learn", text = "Recipe: " .. item, where = "quest " .. q.n .. (q.level and (", level " .. q.level) or "") } end
+    return { label = "Learn", text = "Recipe: " .. item, where = (l.source or "source") .. " \194\183 place not known" }
 end
 
 -- Per profession labelled rows (Rows): planned professions not learned yet (Learn, Buy, Then), crafts (Make, Then),
@@ -374,16 +450,81 @@ local function SkillUp()
     return by, api
 end
 
+-- Runs fn without SkillUp Forever's and TomTom's chat lines ("route set to ...", "Added a waypoint"): the arrow is
+-- enough (user, 2026-10-22).
+local function Quietly(fn, ...)
+    local frame = DEFAULT_CHAT_FRAME
+    local add = frame and frame.AddMessage
+    if add then
+        frame.AddMessage = function(self, msg, ...)
+            if type(msg) == "string" and (msg:find("SkillUp") or msg:find("TomTom")) then return end
+            return add(self, msg, ...)
+        end
+    end
+    local ok, a, b = pcall(fn, ...)
+    if add then frame.AddMessage = add end
+    return ok and a, b
+end
+
+-- A material that monsters drop (Plan.lua reagentDrops, QuestieDB): the monster to kill, nearest your level, one
+-- on your map first. Returns a row ("Kill Mottled Boar for 10 Chunk of Boar Meat") or a fishing row, or nil.
+local function DropRow(item, count)
+    local d = item and (PLAN.reagentDrops or {})[item]
+    if not d then return nil end
+    if d.fish then
+        return { label = "Fish", text = "Fish for " .. (count or "") .. " " .. item, icon = "Interface\\Icons\\Trade_Fishing" }
+    end
+    local level = UnitLevel("player") or 1
+    local here = C_Map and C_Map.GetBestMapForUnit and C_Map.GetBestMapForUnit("player")
+    local best, bestScore
+    for _, m in ipairs(d.mobs or {}) do
+        -- Distance from your level (0 inside the monster's range), and a little bonus when it is on your map.
+        local gap = (level < m.lo and (m.lo - level)) or (level > m.hi and (level - m.hi)) or 0
+        local score = gap * 2 + (m.m == here and 0 or 3)
+        if not bestScore or score < bestScore then best, bestScore = m, score end
+    end
+    if not best then return nil end
+    return { label = "Kill", text = "Kill " .. best.n .. " for " .. (count or "") .. " " .. item,
+             where = ((WFL.MapName(best.m) or "") ~= "" and (WFL.MapName(best.m) .. " \194\183 ") or "") .. "level " .. best.lo .. (best.hi ~= best.lo and ("-" .. best.hi) or ""),
+             point = { mapID = best.m, x = best.x, y = best.y, title = best.n .. " (" .. item .. ")" },
+             icon = WFL.ItemIcon(item) }
+end
+
 local function SkillUpRows(entry, api)
     local rows = {}
-    for i, st in ipairs(entry.steps or {}) do
-        local click
-        if st.nav then
-            click = function() WFL.ClearArrows(); api.Navigate(entry.skillLineID, i) end
-        elseif st.kind == "craft" then
-            click = function() api.OpenRecipes(entry.skillLineID) end
+    local open = function() Quietly(api.OpenRecipes, entry.skillLineID) end
+    -- What to craft first (user, 2026-10-22: Sveti saw only buy steps). SkillUp's API gives at most 3 steps and lists
+    -- a buy step for each missing material first, which can push the craft out; its route recipes always say what to
+    -- craft. The next two that still give points.
+    local rank, shown = entry.rank or 0, 0
+    for _, rc in ipairs(entry.recipes or {}) do
+        if shown < 2 and (rc.toRank or 0) > rank then
+            shown = shown + 1
+            local icon = rc.itemID and C_Item and C_Item.GetItemIconByID and C_Item.GetItemIconByID(rc.itemID)
+            table.insert(rows, { label = "Craft", text = (rc.count or "?") .. " " .. (rc.name or "?") .. " \226\134\146 " .. rc.toRank,
+                                 where = (rc.learned == false) and ("learn it first" .. (rc.trainAt and (" (skill " .. rc.trainAt .. ")") or "")) or nil,
+                                 icon = icon, click = open })
         end
-        table.insert(rows, { label = SU_LABEL[st.kind] or "Next", text = st.text, where = st.detail, click = click })
+    end
+    -- Then up to two of its other steps (buy, gather, train); its craft steps are covered above.
+    local others = 0
+    for i, st in ipairs(entry.steps or {}) do
+        local drop = st.kind == "buy" and st.itemID and C_Item and C_Item.GetItemNameByID
+                     and DropRow(C_Item.GetItemNameByID(st.itemID), st.count)
+        if drop and others < 2 then
+            -- "Buy 10 Chunk of Boar Meat" -> "Kill Mottled Boar for 10 Chunk of Boar Meat" (user, 2026-10-22).
+            others = others + 1
+            table.insert(rows, drop)
+        elseif st.kind ~= "craft" and others < 2 then
+            others = others + 1
+            local click
+            if st.nav then click = function() WFL.ClearArrows(); Quietly(api.Navigate, entry.skillLineID, i) end end
+            -- "Krugosh, Razor Hill · 50c": the place under the step, the cost on the right.
+            local where, cost = (st.detail or ""):match("^(.-)%s*\194\183%s*(.+)$")
+            local icon = st.itemID and C_Item and C_Item.GetItemIconByID and C_Item.GetItemIconByID(st.itemID)
+            table.insert(rows, { label = SU_LABEL[st.kind] or "Next", text = st.text, where = where or st.detail, cost = cost,
+                                 click = click, icon = icon })
+        end
     end
     return rows
 end
@@ -414,7 +555,8 @@ local function ProfessionActions()
             local buy, buyPoint = KitToBuy(prof)
             local st = ((PLAN.craftSteps or {})[prof] or {})[1]
             table.insert(acts, { prof = prof, s = { rank = 0, max = 0 }, learn = true, craft = CRAFTS[prof], gather = GATHER[prof] and true, rows = {
-                { label = "Learn", text = prof .. RankCost(prof, "Apprentice") .. (drop and (", after you drop " .. drop) or ""), point = point, where = where },
+                { label = "Learn", text = "Learn " .. prof .. RankCost(prof, "Apprentice"), point = point,
+                  where = drop and ("Drop " .. drop .. " first \194\183 " .. (where or "")) or where },
                 { label = "Buy", text = buy, point = buyPoint },
                 { label = "Gather", text = GatherNow(prof, 1, zone) },
                 { label = "Make", text = st and (CraftsLeft(st, st.from, st.to) .. " " .. st.recipe .. " to " .. st.to) },
@@ -449,17 +591,20 @@ local function ProfessionActions()
             -- A craft that sells (Plan.lua craftSteps sell: our auction scans): its price, and sell only a few
             -- (the launch market is small: forever_profs.py MARKET_CAP).
             -- Green or better armor and weapons: what disenchanting one is worth (the enchanter gets the materials).
-            local de = st.de and st.de > 0 and ("disenchant (" .. Money(st.de) .. ")") or nil
-            local sells = st.sell and (" · sells " .. Money(st.sell) .. ", sell at most 10" .. (de and (", then " .. de) or ""))
-                          or (de and (" · " .. de) or "")
+            local de = st.de and st.de > 0 and ("disenchant " .. Money(st.de)) or nil
+            -- No generic "sell at most 10" (user, 2026-10-22); a warning only when the item's market is small
+            -- (usually fewer than 5 listed in our scans).
+            local pr = (PLAN.prices or {})[st.recipe]
+            local small = pr and pr.qtyUsual and pr.qtyUsual < 5 and "small market: sell a few" or nil
+            local sells = st.sell and ("Sells " .. Money(st.sell) .. (small and (", " .. small) or "") .. (de and (" \194\183 " .. de) or "")) or de
             if s.rank < goal then
                 local learn = LearnRow(prof, st)
                 if learn then table.insert(rows, learn) end
-                table.insert(rows, { label = "Make", text = CraftsLeft(st, math.max(s.rank, st.from), goal) .. " " .. st.recipe .. " to " .. goal .. sells })
+                table.insert(rows, { label = "Make", text = CraftsLeft(st, math.max(s.rank, st.from), goal) .. " " .. st.recipe .. " \226\134\146 " .. goal, extra = sells })
             end
             if nx and nx.from < s.max then
                 local g2 = math.min(nx.to, s.max)
-                table.insert(rows, { label = "Then", text = CraftsLeft(nx, nx.from, g2) .. " " .. nx.recipe .. " to " .. g2 })
+                table.insert(rows, { label = "Then", text = CraftsLeft(nx, nx.from, g2) .. " " .. nx.recipe .. " \226\134\146 " .. g2 })
             end
             -- The market for this step's materials: hot = sell them now and craft later, cheap = buy them now.
             for item in pairs(st.raw or {}) do
@@ -486,7 +631,7 @@ local function ProfessionActions()
         if not a.learn and not inPlan[a.prof] and (CRAFTS[a.prof] or GATHER[a.prof]) then
             local goal = replaces[a.prof]
             local _, where = TrainerWhere(goal or "")
-            table.insert(a.rows, 1, { label = "Temporary", text = goal and ("drop it when you reach the " .. goal .. " trainer (" .. where .. "); mail what you gathered first")
+            table.insert(a.rows, 1, { label = "Temporary", text = goal and ("Drop for " .. goal .. " \194\183 " .. (where:match(", (.+)$") or where))
                                                                or "not in your plan; keep it while it pays" })
             a.temp = true
         end
@@ -521,7 +666,16 @@ local function StillNeeded(prof, rank, b)
 end
 
 local function MatLine(item, have, need, tip)
-    return { icon = WFL.ItemIcon(item), text = C.WHITE .. item .. "|r" .. (have > need and (" " .. C.GREEN .. "sell " .. (have - need) .. "|r") or ""),
+    -- One block like the other rows: the material in bold, who holds it in grey under it ("Banka 40 · You 12 ·
+    -- Pala 3"), the have / need bar on the right.
+    local where = {}
+    for i, w in ipairs(WFL.MaterialWhere and WFL.MaterialWhere(item) or {}) do
+        if i <= 4 then table.insert(where, w.name .. " " .. w.n) end
+    end
+    local extra = have > need and (C.GREEN .. "sell " .. (have - need) .. "|r") or nil
+    local holders = #where > 0 and (C.GREY .. table.concat(where, " \194\183 ") .. "|r") or nil
+    return { icon = WFL.ItemIcon(item), title = item, inline = false, titleColor = { 0.35, 0.18, 0 },
+             text = (holders and extra) and (holders .. "  " .. extra) or holders or extra,
              bar = { have = have, need = need }, tip = tip, item = item }
 end
 
@@ -574,10 +728,11 @@ MarketState = function(item)
     local p, now = (PLAN.prices or {})[item], PriceNow(item)
     if not (p and now and p.usual and p.usual > 0 and (p.n or 0) >= 2) then return "normal", nil, now end
     local ratio = now / p.usual
-    local q = (p.qty and p.qtyUsual and p.qtyUsual > 0) and (p.qty / p.qtyUsual) or 1
     local why = Money(now) .. ", usual " .. Money(p.usual) .. (p.qty and (", " .. p.qty .. " listed") or "")
-    if ratio >= 1.25 or q <= 0.5 then return "hot", why, now end
-    if ratio <= 0.75 or q >= 2 then return "flooded", why, now end
+    -- By price only (user, 2026-10-22: too many hot items): the number listed jumps around during the day, so it no
+    -- longer makes an item hot or flooded on its own.
+    if ratio >= 1.3 then return "hot", why, now end
+    if ratio <= 0.75 then return "flooded", why, now end
     return "normal", why, now
 end
 -- Few listed (under 5): a cheap price there may be bait, do not copy it.
@@ -637,11 +792,81 @@ local function Market()
 end
 
 -- --- Tabs ---------------------------------------------------------------------------------------------------------
-local function Section(lines, id, open, title, summary, icon, default)
+local function Section(lines, id, open, title, summary, icon, default, tint)
     local isOpen = open[id]
     if isOpen == nil then isOpen = default ~= false end
-    table.insert(lines, { section = id, icon = icon, open = isOpen, title = title, inline = true, text = C.GREY .. (summary or "") .. "|r" })
+    table.insert(lines, { section = id, icon = icon, open = isOpen, title = title, inline = true, text = C.GREY .. (summary or "") .. "|r", tint = tint })
     return isOpen
+end
+
+-- Cards on every tab (style A, user 2026-10-22): each section header becomes a card header (medium brown, yellow
+-- title, cream summary) and the lines under it go inside the card. A line with group = true (a title over several
+-- cards, such as "Dungeon chains") stays outside. Lines that already have a card (the Professions tab) are kept.
+local HEAD_TEXT = "|cffeadfb8"
+local HEAD_TITLE = { 1, 0.82, 0 }
+local function HeadText(t) return (t or ""):gsub("|c%x%x%x%x%x%x%x%x", HEAD_TEXT) end
+-- Every second header is light (no dark fill): dark brown title, grey-brown summary.
+local ALT_TITLE = { 0.35, 0.18, 0 }
+local function AltText(t) return (t or ""):gsub("|c%x%x%x%x%x%x%x%x", "|cff6e5a3c") end
+-- Every second row inside a card gets a stripe (user, 2026-10-22). A row is a line with a title or an icon; the
+-- lines under it (its place, its task text) keep its stripe. Notes and headers keep their own look.
+local function Stripe(lines)
+    local k, on = 0, false
+    for _, l in ipairs(lines) do
+        if l.card == "head" or l.group or not l.card then
+            k, on = 0, false
+        elseif l.title or l.icon then
+            k = k + 1
+            on = k % 2 == 0
+            if l.stripe == nil then l.stripe = on end
+        elseif l.stripe == nil then
+            l.stripe = on
+        end
+    end
+    return lines
+end
+
+local function Cardify(lines)
+    local last
+    local function close()
+        if not last then return end
+        local l = lines[last]
+        l.cardEnd = true
+        if l.card == "body" then l.card = "foot" end
+        last = nil
+    end
+    local n = 0
+    for i, l in ipairs(lines) do
+        if l.card then
+            -- built as a card already: leave it
+        elseif l.group then
+            close()
+            n = 0
+        elseif l.section then
+            close()
+            n = n + 1
+            l.card, l.alt = "head", n % 2 == 0 and not l.tint
+            l.titleColor, l.text = l.alt and ALT_TITLE or HEAD_TITLE, l.alt and AltText(l.text) or HeadText(l.text)
+            if l.icon then l.big = true end
+            last = i
+        elseif l.group then
+            close()
+            n = 0
+        elseif last then
+            l.card = "body"
+            last = i
+        end
+    end
+    close()
+    return Stripe(lines)
+end
+
+-- The team member a line names ("Switch to Vestac: ..."), for a link to that row of the Team tab.
+local function TeamName(l)
+    local title = l.title or ""
+    for _, t in ipairs(Team()) do
+        if t.c.name and title:find(t.c.name, 1, true) then return t.c.name end
+    end
 end
 
 local function TeamPair(lines)
@@ -693,24 +918,24 @@ end
 
 local function LegacyLines(lines)
     local st = LegacyStatus()
-    table.insert(lines, { plain = true, text = C.GOLD .. "Levels|r" .. C.GREY .. "  first of each class, 1 point each|r" })
+    table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. "Levels|r" .. C.GREY .. "  first of each class|r" })
     for _, cl in ipairs(CLASS_ORDER) do
-        table.insert(lines, { title = ClassName(cl), inline = true, titleColor = GREY_C, text = Marks(st.levels[cl], { 25, 45, 60 }) })
+        table.insert(lines, { icon = ClassIcon(cl), title = ClassName(cl), inline = true, titleColor = GREY_C, text = Marks(st.levels[cl], { 25, 45, 60 }) })
     end
-    table.insert(lines, { plain = true, text = C.GOLD .. "Crafting|r" .. C.GREY .. "  any character, 1 point each|r" })
+    table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. "Crafting|r" })
     local names = {}
     for prof in pairs(CRAFTS) do table.insert(names, prof) end
     table.sort(names)
     for _, prof in ipairs(names) do
-        table.insert(lines, { title = prof, inline = true, titleColor = GREY_C, text = Marks(st.crafts[prof], { 150, 225, 300 }) })
+        table.insert(lines, { icon = ProfIcon(prof), title = prof, inline = true, titleColor = GREY_C, text = Marks(st.crafts[prof], { 150, 225, 300 }) })
     end
     if PLAN.spelunker and PLAN.spelunker[1] then
-        table.insert(lines, { plain = true, text = C.GOLD .. "Dungeons|r" .. C.GREY .. "  clear each dungeon of a tier once, 1 point per tier|r" })
+        table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. "Dungeons|r" .. C.GREY .. "  one clear per tier|r" })
         for _, t in ipairs(PLAN.spelunker) do
-            table.insert(lines, { title = t.name, inline = false, titleColor = GREY_C, text = C.GREY .. table.concat(t.dungeons, ", ") .. "|r" })
+            table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_Key_14", title = t.name, inline = false, titleColor = GREY_C, text = C.GREY .. table.concat(t.dungeons, ", ") .. "|r" })
         end
     end
-    table.insert(lines, { text = C.GREY .. "Quests, exploring, PvP and raids: see the game's Legacy panel (Y).|r" })
+    table.insert(lines, { text = C.GREY .. "More in the game's Legacy panel (Y).|r" })
 end
 
 local function NextLeveling(open)
@@ -718,7 +943,11 @@ local function NextLeveling(open)
     local acts, st = DungeonActions(level, zone)
     if Section(lines, "n-d", open, "Dungeons", st and st.name or "nothing for your level", "Interface\\Icons\\INV_Misc_Key_14") then
         if acts[1] then
-            Pair(lines, acts[1].text, acts[2] and (acts[2].text .. (acts[2].where and (" (" .. acts[2].where .. ")") or "")), acts[1].point, acts[1].where)
+            local t = acts[1].text
+            local icon = t:find("^Take") and WFL.icons.take or (t:find("^Hand in") or t:find("^Finish")) and WFL.icons.turnin or "Interface\\Icons\\INV_Misc_Key_03"
+            local from = #lines
+            Pair(lines, t, acts[2] and (acts[2].text .. ((acts[2].where and acts[2].where ~= "") and (" (" .. acts[2].where .. ")") or "")), acts[1].point, acts[1].where, icon)
+            LinkRows(lines, from, "dg", "d:" .. st.name, acts[2] and acts[2].quest)
         else
             table.insert(lines, { text = C.GREY .. "No dungeon quests open for level " .. level .. ".|r" })
         end
@@ -728,29 +957,48 @@ local function NextLeveling(open)
     for _, a in ipairs(ProfessionActions()) do if a.craft or a.gather then table.insert(pa, a) end end
     local names = {}
     for _, a in ipairs(pa) do table.insert(names, a.prof .. " " .. (a.learn and "(learn)" or a.s.rank)) end
-    if Section(lines, "n-p", open, "Professions", #names > 0 and table.concat(names, ", ") or "none yet", "Interface\\Icons\\Trade_BlackSmithing") then
+    if Section(lines, "n-p", open, "Professions", #names == 0 and "none yet" or "", "Interface\\Icons\\Trade_BlackSmithing") then
         if #pa == 0 then table.insert(lines, { text = C.GREY .. "No professions learned yet.|r" }) end
+        -- Per profession only the first thing to do (user, 2026-10-22: Next repeated the whole Professions tab);
+        -- click the profession for its card in the Professions tab.
         for _, a in ipairs(pa) do
-            table.insert(lines, { plain = true, text = C.GOLD .. a.prof .. " " .. (a.learn and "not learned" or (a.s.rank .. "/" .. a.s.max)) .. "|r" })
-            Rows(lines, a.rows)
+            local open = function() WFL.OpenTab("prof2", "p:" .. a.prof) end
+            table.insert(lines, { icon = ProfIcon(a.prof), title = a.prof, inline = true, titleColor = { 0.35, 0.18, 0 },
+                                  text = a.learn and (C.GREY .. "not learned|r") or "", click = open,
+                                  bar = (not a.learn) and { have = a.s.rank, need = a.s.max, color = SKILL_GREEN } or nil })
+            local firstRow, tempRow
+            for _, r in ipairs(a.rows) do
+                if r.label == "Temporary" then tempRow = tempRow or r
+                elseif r.label ~= "Market" and r.text and r.text ~= "" then firstRow = firstRow or r end
+            end
+            local pick = {}
+            if tempRow then table.insert(pick, tempRow) end
+            if firstRow then table.insert(pick, firstRow) end
+            Rows(lines, pick, a.prof)
         end
     end
-    if Section(lines, "n-t", open, "Team", "", "Interface\\Icons\\INV_Misc_GroupLooking") then TeamPair(lines) end
+    if Section(lines, "n-t", open, "Team", "", "Interface\\Icons\\INV_Misc_GroupLooking") then
+        local from = #lines
+        TeamPair(lines)
+        LinkRows(lines, from, "team", "t-l", TeamName)
+    end
     -- Legacy: this character's next point (level, then crafting), only when nobody on the account has it yet.
     local st, rows = LegacyStatus(), {}
     local _, classFile = UnitClass("player")
     for _, l in ipairs({ 25, 45, 60 }) do
-        if (st.levels[classFile or ""] or 0) < l then table.insert(rows, { label = "Level", text = l .. ": first " .. ClassName(classFile) .. " there" }) break end
+        if (st.levels[classFile or ""] or 0) < l then table.insert(rows, { label = "Level", text = l .. ": first " .. ClassName(classFile) .. " there", match = ClassName(classFile) }) break end
     end
     for prof in pairs(WFL.Skills()) do
         if CRAFTS[prof] then
             for _, c in ipairs({ 150, 225, 300 }) do
-                if (st.crafts[prof] or 0) < c then table.insert(rows, { label = "Craft", text = prof .. " " .. c }) break end
+                if (st.crafts[prof] or 0) < c then table.insert(rows, { label = "Craft", text = prof .. " " .. c, match = prof }) break end
             end
         end
     end
-    if Section(lines, "n-l", open, "Legacy points", st.got .. " of " .. st.total .. " (Team tab)", "Interface\\Icons\\INV_Misc_Book_08") then
+    if Section(lines, "n-l", open, "Legacy points", st.got .. " of " .. st.total, "Interface\\Icons\\INV_Misc_Book_08") then
+        local from = #lines
         if rows[1] then Rows(lines, rows) else table.insert(lines, { text = C.GREY .. "Nothing left for this character.|r" }) end
+        LinkRows(lines, from, "team", "t-g")
     end
     return lines
 end
@@ -759,21 +1007,37 @@ local function NextBank(open)
     local lines, mk = {}, Market()
     if Section(lines, "b-m", open, "Market", "scan the AH with Auctionator first", "Interface\\Icons\\INV_Misc_Coin_02") then
         local s0, s1, b0, c0 = mk.sell[1], mk.sell[2], mk.buy[1], mk.crafts[1]
-        Pair(lines, s0 and ("Sell " .. s0.extra .. " " .. s0.item .. " at " .. Money(s0.now) .. (s0.state == "hot" and " (hot)" or "")) or "Nothing to sell now",
+        Pair(lines, s0 and ("Sell " .. s0.extra .. " " .. s0.item .. " at " .. Money(s0.now) .. (s0.state == "hot" and ("  " .. HOT) or "")) or "Nothing to sell now",
              b0 and ("Buy " .. b0.short .. " " .. b0.item .. " (" .. b0.why .. ")")
              or (s1 and ("Sell " .. s1.extra .. " " .. s1.item .. " (" .. Money(s1.value) .. ")")))
-        if c0 then table.insert(lines, { title = "Craft", inline = true, titleColor = GREY_C, text = C.GREY .. c0.who .. ": " .. c0.recipe .. " +" .. Money(c0.profit) .. " each|r" }) end
-    end
-    if Section(lines, "b-mail", open, "Mail", "", "Interface\\Icons\\INV_Letter_15") then
-        local crafters = {}
-        for _, t in ipairs(Team()) do
-            for _, p in ipairs(t.c.professions or {}) do if CRAFTS[p.name] then table.insert(crafters, t.c.name) break end end
+        -- Click the sell or buy line: the Market tab at that list (links, 2026-10-22).
+        local n = #lines
+        for i = n - 2, n do
+            local l = lines[i]
+            if l and l.title and not l.section then
+                local key = l.title:find("^Buy") and "m-b" or "m-s"
+                local item = (b0 and l.title:find(b0.item, 1, true) and b0.item) or (s0 and l.title:find(s0.item, 1, true) and s0.item)
+                             or (s1 and l.title:find(s1.item, 1, true) and s1.item) or nil
+                if item then l.click = function() WFL.OpenTab("market", key, item) end end
+                l.titleColor = key == "m-b" and BUY_C or SELL_C
+            end
         end
-        local newMail = HasNewMail and HasNewMail()
-        Pair(lines, newMail and "Collect the mail: new mail is waiting" or "Mailbox checked: nothing new",
-             #crafters > 0 and ("Send each crafter their step's materials: " .. table.concat(crafters, ", ")) or nil)
+        if c0 then
+            table.insert(lines, { icon = WFL.ItemIcon(c0.recipe), title = c0.recipe, inline = false, titleColor = GREEN_C,
+                                  text = C.GREY .. "Craft to sell \194\183 " .. c0.who .. " \194\183 +" .. Money(c0.profit) .. " each|r",
+                                  click = function() WFL.OpenTab("market", "m-c", c0.recipe) end })
+        end
+
     end
-    if Section(lines, "n-t", open, "Team", "", "Interface\\Icons\\INV_Misc_GroupLooking") then TeamPair(lines) end
+    -- Mail: only when new mail is waiting (user, 2026-10-22: "No new mail" added nothing).
+    if HasNewMail and HasNewMail() and Section(lines, "b-mail", open, "Mail", "", "Interface\\Icons\\INV_Letter_15") then
+        table.insert(lines, { icon = "Interface\\Icons\\INV_Letter_15", title = "Collect the new mail", inline = false, titleColor = GREEN_C })
+    end
+    if Section(lines, "n-t", open, "Team", "", "Interface\\Icons\\INV_Misc_GroupLooking") then
+        local from = #lines
+        TeamPair(lines)
+        LinkRows(lines, from, "team", "t-l", TeamName)
+    end
     return lines
 end
 
@@ -798,10 +1062,18 @@ local function DungeonTabLines(open)
             end
         end
     end
+    -- The two banners fold like cards: closed, the chains or dungeons under them are hidden (user, 2026-10-22).
+    local gOpen = {}
+    for _, want in ipairs({ true, false }) do
+        local o = open[want and "g:chains" or "g:dungeons"]
+        if o == nil then o = true end
+        gOpen[want] = o
+    end
     for si = 1, #ordered do
         local s = ordered[si]
-        if first[true] == s then table.insert(lines, { plain = true, text = C.GOLD .. "Dungeon chains|r" .. C.GREY .. "  dungeons to run one after another|r" }) end
-        if first[false] == s then table.insert(lines, { plain = true, text = C.GOLD .. "Dungeons|r" .. C.GREY .. "  each on its own, all its quests|r" }) end
+        if first[true] == s then table.insert(lines, { plain = true, group = true, section = "g:chains", open = gOpen[true], text = "|cffffd100Dungeon chains|r" }) end
+        if first[false] == s then table.insert(lines, { plain = true, group = true, section = "g:dungeons", open = gOpen[false], text = "|cffffd100Dungeons|r" }) end
+        if gOpen[s.chain ~= nil] then
         local due = level >= s.at
         -- Folded line: when the quests open and the run levels of its dungeons.
         local lo, hi = 99, 0
@@ -817,8 +1089,8 @@ local function DungeonTabLines(open)
                 table.insert(lines, { plain = true, text = C.GOLD .. "Run in this order|r" })
                 for i, d in ipairs(s.members) do
                     local e = d.run.entrance
-                    table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_Key_03", title = i .. ". " .. d.name, inline = false,
-                                          text = C.GREY .. "lvl: " .. d.run.runFrom .. "-" .. d.run.runTo .. ", entrance " .. (e and Zone(e.m) or (d.run.zone or "?")) .. "|r",
+                    table.insert(lines, { num = i, icon = "Interface\\Icons\\INV_Misc_Key_03", title = d.name, inline = false,
+                                          text = C.GREY .. "lvl " .. d.run.runFrom .. "-" .. d.run.runTo .. " \194\183 " .. (e and Zone(e.m) or (d.run.zone or "?")) .. "|r",
                                           point = e and { mapID = e.m, x = e.x, y = e.y, title = d.name .. " entrance" } or nil, stripe = i % 2 == 0 })
                 end
             else
@@ -846,7 +1118,7 @@ local function DungeonTabLines(open)
                     local q = x.q
                     if x.zone ~= zone then
                         zone, n = x.zone, 0
-                        table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. (zone ~= "" and zone or "Other") .. "|r" })
+                        table.insert(lines, { plain = true, gap = 4, icon = "Interface\\Icons\\INV_Misc_Map_01", text = C.GOLD .. (zone ~= "" and zone or "Other") .. "|r" })
                     end
                     n = n + 1
                     local icon, desat, state = WFL.icons.take, false, ""
@@ -892,7 +1164,56 @@ local function DungeonTabLines(open)
             end
         end
     end
+        end
     return lines
+end
+
+-- --- Professions tab: one card per profession (redesign 2026-10-22, style A) -----------------------------------
+-- Header: profession icon, name, rank, skill bar, a tag (SkillUp / Temporary). Inside: numbered steps with an icon,
+-- the place under them and the cost on the right; market and "temporary" notes as coloured boxes; the materials
+-- still needed as bars (all characters' bags and banks).
+
+-- Cooking / First Aid: recipes for the materials in your bags that you do not know yet and that still give skill,
+-- with where to learn them: the trainer, a recipe vendor, or the source (quest, drop). Up to four (user, 2026-10-22:
+-- "I have boar meat, where do I get a recipe to cook it?").
+local function BagRecipeRows(prof, rank)
+    local rows, seen = {}, {}
+    local list = (PLAN.cookRecipes or {})[prof] or {}
+    local names = {}
+    for name in pairs(list) do table.insert(names, name) end
+    table.sort(names, function(x, y) return (list[x].learn or 0) < (list[y].learn or 0) end)
+    for _, name in ipairs(names) do
+        local r = list[name]
+        if #rows >= 4 then break end
+        -- No source: a starter recipe that comes with the profession (Roasted Boar Meat), nothing to fetch.
+        local useful = (r.src or "") ~= "" and (not r.grey or rank < r.grey) and (r.learn or 0) <= rank + 50
+                       and Knows(prof, name) ~= true
+        if useful then
+            for mat in pairs(r.r or {}) do
+                local have = WFL.OwnCount and WFL.OwnCount(mat) or 0
+                if (have or 0) > 0 and not seen[name] then
+                    seen[name] = true
+                    local point, where
+                    local src = r.src or ""
+                    if src:find("Trainer") then
+                        point, where = TrainerWhere(prof)
+                        where = "Trainer \194\183 " .. (where or "")
+                    elseif src:find("Vendor") and WFL.NearestVendor then
+                        local p, w = WFL.NearestVendor("Recipe: " .. name)
+                        point, where = p, "Vendor \194\183 " .. (w or "place not known")
+                    else
+                        where = src
+                    end
+                    table.insert(rows, { label = "Recipe", text = "Recipe: " .. name, icon = "Interface\\Icons\\INV_Scroll_03",
+                                         where = "for your " .. mat .. " (" .. have .. ") \194\183 " .. where
+                                                 .. ((r.learn or 0) > rank and (" \194\183 skill " .. r.learn) or ""),
+                                         point = point })
+                    break
+                end
+            end
+        end
+    end
+    return rows
 end
 
 local function ProfessionTabLines(open)
@@ -900,45 +1221,113 @@ local function ProfessionTabLines(open)
     local lines = {}
     local pa = ProfessionActions()
     if #pa == 0 then return { { text = C.GREY .. "No professions learned yet.|r" } } end
-    for _, a in ipairs(pa) do
-        if Section(lines, "p:" .. a.prof, open, a.prof .. " " .. (a.learn and "not learned" or (a.s.rank .. "/" .. a.s.max)), "", nil) then
-            Rows(lines, a.rows)
-            local b = a.craft and not a.learn and not a.su and Bracket(a.prof, a.s.rank)
-            if a.su and #(a.su.reagents or {}) > 0 then
-                -- SkillUp's route reagents; have = all characters' bags and banks (mail them over).
-                table.insert(lines, { plain = true, text = C.GREY .. "Materials still needed (SkillUp Forever route)|r" })
-                for _, r in ipairs(a.su.reagents) do
-                    local name = C_Item and C_Item.GetItemNameByID and C_Item.GetItemNameByID(r.itemID)
-                    if name then
-                        local have = math.max(r.have or 0, WFL.MaterialHave(name) or 0)
-                        if have < (r.need or 0) then
-                            table.insert(lines, MatLine(name, have, r.need, { name, a.prof .. ", SkillUp route", "Have = all characters' bags and banks" }))
-                        end
+    -- Crafts this character can sell at a profit now (the bank's "Craft to sell" list, user 2026-10-22).
+    local me = UnitName("player")
+    local okMk, mk = pcall(Market)
+    local profit = {}
+    for _, c in ipairs(okMk and mk.crafts or {}) do
+        if c.who == me then
+            profit[c.prof] = profit[c.prof] or {}
+            if #profit[c.prof] < 2 then table.insert(profit[c.prof], c) end
+        end
+    end
+    -- Fishing for everyone (user, 2026-10-22): a card to learn it, with a pole, when it is not learned.
+    if not WFL.Skills()["Fishing"] then
+        local tPoint, tWhere = TrainerWhere("Fishing")
+        local pPoint, pWhere
+        if WFL.NearestVendor then pPoint, pWhere = WFL.NearestVendor("Fishing Pole") end
+        table.insert(pa, { prof = "Fishing", s = { rank = 0, max = 0 }, learn = true, rows = {
+            { label = "Learn", text = "Learn Fishing", point = tPoint, where = tWhere },
+            { label = "Buy", text = "Fishing Pole", point = pPoint, where = pWhere },
+            { label = "Next", text = "Fish while you level, cook the fish for Cooking skill", icon = "Interface\\Icons\\INV_Misc_Food_15" },
+        } })
+    end
+    for ci, a in ipairs(pa) do
+        if (a.prof == "Cooking" or a.prof == "First Aid") and not a.learn then
+            for _, r in ipairs(BagRecipeRows(a.prof, a.s.rank or 0)) do table.insert(a.rows, r) end
+        end
+        for _, c in ipairs(profit[a.prof] or {}) do
+            local dup = false
+            for _, r in ipairs(a.rows) do if r.label == "Profit" and r.text:find(c.recipe, 1, true) then dup = true end end
+            if not dup then
+                table.insert(a.rows, { label = "Profit", text = "Craft " .. c.recipe .. " to sell", where = "+" .. Money(c.profit) .. " each",
+                                       icon = WFL.ItemIcon(c.recipe) })
+            end
+        end
+        local id = "p:" .. a.prof
+        local isOpen = open[id]
+        if isOpen == nil then isOpen = true end
+        local tag = a.temp and "|cffffd27aTemporary|r" or a.su and "|cffb6e39aSkillUp|r" or nil
+        local alt = ci % 2 == 0
+        local head = { section = id, open = isOpen, card = "head", alt = alt, big = true, icon = ProfIcon(a.prof),
+                       title = a.prof, titleColor = alt and ALT_TITLE or { 1, 0.82, 0 }, inline = true,
+                       text = (alt and AltText(RankName(a.s.max)) or HeadText(RankName(a.s.max))) .. (tag and ("  " .. (alt and AltText(tag) or tag)) or ""),
+                       bar = (not a.learn) and { have = a.s.rank, need = a.s.max, color = SKILL_GREEN } or nil }
+        table.insert(lines, head)
+        local first = #lines
+        if isOpen then
+            local n = 0
+            for _, r in ipairs(a.rows) do
+                if r.text and r.text ~= "" then
+                    -- One block per row, like the Team tab: icon, bold text, one grey line under it (what kind of
+                    -- step, where, the cost). Market and "temporary" rows by text colour, no boxes.
+                    local kind = r.label == "Temporary" and "temp" or r.label == "Market" and (MarketNote(r.text) or "cold") or nil
+                    local icon = r.icon or (STEP_ICON[r.label] and ("Interface\\Icons\\" .. STEP_ICON[r.label])) or ProfIcon(a.prof)
+                    local detail = Detail(r, r.where, r.cost, r.extra)
+                    if kind then
+                        table.insert(lines, { card = "body", icon = icon, title = kind ~= "temp" and MarketShort(r.text) or r.text, inline = false,
+                                              titleColor = kind == "hot" and SELL_C or kind == "cold" and BUY_C or TEMP_C,
+                                              text = C.GREY .. (kind == "temp" and "Temporary" or kind == "hot" and "Sell" or "Buy") .. "|r",
+                                              point = r.point, click = r.click })
+                    else
+                        table.insert(lines, { card = "body", icon = icon, title = r.text, inline = false,
+                                              titleColor = r.label == "Buy" and BUY_C or r.label == "Profit" and GREEN_C or { 0.35, 0.18, 0 },
+                                              text = C.GREY .. detail .. "|r", point = r.point, click = r.click })
                     end
                 end
             end
-            if b then
-                table.insert(lines, { plain = true, text = C.GREY .. "Materials still needed to " .. b.to .. "|r" })
-                local items = {}
-                for item, n in pairs(StillNeeded(a.prof, a.s.rank, b)) do if n > 0 then table.insert(items, { item = item, n = n }) end end
-                table.sort(items, function(x, y) return x.n > y.n end)
-                for _, x in ipairs(items) do
-                    table.insert(lines, MatLine(x.item, WFL.MaterialHave(x.item), x.n, { x.item, a.prof .. " " .. a.s.rank .. " to " .. b.to, "Have = all characters' bags and banks" }))
+            -- Materials still needed: SkillUp's route reagents, else our step's.
+            local mats = {}
+            if a.su then
+                for _, r in ipairs(a.su.reagents or {}) do
+                    local name = C_Item and C_Item.GetItemNameByID and C_Item.GetItemNameByID(r.itemID)
+                    if name then
+                        local have = math.max(r.have or 0, WFL.MaterialHave(name) or 0)
+                        if have < (r.need or 0) then table.insert(mats, { item = name, have = have, n = r.need, why = a.prof .. ", SkillUp route" }) end
+                    end
+                end
+            else
+                local b = a.craft and not a.learn and Bracket(a.prof, a.s.rank)
+                if b then
+                    for item, n in pairs(StillNeeded(a.prof, a.s.rank, b)) do
+                        if n > 0 then table.insert(mats, { item = item, have = WFL.MaterialHave(item), n = n, why = a.prof .. " " .. a.s.rank .. " to " .. b.to }) end
+                    end
+                    table.sort(mats, function(x, y) return x.n > y.n end)
+                end
+            end
+            if #mats > 0 then
+                table.insert(lines, { card = "body", plain = true, text = C.GREY .. "Materials (all characters)|r" })
+                for _, m in ipairs(mats) do
+                    local l = MatLine(m.item, m.have, m.n, { m.item, m.why, "Have = all characters' bags and banks" })
+                    l.card = "body"
+                    table.insert(lines, l)
                 end
             end
         end
+        lines[#lines].cardEnd = true
+        if #lines > first then lines[#lines].card = "foot" end
     end
-    return lines
+    return Stripe(lines)
 end
 
 local function TeamTabLines(open)
     open = open or {}
     local lines, team = {}, Team()
-    if Section(lines, "t-l", open, "Rotation", "most rested first", "Interface\\Icons\\INV_Misc_GroupLooking") then
+    if Section(lines, "t-l", open, "Rotation", "", "Interface\\Icons\\INV_Misc_GroupLooking") then
         for _, t in ipairs(team) do
             local c, profs = t.c, {}
             for _, p in ipairs(c.professions or {}) do table.insert(profs, p.name .. " " .. (p.rank or 0)) end
-            table.insert(lines, { title = c.name .. (t.me and " (you)" or ""), inline = false,
+            table.insert(lines, { icon = ClassIcon(c.class), title = c.name .. (t.me and " (you)" or ""), inline = false,
                                   text = C.GREY .. "level " .. (c.level or "?") .. ", rested " .. Pct(t.rested) .. ", " .. (t.me and "playing" or (c.resting and "in an inn" or "outside"))
                                          .. (#profs > 0 and ("\n" .. table.concat(profs, ", ")) or "") .. "|r",
                                   titleColor = (not t.me and t.rested >= 0.3) and GREEN_C or nil })
@@ -947,13 +1336,12 @@ local function TeamTabLines(open)
     local need, rows = TeamNeed(), {}
     for item, v in pairs(need) do table.insert(rows, { item = item, n = v.n, by = v.by }) end
     table.sort(rows, function(a, b) return a.n > b.n end)
-    if Section(lines, "t-m", open, "Team materials", "what the crafters need now", "Interface\\Icons\\INV_Misc_Bag_10") then
-        table.insert(lines, { text = C.GREY .. "Mail these to the bank. Bar: have / need.|r" })
+    if Section(lines, "t-m", open, "Team materials", "", "Interface\\Icons\\INV_Misc_Bag_10") then
         if #rows == 0 then table.insert(lines, { text = C.GREY .. "No crafter has learned a profession yet.|r" }) end
         for _, r in ipairs(rows) do table.insert(lines, MatLine(r.item, WFL.MaterialHave(r.item), r.n, { r.item, "For: " .. table.concat(r.by, ", ") })) end
     end
     local ls = LegacyStatus()
-    if Section(lines, "t-g", open, "Legacy points", ls.got .. " of " .. ls.total .. " from levels and crafting", "Interface\\Icons\\INV_Misc_Book_08") then
+    if Section(lines, "t-g", open, "Legacy points", ls.got .. " of " .. ls.total, "Interface\\Icons\\INV_Misc_Book_08") then
         LegacyLines(lines)
     end
     return lines
@@ -962,36 +1350,35 @@ end
 local function MarketTabLines(open)
     open = open or {}
     local lines, mk = {}, Market()
-    table.insert(lines, { text = C.GREY .. "Each item against its own usual price and amount listed (Sync scans).|r" })
     local total = 0
     for _, x in ipairs(mk.sell) do total = total + x.value end
-    if Section(lines, "m-s", open, "Sell now", #mk.sell .. " items, about " .. Money(total), "Interface\\Icons\\INV_Misc_Coin_02") then
+    if Section(lines, "m-s", open, "Sell now", (#mk.sell > 0 and (#mk.sell .. " \194\183 about " .. Money(total)) or "none"), "Interface\\Icons\\INV_Misc_Coin_02", nil, "sell") then
         if #mk.sell == 0 then table.insert(lines, { text = C.GREY .. "Nothing to sell now.|r" }) end
         for i = 1, math.min(10, #mk.sell) do
             local x = mk.sell[i]
-            local note = x.state == "hot" and (C.GREEN .. "hot|r" .. C.GREY .. (x.needed and x.needed > 0 and (", buy " .. x.needed .. " back later") or "") .. "|r") or ""
-            table.insert(lines, { icon = WFL.ItemIcon(x.item), item = x.item, title = x.extra .. " " .. x.item, inline = true,
+            local note = x.state == "hot" and HOT or "" -- (no "buy N back later": user, 2026-10-22)
+            table.insert(lines, { titleColor = SELL_C, icon = WFL.ItemIcon(x.item), item = x.item, title = x.extra .. " " .. x.item, inline = true,
                                   text = C.GREY .. "at " .. Money(x.now) .. "|r  " .. note .. (FewListed(x.item) and (C.GREY .. "  few listed: check the price|r") or ""),
                                   tip = { x.item, x.why or ("AH now " .. Money(x.now)), "Vendor " .. Money(VendorPrice(x.item)) } })
         end
     end
-    if Section(lines, "m-b", open, "Buy cheap", #mk.buy .. " the crafters need", "Interface\\Icons\\INV_Misc_Bag_10") then
-        if #mk.buy == 0 then table.insert(lines, { text = C.GREY .. "Nothing the crafters need is cheap now.|r" }) end
+    if Section(lines, "m-b", open, "Buy cheap", (#mk.buy > 0 and tostring(#mk.buy) or "none"), "Interface\\Icons\\INV_Misc_Bag_10", nil, "buy") then
+        if #mk.buy == 0 then table.insert(lines, { text = C.GREY .. "Nothing cheap now.|r" }) end
         for i = 1, math.min(8, #mk.buy) do
             local x = mk.buy[i]
-            table.insert(lines, { icon = WFL.ItemIcon(x.item), item = x.item, title = x.short .. " " .. x.item, inline = true,
+            table.insert(lines, { titleColor = BUY_C, icon = WFL.ItemIcon(x.item), item = x.item, title = x.short .. " " .. x.item, inline = true,
                                   text = C.GREY .. "at " .. Money(x.now) .. " = " .. Money(x.cost) .. "|r", tip = { x.item, x.why } })
         end
     end
-    if Section(lines, "m-c", open, "Craft to sell", #mk.crafts .. " with profit now", "Interface\\Icons\\Trade_BlackSmithing") then
-        if #mk.crafts == 0 then table.insert(lines, { text = C.GREY .. "No craft of the team sells above its materials now.|r" }) end
+    if Section(lines, "m-c", open, "Craft to sell", (#mk.crafts > 0 and tostring(#mk.crafts) or "none"), "Interface\\Icons\\Trade_BlackSmithing", nil, "craft") then
+        if #mk.crafts == 0 then table.insert(lines, { text = C.GREY .. "No profitable craft now.|r" }) end
         for i = 1, math.min(6, #mk.crafts) do
             local x = mk.crafts[i]
-            table.insert(lines, { icon = WFL.ItemIcon(x.recipe), item = x.recipe, title = x.recipe, inline = true, text = C.GREY .. x.who .. ": +" .. Money(x.profit) .. " each, sell at most 10|r",
+            table.insert(lines, { titleColor = GREEN_C, icon = WFL.ItemIcon(x.recipe), item = x.recipe, title = x.recipe, inline = true, text = C.GREY .. x.who .. ": +" .. Money(x.profit) .. " each" .. (((PLAN.prices or {})[x.recipe] or {}).qtyUsual and ((PLAN.prices or {})[x.recipe].qtyUsual < 5) and ", small market: sell a few" or "") .. "|r",
                                   tip = { x.recipe, "Sells at " .. Money(x.sellAt), "Materials " .. Money(x.cost) .. " at AH prices" } })
         end
     end
-    if #mk.hold > 0 and Section(lines, "m-h", open, "Hold", #mk.hold .. " flooded now, sell later", "Interface\\Icons\\INV_Misc_Note_01", false) then
+    if #mk.hold > 0 and Section(lines, "m-h", open, "Hold", #mk.hold .. " flooded now, sell later", "Interface\\Icons\\INV_Misc_Note_01", false, "hold") then
         for _, x in ipairs(mk.hold) do
             table.insert(lines, { icon = WFL.ItemIcon(x.item), item = x.item, title = x.extra .. " " .. x.item, inline = true, text = C.GREY .. x.why .. "|r" })
         end
@@ -1001,9 +1388,41 @@ end
 
 WFL.title = "WoW Forever Planner"
 WFL.RegisterTabs({
-    { key = "next", label = "Next", lines = NextTabLines },
-    { key = "dg", label = "Dungeons", lines = DungeonTabLines, visible = NotBank },
+    { key = "next", label = "Next", lines = function(open) return Cardify(NextTabLines(open)) end },
+    { key = "dg", label = "Dungeons", lines = function(open) return Cardify(DungeonTabLines(open)) end, visible = NotBank },
     { key = "prof2", label = "Professions", lines = ProfessionTabLines, visible = NotBank },
-    { key = "market", label = "Market", lines = MarketTabLines, visible = IsBank },
-    { key = "team", label = "Team", lines = TeamTabLines },
+    { key = "market", label = "Market", lines = function(open) return Cardify(MarketTabLines(open)) end, visible = IsBank },
+    { key = "team", label = "Team", lines = function(open) return Cardify(TeamTabLines(open)) end },
 })
+
+-- Level-up reminder (user, 2026-10-22): when you reach a level that opens dungeon quests, one short chat line and a
+-- yellow note at the top of the screen name them, grouped by dungeon. Other classes' quests and done ones are left
+-- out. Nothing is said when no dungeon quest opens at the new level.
+local levelUp = CreateFrame("Frame")
+levelUp:RegisterEvent("PLAYER_LEVEL_UP")
+levelUp:SetScript("OnEvent", function(_, _, newLevel)
+    local ok, err = pcall(function()
+        local level = tonumber(newLevel) or UnitLevel("player") or 1
+        local byDungeon, order, count = {}, {}, 0
+        for _, d in ipairs(WFL.DungeonEntries(level)) do
+            for _, q in ipairs(d.quests or {}) do
+                if (q.from or 1) == level and not WFL.QuestDone(q.id) then
+                    if not byDungeon[d.name] then byDungeon[d.name] = {}; table.insert(order, d.name) end
+                    table.insert(byDungeon[d.name], q.quest)
+                    count = count + 1
+                end
+            end
+        end
+        if count == 0 then return end
+        local parts = {}
+        for _, name in ipairs(order) do table.insert(parts, name .. ": " .. table.concat(byDungeon[name], ", ")) end
+        DEFAULT_CHAT_FRAME:AddMessage("|cffffd100WFL:|r level " .. level .. ", new dungeon quests. " .. table.concat(parts, "; ")
+                                      .. " |cff9d9d9d(/wflp dungeons)|r")
+        if UIErrorsFrame and UIErrorsFrame.AddMessage then
+            UIErrorsFrame:AddMessage(count .. " new dungeon quest" .. (count > 1 and "s" or "") .. ": " .. table.concat(order, ", "), 1, 0.82, 0)
+        end
+    end)
+    if not ok and WoWForeverLevelerLog then
+        table.insert(WoWForeverLevelerLog, date("%Y-%m-%d %H:%M:%S") .. "  Planner error level-up reminder: " .. tostring(err))
+    end
+end)

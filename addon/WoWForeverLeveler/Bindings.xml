@@ -2,4 +2,7 @@
 	<!-- Hover an item (bags, profession window, chat link) and press the key: the nearest vendors in chat, an arrow
 	     to the first. Set a key in the game's Key Bindings (AddOns) if you want one; Ctrl + right-click on an item does the same. -->
 	<Binding name="WFL_FIND_VENDOR" header="WFL" category="ADDONS">WFL_FindVendorHovered()</Binding>
+	<!-- Open or close our window, or open it on the Professions tab (user, 2026-10-22). No default keys. -->
+	<Binding name="WFL_TOGGLE" category="ADDONS">WFL_ToggleWindow()</Binding>
+	<Binding name="WFL_PROFESSIONS" category="ADDONS">WFL_ShowTab("prof2")</Binding>
 </Bindings>

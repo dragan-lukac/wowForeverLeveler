@@ -1859,6 +1859,233 @@
    252380,
    260570
   ],
+  "Recipe: Baked Salmon": [
+   8145
+  ],
+  "Recipe: Barbecued Buzzard Wing": [
+   12246
+  ],
+  "Recipe: Big Bear Steak": [
+   12246
+  ],
+  "Recipe: Brilliant Smallfish": [
+   3029,
+   3550,
+   4574,
+   5940,
+   257006
+  ],
+  "Recipe: Bristle Whisker Catfish": [
+   2397,
+   3027,
+   3029,
+   3497,
+   4553,
+   260487
+  ],
+  "Recipe: Calcified Smoothie": [
+   248198
+  ],
+  "Recipe: Carrion Surprise": [
+   989,
+   4879,
+   9636,
+   12245
+  ],
+  "Recipe: Cooked Glossy Mightfish": [
+   2664
+  ],
+  "Recipe: Crispy Bat Wing": [
+   2118
+  ],
+  "Recipe: Crispy Lizard Tail": [
+   3482
+  ],
+  "Recipe: Curiously Tasty Omelet": [
+   1148,
+   2821
+  ],
+  "Recipe: Dragonbreath Chili": [
+   4879,
+   12246
+  ],
+  "Recipe: Egg Nog": [
+   13420,
+   13429,
+   13432,
+   13433,
+   13435
+  ],
+  "Recipe: Filet of Redgill": [
+   2664
+  ],
+  "Recipe: Giant Clam Scorcho": [
+   2664
+  ],
+  "Recipe: Gingerbread Cookie": [
+   13420,
+   13429,
+   13432,
+   13433,
+   13435
+  ],
+  "Recipe: Grilled Squid": [
+   8137
+  ],
+  "Recipe: Heavy Crocolisk Stew": [
+   4879
+  ],
+  "Recipe: Heavy Kodo Stew": [
+   9636,
+   12245
+  ],
+  "Recipe: Hot Lion Chops": [
+   3489,
+   12245
+  ],
+  "Recipe: Hot Smoked Bass": [
+   2664
+  ],
+  "Recipe: Hot Wolf Ribs": [
+   8145,
+   12246
+  ],
+  "Recipe: Jungle Stew": [
+   1148,
+   12245
+  ],
+  "Recipe: Lean Venison": [
+   12245
+  ],
+  "Recipe: Lean Wolf Steak": [
+   12246
+  ],
+  "Recipe: Lobster Stew": [
+   8145
+  ],
+  "Recipe: Longjaw Mud Snapper": [
+   3027,
+   4574,
+   5748,
+   5940,
+   257006
+  ],
+  "Recipe: Major Healing Potion": [
+   11188
+  ],
+  "Recipe: Mightfish Steak": [
+   8145
+  ],
+  "Recipe: Monster Omelet": [
+   2806,
+   11187
+  ],
+  "Recipe: Mrrggl Smrrthle": [
+   248198
+  ],
+  "Recipe: Mystery Stew": [
+   12246
+  ],
+  "Recipe: Nightfin Soup": [
+   8137
+  ],
+  "Recipe: Poached Sunscale Salmon": [
+   8137
+  ],
+  "Recipe: Rainbow Fin Albacore": [
+   3333,
+   3497,
+   4553,
+   5748,
+   5942,
+   260487
+  ],
+  "Recipe: Roast Raptor": [
+   1148,
+   2821,
+   4879,
+   12245
+  ],
+  "Recipe: Roasted Kodo Meat": [
+   3081
+  ],
+  "Recipe: Rockscale Cod": [
+   2664,
+   3333,
+   4574,
+   12033,
+   12962
+  ],
+  "Recipe: Sagefish Delight": [
+   2397,
+   2664,
+   3027,
+   3400,
+   4553,
+   8307,
+   12033,
+   14738,
+   242498,
+   248198,
+   251905
+  ],
+  "Recipe: Scorpid Surprise": [
+   3881
+  ],
+  "Recipe: Slimy Smoothie": [
+   248198
+  ],
+  "Recipe: Slitherskin Mackerel": [
+   3550,
+   5942,
+   257006
+  ],
+  "Recipe: Smoked Bear Meat": [
+   3556
+  ],
+  "Recipe: Smoked Sagefish": [
+   2397,
+   2664,
+   3027,
+   3400,
+   4553,
+   8307,
+   12033,
+   14738,
+   242498,
+   248198,
+   251905
+  ],
+  "Recipe: Spiced Chili Crab": [
+   989,
+   1149
+  ],
+  "Recipe: Spicy Smoothie": [
+   248198
+  ],
+  "Recipe: Spotted Yellowtail": [
+   8137
+  ],
+  "Recipe: Strider Stew": [
+   3482
+  ],
+  "Recipe: Tender Wolf Steak": [
+   7733,
+   8125
+  ],
+  "Recipe: Thistle Tea": [
+   6779
+  ],
+  "Recipe: Undermine Clam Chowder": [
+   8139,
+   255895
+  ],
+  "Recipe: Venomous Smoothie": [
+   248198
+  ],
+  "Recipe: Wicked Smoothie": [
+   248198
+  ],
   "Red Dye": [
    989,
    1148,
@@ -5669,6 +5896,17 @@
    "n": "Wrahk",
    "sub": "Tailoring Supplies"
   },
+  "3489": {
+   "at": [
+    [
+     1413,
+     52.6,
+     29.8
+    ]
+   ],
+   "n": "Zargh",
+   "sub": "Butcher"
+  },
   "3490": {
    "at": [
     [
@@ -6284,6 +6522,17 @@
    ],
    "n": "Innkeeper Renee",
    "sub": "Innkeeper"
+  },
+  "5748": {
+   "at": [
+    [
+     1421,
+     33,
+     17.9
+    ]
+   ],
+   "n": "Killian Sanatha",
+   "sub": "Fisherman"
   },
   "5757": {
    "at": [

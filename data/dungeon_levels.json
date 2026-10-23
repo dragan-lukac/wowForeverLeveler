@@ -1,0 +1,147 @@
+{
+ "Alterac Valley": {
+  "monsters": 21,
+  "most": 54,
+  "top": 62
+ },
+ "Arathi Basin": {
+  "monsters": 1,
+  "most": 1,
+  "top": 1
+ },
+ "Blackfathom Deeps": {
+  "monsters": 29,
+  "most": 25,
+  "top": 28
+ },
+ "Blackrock Depths": {
+  "monsters": 23,
+  "most": 54,
+  "top": 60
+ },
+ "Blackrock Spire": {
+  "monsters": 81,
+  "most": 58,
+  "top": 62
+ },
+ "Blackwing Lair": {
+  "monsters": 25,
+  "most": 62,
+  "top": 63
+ },
+ "Deeprun Tram": {
+  "monsters": 1,
+  "most": 41,
+  "top": 41
+ },
+ "Dire Maul": {
+  "monsters": 66,
+  "most": 57,
+  "top": 62
+ },
+ "Gnomeregan": {
+  "monsters": 28,
+  "most": 29,
+  "top": 34
+ },
+ "Maraudon": {
+  "monsters": 35,
+  "most": 46,
+  "top": 51
+ },
+ "Molten Core": {
+  "monsters": 28,
+  "most": 62,
+  "top": 63
+ },
+ "Naxxramas": {
+  "monsters": 75,
+  "most": 61,
+  "top": 63
+ },
+ "Onyxia's Lair": {
+  "monsters": 2,
+  "most": 61,
+  "top": 63
+ },
+ "Ragefire Chasm": {
+  "monsters": 11,
+  "most": 13,
+  "top": 16
+ },
+ "Razorfen Downs": {
+  "monsters": 20,
+  "most": 37,
+  "top": 41
+ },
+ "Razorfen Kraul": {
+  "monsters": 39,
+  "most": 28,
+  "top": 33
+ },
+ "Ruins of Ahn'Qiraj": {
+  "monsters": 31,
+  "most": 61,
+  "top": 63
+ },
+ "Scarlet Monastery": {
+  "monsters": 35,
+  "most": 35,
+  "top": 42
+ },
+ "Scholomance": {
+  "monsters": 41,
+  "most": 59,
+  "top": 62
+ },
+ "Shadowfang Keep": {
+  "monsters": 25,
+  "most": 22,
+  "top": 26
+ },
+ "Stratholme": {
+  "monsters": 54,
+  "most": 58,
+  "top": 62
+ },
+ "Temple of Ahn'Qiraj": {
+  "monsters": 36,
+  "most": 62,
+  "top": 63
+ },
+ "The Deadmines": {
+  "monsters": 24,
+  "most": 19,
+  "top": 21
+ },
+ "The Stockade": {
+  "monsters": 11,
+  "most": 25,
+  "top": 29
+ },
+ "The Temple of Atal'Hakkar": {
+  "monsters": 33,
+  "most": 49,
+  "top": 55
+ },
+ "Uldaman": {
+  "monsters": 34,
+  "most": 43,
+  "top": 47
+ },
+ "Wailing Caverns": {
+  "monsters": 21,
+  "most": 20,
+  "top": 22
+ },
+ "Zul'Farrak": {
+  "monsters": 26,
+  "most": 45,
+  "top": 48
+ },
+ "Zul'Gurub": {
+  "monsters": 46,
+  "most": 61,
+  "top": 63
+ }
+}

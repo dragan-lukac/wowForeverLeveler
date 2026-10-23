@@ -12,6 +12,8 @@ import math
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Our dungeon names (Forever Loot) that QuestieDB writes differently (data/dungeon_levels.json).
+LEVEL_NAMES = {'Sunken Temple': "The Temple of Atal'Hakkar"}
 SOURCE = os.path.join(ROOT, 'data', 'guide.json')
 GUIDE_MD = os.path.join(ROOT, 'guide.md')
 GUIDE_JS = os.path.join(ROOT, 'data', 'guide.js')
@@ -533,6 +535,8 @@ def addon_plan(g):
                 'Searing Gorge': 1427, 'Burning Steppes': 1428, 'Blasted Lands': 1419}
     pickups, runs = {}, []
     zone_name = {m: z for z, m in zone_map.items()}
+    lpath = os.path.join(ROOT, 'data', 'dungeon_levels.json')
+    dungeon_levels = json.load(open(lpath, encoding='utf-8')) if os.path.exists(lpath) else {}
     gpath = os.path.join(ROOT, 'data', 'dungeon_givers.json')
     givers = json.load(open(gpath, encoding='utf-8')) if os.path.exists(gpath) else {}
     dpath = os.path.join(ROOT, 'data', 'dungeons.js')
@@ -547,8 +551,13 @@ def addon_plan(g):
                 continue
             lo, hi = (int(x) for x in str(d['levels']).split('-')) if '-' in str(d['levels']) else (0, 0)
             if lo:
+                # When to run it: from the level most of its monsters have to the last boss's level (QuestieDB,
+                # data/dungeon_levels.json); without monster levels (the dungeons new in Forever) the old rule of
+                # thumb, 30% to 60% of the dungeon's level range.
+                mob = dungeon_levels.get(LEVEL_NAMES.get(d['name'], d['name']))
+                run_from, run_to = (mob['most'], mob['top']) if mob else (lo + round(0.3 * (hi - lo)), lo + round(0.6 * (hi - lo)))
                 runs.append({'name': d['name'], 'from': lo, 'to': hi, 'zone': dg.get('zoneOf', {}).get(d['name'], ''),
-                             'runFrom': lo + round(0.3 * (hi - lo)), 'runTo': lo + round(0.6 * (hi - lo))})
+                             'runFrom': run_from, 'runTo': run_to, **({'levelsFrom': 'monsters'} if mob else {})})
             seen, inside = set(), []
             for q in d.get('quests', []):
                 st = dict(q.get('start') or {})
@@ -718,6 +727,10 @@ def addon_plan(g):
             'gatherNodes': {profs[c]['name']: {k: v for k, v in profs[c].get('nodes', {}).items() if isinstance(v, int)}
                             for c in ('herb', 'mine')},
             'pickups': pickups, 'runs': sorted(runs, key=lambda r: r['from']),
+            # Cooking / First Aid: which monsters drop each material (data/reagent_drops.json, QuestieDB), and the
+            # recipes with their materials, learn skill, grey skill and source ("From your bags" in the window).
+            'reagentDrops': reagent_drops(),
+            'cookRecipes': cook_recipes(),
             'routeChoices': [{'id': c['id'], 'options': [{'name': o['name'], 'zones': o['zones']} for o in c['options']]}
                              for c in g.get('routeChoices', [])],
             'dungeonChains': [{'name': c['name'], 'dungeons': c['dungeons'], 'note': c.get('note', '')}
@@ -909,6 +922,32 @@ def tracked_items(g):
             names.add(recipe)
             names.update(reagents)
     return sorted(names)
+
+
+def reagent_drops():
+    """data/reagent_drops.json, or {} when it is not built yet."""
+    p = os.path.join(ROOT, 'data', 'reagent_drops.json')
+    return json.load(open(p, encoding='utf-8')) if os.path.exists(p) else {}
+
+
+def cook_recipes():
+    """Cooking and First Aid recipes: {profession: {recipe: {r = {material: n}, learn, grey, src}}}."""
+    p = os.path.join(ROOT, 'data', 'forever_recipes.json')
+    if not os.path.exists(p):
+        return {}
+    profs = json.load(open(p, encoding='utf-8'))['professions']
+    # Holiday recipes (Winter Veil, Hallow's End): their vendors stand only during the event.
+    holiday = {'Gingerbread Cookie', 'Egg Nog', 'Candy Cane', 'Graccu\'s Mince Meat Fruitcake', 'Spiced Beef Jerky'}
+    out = {}
+    for prof in ('Cooking', 'First Aid'):
+        for name, r in profs.get(prof, {}).items():
+            if name in holiday:
+                continue
+            colors = r.get('colors') or []
+            out.setdefault(prof, {})[name] = {'r': r.get('reagents', {}), 'learn': r.get('learn') or 0,
+                                              'grey': colors[3] if len(colors) > 3 and colors[3] else None,
+                                              'src': r.get('source') or ''}
+    return out
 
 
 if __name__ == "__main__":

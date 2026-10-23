@@ -43,6 +43,14 @@ def wanted_items():
         if kit.get('bag'):
             names.add(kit['bag'])
     names.update((guide.get('shopping') or {}).get('items', {}))
+    # Cooking and First Aid recipes sold by vendors, and the fishing pole (the "From your bags" and Fishing rows).
+    with open(RECIPES, encoding='utf-8') as f:
+        prof = json.load(f)['professions']
+    for p in ('Cooking', 'First Aid'):
+        for rname, r in prof.get(p, {}).items():
+            if 'Vendor' in (r.get('source') or ''):
+                names.add('Recipe: ' + rname)
+    names.add('Fishing Pole')
     return names
 
 

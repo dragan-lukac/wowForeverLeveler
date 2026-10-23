@@ -5,6 +5,8 @@ update. Runs on every Sync (scripts/server.py) and every `make guide`, before bu
 
   - data/dungeon_givers.json (scripts/dungeon_givers.py): where each dungeon quest's giver really is.
   - data/vendor_items.json (scripts/vendor_items.py): which vendors sell each crafting material; the trainers.
+  - data/dungeon_levels.json (scripts/dungeon_levels.py): the real monster levels in each dungeon.
+  - data/reagent_drops.json (scripts/reagent_drops.py): which monsters drop each Cooking / First Aid material.
 
 Without QuestieDB installed (a fresh live install), or when a script fails, the last files stay and the sync goes on.
 """
@@ -23,8 +25,11 @@ def main():
         print('[refresh] QuestieDB not installed: dungeon givers and vendor lists kept as they are')
         return
     import dungeon_givers
+    import dungeon_levels
+    import reagent_drops
     import vendor_items
-    for name, mod in (('dungeon givers', dungeon_givers), ('vendor lists', vendor_items)):
+    for name, mod in (('dungeon givers', dungeon_givers), ('vendor lists', vendor_items), ('dungeon levels', dungeon_levels),
+                      ('material drops', reagent_drops)):
         out = io.StringIO()
         try:
             with contextlib.redirect_stdout(out):

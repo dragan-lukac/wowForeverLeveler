@@ -610,7 +610,119 @@ scanned prices are per character, not fixed). Forever-only quests seen: 91899,
    pack, plus ours), create all characters and log in on each once, close the game, `make live` again (settings
    import). Point CurseForge at `_forever_`. Banka runs to Thunder Bluff for bags, Sync. Then set the real mount
    price (`money.mountGoal.gold`) and say "launch check". Update personal/team.json first if names differ.
-8. Next session (user, 2026-10-21): make our addon's text prettier and easier to read.
+8. Addon redesign (started 2026-10-22): dividers between sections and subsections, more icons and graphics, less
+   text. Way of working: HTML mockups of one tab in two styles (A cards, B compact list), the user picks, then
+   build it in UI.lua/Planner.lua and check with a screenshot; then the other tabs. First tab: Professions. The
+   user opens the window big, now and then (professions, money, dungeons), not all the time.
+   After the redesign: a level-up reminder to pick up the dungeon quests that just opened (user idea 2026-10-22).
+   User picked A (cards), mockups-ui.html. Built for the Professions tab: core 3.40.0 rows take card ("head",
+   "body", "foot"; cardEnd = last line of a card: bottom edge and an 8 px gap), num (numbered square), right
+   (value right of the text), note ("hot" / "cold" / "temp" / "good": coloured box with an edge), big (large
+   icon), bar.color and bar.label. Planner 2.9.0: one card per profession (icon, name, rank, skill bar, tag),
+   numbered steps with icons, SkillUp detail split into place and cost, market / temporary notes, materials.
+   Seen in game (user): "really like the change", headers too dark -> core 3.40.1 header colour 0.45/0.31/0.14.
+   New: /wflp next|dungeons|prof|team opens that tab (again closes); key bindings WFL_TOGGLE and WFL_PROFESSIONS
+   (Key Bindings, AddOns, no default keys); globals WFL_ToggleWindow(), WFL_ShowTab(key) for macros.
+   Planner 2.10.0: cards on every tab (user: "really like the new look, apply it to all other places"):
+   Cardify() turns each section into a card (head: medium brown, yellow title, cream text via HeadText; the
+   lines under it inside); group = true keeps a title outside (Dungeons tab: "Dungeon chains", "Dungeons").
+   Note: C.GOLD is dark brown (QuestTitleFont), unreadable on the header: header text is cream |cffeadfb8.
+   Chain run order uses num. The old Quests addon window is not restyled.
+    Core 3.40.2 + Planner 2.10.1: group titles (line.group) are a banner (dark band 0.20/0.13/0.06, bold font +3,
+    yellow title, cream subtitle, 10 px above); every second card header (line.alt) is caramel 0.58/0.42/0.20
+    (user: chains and dungeons looked insignificant, wanted alternating row colours).
+    Core 3.40.3 + Planner 2.11.0 (user: more icons in Next, buy and sell parts more distinct): icons for every row
+    kind (STEP_ICON, PROF_ICON moved above Rows, which now takes prof), Pair() rows get icons (dungeon step: quest
+    take / turn-in icon), Next profession sub-headers with icon and skill bar. Colours by meaning, the same
+    everywhere: sell = red, buy = blue, craft to sell = green, hold = grey (line.tint on card headers, TINTS in
+    UI.lua; Section() takes tint). Market rows and Buy rows get the pale red / blue note.
+    Core 3.40.4 + Planner 2.12.0: stripes on every second row inside cards (Stripe(): a row = a line with a title or
+    icon; lines under it keep its stripe; darker inside cards, 0.13), stronger header alternation (0.42/0.28/0.12 vs
+    0.63/0.46/0.22). Icons: class icons (ClassIcon_<Class>, not checked that the Forever client has them) in Team
+    rotation and Legacy, profession icons in Legacy, map icon on dungeon zone headings, key icon on Spelunker tiers.
+    Market Hold rows neutral (were green by mistake).
+    Planner 2.13.0 (user: too much colour, text in two rows; "BAD: Professions inside text, GOOD: Team inside
+    text"; likes icon per row and one block per row): every row like the Team tab's: icon, bold text, one grey line
+    under it (kind · place · cost). No numbered squares, no right-aligned cost, no pale note boxes inside cards;
+    buy / sell by title colour (BUY_C blue, SELL_C red, TEMP_C gold, craft green). Rows(), Pair(), Professions
+    cards and Market rows changed. Card header colours (alternating, Market tints) and row stripes stay.
+    Core 3.40.5 + Planner 2.13.1: no chat lines on clicks in our window: TomTom AddWaypoint silent = true,
+    FindVendor(item, quiet) from window clicks (/wfl buy still prints), SkillUp Navigate / OpenRecipes run in
+    Quietly() (drops chat lines with "SkillUp" or "TomTom" during the call).
+    Core 3.40.6 + Planner 2.13.2 (tuned in 3.40.9: light 0.80/0.70/0.51, dark 0.56/0.40/0.19): every second card header (alt) has no dark fill (card paper 0.965/0.93/0.84,
+    gold edge), dark brown title (ALT_TITLE), grey-brown summary (AltText); the others dark brown 0.42/0.28/0.12
+    with yellow title. Tinted headers (Market) never alternate.
+    Core 3.40.10 + Planner 2.14.0: the Dungeons tab banners ("Dungeon chains", "Dungeons", no subtitles now) fold
+    like cards (section ids g:chains / g:dungeons, open by default; Cardify leaves group lines alone). Fake-game
+    view "Dungeons tab (chains folded)" added.
+    Core 3.41.0 + Planner 2.15.0 (user: optimise Next, links to other tabs): WFL.OpenTab(key, section) opens a tab
+    with that card expanded and scrolls to it (win.scrollTo / scrollY in RefreshWindow). Next: per profession one
+    row (icon, name, skill bar; click = its card in Professions) plus its first step and the temporary line;
+    link lines (Link(): blue text with "›") to the dungeon stop, the whole team, all Legacy points. Shorter
+    texts on all tabs: MarketShort ("X cheap: buy now", "X price high: sell now"), temporary "drop it at the X
+    trainer, <zone>". Fake-game view of a link added.
+    Planner 2.15.1: the bank's Next tab (NextBank) had no links (user on Banka: "clicks are not opening anything"):
+    links to the Market tab (sell list), Team materials and the whole team; its sell / buy lines open the Market tab
+    at that list (red / blue), the craft line at Craft to sell.
+    Planner 2.15.2 (user: links on the rows, no extra "… ›" link lines): Link() replaced by LinkRows(lines, from,
+    key, section): the rows just added that have no arrow or action open the tab. Dungeons in Next: the After row;
+    Team; Legacy; bank Mail ("No new mail" / "Mail materials to: ..."). Bank Market rows already link.
+    Core 3.41.1: a card opened by a link glows gold (row texture glow, win.flash = the section) until the mouse goes
+    over its header (OnEnter clears win.flash).
+    Core 3.42.0 + Planner 2.16.0: the glow marks the exact row that was clicked: WFL.OpenTab(key, section, match);
+    in the opened card the first line whose text holds match glows (else the card header), and the window scrolls
+    to it. Glow = a rounded gold BackdropTemplate frame (tooltip border) that pulses (Alpha animation, BOUNCE),
+    built on first use, cleared on hover. Matches: dungeon After quest name, team character name, Legacy class /
+    profession, bank market item / recipe. Fake game: date shim; a link view with a match. Note: fake frames answer
+    unknown fields with a function, so per-row state lives in locals, not b.<field>.
+    Core 3.42.1 + Planner 2.16.1: a row only links when it has something to highlight (LinkRows skips rows without
+    a match; TeamName() matches team members only; bank mail: only "Mail materials to"; bank market: only rows with
+    an item). Glow: a steady soft gold frame plus a brighter edge that flashes in fading waves (Alpha steps 1 ->
+    0.15 -> 0.75 -> 0.1 -> 0.45 -> 0, about 2.4 s, once per glow; redraws do not restart it).
+    Core 3.43.0 (user: "still not glowing, I want a light effect", like the new-spell glow in the spellbook): the
+    highlight is additive gold light (SetBlendMode ADD): a 12 px halo fading outward from the four edges (gradient
+    textures, SetGradient + CreateColor, fallback SetGradientAlpha), a 2 px bright edge line, a faint wash. Fading
+    flash waves, then a slow looping pulse (0.5 <-> 0.95, 1.1 s, BOUNCE) until hover. Not seen in game yet.
+    Core 3.43.1: a dark frame (0.16/0.09/0.03, 0.88) 12 px around the row under the light, so it shows on the paper
+    (user: "not that visible because the background is light").
+    Core 3.44.0: brighter, wider light (16 px gold halo plus a 6 px near-white core layer, the light adds up; edge
+    line near-white) and a spotlight: a veil (four dark areas, 0.55, clipped by the scroll frame) dims the rest of the
+    list for 1.8 s, fades out in 0.8 s; the glow stays (user: "brilliant").
+    Planner 2.17.0, texts tightened (bold line = what to do, grey line = where / how much, built by Detail(), which
+    leaves out the kind when the bold line starts with it): Make rows "N Recipe → goal" with "Sells X (max 10) ·
+    disenchant Y" in the extra; "Learn Mining (10c)" + "Drop Enchanting first · trainer"; "Drop for Skinning ·
+    zone"; "Recipe: X" + "vendor · place not known"; chain rows "lvl 35-42 · zone"; no Professions summary in Next;
+    Team / Legacy / Market summaries and help lines cut; "none" for empty counts; fixed empty "()" in dungeon After.
+    Planner 2.17.1: no "Now" / "After" words (user: clutter): Pair() shows now as full colour, bold, coloured icon,
+    the place in grey; after as one quiet grey line with a desaturated icon. Bank Next: the Mail card only when
+    HasNewMail(). Planner 2.17.2: no generic "sell at most 10" anywhere (user); "small market: sell a few" only when the
+    item usually has fewer than 5 listed (PLAN.prices qtyUsual).
+    Planner 2.18.0 (user: too many hot items, hot was green, "buy 412 back later" not wanted): MarketState by price
+    only: hot = now >= 1.3 x usual, flooded = now <= 0.75 x usual (the listed count no longer counts on its own; it
+    jumps around during the day). Hot = flame icon + red word (HOT / FLAME), no buy-back text.
+    Core 3.45.0 + Planner 2.19.0 (user on Sveti: buy and sell only, no crafts; and where are my materials):
+    SkillUp's API gives at most 3 steps and puts a buy step per missing material first, pushing the craft out:
+    SkillUpRows now shows the next 2 route recipes (entry.recipes: "N Name → toRank", "learn it first (skill X)"),
+    then at most 2 other steps. Crafting cards add "Craft X to sell · +N each" (Market() crafts for this character
+    and profession, green). Material rows: WFL.MaterialWhere(item) -> holders on this realm ("Banka 40 · You 12"),
+    shown in grey under the material, bar on the right.
+    Core 3.45.1: item tooltips get "WFL: Banka 40 · Sveti 12 · You 3" when anyone other than you holds the item
+    (user on Banka could not find where Light Leather was: holders only showed on crafter cards and Team materials).
+    Forever folder check (2026-10-22): same _forever_ install (wowf, account ACA10, realm 93) as the stress test,
+    all beta addons plus Questie / QuestieDB, ours newest, Main layout, bindings = save, Brightness 60, quest
+    tracking off, SkillUp tracker off. Portrait hide rules removed by the user on purpose (do not restore); the
+    only Edit Mode Tweaks rule left is on EditModeSystemSettingsDialog (/emt reset clears it).
+10. Cooking and fishing help (proposed 2026-10-22, waiting for the user's go): (1) a SkillUp "Buy N <meat>" step
+    becomes "Kill <mob> for N <meat>, <zone>" from QuestieDB item npcDrops (monsters near the player's level, on
+    the route; no drop chances in QuestieDB); fish: "Fish: <fish>". (2) Cooking card "From your bags": recipes that
+    use a meat or fish the character carries, not known yet, with where to learn (trainer / recipe vendor via
+    vendor_items / quest). (3) A "Learn Fishing at <trainer>: fish to level Cooking" card for characters without
+    Fishing. Point 1 also helps cloth and hides for Tailoring, Leatherworking and First Aid.
+9. Dungeon run levels (done 2026-10-22): new scripts/dungeon_levels.py (in refresh_data.py) reads QuestieDB's NPC
+   levels per dungeon zone (support/Forever/Zones/dungeons.lua): run range = median monster level to the top
+   (last boss). Pick-up levels were no use (RFC quests at 9, monsters 13-16). The 3 new Forever dungeons (Ruins
+   of Lordaeron 16611, Excavation Site 16732, Dalaran 16544) have NPCs without levels in QuestieDB yet: rule of
+   thumb stays for them. Sunken Temple = "The Temple of Atal'Hakkar" in QuestieDB (LEVEL_NAMES).
 
 **Next (user's priority, 2026-10-13):** (gold tips from Gillee's video are built: First Aid bandage profit line,
 level 60 "quests give gold" note, "best Tue/Thu evening" on the AH tooltip line)
@@ -678,6 +790,15 @@ and update section 3 if Blizzard changed an API.
 
 Newest first. One short entry per session.
 
+- **2026-10-23** (Claude, cooking and fishing): Core 3.46.0, Planner 2.20.0. New `scripts/reagent_drops.py`
+  (runs in `refresh_data.py`) writes `data/reagent_drops.json`: which monsters drop each Cooking / First Aid
+  material, or "fish". Plan.lua gets `reagentDrops` and `cookRecipes` (holiday recipes left out). Professions tab:
+  a SkillUp "Buy 10 Chunk of Boar Meat" becomes "Kill <monster> for 10 Chunk of Boar Meat" with an arrow (monster
+  nearest your level, your map first); Cooking / First Aid cards list up to 4 recipes for materials in your bags,
+  with where to learn them (starter recipes with no source skipped); a Fishing card (Learn Fishing, Fishing Pole,
+  nearest vendor) when Fishing is not learned. Level-up reminder: on PLAYER_LEVEL_UP a chat line and a top-screen
+  line name the dungeon quests that open at the new level. `vendor_items.py` also lists recipe and Fishing Pole
+  vendors (`WFL.NearestVendor`). Fake-game test has a cook view and the level-up check. Not yet seen in the game.
 - **2026-10-21** (Claude, addons): Edit Mode Tweaks supports Forever (1.60.1); `settings_transfer.py` also copies
   its per-character file (guessed name SavedVariables/EditModeTweaks.lua, check after install). Forever Loot and DFL
   Dungeon Journal are not needed in game: Sync (build_roster.py) now keeps the last data/dungeons.js data for a

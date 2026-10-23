@@ -7799,9 +7799,9 @@
         "why": "Change layer (a copy of the zone) to find free mobs and nodes. Kept for live, where the zones are full (user, 2026-10-21)."
       },
       {
-        "name": "HandyNotes + Books",
-        "folder": "HandyNotes",
-        "why": "Map pins for the library book quest: 10, 20 and 30 tomes give blue rewards. Kept (user, 2026-10-21)."
+        "name": "Books on map (Forever)",
+        "folder": "Books_on_map_Forever",
+        "why": "Library book pins on the map: 10, 20 and 30 tomes give blue rewards. Works on its own (replaces HandyNotes + Books). Installed 2026-10-23."
       }
     ],
     "dataOnly": [

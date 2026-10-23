@@ -449,7 +449,8 @@ local function SetArrow(point)
     pcall(ClearOldWaypoints) -- a SkillUp Forever arrow goes too: one arrow at a time
     if point then
         arrowUid = TomTom:AddWaypoint(point.mapID, point.x / 100, point.y / 100, { title = point.title,
-            from = "WoW Forever Leveler", world = true, minimap = true, crazy = true, persistent = false, cleardistance = 8 })
+            from = "WoW Forever Leveler", world = true, minimap = true, crazy = true, persistent = false, cleardistance = 8,
+            silent = true }) -- no "Added a waypoint" chat line
     end
 end
 
@@ -579,6 +580,65 @@ local function FlatButton(parent, label, w, h, red)
     return b
 end
 
+-- Card look of a row (see MakeRow): dark header or light body, gold edges (top on the header, bottom on the last
+-- line), and a coloured note box inside.
+local NOTE_COLORS = {
+    hot = { 0.96, 0.82, 0.78, 0.64, 0.15, 0.10 },   -- sell now: price high
+    cold = { 0.83, 0.89, 0.95, 0.12, 0.36, 0.56 },  -- buy now: price low
+    temp = { 0.95, 0.87, 0.66, 0.48, 0.30, 0.00 },  -- a temporary profession
+    good = { 0.85, 0.93, 0.78, 0.17, 0.42, 0.12 },  -- something ready
+}
+-- Header colours by meaning (line.tint): the same everywhere a list is about selling, buying or crafting.
+local TINTS = {
+    sell = { 0.55, 0.20, 0.13 },  -- red: sell now
+    buy = { 0.17, 0.33, 0.52 },   -- blue: buy now
+    craft = { 0.24, 0.43, 0.17 }, -- green: craft to sell
+    hold = { 0.40, 0.37, 0.33 },  -- grey: keep for later
+}
+local function CardLook(r, card, note, pad, last, alt, group, tint)
+    if group then
+        -- A title over several cards (line.group): a dark band across the window with a gold line under it.
+        r.cardBg:SetColorTexture(0.20, 0.13, 0.06, 1)
+        r.cardBg:Show()
+        r.cardEdges.L:Hide(); r.cardEdges.R:Hide(); r.cardEdges.T:Hide()
+        r.cardEdges.B:Show()
+    elseif card then
+        -- Header: a warm medium brown (the first dark one, 0.23/0.17/0.11, was too dark: user, 2026-10-22); every
+        -- second header (line.alt) a lighter caramel, so a long list of closed cards reads in stripes.
+        if card == "head" and tint and TINTS[tint] then
+            local t = TINTS[tint]
+            r.cardBg:SetColorTexture(t[1], t[2], t[3], 1)
+        elseif card == "head" then
+            -- Every second header (alt) has no dark fill at all: the card's light paper, gold edge, dark text
+            -- (user, 2026-10-22: more contrast than a paler brown).
+            -- Tuned 2026-10-22: the light one a little darker than the card's paper, the dark one a little lighter.
+            if alt then r.cardBg:SetColorTexture(0.80, 0.70, 0.51, 1) else r.cardBg:SetColorTexture(0.56, 0.40, 0.19, 1) end
+        else r.cardBg:SetColorTexture(0.965, 0.93, 0.84, 1) end
+        r.cardBg:Show()
+        r.cardEdges.L:Show(); r.cardEdges.R:Show()
+        r.cardEdges.T:SetShown(card == "head")
+        r.cardEdges.B:SetShown(card == "foot" or card == "head" or last)
+    else
+        r.cardBg:Hide()
+        for _, t in pairs(r.cardEdges) do t:Hide() end
+    end
+    local c = note and NOTE_COLORS[note]
+    if c then
+        r.noteBg:ClearAllPoints()
+        r.noteBg:SetPoint("TOPLEFT", pad, -1)
+        r.noteBg:SetPoint("BOTTOMRIGHT", -pad, 1)
+        r.noteBg:SetColorTexture(c[1], c[2], c[3], 1)
+        r.noteEdge:ClearAllPoints()
+        r.noteEdge:SetPoint("TOPLEFT", r.noteBg, "TOPLEFT")
+        r.noteEdge:SetPoint("BOTTOMLEFT", r.noteBg, "BOTTOMLEFT")
+        r.noteEdge:SetWidth(3)
+        r.noteEdge:SetColorTexture(c[4], c[5], c[6], 1)
+        r.noteBg:Show(); r.noteEdge:Show()
+    else
+        r.noteBg:Hide(); r.noteEdge:Hide()
+    end
+end
+
 local function RefreshWindow(win)
     if not win.panel or not win.panel:IsShown() then return end
     local ws = WinSettings(win)
@@ -588,6 +648,7 @@ local function RefreshWindow(win)
     local font = ws.font or 13
     local width = win.scroll:GetWidth() - 4
     local y = 0
+    local curSection, flashDone, flashHead
     for i, line in ipairs(lines) do
         local r = win.row(i)
         -- No coordinates anywhere (user, 2026-10-21): the zone name and the arrow are enough. Data texts can carry
@@ -596,32 +657,67 @@ local function RefreshWindow(win)
         if line.title then line.title = NoCoords(line.title) end
         r.point, r.section, r.open, r.skipId, r.tip, r.item = line.point, line.section, line.open, line.skipId, line.tip, line.item
         r.click = line.click
-        SetFontSafe(r.text, FONT, font)
+        local card = line.card
+        local pad = (card or line.group) and 7 or 0 -- lines in a card keep away from its edges
+        CardLook(r, card, line.note, pad, line.cardEnd, line.alt, line.group, line.tint)
+        SetFontSafe(r.text, line.group and FONT_BOLD or FONT, line.group and (font + 3) or font)
         -- Title rows: the topic icon and the instruction; detail rows are indented.
-        local indent = 0
+        local indent = pad
         if line.section then
             r.fold:SetTexture(line.open and "Interface\\Buttons\\UI-MinusButton-Up" or "Interface\\Buttons\\UI-PlusButton-Up")
             r.fold:SetSize(font + 2, font + 2)
+            r.fold:ClearAllPoints()
+            r.fold:SetPoint("TOPLEFT", pad, (card == "head" or line.group) and -6 or -2)
             r.fold:Show()
-            indent = font + 6
+            indent = pad + font + 6
         else
             r.fold:Hide()
         end
+        -- A step number in front of the icon.
+        if line.num then
+            local sz = font + 4
+            r.numBg:ClearAllPoints()
+            r.numBg:SetPoint("TOPLEFT", indent, card == "head" and -5 or -1)
+            r.numBg:SetSize(sz, sz)
+            r.numBg:Show()
+            SetFontSafe(r.num, FONT_BOLD, math.max(9, font - 2))
+            r.num:SetText(tostring(line.num))
+            r.num:Show()
+            indent = indent + sz + 5
+        else
+            r.numBg:Hide(); r.num:Hide()
+        end
         if line.icon then
             r.icon:ClearAllPoints()
-            r.icon:SetPoint("TOPLEFT", indent, -1)
+            r.icon:SetPoint("TOPLEFT", indent, card == "head" and -4 or -1)
             r.icon:SetTexture(line.icon)
             if r.icon.SetDesaturated then r.icon:SetDesaturated(line.desat and true or false) end
-            r.icon:SetSize(font + 5, font + 5)
+            local isz = line.big and (font + 14) or (font + 5)
+            r.icon:SetSize(isz, isz)
             r.icon:Show()
-            indent = indent + font + 10
+            indent = indent + isz + 5
         else
             r.icon:Hide()
-            if not line.section and not line.plain then indent = font + 10 end
+            if not line.section and not line.plain then indent = indent + font + 10 end
         end
         -- A material row: the name on the left half, a bar with "have / need" inside it on the right half.
-        local barW = line.bar and math.floor((width - indent) * 0.5) or 0
-        local avail = width - indent - (line.point and 26 or 0) - (line.bar and (barW + 6) or 0)
+        local barW = line.bar and math.floor((width - indent - pad) * 0.5) or 0
+        -- The value on the right, before the arrow box.
+        local rightW = 0
+        if line.right and line.right ~= "" then
+            SetFontSafe(r.right, FONT, math.max(9, font - 1))
+            r.right:SetText(line.right)
+            r.right:SetWidth(0)
+            rightW = r.right:GetStringWidth() + 2
+            r.right:SetWidth(rightW)
+            r.right:ClearAllPoints()
+            r.right:SetPoint("TOPRIGHT", r, "TOPRIGHT", -(pad + ((line.point or line.click) and 26 or 2) + (line.bar and (barW + 6) or 0)), card == "head" and -6 or -2)
+            r.right:SetTextColor(0.24, 0.16, 0.08)
+            r.right:Show()
+        else
+            r.right:Hide()
+        end
+        local avail = width - indent - pad - (line.point and 26 or 0) - (line.bar and (barW + 6) or 0) - (rightW > 0 and rightW + 6 or 0)
         local textH
         r.text:ClearAllPoints()
         r.text:SetJustifyH("LEFT")
@@ -632,7 +728,7 @@ local function RefreshWindow(win)
             local c = line.titleColor or (line.section and COLORS.section or COLORS.quest)
             r.title:SetTextColor(c[1], c[2], c[3])
             r.title:ClearAllPoints()
-            r.title:SetPoint("TOPLEFT", indent, -2)
+            r.title:SetPoint("TOPLEFT", indent, card == "head" and -5 or -2)
             r.title:SetWidth(0)
             r.title:SetText(line.title)
             local tw = r.title:GetStringWidth()
@@ -648,21 +744,21 @@ local function RefreshWindow(win)
                 local oneLine = line.inline and not rest:find("\n")
                 if oneLine and tw + 8 + nw <= avail then
                     if line.section then
-                        r.text:SetPoint("TOPRIGHT", r, "TOPRIGHT", -(line.point and 28 or 4), -2)
+                        r.text:SetPoint("TOPRIGHT", r, "TOPRIGHT", -(pad + (line.point and 28 or 4)), card == "head" and -5 or -2)
                         r.text:SetJustifyH("RIGHT")
                     else
                         r.text:SetPoint("TOPLEFT", indent + tw + 6, -2)
                     end
                     r.text:SetWidth(nw + 2)
                 else
-                    r.text:SetPoint("TOPLEFT", indent, -3 - th)
+                    r.text:SetPoint("TOPLEFT", indent, (card == "head" and -6 or -3) - th)
                     r.text:SetWidth(avail)
                     textH = th + 1 + r.text:GetStringHeight()
                 end
             end
         else
             r.title:Hide()
-            r.text:SetPoint("TOPLEFT", indent, -2)
+            r.text:SetPoint("TOPLEFT", indent, line.group and -7 or -2)
             r.text:SetWidth(avail)
             r.text:SetText(line.text)
             textH = r.text:GetStringHeight()
@@ -670,39 +766,81 @@ local function RefreshWindow(win)
         if line.bar then
             local bar = r.makeBar()
             bar:ClearAllPoints()
-            bar:SetPoint("TOPRIGHT", r, "TOPRIGHT", -2, -1)
+            bar:SetPoint("TOPRIGHT", r, "TOPRIGHT", -(2 + pad), card == "head" and -5 or -1)
             bar:SetSize(barW, font + 5)
             bar:SetMinMaxValues(0, math.max(1, line.bar.need))
             bar:SetValue(math.min(line.bar.have, line.bar.need))
-            if line.bar.have >= line.bar.need then bar:SetStatusBarColor(0.85, 0.65, 0.15) else bar:SetStatusBarColor(0.25, 0.6, 0.2) end
+            if line.bar.color then bar:SetStatusBarColor(line.bar.color[1], line.bar.color[2], line.bar.color[3])
+            elseif line.bar.have >= line.bar.need then bar:SetStatusBarColor(0.85, 0.65, 0.15) else bar:SetStatusBarColor(0.25, 0.6, 0.2) end
             SetFontSafe(bar.label, FONT_BOLD, math.max(9, font - 1), "OUTLINE")
             bar.label:SetTextColor(1, 1, 1)
-            bar.label:SetText(line.bar.have .. " / " .. line.bar.need)
+            bar.label:SetText(line.bar.label or (line.bar.have .. " / " .. line.bar.need))
             bar:Show()
         elseif r.matBar then
             r.matBar:Hide()
         end
         if line.point then
+            r.arrow:ClearAllPoints()
+            r.arrow:SetPoint("TOPRIGHT", -pad, (card == "head" and -2 or 2))
             local sel = Settings().selected
             r.arrow:SetChecked(sel and sel.key == PointKey(line.point) or false)
             r.arrow:Show()
         else
             r.arrow:Hide()
         end
-        local h = math.max(textH, font + (line.bar and 5 or 0)) + (line.section and 8 or 4)
+        local h = math.max(textH, font + (line.bar and 5 or 0), line.big and (font + 14) or 0, line.num and (font + 4) or 0)
+                  + (line.section and 8 or 4) + (card == "head" and 6 or 0) + (card == "foot" and 4 or 0) + (line.note and 4 or 0)
+                  + (line.group and 10 or 0)
         r:SetSize(width, h)
-        if line.section then r.band:Show() else r.band:Hide() end
-        if line.stripe and not line.section then r.stripe:Show() else r.stripe:Hide() end
-        if line.section and i > 2 then r.sep:Show() else r.sep:Hide() end
+        if line.section and not card and not line.group then r.band:Show() else r.band:Hide() end
+        if line.stripe and not line.section then
+            -- Inside a card the paper is lighter, so the stripe is darker there.
+            if card then r.stripe:SetColorTexture(0.55, 0.35, 0.1, 0.13) else r.stripe:SetColorTexture(0.55, 0.35, 0.1, 0.06) end
+            r.stripe:Show()
+        else
+            r.stripe:Hide()
+        end
+        if line.section and i > 2 and not card and not line.group then r.sep:Show() else r.sep:Hide() end
         r:ClearAllPoints()
-        if line.section and i > 2 then y = y + 4 end
+        if line.section and i > 2 and not card and not line.group then y = y + 4 end
+        if line.group and i > 1 then y = y + 10 end -- room above a group title
         if line.gap then y = y + line.gap end
         r:SetPoint("TOPLEFT", win.child, "TOPLEFT", 2, -y)
+        -- The row a link pointed at: inside the linked card, the first line whose text holds flash.match, else the
+        -- card's header. It glows and is what the window scrolls to.
+        if line.section then curSection = line.section end
+        local f = win.flash
+        local hit = false
+        if f and not flashDone and curSection == f.section then
+            if not f.match then
+                hit = line.section == f.section
+            else
+                local hay = ((line.title or "") .. " " .. (line.text or "")):lower()
+                hit = hay:find(f.match:lower(), 1, true) ~= nil and not line.section
+            end
+        end
+        if hit then flashDone = true end
+        if f and line.section == f.section then flashHead = r end
+        r.glowing = hit
+        r.setGlow(hit)
+        if hit and win.scrollTo then win.scrollY = math.max(0, y - 20) end
+        if win.scrollTo and line.section == win.scrollTo and not win.scrollY then win.scrollY = y end
         r:Show()
-        y = y + h
+        y = y + h + (line.cardEnd and 8 or 0) -- a gap after each card
     end
     for i = #lines + 1, #win.rows do win.rows[i]:Hide() end
+    -- The clicked thing was not found in the card: its header glows instead.
+    if win.flash and not flashDone and flashHead then flashHead.glowing = true; flashHead.setGlow(true) end
     win.child:SetHeight(y + 8)
+    -- WFL.OpenTab asked for a card: scroll it to the top once the new height is known.
+    if win.scrollTo then
+        local target = win.scrollY or 0
+        win.scrollTo, win.scrollY = nil, nil
+        if C_Timer then C_Timer.After(0, function()
+            local range = tonumber(win.scroll:GetVerticalScrollRange()) or target
+            win.scroll:SetVerticalScroll(math.min(target, range))
+        end) end
+    end
     -- What the open/close-all button works on, and its label.
     win.sections = {}
     local anyClosed = false
@@ -773,6 +911,184 @@ local function MakeRow(win, i)
     b.stripe:SetAllPoints()
     b.stripe:SetColorTexture(0.55, 0.35, 0.1, 0.06)
     -- Plus / minus in front of every title row: open or closed at a glance.
+    -- Cards (line.card = "head" / "body" / "foot"): a box with a dark header and gold edges around a group of
+    -- lines, and coloured notes inside (line.note = "hot" sell now, "cold" buy now, "temp" temporary). 3.40.0.
+    b.cardBg = b:CreateTexture(nil, "BACKGROUND", nil, -6)
+    b.cardBg:SetAllPoints()
+    b.cardEdges = {}
+    for _, side in ipairs({ "L", "R", "T", "B" }) do
+        local t = b:CreateTexture(nil, "BORDER")
+        t:SetColorTexture(0.54, 0.42, 0.17, 1)
+        b.cardEdges[side] = t
+    end
+    b.cardEdges.L:SetPoint("TOPLEFT"); b.cardEdges.L:SetPoint("BOTTOMLEFT"); b.cardEdges.L:SetWidth(1)
+    b.cardEdges.R:SetPoint("TOPRIGHT"); b.cardEdges.R:SetPoint("BOTTOMRIGHT"); b.cardEdges.R:SetWidth(1)
+    b.cardEdges.T:SetPoint("TOPLEFT"); b.cardEdges.T:SetPoint("TOPRIGHT"); b.cardEdges.T:SetHeight(1)
+    b.cardEdges.B:SetPoint("BOTTOMLEFT"); b.cardEdges.B:SetPoint("BOTTOMRIGHT"); b.cardEdges.B:SetHeight(1)
+    -- The glow on the row a link pointed at (win.flash): a rounded gold frame that pulses, until the mouse goes over
+    -- it. Built the first time it is needed.
+    -- The light on the row a link pointed at (win.flash): additive gold light (it adds to what is behind it, like the
+    -- game's proc glow on action buttons): a halo fading outward from the four edges, a thin bright edge line and a
+    -- faint wash over the row. It flashes in fading waves (strong, weaker, weaker), then stays as a steady glow until
+    -- the mouse goes over the row (user, 2026-10-22). Built the first time it is needed; a redraw does not restart it.
+    local halo, veil, active
+    -- Spotlight: for about two seconds everything else in the window dims, then the dimming fades away and the glow
+    -- stays (user, 2026-10-22). Four large dark areas around the row; the scroll frame clips them to the window.
+    local function BuildVeil()
+        local v = CreateFrame("Frame", nil, b)
+        v:SetAllPoints()
+        v:SetFrameLevel(b:GetFrameLevel() + 3) -- under the light, over the other rows
+        if v.EnableMouse then v:EnableMouse(false) end
+        local FAR = 3000
+        local function Dark()
+            local t = v:CreateTexture(nil, "BACKGROUND")
+            t:SetColorTexture(0, 0, 0, 0.55)
+            return t
+        end
+        local up = Dark(); up:SetPoint("BOTTOMLEFT", v, "TOPLEFT", -FAR, 0); up:SetPoint("BOTTOMRIGHT", v, "TOPRIGHT", FAR, 0); up:SetHeight(FAR)
+        local down = Dark(); down:SetPoint("TOPLEFT", v, "BOTTOMLEFT", -FAR, 0); down:SetPoint("TOPRIGHT", v, "BOTTOMRIGHT", FAR, 0); down:SetHeight(FAR)
+        local left = Dark(); left:SetPoint("TOPRIGHT", v, "TOPLEFT", 0, 0); left:SetPoint("BOTTOMRIGHT", v, "BOTTOMLEFT", 0, 0); left:SetWidth(FAR)
+        local right = Dark(); right:SetPoint("TOPLEFT", v, "TOPRIGHT", 0, 0); right:SetPoint("BOTTOMLEFT", v, "BOTTOMRIGHT", 0, 0); right:SetWidth(FAR)
+        pcall(function()
+            local ag = v:CreateAnimationGroup()
+            local hold = ag:CreateAnimation("Alpha")
+            hold:SetFromAlpha(1); hold:SetToAlpha(1); hold:SetDuration(1.8); hold:SetOrder(1)
+            local fade = ag:CreateAnimation("Alpha")
+            fade:SetFromAlpha(1); fade:SetToAlpha(0); fade:SetDuration(0.8); fade:SetOrder(2)
+            if ag.SetToFinalAlpha then ag:SetToFinalAlpha(true) end
+            ag:SetScript("OnFinished", function() v:Hide() end)
+            v.fade = ag
+        end)
+        return v
+    end
+    local GOLD_LIGHT = { 1, 0.78, 0.25 }
+    local WHITE_LIGHT = { 1, 0.96, 0.78 }
+    local function Gradient(t, orientation, a1, a2, c)
+        c = c or GOLD_LIGHT
+        t:SetTexture("Interface\\Buttons\\WHITE8X8")
+        if CreateColor and t.SetGradient then
+            pcall(t.SetGradient, t, orientation, CreateColor(c[1], c[2], c[3], a1), CreateColor(c[1], c[2], c[3], a2))
+        elseif t.SetGradientAlpha then
+            pcall(t.SetGradientAlpha, t, orientation, c[1], c[2], c[3], a1, c[1], c[2], c[3], a2)
+        else
+            t:SetColorTexture(c[1], c[2], c[3], (a1 + a2) / 2)
+        end
+        if t.SetBlendMode then t:SetBlendMode("ADD") end
+    end
+    local function BuildHalo()
+        local f = CreateFrame("Frame", nil, b)
+        f:SetAllPoints()
+        f:SetFrameLevel(b:GetFrameLevel() + 4)
+        if f.EnableMouse then f:EnableMouse(false) end
+        local W = 16 -- how far the light reaches out of the row
+        -- A dark frame around the row under the light, so the gold shows on the light paper (user, 2026-10-22).
+        -- Inside the row the paper and the text stay as they are.
+        for _, d in ipairs({ { "BOTTOMLEFT", "TOPLEFT", "BOTTOMRIGHT", "TOPRIGHT", true }, { "TOPLEFT", "BOTTOMLEFT", "TOPRIGHT", "BOTTOMRIGHT", true },
+                              { "TOPRIGHT", "TOPLEFT", "BOTTOMRIGHT", "BOTTOMLEFT", false }, { "TOPLEFT", "TOPRIGHT", "BOTTOMLEFT", "BOTTOMRIGHT", false } }) do
+            local t = f:CreateTexture(nil, "ARTWORK")
+            t:SetColorTexture(0.16, 0.09, 0.03, 0.88)
+            if d[5] then
+                t:SetPoint(d[1], f, d[2], -W, 0); t:SetPoint(d[3], f, d[4], W, 0); t:SetHeight(W)
+            else
+                t:SetPoint(d[1], f, d[2], 0, 0); t:SetPoint(d[3], f, d[4], 0, 0); t:SetWidth(W)
+            end
+        end
+        local top = f:CreateTexture(nil, "OVERLAY")
+        top:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 0, 0); top:SetPoint("BOTTOMRIGHT", f, "TOPRIGHT", 0, 0); top:SetHeight(W)
+        Gradient(top, "VERTICAL", 0.9, 0)       -- bright at the row, fading upward
+        local bottom = f:CreateTexture(nil, "OVERLAY")
+        bottom:SetPoint("TOPLEFT", f, "BOTTOMLEFT", 0, 0); bottom:SetPoint("TOPRIGHT", f, "BOTTOMRIGHT", 0, 0); bottom:SetHeight(W)
+        Gradient(bottom, "VERTICAL", 0, 0.9)    -- bright at the row, fading downward
+        local left = f:CreateTexture(nil, "OVERLAY")
+        left:SetPoint("TOPRIGHT", f, "TOPLEFT", 0, 0); left:SetPoint("BOTTOMRIGHT", f, "BOTTOMLEFT", 0, 0); left:SetWidth(W)
+        Gradient(left, "HORIZONTAL", 0, 0.9)
+        local right = f:CreateTexture(nil, "OVERLAY")
+        right:SetPoint("TOPLEFT", f, "TOPRIGHT", 0, 0); right:SetPoint("BOTTOMLEFT", f, "BOTTOMRIGHT", 0, 0); right:SetWidth(W)
+        Gradient(right, "HORIZONTAL", 0.9, 0)
+        -- A near-white core close to the row, over the gold: two layers of light add up, so the edge burns brighter.
+        local C = 6
+        local t2 = f:CreateTexture(nil, "OVERLAY", nil, 2)
+        t2:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 0, 0); t2:SetPoint("BOTTOMRIGHT", f, "TOPRIGHT", 0, 0); t2:SetHeight(C)
+        Gradient(t2, "VERTICAL", 1, 0, WHITE_LIGHT)
+        local b2 = f:CreateTexture(nil, "OVERLAY", nil, 2)
+        b2:SetPoint("TOPLEFT", f, "BOTTOMLEFT", 0, 0); b2:SetPoint("TOPRIGHT", f, "BOTTOMRIGHT", 0, 0); b2:SetHeight(C)
+        Gradient(b2, "VERTICAL", 0, 1, WHITE_LIGHT)
+        local l2 = f:CreateTexture(nil, "OVERLAY", nil, 2)
+        l2:SetPoint("TOPRIGHT", f, "TOPLEFT", 0, 0); l2:SetPoint("BOTTOMRIGHT", f, "BOTTOMLEFT", 0, 0); l2:SetWidth(C)
+        Gradient(l2, "HORIZONTAL", 0, 1, WHITE_LIGHT)
+        local r2 = f:CreateTexture(nil, "OVERLAY", nil, 2)
+        r2:SetPoint("TOPLEFT", f, "TOPRIGHT", 0, 0); r2:SetPoint("BOTTOMLEFT", f, "BOTTOMRIGHT", 0, 0); r2:SetWidth(C)
+        Gradient(r2, "HORIZONTAL", 1, 0, WHITE_LIGHT)
+        -- The thin bright edge and the faint wash.
+        for _, e in ipairs({ { "TOPLEFT", "TOPRIGHT", true }, { "BOTTOMLEFT", "BOTTOMRIGHT", true }, { "TOPLEFT", "BOTTOMLEFT", false }, { "TOPRIGHT", "BOTTOMRIGHT", false } }) do
+            local t = f:CreateTexture(nil, "OVERLAY")
+            t:SetColorTexture(1, 0.97, 0.8, 1)
+            if t.SetBlendMode then t:SetBlendMode("ADD") end
+            t:SetPoint(e[1]); t:SetPoint(e[2])
+            if e[3] then t:SetHeight(2) else t:SetWidth(2) end
+        end
+        local wash = f:CreateTexture(nil, "OVERLAY")
+        wash:SetAllPoints()
+        wash:SetColorTexture(1, 0.8, 0.3, 0.14)
+        if wash.SetBlendMode then wash:SetBlendMode("ADD") end
+        pcall(function()
+            local ag = f:CreateAnimationGroup()
+            -- Waves: full, a dip, weaker, a dip, weaker, then settle on a steady glow.
+            local steps = { { 1, 0.25, 0.4 }, { 0.25, 0.9, 0.3 }, { 0.9, 0.3, 0.45 }, { 0.3, 0.75, 0.3 }, { 0.75, 0.5, 0.6 } }
+            for i, st in ipairs(steps) do
+                local an = ag:CreateAnimation("Alpha")
+                an:SetFromAlpha(st[1]); an:SetToAlpha(st[2]); an:SetDuration(st[3]); an:SetOrder(i)
+            end
+            if ag.SetToFinalAlpha then ag:SetToFinalAlpha(true) end
+            f.waves = ag
+            -- Then a slow pulse that keeps going, like the glow on a new spell in the spellbook.
+            local pulse = f:CreateAnimationGroup()
+            pulse:SetLooping("BOUNCE")
+            local p = pulse:CreateAnimation("Alpha")
+            p:SetFromAlpha(0.5); p:SetToAlpha(0.95); p:SetDuration(1.1)
+            if p.SetSmoothing then p:SetSmoothing("IN_OUT") end
+            f.pulse = pulse
+            ag:SetScript("OnFinished", function() if f:IsShown() then pulse:Play() end end)
+        end)
+        return f
+    end
+    b.setGlow = function(on)
+        if not on then
+            active = false
+            if halo then
+                if halo.pulse then halo.pulse:Stop() end
+                halo:Hide()
+            end
+            if veil then
+                if veil.fade then veil.fade:Stop() end
+                veil:Hide()
+            end
+            return
+        end
+        if active then return end
+        active = true
+        halo = halo or BuildHalo()
+        veil = veil or BuildVeil()
+        veil:Show()
+        veil:SetAlpha(1)
+        if veil.fade then veil.fade:Stop(); veil.fade:Play() else C_Timer.After(2, function() veil:Hide() end) end
+        halo:Show()
+        halo:SetAlpha(1)
+        if halo.pulse then halo.pulse:Stop() end
+        if halo.waves then halo.waves:Stop(); halo.waves:Play() else halo:SetAlpha(0.6) end
+    end
+    b.noteBg = b:CreateTexture(nil, "BACKGROUND", nil, -4)
+    b.noteEdge = b:CreateTexture(nil, "BORDER")
+    -- The number of a step: a small dark square with a gold digit.
+    b.numBg = b:CreateTexture(nil, "ARTWORK")
+    b.numBg:SetColorTexture(0.23, 0.17, 0.11, 1)
+    b.num = b:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    b.num:SetPoint("CENTER", b.numBg, "CENTER", 0, 0)
+    b.num:SetTextColor(1, 0.82, 0)
+    -- A value on the right (a cost, a level).
+    b.right = b:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+    b.right:SetShadowOffset(0, 0)
+    b.right:SetJustifyH("RIGHT")
     b.fold = b:CreateTexture(nil, "ARTWORK")
     b.fold:SetPoint("TOPLEFT", 0, -2)
     b.icon = b:CreateTexture(nil, "ARTWORK")
@@ -806,6 +1122,7 @@ local function MakeRow(win, i)
     end
     -- Details on hover (NPC, spot, what a material is for), like the game's own tooltips.
     b:SetScript("OnEnter", function(self)
+        if self.glowing then win.flash = nil; self.glowing = false; self.setGlow(false) end
         if not self.tip and not self.item then return end
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
         -- An item line shows the game's own item tooltip, then our lines under it.
@@ -850,7 +1167,7 @@ local function MakeRow(win, i)
         end
         -- A material line (an item without its own place): find the nearest vendor that sells it.
         if self.item and not self.point and not self.section then
-            FindVendor(self.item)
+            FindVendor(self.item, true) -- quiet: the arrow is enough, no chat line (user, 2026-10-22)
             return
         end
         if self.section then
@@ -1705,6 +2022,21 @@ local function MaterialHave(item)
     return n
 end
 
+-- Who holds an item: { { name = "Banka", n = 40 }, ... } from every character's saved bag and bank counts on this
+-- realm, most first; the character you play is "You" (user, 2026-10-22: know whom to ask for a mail).
+local function MaterialWhere(item)
+    local out, realm, me = {}, GetRealmName and GetRealmName() or "", UnitName("player")
+    for key, counts in pairs(Settings().have or {}) do
+        local n = counts[item] or 0
+        local name, r = key:match("^([^-]+)%-(.+)$")
+        if n > 0 and (not r or r == realm) then
+            table.insert(out, { name = (name == me) and "You" or (name or key), n = n })
+        end
+    end
+    table.sort(out, function(a, b) return a.n > b.n end)
+    return out
+end
+
 local function ItemIcon(item)
     local id = WoWForeverLevelerItemIDs and WoWForeverLevelerItemIDs[item]
     local icon = id and ((C_Item and C_Item.GetItemIconByID and C_Item.GetItemIconByID(id)) or (GetItemIcon and GetItemIcon(id)))
@@ -2005,7 +2337,16 @@ local function AddAdvice(tooltip)
     if need then
         tooltip:AddLine("|cffffd100WFL:|r |cffa0a0ffTeam needs about " .. need.total .. " (" .. need.by .. ")|r", 1, 1, 1, true)
     end
-    if (ok and advice) or need or gather then tooltip:Show() end
+    -- Who on the team holds it (saved bag and bank counts), when someone other than you does (user, 2026-10-22).
+    local held = MaterialWhere(name)
+    local others = false
+    for _, w in ipairs(held) do if w.name ~= "You" then others = true end end
+    if others then
+        local parts = {}
+        for i, w in ipairs(held) do if i <= 5 then table.insert(parts, w.name .. " " .. w.n) end end
+        tooltip:AddLine("|cffffd100WFL:|r |cffffffff" .. table.concat(parts, " \194\183 ") .. "|r", 1, 1, 1, true)
+    end
+    if (ok and advice) or need or gather or others then tooltip:Show() end
 end
 
 local function HookTooltips()
@@ -2069,8 +2410,9 @@ local function NearestVendors(item, count)
     return out
 end
 
-FindVendor = function(item)
+FindVendor = function(item, quiet)
     if not item then return end
+    local print = quiet and function() end or print
     local list = NearestVendors(item, 1)
     if #list == 0 then
         print("|cffffd100WFL:|r no vendor known for " .. item .. ".")
@@ -2165,8 +2507,29 @@ WFL.menu = MENU
 WFL.ItemLink, WFL.InsertItem, WFL.TrainerPoint = ItemLink, InsertItem, TrainerPoint
 WFL.OwnCount, WFL.ShopPrice, WFL.ItemVendorPoint, WFL.VendorPoint = OwnCount, ShopPrice, ItemVendorPoint, VendorPoint
 WFL.FindVendor, WFL.FindVendorByName, WFL.NamedTrainerPoint = FindVendor, FindVendorByName, NamedTrainerPoint
+WFL.MaterialWhere = MaterialWhere
+-- The nearest vendor of an item (QuestieDB vendor lists in Plan.lua) as an arrow point and "NPC, zone", or nil.
+WFL.NearestVendor = function(item)
+    local e = (NearestVendors(item, 1) or {})[1]
+    if not e then return nil end
+    return { mapID = e.m, x = e.x, y = e.y, title = e.v.n .. " (" .. item .. ")", npc = e.v.n }, e.v.n .. ", " .. MapName(e.m)
+end
 -- Select a map point (arrow, map pin, WFL Prof macro); the same point again clears it.
 WFL.Select = function(point) Select(point) end
+-- Open the window on a tab with one card (section id) expanded and scrolled to: links between tabs (2026-10-22).
+WFL.OpenTab = function(key, section, match)
+    local win = windows.main
+    if not win then return end
+    local ws = WinSettings(win)
+    if section then
+        local k = key == "prof" and "open" or ("open_" .. key)
+        ws[k] = ws[k] or {}
+        ws[k][section] = true
+        win.scrollTo, win.flash = section, { section = section, match = match }
+    end
+    win.panel:Show()
+    win.showTab(key)
+end
 -- No arrow at all: our selection cleared and every waypoint from us or SkillUp Forever removed.
 WFL.ClearArrows = function()
     local st = Settings()
@@ -2271,5 +2634,14 @@ SlashCmdList["WFLPANEL"] = function(msg)
         print("|cffffd100WoW Forever Leveler:|r target button " .. (s.targetShown and "on" or "off"))
         return
     end
+    -- /wflp next | dungeons | prof | team: open the window on that tab (the same again closes it).
+    local tab = ({ next = "next", dungeons = "dg", dg = "dg", prof = "prof2", professions = "prof2", team = "team" })[(msg or ""):lower()]
+    if tab then ShowTab(tab) return end
     Toggle()
 end
+
+-- For key bindings (Bindings.xml) and macros: /run WFL_ShowTab("prof2").
+function WFL_ToggleWindow() Toggle() end
+function WFL_ShowTab(key) ShowTab(key) end
+BINDING_NAME_WFL_TOGGLE = "Open or close the window"
+BINDING_NAME_WFL_PROFESSIONS = "Open the Professions tab"

@@ -33,6 +33,8 @@ CRAFTER = 'crafter' in sys.argv  # crafting professions instead of the gathering
 EK = "ek" in sys.argv  # the 20-30 route choice "Eastern Kingdoms"
 
 FAKE_GAME = r'''
+date = date or (os and os.date) or function() return '' end
+
 TEXTS, ATTR, MACROS = {}, {}, {}
 local function fake()
   local f = { scripts = {} }
@@ -135,22 +137,46 @@ def main():
         show('Dungeons tab (Ragefire Chasm open)', 'WoWForeverLevelerUI.tab = "dg"; '
              'WoWForeverLevelerUI.open_dg = { ["d:Ragefire Chasm"] = true, ["d:Wailing Caverns"] = true }; '
              'local onQuest = C_QuestLog.IsOnQuest; C_QuestLog.IsOnQuest = function(id) return id == 5761 or onQuest(id) end')
+        show('Dungeons tab (chains folded)', 'WoWForeverLevelerUI.tab = "dg"; WoWForeverLevelerUI.open_dg = { ["g:chains"] = false }')
+        # A link from Next: the Dungeons tab with "Shadowfang Keep" open (WFL.OpenTab).
+        show('Link: WFL.OpenTab("dg", "d:Shadowfang Keep", "Arugal Must Die")', 'WoWForeverLevelerUI.open_dg = {}; WFL.OpenTab("dg", "d:Shadowfang Keep", "Arugal Must Die")')
         show('Professions tab', 'WoWForeverLevelerUI.tab = "prof2"; WoWForeverLevelerUI.have = { ["Alt-Realm"] = { ["Linen Cloth"] = 88 } }')
         if CRAFTER:
             # SkillUp Forever installed: its API steps and reagents replace our craft steps for Tailoring.
             show('Professions tab (SkillUp Forever)', 'C_Item = C_Item or {}; C_Item.GetItemNameByID = function(id) return ({ [2589] = "Linen Cloth", [2320] = "Coarse Thread" })[id] end; '
                  'NAVIGATED = nil; SkillUpForever = { API = { version = 1, '
                  'Professions = function() return { { name = "Tailoring", skillLineID = 197, rank = 60, maxRank = 75, steps = { '
-                 '{ kind = "buy", text = "Buy 10 Coarse Thread", detail = "Krugosh, Razor Hill \194\183 50c", nav = true }, '
+                 '{ kind = "buy", text = "Buy 10 Coarse Thread", detail = "Krugosh, Razor Hill \\194\\183 50c", nav = true }, '
                  '{ kind = "craft", text = "Craft 10 Heavy Linen Gloves", detail = "60 to 70", nav = false }, '
-                 '{ kind = "train", text = "Train Journeyman Tailoring", detail = "Snang, Orgrimmar \194\183 5s", nav = true } }, '
+                 '{ kind = "train", text = "Train Journeyman Tailoring", detail = "Snang, Orgrimmar \\194\\183 5s", nav = true } }, '
+                 'recipes = { { name = "Heavy Linen Gloves", count = 10, fromRank = 60, toRank = 70, learned = true }, '
+                 '{ name = "Reinforced Linen Cape", count = 5, fromRank = 70, toRank = 75, learned = false, trainAt = 60 } }, '
                  'reagents = { { itemID = 2589, need = 200, have = 40 }, { itemID = 2320, need = 10, have = 0 } } } } end, '
                  'Navigate = function(line, i) NAVIGATED = i; return true end, OpenRecipes = function() return true end } }; '
                  'WoWForeverLevelerUI.tab = "prof2"')
+        # A cook without Fishing, boar meat in the bags; SkillUp says "Buy 10 Chunk of Boar Meat".
+        show('Professions tab (cook, no Fishing, boar meat in bags)',
+             'SKILLS = { { "Cooking", 12, 75 }, { "First Aid", 45, 75 } }; '
+             'C_Item = C_Item or {}; C_Item.GetItemNameByID = function(id) return ({ [769] = "Chunk of Boar Meat" })[id] end; '
+             'C_Item.GetItemCount = function(it) return (it == "Chunk of Boar Meat" or it == 769) and 6 or (it == "Small Egg" and 3) or 0 end; '
+             'SkillUpForever = { API = { version = 1, Professions = function() return { { name = "Cooking", skillLineID = 185, rank = 12, maxRank = 75, steps = { '
+             '{ kind = "buy", text = "Buy 10 Chunk of Boar Meat", itemID = 769, count = 10, nav = true } }, recipes = {}, reagents = {} } } end, '
+             'Navigate = function() return true end, OpenRecipes = function() return true end } }; '
+             'WoWForeverLevelerUI.tab = "prof2"')
+        lua.execute('SkillUpForever = nil; C_Item.GetItemCount = nil; '
+                    'SKILLS = { { "Mining", 11, 75 }, { "Skinning", 61, 75 }, { "Cooking", 12, 75 }, { "First Aid", 45, 75 }, { "Fishing", 5, 75 } }')
         show('Team tab', 'WoWForeverLevelerUI.tab = "team"')
         # The bank character: Next shows market and mail, the Market tab replaces Dungeons and Professions.
         show('Bank: Next tab', 'UnitName = function() return "Banka" end; WoWForeverLevelerUI.tab = "next"')
         show('Bank: Market tab', 'WoWForeverLevelerUI.tab = "market"; WoWForeverLevelerUI.have = { ["Alt-Realm"] = { ["Linen Cloth"] = 400, ["Copper Ore"] = 60 } }')
+        print('\n=== Level-up reminder (level 9 opens the Ragefire Chasm quests)')
+        lua.execute('CHAT = {}; DEFAULT_CHAT_FRAME = { AddMessage = function(self, m) table.insert(CHAT, m) end }; '
+                    'UIErrorsFrame = { AddMessage = function(self, m) table.insert(CHAT, "[top] " .. m) end }; '
+                    'local lvl = UnitLevel; UnitLevel = function() return 9 end; '
+                    'for _, f in pairs(FRAMES) do local h = f.scripts and f.scripts.OnEvent; if h then pcall(h, f, "PLAYER_LEVEL_UP", 9) end end; '
+                    'UnitLevel = lvl')
+        for m in g.CHAT.values():
+            print(plain(m))
         return
     show('Now tab', 'WoWForeverLevelerUI.tab = "now"; WoWForeverLevelerUI.open_now = { cook = true, aid = true, fish = true, gather = true, camp = true }')
     show('Route tab (Dungeon chain 1 and Wailing Caverns open)', 'WoWForeverLevelerUI.tab = "route"; WoWForeverLevelerUI.open_route = { ["chain:Dungeon chain 1"] = true, ["dg:Wailing Caverns"] = true }')
