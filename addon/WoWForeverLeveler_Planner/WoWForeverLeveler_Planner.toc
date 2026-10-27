@@ -2,8 +2,9 @@
 ## Title: WoW Forever Leveler - Planner
 ## Notes: The overview window for your team: Next, Dungeons, Professions, Team; the bank character gets Next, Market, Team. Quests come from another guide (Polestar). Needs WoW Forever Leveler.
 ## Author: Antigravity
-## Version: 2.20.0
+## Version: 2.27.0
 ## IconTexture: Interface\Icons\INV_Misc_Spyglass_02
 ## Dependencies: WoWForeverLeveler
 
+Alert.lua
 Planner.lua

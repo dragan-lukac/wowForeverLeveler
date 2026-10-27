@@ -116,17 +116,17 @@ A leveling, profession and money system for 9 Horde characters plus a bank chara
   ("Play first") first. First gold goal: level 40 mount (100 gold until Blizzard announces the price).
 - **Names** (WoW Forever needs first + last name; only the full name must be free in the region):
 
-  | Group | Class | Name | Plan professions |
+  | Group | Class | Name | Plan professions (2026-10-24 replan) |
   |---|---|---|---|
-  | 1 (Play first, reserve these 3) | Tauren Hunter | Kaspin Lovac (was Lovac Kasapin, name rules, 2026-10-16) | Skinning + Herbalism |
-  | 1 | Orc Warlock | Vestac Zla | Tailoring + Enchanting |
-  | 1 | Undead Paladin | Pally Rifle (was Pala Rifle, 2026-10-16) | Mining + Skinning |
-  | 2 | Undead Priest | Nemrtvi Svestenik | Skinning + Mining |
-  | 2 | Troll Shaman | Sveti Munja | Alchemy + Leatherworking (4th in rotation, 2026-10-14) |
-  | 2 | Orc Warrior | Konan Unistitelj (was Konan Ratnik, 2026-10-16) | Mining + Blacksmithing (5th, fixed 2026-10-16) |
-  | 3 | Undead Mage | More Vatre | Skinning + Herbalism |
-  | 3 | Undead Rogue | Ubica Propalitet | Mining + Engineering (6th, fixed 2026-10-16) |
-  | 3 | Skyborne Druid (was Tauren, 2026-10-15) | Travar Vracevgajski (was Travar Baum, 2026-10-16) | Alchemy + Engineering |
+  | 1 (plays 1st) | Tauren Hunter | Kaspin Lovac | Skinning + Herbalism |
+  | 1 (2nd) | Orc Warlock | Vestac Zla | Skinning + Mining |
+  | 1 (3rd) | Undead Priest, Holy, dungeons | Sveti Sava or Jovan Krstitelj (picked on launch day; was Nemrtvi Svestenik) | Enchanting + Tailoring |
+  | 1 (4th) | Troll Shaman, Enhancement | Duh Elemenata or Elementalni Duh (picked on launch day; was Sveti Munja) | Herbalism + Skinning to 20, then Alchemy + Leatherworking |
+  | 1 (5th) | Orc (maybe Tauren) Warrior, Protection, dungeons | Konan Unistitelj | Mining + Skinning, then Blacksmithing + Engineering; First Aid |
+  | 2 (6th) | Undead Rogue | Ubica Propalitet | Mining + Engineering; First Aid |
+  | 2 | Undead Paladin | Pally Rifle | Mining + Skinning |
+  | 2 | Undead Mage | More Vatre | Skinning + Herbalism |
+  | 2 | Skyborne Druid | Travar Vracevgajski | Alchemy + Engineering |
   | bank | Tauren Warrior (female) | Banka Posta | none; stays in Thunder Bluff |
 
   No spare first names (removed 2026-10-16): if a name is taken, the user picks a new one.
@@ -555,6 +555,10 @@ hold / sell), legacy (Rested XP and Legacy point cards above the character grid)
 
 ## 6. Plan / open to-do list
 
+**Remind the user (asked 2026-10-26):** SKTools installed 2026-10-27 (folder SKTools; turn off its 3 Meta
+folders). Try **Threat Plates** in a
+dungeon on live. Check Improved Auto Shot Timer vs Shot Window (both do almost the same).
+
 **Try on live (money ideas from the beta):**
 - **Video "WoW Forever Fresh Server Guide: How to Get Ahead on Day One" (World of Wyland, 2026-10-16, read
   2026-10-19), not checked:** first weeks = sell raw materials (Linen Cloth, Ruined Leather Scraps, Light Leather,
@@ -790,6 +794,89 @@ and update section 3 if Blizzard changed an API.
 
 Newest first. One short entry per session.
 
+- **2026-10-27** (Claude): SKTools 1.6.4 installed by the user (folder `SKTools`, Interface 16001 included); its
+  Meta folders are retail-only. Install reminder cleared; Threat Plates still to try on live.
+- **2026-10-26** (Claude, names): Priest = Sveti Sava or Jovan Krstitelj, shaman = Duh Elemenata or Elementalni
+  Duh; the user picks on launch day. personal/team.json `alts` [{name, lastName}] (backup
+  team-2026-10-26-before-names.json); team.py turns them into `altNames`; Plan.lua paths, reserved, dungeonLevelers
+  and rares carry every name; settings_transfer uses the name whose character folder exists. Path texts say "the
+  priest" / "the shaman". Once the names are picked, drop the unused alt.
+- **2026-10-26** (Claude, rares): Planner 2.27.0. guide.json `rares` (11 rares from the Uncas video: Barrens set,
+  Alliance Outrunners, Stonetalon, Heartrazor, Creepthess) with the item, stats, who it is for (character ids) and
+  "group needed". User: the Barrens set needs only 2 pieces (+5% run speed): Kaspin takes ring + cloak, Sveti the
+  neck; the Whipfang dagger is for Konan too. New `scripts/rares.py` (in refresh_data) -> `data/rares.json` (QuestieDB
+  spawn, level, drops; names as the game spells them: Aean Swiftriver, Hannah Bladeleaf). Next tab "Rares" card
+  from 2 character levels below the rare until you own or wear the item (max 3, arrow), and a big alert once.
+  Install reminders noted in section 6 and memory (SKTools, Threat Plates).
+- **2026-10-26** (Claude, addon list): guide.json `addons` now matches the Forever folder: needed + OPie,
+  Minimap Button: Forever, Improved Auto Shot Timer, Shot Window; optional + Threat Plates (try in a dungeon on live).
+  SKTools is listed but not installed yet.
+- **2026-10-26** (Claude, addons): Classic test addon works (user ran `/wfltest`; gameplay test later). SKTools
+  (Silverkitty, CurseForge) added to guide.json `addons.needed`: Easy Fishing (one key: cast, reel, loot; /sk >
+  Professions > Easy Fishing), fishing and gathering logs. The user installs it; check its folder name afterwards.
+- **2026-10-26** (Claude, alerts for everything on Next + Classic test): Planner 2.26.0. The alert display moved to
+  `addon/WoWForeverLeveler_Planner/Alert.lua` (`WFL_Alert(text, where, icon)`: big gold text, epic-loot sound, chat
+  line, queue). New alerts: new herbs / ores per gathering skill step (Plan.lua gatherNodes), a dungeon chain whose
+  quests are due, and new dungeon quests at a level-up (the small UIErrorsFrame line is gone). All 5 paths end with
+  an optional Cozy Sleeping Bag step at character level 20 (video, not checked; route in FACTS.md). New addon
+  `WoWForeverLeveler_ClassicTest` (Interface 11508, 11507) for WoW Classic: the same Alert.lua fired by money
+  (20c, 25c, 90c, 1s), level-up, every 5 skill points, new skills; `/wfltest`, `/wfltest 3`, `/wfltest off`; log in
+  `WFLClassicTestLog`. `make addon` puts only it into `_classic_era_` / `_anniversary_` / `_classic_` (removed the old
+  Forever addon copies from `_classic_era_`). Not run in the real Classic client yet.
+- **2026-10-24** (Claude, less text): Planner 2.25.0. Dungeons tab shows only chains and dungeons that start
+  within 10 character levels, plus "N more for later character levels" (was ~65 lines at every level). Team tab
+  "Legacy points" is folded by default. A gathering profession your path takes from the free book reads "Free
+  Herbalism book: quest A Humble Task" instead of "Learn Herbalism (10c)". New team field `reserved` (items, or
+  "Herbalism" = every herb; Kaspin and Sveti) -> Plan.lua `reserved`: no cooking recipe rows for them.
+- **2026-10-24** (Claude, level words): Planner 2.24.0. User rule: every level in the window says what it is:
+  "skill 50" for a profession, "character level 10" for the character, "monster level", "quest level". Ranks read
+  "Journeyman (5s) at skill 50 and character level 10". In reports to the user, give levels only where they matter.
+- **2026-10-24** (Claude, rank alerts + Kaspin simulation): Planner alerts also fire for every new profession
+  rank (skill, level and known cost met; once per rank). New `tests/simulate_path.py` plays Kaspin 1-20 in the fake
+  game with mock auction prices and prints all tabs (`personal/kaspin_1-20.txt`). Found and fixed: bag names in the
+  path ("Apprentice's Skinning Satchel", "Apprentice's Herb Pouch"; the short names never matched an item), done
+  steps now hide (profession learned / item owned), Journeyman+ trainer arrows skip Junior trainers (QuestieDB
+  "Junior ..." titles -> `junior` in Plan.lua trainers; `WFL.TrainerPoint(prof, skipJunior)`). Seen, not changed yet:
+  Dungeons tab ~65 lines and Team tab ~47 lines at every level; Market rows only reach crafters and the bank, so
+  mock prices change nothing for Kaspin.
+- **2026-10-24** (Claude, data cleanup + plan alerts): Core 3.47.0, Planner 2.23.0. New `FACTS.md` (checked facts
+  only; AGENTS.md says read it first). `vendor_items.py` now also reads one-word trainer titles (Miner, Skinner,
+  Herbalist, Fisherman, Cook, Engineer, Blacksmith, Superior ..., Leathercrafter): 157 Forever trainers, every
+  ClassicDB one included, so `build_guide.py` no longer uses `trainerDB`. `cook_recipes()` skips "Not yet confirmed"
+  recipes nobody saw (the Classic Alchemy healing potions). Paths: no "sell the scraps"; Kaspin mails Peacebloom,
+  Briarthorn, Bruiseweed to Konan (First Aid healing potions), other herbs and leather to Sveti; Konan has a
+  potion step. Plan alerts: a path step's `alert` (money, lacks, has, noItem, skill) or its level; big gold text
+  mid-screen with the epic-loot sound and a chat line, once per character (`WoWForeverLevelerUI.alertsDone`), first
+  check at login only marks; `/wflp alert` test, `/wflp alerts` off/on. Not seen in game yet.
+- **2026-10-24** (Claude, paths fixed): The first paths used ClassicDB trainers (guide.json `trainerDB`) and
+  Classic habits, not the facts in this file (Junior trainers in the start camps, free gathering books, 20c
+  Skinning + knife, 25c bags, 90c Fishing). Rewritten from the beta scans (`data/npcs.js`) and section 4 facts.
+  User rules: Skinning the moment you have 20c, its bag at 25c; Herbalism / Mining from the start-zone book quest;
+  Cooking and Fishing when the money is there; herbs go to Sveti (not Konan). Lesson: read STATUS.md first, and
+  prefer `data/npcs.js` (seen in game) over `trainerDB` (Classic). Brill Tailoring / Enchanting and the Fishing
+  trainers were not scanned on the beta.
+- **2026-10-24** (Claude, level paths): Planner 2.22.0. `personal/team.json` "path" per character (from, to, text,
+  where; backup `personal/backups/team-2026-10-24-before-paths.json`) for Kaspin, Vestac, Nemrtvi, Sveti, Konan,
+  levels 1-20: gathering first, Nemrtvi Tailoring + Enchanting in Brill at 5 (Novice's Practice Wand, one mailed to
+  Vestac; Lesser Magic Wand at Enchanting 10, Greater at 70), Konan drops Mining for Blacksmithing at 13 and keeps
+  Skinning until Engineering, Sveti (now Enhancement, solo) gathers to 20 then Alchemy + Leatherworking. Plan.lua
+  `paths`; Next tab "Your plan" card on top: the steps for your level, the next one in grey. Wand skills from our
+  game scan (1, 10, 70, 155, 175); wand character levels are estimates, check on live. The beta is uninstalled:
+  `make addon` installs only into `_forever_`.
+- **2026-10-24** (Claude, team replan): `personal/team.json` changed (backup in
+  `personal/backups/team-2026-10-24-before-replan.json`). Group 1 (first 5, all 9 professions): Kaspin skin/herb,
+  Vestac skin/mine, Nemrtvi ench/tail (Holy, dungeons, plays 3rd), Sveti alch/leath, Konan eng/bsmith (Protection,
+  dungeons). Group 2: Ubica, Pally (no order now), More, Travar. New team fields `spec`, `dungeons`; Plan.lua
+  `dungeonLevelers`, `dungeonGaps` (guide.json: 1-13, 21-24, 38-43). Planner 2.21.0: Next tab "Quest gap" row for a
+  dungeon leveler in a gap. Empty groups skipped in guide.md. Dashboard tests read the team instead of fixed names.
+  Agreed but not stored yet: First Aid only on Konan (potions too, herbs from Kaspin) and Ubica; Blacksmithing and
+  Leatherworking only to skill 20 early (Sharpening Wheel, stones, Camp Tent, ammo pouch), the rest later.
+  `/tmp/wfl-lua` venv was gone: recreated with lupa 2.4.
+- **2026-10-23** (Claude, beta removal check): Before the user uninstalls the beta: fresh settings save
+  `personal/settings-backup/2026-10-23-classic_beta` (beta played until 18:52 today), full beta WTF in
+  `personal/backups/beta-WTF-2026-10-23.tar.gz`, `make sync` run. `scan_local_wow.py` now also reads `_forever_`.
+  Without the beta: `make addon` skips the missing folder, `make live` uses the packed `addons.tar.gz`, other
+  scripts glob `_*_`. `_forever_` has every beta addon plus Questie and QuestieDB.
 - **2026-10-23** (Claude, cooking and fishing): Core 3.46.0, Planner 2.20.0. New `scripts/reagent_drops.py`
   (runs in `refresh_data.py`) writes `data/reagent_drops.json`: which monsters drop each Cooking / First Aid
   material, or "fish". Plan.lua gets `reagentDrops` and `cookRecipes` (holiday recipes left out). Professions tab:
@@ -1433,3 +1520,12 @@ Newest first. One short entry per session.
 - **2026-09-28** (Claude): Built most of the system: addon 1.1 -> 2.1.1 (modern APIs, recipes, trainers,
   vendors, auction scan), dashboard pages, SQLite history with backups, Forever beta guides, new zones and
   dungeons, race-based start zones, tests and launch check.
+- 2026-10-27: name reservation (2026-10-27 to 11-03, 3 names): reserve Lovac Kasapin (hunter, was Kaspin Lovac,
+  kept as alt), Konan Varvarin (warrior, was Konan Unistitelj), Sveti Sava (priest). RESERVED 2026-10-27 evening (EU, PvP, Horde), but Sveti Sava was taken: priest is Jovan Krstitelj
+  (WTF folder Jovan-Krstitelj). Shaman: Ilija Gromovnik, spare Sveti Ilija (no clash now).
+  Backup personal/backups/team-2026-10-27-before-reserve.json.
+- 2026-10-27: shaman renamed to Ilija Gromovnik (was Duh Elemenata / Elementalni Duh). "Sveti Ilija" not used: the
+  addon keys characters by first name, and "Sveti" is the priest (Sveti Sava). Priest alt Jovan Krstitelj dropped.
+- 2026-10-27: wand plan: Konan makes 2 Copper Shortswords after Blacksmithing and mails them to the priest, who
+  disenchants them for the Lesser Magic Wands (Ahmpy video). Money method linenPantsShuffle got a wand step.
+  Dashboard realm menu shows only live Forever realms (js/app.js filter).

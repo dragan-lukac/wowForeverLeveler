@@ -133,18 +133,32 @@ def char_dirs(acct):
     return out
 
 
-def team_by_class():
-    """{ 'hunter': 'Kaspin-Lovac', ..., 'bank': 'Banka-Posta' } from personal/team.json."""
+def team_candidates():
+    """{ 'hunter': ['Kaspin-Lovac'], 'priest': ['Sveti-Sava', 'Jovan-Krstitelj'], ... } from personal/team.json: the
+    name, then the spare names ("alts", user 2026-10-26: the name is picked on launch day)."""
     with open(TEAM, encoding='utf-8') as f:
         team = json.load(f)
     chars = dict(team.get('characters', {}))
     if team.get('bank'):
         chars['bank'] = team['bank']
-    return {k: f"{c['name']}-{c['lastName']}" for k, c in chars.items() if c.get('name') and c.get('lastName')}
+    out = {}
+    for k, c in chars.items():
+        names = [c] + list(c.get('alts') or [])
+        out[k] = [f"{n['name']}-{n['lastName']}" for n in names if n.get('name') and n.get('lastName')]
+    return {k: v for k, v in out.items() if v}
 
 
-def team_folders():
-    return list(team_by_class().values())
+def team_by_class(existing=None):
+    """{ 'hunter': 'Kaspin-Lovac', ..., 'bank': 'Banka-Posta' }: per class the name whose character folder exists
+    (existing = the account's character folders), else the first name."""
+    out = {}
+    for k, names in team_candidates().items():
+        out[k] = next((n for n in names if existing and n in existing), names[0])
+    return out
+
+
+def team_folders(existing=None):
+    return list(team_by_class(existing).values())
 
 
 def write(path, text):
@@ -220,7 +234,7 @@ def apply_to(acct, layout, cvars, files, skip=None, everyone=False):
     chars = char_dirs(acct)
     addons = addon_list(acct)
     done, missing = [], []
-    for name in (sorted(chars) if everyone else team_folders()):
+    for name in (sorted(chars) if everyone else team_folders(chars)):
         cdir = chars.get(name)
         if not cdir:
             missing.append(name)
@@ -295,7 +309,7 @@ def cmd_export(a):
             shutil.copy2(os.path.join(tdir, n), os.path.join(out, 'template', n))
     chars, classes = char_dirs(acct), []
     # Team names, or (other names, a test client) each character's class from our addon's save file there.
-    pairs = {cls: name for cls, name in team_by_class().items() if name in chars}
+    pairs = {cls: name for cls, name in team_by_class(chars).items() if name in chars}
     for name, cls in classes_from_save(acct).items():
         if name in chars and cls not in pairs:
             pairs[cls] = name
@@ -375,7 +389,7 @@ def cmd_import(a):
     print(f'Imported {os.path.relpath(src, ROOT)}: account files, addon settings, {len(values)} graphics lines.')
     apply_to(acct, layout, cvars, files, everyone=a.everyone)
     chars, put = char_dirs(acct), []
-    targets = list(team_by_class().items())
+    targets = list(team_by_class(chars).items())
     if a.everyone:
         # Other names (a test client): each character's class from our addon's save file there.
         targets = [(cls, name) for name, cls in classes_from_save(acct).items()] or targets

@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Professions Redesign</title>
+<!-- Redesign mockups for the Planner's Professions tab (2026-10-22): A = cards, B = compact list. Drawn only with what
+     the addon can draw in game: flat colours, 1-px edges, game icons (Blizzard's render server, the same icons as in game),
+     status bars. Data: a crafter with Tailoring (SkillUp Forever steps), Enchanting (our steps) and Skinning
+     (temporary). Not generated; edit by hand. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page: #1d1a16; --pageText: #e9e2d0; --muted: #a59a83; --titleText: #f2c84b;
+    --frame: #1a140e; --bar: #2b2016; --gold: #8a6a2c; --btn: #3a2b1c;
+    --paper: #efe3c5; --paper2: #f6edd6; --ink: #2b1d0e; --inkSoft: #6e5a3c; --head: #5a2d00;
+    --band: rgba(140, 90, 25, .14); --rule: rgba(115, 70, 20, .45);
+    --good: #1e7a1e; --goodBg: #d9ecc8; --hot: #a3261a; --hotBg: #f6d2c8; --cold: #1f5c8f; --coldBg: #d3e3f1;
+    --temp: #7a4d00; --tempBg: #f3dfa8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--pageText); font: 15px/1.45 -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 18px 16px 4px; max-width: 1100px; margin: 0 auto; }
+  h1 { font: 600 22px/1.2 Georgia, serif; margin: 0 0 6px; color: var(--titleText); }
+  header p { margin: 4px 0; color: var(--muted); max-width: 900px; }
+  .row { display: flex; gap: 28px; flex-wrap: wrap; padding: 12px 16px 40px; max-width: 1100px; margin: 0 auto; align-items: flex-start; justify-content: center; }
+  .col h2 { font: 600 17px Georgia, serif; color: var(--titleText); margin: 6px 0 2px; }
+  .col .why { color: var(--muted); font-size: 13px; margin: 0 0 10px; max-width: 420px; }
+
+  /* The window frame, as in game. */
+  .win { width: 420px; display: flex; flex-direction: column; background: var(--frame); outline: 1px solid #000; padding: 2px;
+         font-family: "Noto Sans", sans-serif; }
+  .win * { font-family: "Noto Sans", sans-serif; }
+  .tbar { display: flex; align-items: center; gap: 6px; padding: 3px 6px 3px 8px; background: var(--bar); border: 1px solid var(--gold); border-bottom: 0; }
+  .tbar .t { flex: 1; font: 700 12px "Noto Sans"; color: #ffd100; }
+  .tbar .x { background: #5a1410; color: #ffdcb0; border: 1px solid var(--gold); font: 700 11px "Noto Sans"; width: 18px; height: 18px; }
+  .tabs { display: flex; gap: 4px; padding: 3px 6px 0; background: var(--bar); border: 1px solid var(--gold); border-width: 0 1px; }
+  .tabs span { flex: 1; text-align: center; background: var(--btn); color: #c9b27a; border: 1px solid #6b5228; border-bottom: 0; font: 700 12px "Noto Sans"; padding: 3px 4px; }
+  .tabs span.on { background: var(--paper); color: var(--head); border-color: var(--gold); }
+  .paper { background: var(--paper); color: var(--ink); border: 1px solid var(--gold); border-top: 0; padding: 8px; font-size: 13px; }
+
+  .ic { width: 20px; height: 20px; flex: none; border: 1px solid #000; background: #3a2b1c center/cover; }
+  .ic.big { width: 30px; height: 30px; }
+  .ic.sm { width: 16px; height: 16px; }
+
+  /* --- A: cards --------------------------------------------------------------------------------------------- */
+  .card { background: var(--paper2); border: 1px solid var(--gold); margin-bottom: 10px; }
+  .card .head { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: #3a2b1c; border-bottom: 1px solid var(--gold); }
+  .card .head .name { font-weight: 700; color: #ffd100; font-size: 14px; }
+  .card .head .rank { color: #c9b27a; font-size: 11px; }
+  .card .head .grow { flex: 1; }
+  .skill { position: relative; height: 14px; background: #1a140e; border: 1px solid #000; }
+  .skill i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(#3f9a2e, #256b18); }
+  .skill b { position: relative; display: block; text-align: center; font: 700 10px/12px "Noto Sans"; color: #fff; text-shadow: 0 1px 0 #000; }
+  .tag { font: 700 10px/1 "Noto Sans"; padding: 3px 5px; border: 1px solid; text-transform: uppercase; letter-spacing: .03em; }
+  .tag.temp { color: var(--temp); background: var(--tempBg); border-color: #b98a2a; }
+  .tag.su { color: #2b5d1f; background: #dcebc8; border-color: #7aa25a; }
+  .steps { padding: 4px 0; }
+  .step { display: flex; align-items: center; gap: 8px; padding: 5px 8px; }
+  .step + .step { border-top: 1px dashed rgba(115, 70, 20, .3); }
+  .step .num { width: 18px; height: 18px; flex: none; display: grid; place-items: center; font: 700 11px "Noto Sans";
+               color: #ffd100; background: #3a2b1c; border: 1px solid var(--gold); }
+  .step .what { flex: 1; min-width: 0; }
+  .step .what b { color: var(--head); }
+  .step .where { color: var(--inkSoft); font-size: 11.5px; }
+  .step .cost { font-size: 11.5px; color: var(--ink); white-space: nowrap; }
+  .step .go { width: 18px; height: 18px; flex: none; border: 1px solid var(--gold); background: var(--btn); color: #ffd100;
+              display: grid; place-items: center; font-size: 11px; }
+  .note { display: flex; align-items: center; gap: 8px; margin: 4px 8px 6px; padding: 5px 7px; border: 1px solid; font-size: 12px; }
+  .note.hot { color: var(--hot); background: var(--hotBg); border-color: #d48a7c; }
+  .note.cold { color: var(--cold); background: var(--coldBg); border-color: #8fb3d6; }
+  .note.temp { color: var(--temp); background: var(--tempBg); border-color: #b98a2a; }
+  .mats { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 6px; padding: 6px 8px 8px;
+          border-top: 1px solid var(--rule); background: rgba(140, 90, 25, .07); }
+  .mats .lbl { grid-column: 1 / -1; font: 700 11px "Noto Sans"; color: var(--inkSoft); text-transform: uppercase; letter-spacing: .04em; }
+  .mat { display: flex; align-items: center; gap: 6px; }
+  .mat .bar { flex: 1; position: relative; height: 14px; background: #1a140e; border: 1px solid #000; }
+  .mat .bar i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(#cf9a2c, #9c6d12); }
+  .mat .bar b { position: relative; display: block; text-align: center; font: 700 10px/12px "Noto Sans"; color: #fff; text-shadow: 0 1px 0 #000; }
+
+  /* --- B: compact list -------------------------------------------------------------------------------------- */
+  .sec { display: flex; align-items: center; gap: 7px; padding: 5px 4px; background: var(--band); border-top: 2px solid var(--gold); margin-top: 10px; }
+  .sec:first-child { margin-top: 0; }
+  .sec .name { font-weight: 700; color: var(--head); }
+  .sec .grow { flex: 1; }
+  .sec .skill { width: 110px; }
+  .sub { font: 700 10.5px "Noto Sans"; color: var(--inkSoft); text-transform: uppercase; letter-spacing: .05em;
+         padding: 6px 4px 2px; border-bottom: 1px solid var(--rule); margin: 0 0 2px; }
+  .ln { display: flex; align-items: center; gap: 7px; padding: 3px 4px; }
+  .ln:hover { background: rgba(255, 235, 160, .45); }
+  .ln .txt { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ln .txt b { color: var(--head); }
+  .ln .r { color: var(--inkSoft); font-size: 11.5px; white-space: nowrap; }
+  .ln .dot { width: 8px; height: 8px; flex: none; border: 1px solid #000; }
+  .ln .dot.hot { background: #d0402c; } .ln .dot.cold { background: #3c86c8; } .ln .dot.temp { background: #d9a221; }
+  .ln .mbar { width: 110px; flex: none; }
+  .tip { margin: 6px 0 0 27px; width: 250px; background: #0b0b1a; border: 1px solid #6b6b9c; color: #fff; padding: 6px 8px; font-size: 12px; }
+  .tip .t1 { color: #ffd100; font-weight: 700; }
+  .tip .g { color: #9d9d9d; }
+
+  .legend { max-width: 1100px; margin: 0 auto; padding: 0 16px 30px; color: var(--muted); font-size: 13px; }
+  .legend b { color: var(--pageText); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Professions tab: two ways to draw it</h1>
+  <p>Same character, same data. Left is <b>A, cards</b>; right is <b>B, compact list</b>. Both use only what the addon can draw in the game: flat colours, game icons, bars. Tell me what you like from each, for example "the card headers from A, the material rows from B".</p>
+</header>
+
+<div class="row">
+  <!-- ======================================== A: CARDS ======================================== -->
+  <div class="col">
+    <h2>A. Cards</h2>
+    <p class="why">Each profession is a box with a dark header: icon, name, skill bar. Steps are numbered, with the cost on the right and an arrow button. Market and "temporary" notes are coloured boxes. Materials are small tiles with bars.</p>
+    <div class="win">
+      <div class="tbar"><span class="t">WoW Forever Leveler</span><button class="x">x</button></div>
+      <div class="tabs"><span>Next</span><span>Dungeons</span><span class="on">Professions</span><span>Team</span></div>
+      <div class="paper">
+
+        <div class="card">
+          <div class="head">
+            <div class="ic big" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/trade_tailoring.jpg)"></div>
+            <div class="grow">
+              <div><span class="name">Tailoring</span> <span class="rank">Apprentice</span></div>
+              <div class="skill"><i style="width:80%"></i><b>60 / 75</b></div>
+            </div>
+            <span class="tag su">SkillUp</span>
+          </div>
+          <div class="steps">
+            <div class="step"><span class="num">1</span>
+              <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_fabric_linen_02.jpg)"></div>
+              <div class="what"><b>Buy 10 Coarse Thread</b><div class="where">Krugosh · Razor Hill</div></div>
+              <span class="cost">50c</span><span class="go">➤</span></div>
+            <div class="step"><span class="num">2</span>
+              <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_gauntlets_19.jpg)"></div>
+              <div class="what"><b>Craft 10 Heavy Linen Gloves</b><div class="where">skill 60 → 70</div></div>
+              <span class="go">⚒</span></div>
+            <div class="step"><span class="num">3</span>
+              <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_book_11.jpg)"></div>
+              <div class="what"><b>Train Journeyman</b><div class="where">Snang · Orgrimmar</div></div>
+              <span class="cost">5s</span><span class="go">➤</span></div>
+          </div>
+          <div class="note hot">
+            <div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_fabric_linen_01.jpg)"></div>
+            <span><b>Linen Cloth is hot</b> (66c, usual 19c): sell it, craft later</span></div>
+          <div class="mats">
+            <div class="lbl">Still needed · all characters</div>
+            <div class="mat"><div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_fabric_linen_01.jpg)"></div>
+              <div class="bar"><i style="width:44%"></i><b>88 / 200</b></div></div>
+            <div class="mat"><div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_fabric_linen_02.jpg)"></div>
+              <div class="bar"><i style="width:0%"></i><b>0 / 10</b></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="head">
+            <div class="ic big" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/trade_engraving.jpg)"></div>
+            <div class="grow">
+              <div><span class="name">Enchanting</span> <span class="rank">Journeyman</span></div>
+              <div class="skill"><i style="width:80%"></i><b>120 / 150</b></div>
+            </div>
+          </div>
+          <div class="steps">
+            <div class="step"><span class="num">1</span>
+              <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/spell_holy_greaterheal.jpg)"></div>
+              <div class="what"><b>Make 29 Enchant 2H Weapon</b><div class="where">Minor Impact · to 146</div></div>
+              <span class="go">⚒</span></div>
+            <div class="step"><span class="num">2</span>
+              <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_book_11.jpg)"></div>
+              <div class="what"><b>Train Expert at 125</b><div class="where">Vance Undergloom · Tirisfal · level 20</div></div>
+              <span class="go">➤</span></div>
+          </div>
+          <div class="note cold">
+            <div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_enchant_shardglimmeringsmall.jpg)"></div>
+            <span><b>Small Glimmering Shard is cheap</b> (80c, usual 2s 98c): buy now</span></div>
+          <div class="mats">
+            <div class="lbl">Still needed · all characters</div>
+            <div class="mat"><div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_enchant_duststrange.jpg)"></div>
+              <div class="bar"><i style="width:0%"></i><b>0 / 29</b></div></div>
+            <div class="mat"><div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_enchant_shardglimmeringsmall.jpg)"></div>
+              <div class="bar"><i style="width:0%"></i><b>0 / 29</b></div></div>
+            <div class="mat"><div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_enchant_essenceastralsmall.jpg)"></div>
+              <div class="bar"><i style="width:0%"></i><b>0 / 4</b></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="head">
+            <div class="ic big" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_pelt_wolf_01.jpg)"></div>
+            <div class="grow">
+              <div><span class="name">Skinning</span> <span class="rank">Apprentice</span></div>
+              <div class="skill"><i style="width:81%"></i><b>61 / 75</b></div>
+            </div>
+            <span class="tag temp">Temporary</span>
+          </div>
+          <div class="note temp">
+            <div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/trade_tailoring.jpg)"></div>
+            <span>Drop it at the <b>Tailoring trainer</b> (Orgrimmar). Mail what you skinned first.</span></div>
+          <div class="steps">
+            <div class="step"><span class="num">1</span>
+              <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_pelt_wolf_ruin_01.jpg)"></div>
+              <div class="what"><b>Skin level 11+ beasts</b><div class="where">The Barrens</div></div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================== B: COMPACT ======================================== -->
+  <div class="col">
+    <h2>B. Compact list</h2>
+    <p class="why">A thick gold line between professions, small grey sub-headings ("Next", "Market", "Still needed"). One line per step: icon, short text, cost. Where to go is in the tooltip when you hover (example under the list).</p>
+    <div class="win">
+      <div class="tbar"><span class="t">WoW Forever Leveler</span><button class="x">x</button></div>
+      <div class="tabs"><span>Next</span><span>Dungeons</span><span class="on">Professions</span><span>Team</span></div>
+      <div class="paper">
+
+        <div class="sec">
+          <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/trade_tailoring.jpg)"></div>
+          <span class="name">Tailoring</span><span class="grow"></span>
+          <div class="skill"><i style="width:80%"></i><b>60 / 75</b></div>
+        </div>
+        <div class="sub">Next</div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_fabric_linen_02.jpg)"></div>
+          <span class="txt"><b>Buy</b> 10 Coarse Thread</span><span class="r">50c ➤</span></div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_gauntlets_19.jpg)"></div>
+          <span class="txt"><b>Craft</b> 10 Heavy Linen Gloves</span><span class="r">→ 70 ⚒</span></div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_book_11.jpg)"></div>
+          <span class="txt"><b>Train</b> Journeyman</span><span class="r">5s ➤</span></div>
+        <div class="sub">Market</div>
+        <div class="ln"><span class="dot hot"></span><span class="txt">Linen Cloth hot: sell, craft later</span><span class="r">66c</span></div>
+        <div class="sub">Still needed</div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_fabric_linen_01.jpg)"></div>
+          <span class="txt">Linen Cloth</span><div class="skill mbar"><i style="width:44%;background:linear-gradient(#cf9a2c,#9c6d12)"></i><b>88 / 200</b></div></div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_fabric_linen_02.jpg)"></div>
+          <span class="txt">Coarse Thread</span><div class="skill mbar"><i style="width:0%"></i><b>0 / 10</b></div></div>
+
+        <div class="sec">
+          <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/trade_engraving.jpg)"></div>
+          <span class="name">Enchanting</span><span class="grow"></span>
+          <div class="skill"><i style="width:80%"></i><b>120 / 150</b></div>
+        </div>
+        <div class="sub">Next</div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/spell_holy_greaterheal.jpg)"></div>
+          <span class="txt"><b>Make</b> 29 Enchant 2H Weapon - Minor Impact</span><span class="r">→ 146 ⚒</span></div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_book_11.jpg)"></div>
+          <span class="txt"><b>Train</b> Expert at 125</span><span class="r">lvl 20 ➤</span></div>
+        <div class="sub">Market</div>
+        <div class="ln"><span class="dot cold"></span><span class="txt">Small Glimmering Shard cheap: buy now</span><span class="r">80c</span></div>
+        <div class="sub">Still needed</div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_enchant_duststrange.jpg)"></div>
+          <span class="txt">Strange Dust</span><div class="skill mbar"><i style="width:0%"></i><b>0 / 29</b></div></div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_enchant_shardglimmeringsmall.jpg)"></div>
+          <span class="txt">Small Glimmering Shard</span><div class="skill mbar"><i style="width:0%"></i><b>0 / 29</b></div></div>
+
+        <div class="sec">
+          <div class="ic" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_pelt_wolf_01.jpg)"></div>
+          <span class="name">Skinning</span><span class="grow"></span>
+          <div class="skill"><i style="width:81%"></i><b>61 / 75</b></div>
+        </div>
+        <div class="ln"><span class="dot temp"></span><span class="txt"><b>Temporary:</b> drop at the Tailoring trainer</span><span class="r">➤</span></div>
+        <div class="ln"><div class="ic sm" style="background-image:url(https://render.worldofwarcraft.com/us/icons/56/inv_misc_pelt_wolf_ruin_01.jpg)"></div>
+          <span class="txt"><b>Skin</b> level 11+ beasts</span><span class="r">Barrens</span></div>
+
+      </div>
+    </div>
+    <div class="tip"><div class="t1">Buy 10 Coarse Thread</div>Krugosh, Trade Supplies<br>Razor Hill, Durotar<br><span class="g">Click: arrow to the vendor</span></div>
+  </div>
+</div>
+
+<div class="legend">
+  <b>Symbols:</b> ➤ click for the arrow · ⚒ click to open the profession window ·
+  red = sell now (price high) · blue = buy now (price low) · gold = temporary profession.
+  Icons are the game's own; in the addon they come from the game files.
+</div>
+</body>
+</html>

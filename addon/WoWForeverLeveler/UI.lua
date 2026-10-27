@@ -86,7 +86,8 @@ end
 -- The nearest trainer for this profession: what this client saw (WoWForeverLevelerNPCs), then the guide's list
 -- (Plan.lua: every client plus ClassicDB). On your map the closest one wins; else one on your continent.
 -- Trainers on another continent are left out: TomTom draws no arrow there.
-local function TrainerPoint(prof)
+-- skipJunior: for Journeyman and up, leave out the Junior trainers of the start camps (Apprentice only).
+local function TrainerPoint(prof, skipJunior)
     local here = C_Map and C_Map.GetBestMapForUnit and C_Map.GetBestMapForUnit("player")
     local continent = Continent(here)
     local px, py
@@ -96,13 +97,15 @@ local function TrainerPoint(prof)
     end
     local list = {}
     for name, n in pairs(WoWForeverLevelerNPCs or {}) do list[name] = n end
+    local junior = {}
     for _, t in ipairs(PLAN.trainers or {}) do
         local n = list[t.name]
         if not n or not n.profession then list[t.name] = { kind = "trainer", profession = t.profession, mapID = t.mapID, x = t.x, y = t.y } end
+        if t.junior then junior[t.name] = true end
     end
     local best, bestDist, other
     for name, n in pairs(list) do
-        if n.kind == "trainer" and n.profession == prof and n.mapID and n.x then
+        if n.kind == "trainer" and n.profession == prof and n.mapID and n.x and not (skipJunior and junior[name]) then
             local point = { mapID = n.mapID, x = n.x, y = n.y, title = name .. " (" .. prof .. ")", npc = name }
             if n.mapID == here then
                 local d = px and ((n.x - px) ^ 2 + (n.y - py) ^ 2) or 0
@@ -2634,6 +2637,9 @@ SlashCmdList["WFLPANEL"] = function(msg)
         print("|cffffd100WoW Forever Leveler:|r target button " .. (s.targetShown and "on" or "off"))
         return
     end
+    -- Plan alerts (Planner): /wflp alert shows a test, /wflp alerts turns them off and on.
+    if msg == "alert" and WFL_TestAlert then WFL_TestAlert() return end
+    if msg == "alerts" and WFL_ToggleAlerts then WFL_ToggleAlerts() return end
     -- /wflp next | dungeons | prof | team: open the window on that tab (the same again closes it).
     local tab = ({ next = "next", dungeons = "dg", dg = "dg", prof = "prof2", professions = "prof2", team = "team" })[(msg or ""):lower()]
     if tab then ShowTab(tab) return end

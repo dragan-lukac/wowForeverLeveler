@@ -131,7 +131,9 @@ test('plannedChars: grey cards only for planned characters the realm lacks, Star
   const keys = plain(d.plannedChars(realm)).map(c => c.key);
   assert.equal(keys.length, 9); // 8 other classes and the bank character
   assert.ok(!keys.includes('hunter'));
-  assert.deepEqual(keys.slice(0, 2), ['warlock', 'paladin']);
+  // The Start characters in play order (personal/team.json or the example team).
+  const starts = d.GUIDE.characters.filter(c => c.start && c.id !== 'hunter').sort((x, y) => (x.order ?? 99) - (y.order ?? 99)).map(c => c.id);
+  assert.deepEqual(keys.slice(0, 2), starts.slice(0, 2));
   assert.equal(keys[keys.length - 1], 'bank');
   assert.deepEqual(plain(d.plannedChars({ chars: [] })), []);
 });
@@ -249,7 +251,7 @@ test('itemDecision: vendor when the AH pays little, hold below the median, keep 
   const fresh = d.metaFor({ key: 'hunter' });
   assert.equal(d.itemDecision({ name: 'Linen Cloth', code: 'cloth' }, fresh, realm, {}).action, 'keep');
   assert.equal(d.itemDecision({ name: 'Wool Cloth', code: 'cloth' }, fresh, realm, {}).action, 'bank');
-  const tailor = d.metaFor({ key: 'warlock' }); // plan: Tailoring + Enchanting
+  const tailor = d.metaFor({ key: d.GUIDE.characters.find(c => c.profs.includes('tail')).id }); // the team's tailor
   assert.equal(d.itemDecision({ name: 'Linen Cloth', code: 'cloth' }, tailor, realm, {}).text, 'Keep for your Tailoring');
   delete d.SELL_PRICES;
 });

@@ -5571,7 +5571,8 @@
           "Sell Strange Dust on the auction house. Sell Lesser Magic Essence there too, or make Lesser Magic Wands for the vendor: the card below says which pays more.",
           "Too much Strange Dust? A beta video turns it into Minor Wizard Oil (with a Maple Seed and an Empty Vial) and sells the oil to a vendor for about 3 silver profit per dust. Check the oil recipe and vendor price in game first.",
           "Buy more linen and repeat. Cheap green items (up to about 3 silver) are also worth disenchanting.",
-          "At Enchanting 70: Greater Magic Wands sell to a vendor for about 15 silver each."
+          "At Enchanting 70: Greater Magic Wands sell to a vendor for about 15 silver each.",
+          "Wands: 2 Copper Shortswords from a blacksmith disenchant into Lesser Magic Essence, enough for 2 Lesser Magic Wands (character level 5; beta video, Ahmpy, 2026-09-29). Check on live if the swords can be disenchanted, and the wand price on the auction house."
         ],
         "calc": {
           "craft": "Brown Linen Pants",
@@ -7802,6 +7803,31 @@
         "name": "Books on map (Forever)",
         "folder": "Books_on_map_Forever",
         "why": "Library book pins on the map: 10, 20 and 30 tomes give blue rewards. Works on its own (replaces HandyNotes + Books). Installed 2026-10-23."
+      },
+      {
+        "name": "SKTools",
+        "folder": "SKTools",
+        "why": "Easy Fishing: one key to cast, reel in at the splash, and loot (turn it on in /sk > Professions > Easy Fishing, bind a key). Louder splash. Logs fish per hour and gathering (herbs, ore, skins). Works in WoW Forever (video, Silverkitty, 2026-10-26). Installed 2026-10-27 (1.6.4). Comes with SKTools_Meta, SKTools_MetaEU and SKTools_MetaUS: build data for retail only (no Forever interface number), so turn those 3 off in the addon list."
+      },
+      {
+        "name": "OPie",
+        "folder": "OPie",
+        "why": "Ring menus: hold a key and a ring of spells or items opens. Installed and kept (user, 2026-10-26)."
+      },
+      {
+        "name": "Minimap Button: Forever",
+        "folder": "MinimapButtonForever",
+        "why": "Puts the addon minimap buttons into one movable bar. Installed and kept (user, 2026-10-26)."
+      },
+      {
+        "name": "Improved Auto Shot Timer",
+        "folder": "ImprovedAutoShotTimer",
+        "why": "Hunter: range feedback and a stop-moving window on the game's own Auto Shot timer. Installed and kept (user, 2026-10-26)."
+      },
+      {
+        "name": "Shot Window",
+        "folder": "ShotWindow",
+        "why": "Hunter and wand users: marks when to stand still so Auto Shot or the wand shot is not delayed. Settings per character. Installed and kept (user, 2026-10-26)."
       }
     ],
     "dataOnly": [
@@ -7826,6 +7852,11 @@
         "name": "Questie",
         "folder": "Questie",
         "why": "Installed but turned off in the game (needed only as the home of QuestieDB). Polestar guides the quests."
+      },
+      {
+        "name": "Threat Plates",
+        "folder": "TidyPlates_ThreatPlates",
+        "why": "Enemy name plates that change colour with threat. Installed, not tried yet: try it in a dungeon on live (user, 2026-10-26)."
       }
     ],
     "later": [
@@ -9348,5 +9379,141 @@
       "note": "Level 59 to 60. Quests in the Plaguelands and Feralas.",
       "source": "Our data (dungeon levels, quest givers), 2026-10-19, not checked"
     }
-  ]
+  ],
+  "dungeonGaps": [
+    {
+      "from": 1,
+      "to": 13,
+      "text": "No dungeon yet: quest to level 13, then Ragefire Chasm"
+    },
+    {
+      "from": 21,
+      "to": 24,
+      "text": "Quest 3 levels, or run Wailing Caverns or Shadowfang Keep again"
+    },
+    {
+      "from": 38,
+      "to": 43,
+      "text": "Run Scarlet Monastery again, or quest in Stranglethorn or Desolace"
+    }
+  ],
+  "rares": {
+    "source": "Video 'RARESPAWNS Are INSANE In WoW Forever' (Uncas, 2026-10); places and levels from QuestieDB (data/rares.json). Not checked in game.",
+    "list": [
+      {
+        "npc": "Takk the Leaper",
+        "item": "Raptor Hide Cloak",
+        "stats": "4 stamina, 3 spirit",
+        "for": [
+          "hunter"
+        ],
+        "group": false,
+        "note": "Barrens set (2 pieces: +5% run speed)"
+      },
+      {
+        "npc": "Swiftmane",
+        "item": "Signet of the Zebra",
+        "stats": "6 agility, 2 spirit",
+        "for": [
+          "hunter"
+        ],
+        "group": false,
+        "note": "Barrens set (2 pieces: +5% run speed)"
+      },
+      {
+        "npc": "Humar the Pridelord",
+        "item": "Mark of the Pack Leader",
+        "stats": "5 strength, 5 intellect",
+        "for": [
+          "shaman"
+        ],
+        "group": false,
+        "note": "Barrens set piece"
+      },
+      {
+        "npc": "Taskmaster Whipfang",
+        "item": "Whipfang's Skinsewer",
+        "stats": "fast dagger, fire damage on hit",
+        "for": [
+          "warrior",
+          "rogue"
+        ],
+        "group": false
+      },
+      {
+        "npc": "Foreman Rigger",
+        "item": "Rigger's helmet (mail)",
+        "stats": "8 strength, 9 stamina, +5 Mining",
+        "for": [
+          "warrior",
+          "paladin"
+        ],
+        "group": false,
+        "note": "item name not checked"
+      },
+      {
+        "npc": "Creepthess",
+        "item": "Spider Swarm",
+        "stats": "summons spiders for 10 minutes",
+        "for": [
+          "hunter",
+          "warlock",
+          "priest",
+          "shaman",
+          "warrior"
+        ],
+        "group": false,
+        "note": "consumable"
+      },
+      {
+        "npc": "Aean Swiftriver",
+        "item": "Alliance Outrunner Bow",
+        "stats": "4 agility, 3 spirit",
+        "for": [
+          "hunter"
+        ],
+        "group": true,
+        "note": "Alliance Outrunners patrol"
+      },
+      {
+        "npc": "Thora Feathermoon",
+        "item": "Alliance Outrunner's Sword",
+        "stats": "5 agility, 6 attack power",
+        "for": [
+          "warrior"
+        ],
+        "group": true,
+        "note": "Alliance Outrunners patrol"
+      },
+      {
+        "npc": "Hannah Bladeleaf",
+        "item": "Alliance Outrunner Healing Rod",
+        "stats": "off-hand: 12 healing, 4 spell damage",
+        "for": [
+          "priest"
+        ],
+        "group": true,
+        "note": "Alliance Outrunners patrol"
+      },
+      {
+        "npc": "Marcus Bel",
+        "item": "Alliance Outrunner Staff",
+        "stats": "9 stamina, 9 spirit, 28 spell power",
+        "for": [
+          "warlock"
+        ],
+        "group": true,
+        "note": "Alliance Outrunners patrol"
+      },
+      {
+        "npc": "Heartrazor",
+        "item": "Wyvern Heart Band",
+        "stats": "5 agility, 5 stamina, 15 attack power",
+        "for": [
+          "hunter"
+        ],
+        "group": true
+      }
+    ]
+  }
 }

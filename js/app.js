@@ -98,7 +98,9 @@ try {
 function init() {
   const synced = window.SYNCED_ROSTERS || {};
   const sel = document.getElementById('realmSelect');
-  Object.entries(synced).reverse().forEach(([slug, realm]) => {
+  // Only live Forever realms (user, 2026-10-27): no beta, no Battle.net Classic, no CAMWOW beta test realm.
+  const live = ([, r]) => r.client === 'forever' && !/camwow/i.test(r.realmName || '');
+  Object.entries(synced).filter(live).reverse().forEach(([slug, realm]) => {
     // Addon realms (Forever beta or live) also show the planned characters not created yet.
     REALM_ROSTERS[slug] = { ...realm, planned: !!realm.client };
     const opt = document.createElement('option');

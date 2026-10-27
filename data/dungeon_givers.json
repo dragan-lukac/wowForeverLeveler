@@ -1780,8 +1780,8 @@
   "kind": "npc",
   "m": 1458,
   "name": "Morbin Lightbane",
-  "x": 57.7,
-  "y": 89.1
+  "x": 58.1,
+  "y": 89.5
  },
  "92422": {
   "inside": false,
@@ -1870,10 +1870,10 @@
  "96984": {
   "inside": false,
   "kind": "npc",
-  "m": 1421,
+  "m": 1416,
   "name": "Image of Archmage Modera",
-  "x": 68.6,
-  "y": 45.2
+  "x": 14.3,
+  "y": 59.6
  },
  "96986": {
   "inside": false,

@@ -56,12 +56,17 @@ def wanted_items():
 
 # A trainer's title -> its profession ("Journeyman Enchanter", "Junior Herbalism Trainer", "Expert Alchemist").
 TITLES = [(r'Alchem', 'Alchemy'), (r'Blacksmith', 'Blacksmithing'), (r'Enchant', 'Enchanting'), (r'Engineer', 'Engineering'),
-          (r'Leatherwork', 'Leatherworking'), (r'Tailor', 'Tailoring'), (r'Herbalis', 'Herbalism'), (r'Mining|Miner', 'Mining'),
+          (r'Leatherwork|Leathercraft', 'Leatherworking'), (r'Tailor', 'Tailoring'), (r'Herbalis', 'Herbalism'), (r'Mining|Miner', 'Mining'),
           (r'Skinn', 'Skinning'), (r'Cook|Chef', 'Cooking'), (r'First Aid|Physician|Surgeon', 'First Aid'), (r'Fish', 'Fishing')]
 
 
 def trainer_profession(sub):
-    if not re.search(r'Trainer|^(Apprentice|Journeyman|Expert|Artisan|Master) ', sub or ''):
+    # Forever's QuestieDB names many gathering and secondary trainers by one word: Krunn "Miner", Yonn Deepcut
+    # "Skinner", Mishiki "Herbalist", Clyde Kellen "Fisherman", Pyall Silentstride "Cook" (user 2026-10-24: the
+    # plan missed them and fell back to Classic data).
+    if re.fullmatch(r'(Superior )?(Miner|Skinner|Herbalist|Fisherman|Cook|Engineer|Blacksmith)', sub or ''):
+        return next(prof for pat, prof in TITLES if re.search(pat, sub))
+    if not re.search(r'Trainer|^(Apprentice|Journeyman|Expert|Artisan|Master|Superior) ', sub or ''):
         return None
     if re.search(r'Supplies|Riding|Weapon|Pet|Portal', sub):
         return None
@@ -106,7 +111,11 @@ def main():
             m = maps.get(int(area))
             c = (coords or [None])[0]
             if m and c and c[0] is not None and c[0] >= 0:
-                trainers.append({'name': npc.get('name'), 'profession': prof, 'mapID': m, 'x': round(c[0], 2), 'y': round(c[1], 2)})
+                t = {'name': npc.get('name'), 'profession': prof, 'mapID': m, 'x': round(c[0], 2), 'y': round(c[1], 2)}
+                # A Junior trainer (start camps) teaches Apprentice only: no arrow to it for Journeyman and up.
+                if (npc.get('subName') or '').startswith('Junior'):
+                    t['junior'] = True
+                trainers.append(t)
                 break
     trainers.sort(key=lambda t: (t['profession'], t['name']))
     with open(OUT, 'w', encoding='utf-8') as f:

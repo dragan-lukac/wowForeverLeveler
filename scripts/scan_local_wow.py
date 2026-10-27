@@ -22,7 +22,7 @@ def find_wtf_folders():
     wtf_paths = []
     for base in POSSIBLE_WOW_PATHS:
         if os.path.exists(base):
-            for flavor in ["_classic_beta_", "_classic_", "_classic_era_", "_retail_"]:
+            for flavor in ["_forever_", "_classic_beta_", "_classic_", "_classic_era_", "_retail_"]:
                 p = os.path.join(base, flavor, "WTF", "Account")
                 if os.path.exists(p):
                     wtf_paths.append((flavor.strip('_'), p))

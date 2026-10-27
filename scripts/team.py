@@ -19,7 +19,7 @@ GUIDE = os.path.join(ROOT, 'data', 'guide.json')
 PERSONAL = os.path.join(ROOT, 'personal')
 TEAM = os.path.join(PERSONAL, 'team.json')
 EXAMPLE = os.path.join(ROOT, 'personal.example', 'team.json')
-CHAR_FIELDS = ('name', 'lastName', 'race', 'group', 'start', 'order', 'profs')
+CHAR_FIELDS = ('name', 'lastName', 'race', 'group', 'start', 'order', 'profs', 'spec', 'dungeons', 'path', 'reserved', 'alts')
 BANK_FIELDS = ('name', 'lastName', 'race', 'class')
 
 
@@ -40,6 +40,9 @@ def load_guide():
     for c in guide.get('characters', []):
         c.update({k: v for k, v in (team.get('characters') or {}).get(c['id'], {}).items() if k in CHAR_FIELDS})
         c.setdefault('name', c['class'])
+        # Spare names (personal/team.json "alts": [{name, lastName}], user 2026-10-26: pick one on launch day): the
+        # addon knows the character by any of them.
+        c['altNames'] = (c.get('altNames') or []) + [a['name'] for a in c.get('alts') or [] if a.get('name')]
         # The route's first zone is the race's start zone.
         start = (guide.get('races') or {}).get(c.get('race'), {}).get('start')
         if start and c.get('zones'):

@@ -277,7 +277,7 @@ local function DungeonActions(level, zone)
     if not st then return {}, nil end
     local acts = {}
     if level < st.at - 2 then
-        table.insert(acts, { text = "Level " .. (st.at - 2) .. ": collect the " .. st.name .. " quests" })
+        table.insert(acts, { text = "Character level " .. (st.at - 2) .. ": collect the " .. st.name .. " quests" })
     end
     for _, d in ipairs(st.members) do
         local groups = ChainGroups(d)
@@ -323,8 +323,8 @@ end
 local function NextRank(prof, s)
     for _, t in ipairs((PLAN.training or {})[prof] or {}) do if s.max < t.cap then return t end end
 end
-local function TrainerWhere(prof)
-    local p = WFL.TrainerPoint and WFL.TrainerPoint(prof)
+local function TrainerWhere(prof, skipJunior)
+    local p = WFL.TrainerPoint and WFL.TrainerPoint(prof, skipJunior)
     return p, p and (p.npc .. ", " .. Pos(p.mapID, p.x, p.y)) or "no trainer known on this continent yet"
 end
 -- What a rank costs at the trainer (Plan.lua profCosts, from the trainer scans): " (5s)", or "" when not known.
@@ -363,8 +363,8 @@ local function TrainText(prof, s, level)
     if s.rank >= t.skill and level >= (t.level or 0) then return t.name .. RankCost(prof, t.name) .. ": now", true end
     local need = {}
     if s.rank < t.skill then table.insert(need, "skill " .. t.skill) end
-    if level < (t.level or 0) then table.insert(need, "level " .. t.level) end
-    return t.name .. RankCost(prof, t.name) .. " at " .. table.concat(need, ", "), false
+    if level < (t.level or 0) then table.insert(need, "character level " .. t.level) end
+    return t.name .. RankCost(prof, t.name) .. " at " .. table.concat(need, " and "), false
 end
 
 -- What your skill can gather: in this zone (Plan.lua zones.<zone>.nodes), else anywhere (gatherNodes); best first.
@@ -430,7 +430,7 @@ local function LearnRow(prof, st)
                  point = bestPoint, where = best.zone or (bestPoint and Pos(bestPoint.mapID, bestPoint.x, bestPoint.y)) }
     end
     local q = l.quests and l.quests[1]
-    if q then return { label = "Learn", text = "Recipe: " .. item, where = "quest " .. q.n .. (q.level and (", level " .. q.level) or "") } end
+    if q then return { label = "Learn", text = "Recipe: " .. item, where = "quest " .. q.n .. (q.level and (", quest level " .. q.level) or "") } end
     return { label = "Learn", text = "Recipe: " .. item, where = (l.source or "source") .. " \194\183 place not known" }
 end
 
@@ -485,7 +485,7 @@ local function DropRow(item, count)
     end
     if not best then return nil end
     return { label = "Kill", text = "Kill " .. best.n .. " for " .. (count or "") .. " " .. item,
-             where = ((WFL.MapName(best.m) or "") ~= "" and (WFL.MapName(best.m) .. " \194\183 ") or "") .. "level " .. best.lo .. (best.hi ~= best.lo and ("-" .. best.hi) or ""),
+             where = ((WFL.MapName(best.m) or "") ~= "" and (WFL.MapName(best.m) .. " \194\183 ") or "") .. "monster level " .. best.lo .. (best.hi ~= best.lo and ("-" .. best.hi) or ""),
              point = { mapID = best.m, x = best.x, y = best.y, title = best.n .. " (" .. item .. ")" },
              icon = WFL.ItemIcon(item) }
 end
@@ -554,8 +554,16 @@ local function ProfessionActions()
             end
             local buy, buyPoint = KitToBuy(prof)
             local st = ((PLAN.craftSteps or {})[prof] or {})[1]
+            -- Your plan takes it from the start zone's free book (user, 2026-10-24): say so, not "Learn (10c)".
+            local learnText = "Learn " .. prof .. RankCost(prof, "Apprentice")
+            for _, ps in ipairs((PLAN.paths or {})[UnitName("player")] or {}) do
+                if ps.alert and ps.alert.has == prof and (ps.text or ""):find("book") then
+                    learnText = "Free " .. prof .. " book: quest " .. ((ps.text or ""):match("^(.-):") or "")
+                    point, where = nil, ps.where
+                end
+            end
             table.insert(acts, { prof = prof, s = { rank = 0, max = 0 }, learn = true, craft = CRAFTS[prof], gather = GATHER[prof] and true, rows = {
-                { label = "Learn", text = "Learn " .. prof .. RankCost(prof, "Apprentice"), point = point,
+                { label = "Learn", text = learnText, point = point,
                   where = drop and ("Drop " .. drop .. " first \194\183 " .. (where or "")) or where },
                 { label = "Buy", text = buy, point = buyPoint },
                 { label = "Gather", text = GatherNow(prof, 1, zone) },
@@ -567,7 +575,8 @@ local function ProfessionActions()
     for prof, s in pairs(skills) do
         local buy, buyPoint = KitToBuy(prof)
         local train = TrainText(prof, s, level)
-        local tPoint, tWhere = TrainerWhere(prof)
+        -- The next rank of a learned profession is Journeyman or higher: not at a Junior trainer.
+        local tPoint, tWhere = TrainerWhere(prof, true)
         local trainRow = train and { label = "Train", text = train, point = tPoint, where = tWhere }
         local rows = {}
         local steps = (PLAN.craftSteps or {})[prof]
@@ -918,7 +927,7 @@ end
 
 local function LegacyLines(lines)
     local st = LegacyStatus()
-    table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. "Levels|r" .. C.GREY .. "  first of each class|r" })
+    table.insert(lines, { plain = true, gap = 4, text = C.GOLD .. "Character levels|r" .. C.GREY .. "  first of each class|r" })
     for _, cl in ipairs(CLASS_ORDER) do
         table.insert(lines, { icon = ClassIcon(cl), title = ClassName(cl), inline = true, titleColor = GREY_C, text = Marks(st.levels[cl], { 25, 45, 60 }) })
     end
@@ -938,10 +947,88 @@ local function LegacyLines(lines)
     table.insert(lines, { text = C.GREY .. "More in the game's Legacy panel (Y).|r" })
 end
 
+-- This character's own plan (personal/team.json "path", user 2026-10-24): the steps for your level, then the next
+-- one in grey. A step with "to" lasts from..to; one without lasts until the next such step.
+local function PathRows(level)
+    local path = (PLAN.paths or {})[UnitName("player")]
+    if not path then return nil end
+    local rows, nextStep = {}, nil
+    local skills = WFL.Skills() or {}
+    for i, st in ipairs(path) do
+        -- Done: the profession it teaches is learned, or the item it buys is in your bags (user, 2026-10-24).
+        local a = st.alert or {}
+        local done = (a.lacks and skills[a.lacks]) or (a.noItem and (WFL.OwnCount(a.noItem) or 0) > 0)
+        local active
+        if st.to then
+            active = level >= st.from and level <= st.to
+        else
+            active = level >= st.from
+            for j = i + 1, #path do
+                if not path[j].to and path[j].from > st.from and path[j].from <= level then active = false break end
+            end
+        end
+        if done then
+            -- nothing: a done step is not shown
+        elseif active then
+            table.insert(rows, { icon = "Interface\\Icons\\INV_Misc_Note_01", title = st.text, inline = false,
+                                 text = st.where and (C.GREY .. st.where .. "|r") or nil })
+        elseif st.from > level and (not nextStep or st.from < nextStep.from) then
+            nextStep = st
+        end
+    end
+    if nextStep then
+        table.insert(rows, { icon = "Interface\\Icons\\INV_Misc_Note_01", desat = true, title = nextStep.text, inline = false, titleColor = GREY_C,
+                             text = C.GREY .. "character level " .. nextStep.from .. (nextStep.where and (" \194\183 " .. nextStep.where) or "") .. "|r" })
+    end
+    return rows
+end
+
+-- Rares worth hunting for this character (Plan.lua rares, user 2026-10-26): from 2 character levels below the rare,
+-- until the item is in your bags or worn. Sorted by level; at most 3.
+local function RareOwned(item)
+    if (WFL.OwnCount(item) or 0) > 0 then return true end
+    local eq = (C_Item and C_Item.IsEquippedItem) or IsEquippedItem
+    local ok, yes = pcall(eq or function() end, item)
+    return ok and yes and true or false
+end
+local function MyRares(level)
+    local me, out = UnitName("player"), {}
+    for _, r in ipairs(PLAN.rares or {}) do
+        if (r["for"] or {})[me] and level >= (r.lo or 1) - 2 and not RareOwned(r.item) then table.insert(out, r) end
+    end
+    return out
+end
+local function RareWhere(r)
+    return (r.m and (WFL.MapName(r.m) .. " \194\183 ") or "") .. "rare, monster level " .. (r.lo or "?")
+           .. (r.stats ~= "" and (" \194\183 " .. r.stats) or "") .. (r.group and " \194\183 group needed" or "")
+end
+
 local function NextLeveling(open)
     local lines, level, zone = {}, UnitLevel("player") or 1, GetRealZoneText() or ""
+    local path = PathRows(level)
+    if path and Section(lines, "n-plan", open, "Your plan", (PLAN.dungeonLevelers or {})[UnitName("player")] or "", "Interface\\Icons\\INV_Misc_Note_01") then
+        for _, r in ipairs(path) do table.insert(lines, r) end
+    end
+    local rares = MyRares(level)
+    if #rares > 0 and Section(lines, "n-rare", open, "Rares", #rares .. " for you", "Interface\\Icons\\INV_Misc_Bone_HumanSkull_01") then
+        for i, r in ipairs(rares) do
+            if i > 3 then break end
+            table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_Bone_HumanSkull_01", title = "Kill " .. r.npc .. " for " .. r.item,
+                                  inline = false, text = C.GREY .. RareWhere(r) .. "|r",
+                                  point = r.m and { mapID = r.m, x = r.x, y = r.y, title = r.npc .. " (" .. r.item .. ")" } or nil })
+        end
+    end
     local acts, st = DungeonActions(level, zone)
     if Section(lines, "n-d", open, "Dungeons", st and st.name or "nothing for your level", "Interface\\Icons\\INV_Misc_Key_14") then
+        -- A dungeon leveler (Konan, Nemrtvi) between two dungeon chains: quest here (user, 2026-10-24).
+        if (PLAN.dungeonLevelers or {})[UnitName("player")] then
+            for _, gap in ipairs(PLAN.dungeonGaps or {}) do
+                if level >= gap.from and level < gap.to then
+                    table.insert(lines, { icon = "Interface\\Icons\\INV_Misc_Map_01", title = "Quest gap: character level " .. gap.from .. "-" .. gap.to,
+                                          inline = false, titleColor = { 0.85, 0.45, 0 }, text = C.GREY .. gap.text .. "|r" })
+                end
+            end
+        end
         if acts[1] then
             local t = acts[1].text
             local icon = t:find("^Take") and WFL.icons.take or (t:find("^Hand in") or t:find("^Finish")) and WFL.icons.turnin or "Interface\\Icons\\INV_Misc_Key_03"
@@ -949,7 +1036,7 @@ local function NextLeveling(open)
             Pair(lines, t, acts[2] and (acts[2].text .. ((acts[2].where and acts[2].where ~= "") and (" (" .. acts[2].where .. ")") or "")), acts[1].point, acts[1].where, icon)
             LinkRows(lines, from, "dg", "d:" .. st.name, acts[2] and acts[2].quest)
         else
-            table.insert(lines, { text = C.GREY .. "No dungeon quests open for level " .. level .. ".|r" })
+            table.insert(lines, { text = C.GREY .. "No dungeon quests open for character level " .. level .. ".|r" })
         end
     end
     -- Only the main professions here (crafting and gathering); Cooking, First Aid and Fishing are on the Professions tab.
@@ -986,7 +1073,7 @@ local function NextLeveling(open)
     local st, rows = LegacyStatus(), {}
     local _, classFile = UnitClass("player")
     for _, l in ipairs({ 25, 45, 60 }) do
-        if (st.levels[classFile or ""] or 0) < l then table.insert(rows, { label = "Level", text = l .. ": first " .. ClassName(classFile) .. " there", match = ClassName(classFile) }) break end
+        if (st.levels[classFile or ""] or 0) < l then table.insert(rows, { label = "Level", text = "Character level " .. l .. ": first " .. ClassName(classFile) .. " there", match = ClassName(classFile) }) break end
     end
     for prof in pairs(WFL.Skills()) do
         if CRAFTS[prof] then
@@ -1050,8 +1137,15 @@ end
 local function DungeonTabLines(open)
     open = open or {}
     local lines, level = {}, UnitLevel("player") or 1
-    local stops = Stops(level)
-    if #stops == 0 then return { { text = C.GREY .. "No dungeon quests open for level " .. level .. ".|r" } } end
+    -- Only what you can run in the next 10 character levels (user, 2026-10-24: 20 dungeons up to level 62 at
+    -- level 1 was too much); a grey line says how many come later.
+    local stops, later = {}, 0
+    for _, st in ipairs(Stops(level)) do
+        local lo = 99
+        for _, m in ipairs(st.members) do lo = math.min(lo, m.run.runFrom or st.at or 99) end
+        if math.max(lo, st.at or 0) <= level + 10 then table.insert(stops, st) else later = later + 1 end
+    end
+    if #stops == 0 then return { { text = C.GREY .. "No dungeon quests open for character level " .. level .. ".|r" } } end
     -- Two groups, each in level order: the chains (what to pick up for a run of dungeons), then every dungeon.
     local ordered, first = {}, {}
     for _, want in ipairs({ true, false }) do
@@ -1081,7 +1175,7 @@ local function DungeonTabLines(open)
         -- "lvl: 15-16": when to run it, with all its quests in hand (green when you are there).
         -- Joined with no-break spaces, so a narrow window moves it under the name whole instead of splitting it.
         local range = hi > 0 and (math.max(s.at, lo) .. "-" .. hi) or tostring(s.at)
-        local summary = ((due and C.GREEN or "") .. "lvl: " .. range .. (due and "|r" or "")):gsub(" ", "\194\160")
+        local summary = ((due and C.GREEN or "") .. "character level " .. range .. (due and "|r" or "")):gsub(" ", "\194\160")
         if Section(lines, "d:" .. s.name, open, s.name, summary, "Interface\\Icons\\INV_Misc_Key_14", si == 1) then
             if s.chain then
                 -- A chain: only the dungeons in run order, with entrances. Where to pick up the quests is in each
@@ -1090,7 +1184,7 @@ local function DungeonTabLines(open)
                 for i, d in ipairs(s.members) do
                     local e = d.run.entrance
                     table.insert(lines, { num = i, icon = "Interface\\Icons\\INV_Misc_Key_03", title = d.name, inline = false,
-                                          text = C.GREY .. "lvl " .. d.run.runFrom .. "-" .. d.run.runTo .. " \194\183 " .. (e and Zone(e.m) or (d.run.zone or "?")) .. "|r",
+                                          text = C.GREY .. "character level " .. d.run.runFrom .. "-" .. d.run.runTo .. " \194\183 " .. (e and Zone(e.m) or (d.run.zone or "?")) .. "|r",
                                           point = e and { mapID = e.m, x = e.x, y = e.y, title = d.name .. " entrance" } or nil, stripe = i % 2 == 0 })
                 end
             else
@@ -1165,6 +1259,9 @@ local function DungeonTabLines(open)
         end
     end
         end
+    if later > 0 then
+        table.insert(lines, { plain = true, gap = 4, text = C.GREY .. later .. " more for later character levels.|r" })
+    end
     return lines
 end
 
@@ -1178,6 +1275,13 @@ end
 -- "I have boar meat, where do I get a recipe to cook it?").
 local function BagRecipeRows(prof, rank)
     local rows, seen = {}, {}
+    -- Materials this character sends to someone else (personal/team.json "reserved": items, or "Herbalism" for every
+    -- herb): no recipe for them (user, 2026-10-24: Peace Tea wanted Kaspin's Peacebloom, which goes to Konan).
+    local reserved = {}
+    for _, r in ipairs((PLAN.reserved or {})[UnitName("player")] or {}) do
+        reserved[r] = true
+        for herb in pairs(((PLAN.gatherNodes or {})[r]) or {}) do reserved[herb] = true end
+    end
     local list = (PLAN.cookRecipes or {})[prof] or {}
     local names = {}
     for name in pairs(list) do table.insert(names, name) end
@@ -1190,7 +1294,7 @@ local function BagRecipeRows(prof, rank)
                        and Knows(prof, name) ~= true
         if useful then
             for mat in pairs(r.r or {}) do
-                local have = WFL.OwnCount and WFL.OwnCount(mat) or 0
+                local have = (not reserved[mat]) and WFL.OwnCount and WFL.OwnCount(mat) or 0
                 if (have or 0) > 0 and not seen[name] then
                     seen[name] = true
                     local point, where
@@ -1328,7 +1432,7 @@ local function TeamTabLines(open)
             local c, profs = t.c, {}
             for _, p in ipairs(c.professions or {}) do table.insert(profs, p.name .. " " .. (p.rank or 0)) end
             table.insert(lines, { icon = ClassIcon(c.class), title = c.name .. (t.me and " (you)" or ""), inline = false,
-                                  text = C.GREY .. "level " .. (c.level or "?") .. ", rested " .. Pct(t.rested) .. ", " .. (t.me and "playing" or (c.resting and "in an inn" or "outside"))
+                                  text = C.GREY .. "character level " .. (c.level or "?") .. ", rested " .. Pct(t.rested) .. ", " .. (t.me and "playing" or (c.resting and "in an inn" or "outside"))
                                          .. (#profs > 0 and ("\n" .. table.concat(profs, ", ")) or "") .. "|r",
                                   titleColor = (not t.me and t.rested >= 0.3) and GREEN_C or nil })
         end
@@ -1341,7 +1445,8 @@ local function TeamTabLines(open)
         for _, r in ipairs(rows) do table.insert(lines, MatLine(r.item, WFL.MaterialHave(r.item), r.n, { r.item, "For: " .. table.concat(r.by, ", ") })) end
     end
     local ls = LegacyStatus()
-    if Section(lines, "t-g", open, "Legacy points", ls.got .. " of " .. ls.total, "Interface\\Icons\\INV_Misc_Book_08") then
+    -- Folded by default (user, 2026-10-24: about 40 lines that rarely change); the summary keeps the count.
+    if Section(lines, "t-g", open, "Legacy points", ls.got .. " of " .. ls.total, "Interface\\Icons\\INV_Misc_Book_08", false) then
         LegacyLines(lines)
     end
     return lines
@@ -1395,34 +1500,140 @@ WFL.RegisterTabs({
     { key = "team", label = "Team", lines = function(open) return Cardify(TeamTabLines(open)) end },
 })
 
--- Level-up reminder (user, 2026-10-22): when you reach a level that opens dungeon quests, one short chat line and a
--- yellow note at the top of the screen name them, grouped by dungeon. Other classes' quests and done ones are left
--- out. Nothing is said when no dungeon quest opens at the new level.
-local levelUp = CreateFrame("Frame")
-levelUp:RegisterEvent("PLAYER_LEVEL_UP")
-levelUp:SetScript("OnEvent", function(_, _, newLevel)
-    local ok, err = pcall(function()
-        local level = tonumber(newLevel) or UnitLevel("player") or 1
-        local byDungeon, order, count = {}, {}, 0
-        for _, d in ipairs(WFL.DungeonEntries(level)) do
-            for _, q in ipairs(d.quests or {}) do
-                if (q.from or 1) == level and not WFL.QuestDone(q.id) then
-                    if not byDungeon[d.name] then byDungeon[d.name] = {}; table.insert(order, d.name) end
-                    table.insert(byDungeon[d.name], q.quest)
-                    count = count + 1
-                end
+-- Alerts (user, 2026-10-24/26): a big alert (Alert.lua: WFL_Alert, also a chat line) for each thing on the Next
+-- tab whose condition is met, once per character:
+--   * a step of "Your plan": its "alert" (personal/team.json: money, lacks / has a profession, noItem, skill
+--     {profession, rank}) or, without one, reaching its character level;
+--   * a new profession rank you can train (skill, character level and the money when the cost is known);
+--   * new herbs or ores your Herbalism / Mining skill can gather (Plan.lua gatherNodes);
+--   * a rare worth hunting for you (Plan.lua rares);
+--   * a dungeon chain whose quests are due ("Collect the Dungeon chain 1 quests");
+--   * on a level-up, the dungeon quests that open at the new character level.
+-- The first check on a character only marks what is already due, so nothing floods at login.
+-- /wflp alerts turns them off and on; /wflp alert shows a test.
+local function QueueAlert(st) WFL_Alert(st.text, st.where, st.icon) end
+
+local function AlertDue(st, level, money, skills)
+    if level < (st.from or 1) then return false end
+    local a = st.alert
+    if not a then return not st.to and (st.from or 1) > 1 end
+    if a.money and money < a.money then return false end
+    if a.lacks and skills[a.lacks] then return false end
+    if a.has and not skills[a.has] then return false end
+    if a.noItem and (WFL.OwnCount(a.noItem) or 0) > 0 then return false end
+    if a.skill then
+        local s = skills[a.skill[1]]
+        if not s or (s.rank or 0) < a.skill[2] then return false end
+    end
+    return true
+end
+
+-- The dungeon quests that open exactly at this character level, grouped by dungeon: "5 new dungeon quests", text.
+local function NewDungeonQuests(level)
+    local byDungeon, order, count = {}, {}, 0
+    for _, d in ipairs(WFL.DungeonEntries(level)) do
+        for _, q in ipairs(d.quests or {}) do
+            if (q.from or 1) == level and not WFL.QuestDone(q.id) then
+                if not byDungeon[d.name] then byDungeon[d.name] = {}; table.insert(order, d.name) end
+                table.insert(byDungeon[d.name], q.quest)
+                count = count + 1
             end
         end
-        if count == 0 then return end
-        local parts = {}
-        for _, name in ipairs(order) do table.insert(parts, name .. ": " .. table.concat(byDungeon[name], ", ")) end
-        DEFAULT_CHAT_FRAME:AddMessage("|cffffd100WFL:|r level " .. level .. ", new dungeon quests. " .. table.concat(parts, "; ")
-                                      .. " |cff9d9d9d(/wflp dungeons)|r")
-        if UIErrorsFrame and UIErrorsFrame.AddMessage then
-            UIErrorsFrame:AddMessage(count .. " new dungeon quest" .. (count > 1 and "s" or "") .. ": " .. table.concat(order, ", "), 1, 0.82, 0)
-        end
-    end)
-    if not ok and WoWForeverLevelerLog then
-        table.insert(WoWForeverLevelerLog, date("%Y-%m-%d %H:%M:%S") .. "  Planner error level-up reminder: " .. tostring(err))
     end
+    return count, order
+end
+
+local function CheckAlerts(newLevel)
+    local s = WFL.Settings()
+    local path = (PLAN.paths or {})[UnitName("player")] or {}
+    if s.alertsOff then return end
+    s.alertsDone = s.alertsDone or {}
+    local key = (UnitName("player") or "?") .. "-" .. ((GetRealmName and GetRealmName()) or "")
+    local first = s.alertsDone[key] == nil
+    local done = s.alertsDone[key] or {}
+    s.alertsDone[key] = done
+    local function Once(id, alert)
+        if done[id] then return end
+        done[id] = true
+        if not first then QueueAlert(alert) end
+    end
+    -- PLAYER_LEVEL_UP comes before UnitLevel changes: take the event's level.
+    local level = math.max(tonumber(newLevel) or 0, UnitLevel("player") or 1)
+    local money = (GetMoney and GetMoney()) or 0
+    local skills = WFL.Skills() or {}
+    for _, st in ipairs(path) do
+        if not done[st.text] and AlertDue(st, level, money, skills) then Once(st.text, st) end
+    end
+    for prof, sk in pairs(skills) do
+        -- A new rank to train.
+        local t = NextRank(prof, sk)
+        if t and sk.rank >= t.skill and level >= (t.level or 0) then
+            local cost = ((PLAN.profCosts or {})[prof] or {})[t.name]
+            if not cost or money >= cost then
+                local p = WFL.TrainerPoint and WFL.TrainerPoint(prof, true)
+                Once("rank:" .. prof .. ":" .. t.name, { text = "Train " .. t.name .. " " .. prof .. RankCost(prof, t.name) .. ".",
+                     where = p and (p.npc .. ", " .. WFL.MapName(p.mapID)) or nil, icon = ProfIcon(prof) })
+            end
+        end
+        -- New herbs or ores: one alert per skill step ("You can now gather Mageroyal and Swiftthistle").
+        local nodes = (PLAN.gatherNodes or {})[prof]
+        if nodes then
+            local bySkill = {}
+            for node, need in pairs(nodes) do
+                if need > 1 and sk.rank >= need then bySkill[need] = bySkill[need] or {}; table.insert(bySkill[need], node) end
+            end
+            for need, list in pairs(bySkill) do
+                table.sort(list)
+                Once("gather:" .. prof .. ":" .. need, { text = "You can now gather " .. table.concat(list, " and ") .. ".",
+                     where = prof .. " skill " .. need, icon = ProfIcon(prof) })
+            end
+        end
+    end
+    -- A rare worth hunting for you (from 2 character levels below it, until you own the item).
+    for _, r in ipairs(MyRares(level)) do
+        Once("rare:" .. r.npc .. ":" .. r.item, { text = "Rare: kill " .. r.npc .. " for " .. r.item .. ".", where = RareWhere(r),
+             icon = "Interface\\Icons\\INV_Misc_Bone_HumanSkull_01" })
+    end
+    -- A dungeon chain whose quests are due (the Next tab's "Character level 11: collect ..." line).
+    for _, st in ipairs(Stops(level)) do
+        if st.chain and level >= st.at - 2 then
+            local names = {}
+            for _, m in ipairs(st.members) do table.insert(names, m.name) end
+            Once("chain:" .. st.name, { text = "Collect the " .. st.name .. " quests: " .. table.concat(names, ", ") .. ".",
+                 where = "Dungeons tab", icon = "Interface\\Icons\\INV_Misc_Key_14" })
+        end
+    end
+    -- New dungeon quests at this character level (was a small yellow line, user 2026-10-26: big alerts only).
+    if newLevel then
+        local count, order = NewDungeonQuests(level)
+        if count > 0 then
+            Once("quests:" .. level, { text = count .. " new dungeon quest" .. (count > 1 and "s" or "") .. ": " .. table.concat(order, ", ") .. ".",
+                 where = "Dungeons tab", icon = "Interface\\Icons\\INV_Misc_Key_14" })
+        end
+    end
+end
+
+local alerts = CreateFrame("Frame")
+for _, ev in ipairs({ "PLAYER_ENTERING_WORLD", "PLAYER_LEVEL_UP", "PLAYER_MONEY", "SKILL_LINES_CHANGED", "BAG_UPDATE_DELAYED" }) do
+    pcall(alerts.RegisterEvent, alerts, ev)
+end
+alerts:SetScript("OnEvent", function(_, event, arg1)
+    local run = function()
+        local ok, err = pcall(CheckAlerts, event == "PLAYER_LEVEL_UP" and arg1 or nil)
+        if not ok and WoWForeverLevelerLog then
+            table.insert(WoWForeverLevelerLog, date("%Y-%m-%d %H:%M:%S") .. "  Planner error alerts: " .. tostring(err))
+        end
+    end
+    -- At login the skills and bags are not ready at once.
+    if event == "PLAYER_ENTERING_WORLD" and C_Timer then C_Timer.After(5, run) else run() end
 end)
+
+-- For /wflp alert and /wflp alerts (UI.lua).
+function WFL_TestAlert()
+    WFL_Alert("When you have 20c: learn Skinning (10c) and buy a Skinning Knife (10c).", "Test alert")
+end
+function WFL_ToggleAlerts()
+    local s = WFL.Settings()
+    s.alertsOff = not s.alertsOff
+    print("|cffffd100WoW Forever Planner:|r alerts " .. (s.alertsOff and "off" or "on"))
+end

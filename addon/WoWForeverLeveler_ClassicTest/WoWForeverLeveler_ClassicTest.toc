@@ -1,0 +1,10 @@
+## Interface: 11508, 11507
+## Title: WoW Forever Leveler - Classic alert test
+## Notes: Tests the Planner's big alerts on WoW Classic before WoW Forever launches: the same alert (Alert.lua), fired by real game events. /wfltest shows one.
+## Author: Antigravity
+## Version: 1.0.0
+## IconTexture: Interface\Icons\INV_Misc_Note_01
+## SavedVariables: WFLClassicTestLog
+
+Alert.lua
+ClassicTest.lua

@@ -118,6 +118,8 @@ def main():
         lua.execute('WoWForeverLevelerUI = WoWForeverLevelerUI or {}; WoWForeverLevelerUI.routeChoice = { ["20-30"] = "Eastern Kingdoms" }')
     files = [os.path.join(ADDON, 'Plan.lua'), os.path.join(ADDON, 'UI.lua'),
              os.path.join(ADDON + ('_Planner' if PLANNER else '_Quests'), 'Planner.lua' if PLANNER else 'Quests.lua')]
+    if PLANNER:
+        files.insert(2, os.path.join(ADDON + '_Planner', 'Alert.lua'))
     for f in files:
         with open(f, encoding='utf-8') as fh:
             lua.execute(fh.read())
@@ -169,6 +171,22 @@ def main():
         # The bank character: Next shows market and mail, the Market tab replaces Dungeons and Professions.
         show('Bank: Next tab', 'UnitName = function() return "Banka" end; WoWForeverLevelerUI.tab = "next"')
         show('Bank: Market tab', 'WoWForeverLevelerUI.tab = "market"; WoWForeverLevelerUI.have = { ["Alt-Realm"] = { ["Linen Cloth"] = 400, ["Copper Ore"] = 60 } }')
+        # A dungeon leveler at level 22, between dungeon chains 1 and 2: the Next tab says to quest.
+        show('Next tab (dungeon leveler, level 22)', 'UnitName = function() return "Konan" end; WoWForeverLevelerPlan.dungeonLevelers = { Konan = "Protection" }; '
+             'local lvl = UnitLevel; UnitLevel = function() return 22 end; WoWForeverLevelerUI.tab = "next"')
+        lua.execute('UnitLevel = function() return LEVEL end')
+        # Plan alerts: Kaspin at level 1 with no professions. The first check only marks; 20c then says "learn
+        # Skinning", 25c with Skinning says "buy a Skinning Satchel", level 6 with 90c says "learn Cooking and Fishing".
+        print('\n=== Plan alerts (Kaspin)')
+        lua.execute('CHAT = {}; DEFAULT_CHAT_FRAME = { AddMessage = function(self, m) table.insert(CHAT, m) end }; '
+                    'UnitName = function() return "Kaspin" end; SKILLS = {}; MONEY = 0; GetMoney = function() return MONEY end; '
+                    'local function fire(ev, a) for _, f in pairs(FRAMES) do local h = f.scripts and f.scripts.OnEvent; if h then pcall(h, f, ev, a) end end end; '
+                    'fire("PLAYER_ENTERING_WORLD"); MONEY = 20; fire("PLAYER_MONEY"); fire("PLAYER_MONEY"); '
+                    'SKILLS = { { "Skinning", 1, 75 } }; MONEY = 25; fire("PLAYER_MONEY"); '
+                    'MONEY = 100; UnitLevel = function() return 6 end; fire("PLAYER_LEVEL_UP", 6); UnitLevel = function() return LEVEL end; '
+                    'SKILLS = { { "Mining", 11, 75 }, { "Skinning", 61, 75 }, { "Cooking", 12, 75 }, { "First Aid", 45, 75 }, { "Fishing", 5, 75 } }')
+        for m in g.CHAT.values():
+            print(plain(m))
         print('\n=== Level-up reminder (level 9 opens the Ragefire Chasm quests)')
         lua.execute('CHAT = {}; DEFAULT_CHAT_FRAME = { AddMessage = function(self, m) table.insert(CHAT, m) end }; '
                     'UIErrorsFrame = { AddMessage = function(self, m) table.insert(CHAT, "[top] " .. m) end }; '

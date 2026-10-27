@@ -50,10 +50,13 @@ check:
 	python3 scripts/test_bnet.py
 
 addon: guide
+	@cp addon/WoWForeverLeveler_Planner/Alert.lua addon/WoWForeverLeveler_ClassicTest/Alert.lua
 	@for flavor in "$(WOW_ROOT)"/_*_; do \
 		[ -d "$$flavor" ] || continue; \
+		case "$$flavor" in *_classic_era_|*_anniversary_|*_classic_) classic=1 ;; *) classic=0 ;; esac; \
 		for a in addon/*/; do \
 			name=$$(basename "$$a"); \
+			if [ "$$name" = WoWForeverLeveler_ClassicTest ]; then [ $$classic = 1 ] || continue; else [ $$classic = 0 ] || continue; fi; \
 			mkdir -p "$$flavor/Interface/AddOns/$$name"; \
 			cp -R "$$a"* "$$flavor/Interface/AddOns/$$name/"; \
 		done; \

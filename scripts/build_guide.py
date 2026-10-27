@@ -127,6 +127,8 @@ def build_markdown(g):
     ]
     for gid, group in g['groups'].items():
         members = [c for c in chars if c['group'] == gid]
+        if not members:  # a group with nobody in it (personal/team.json)
+            continue
         out.append(
             f"| **{group['name']}** | {'<br>'.join(c['class'] for c in members)} | "
             f"{'<br>'.join(c['race'] for c in members)} | {'<br>'.join(' / '.join(c['profs']) for c in members)} | "
@@ -138,6 +140,8 @@ def build_markdown(g):
 
     out += ["", "### Supply Chains"]
     for gid, group in g['groups'].items():
+        if not any(c['group'] == gid for c in chars):
+            continue
         out.append(f"- **{group['name']}:**")
         for c in [c for c in chars if c['group'] == gid]:
             lines = supply_lines(c, chars, profs)
@@ -510,19 +514,22 @@ def addon_plan(g):
         names = {t['name'] for t in trainers}
     else:
         names = set()
-    # Then the Forever trainers from QuestieDB (data/vendor_items.json: Pa'zula in Sen'jin Village, Junior trainers),
-    # then every Horde trainer from ClassicDB (guide.json trainerDB, scripts/trainers_db.py) not seen in game yet.
+    # Then the Forever trainers from QuestieDB (data/vendor_items.json: Pa'zula in Sen'jin Village, Junior trainers).
+    # ClassicDB (guide.json trainerDB) is no longer used: the Forever data has every trainer it has, and Classic
+    # places are wrong for Forever (user, 2026-10-24: the plan sent a hunter to Classic trainers).
     vpath = os.path.join(ROOT, 'data', 'vendor_items.json')
     if os.path.exists(vpath):
         with open(vpath, encoding='utf-8') as f:
-            for t in json.load(f).get('trainers', []):
-                if t['name'] not in names:
-                    names.add(t['name'])
-                    trainers.append(dict(t))
-    for t in g.get('trainerDB', {}).get('list', []):
-        if t['name'] not in names:
-            names.add(t['name'])
-            trainers.append(dict(t))
+            qtrainers = json.load(f).get('trainers', [])
+        for t in qtrainers:
+            if t['name'] not in names:
+                names.add(t['name'])
+                trainers.append(dict(t))
+        # Junior trainers teach Apprentice only (QuestieDB title), also when the game scan found them first.
+        junior = {t['name'] for t in qtrainers if t.get('junior')}
+        for t in trainers:
+            if t['name'] in junior:
+                t['junior'] = True
     # Leveling window: dungeon quests per giver zone (with map positions) and when to run each dungeon,
     # from the Forever Loot / DFL addon data (data/dungeons.js).
     zone_map = {'Tirisfal Glades': 1420, 'Durotar': 1411, 'Mulgore': 1412, 'The Barrens': 1413, 'Orgrimmar': 1454,
@@ -735,6 +742,17 @@ def addon_plan(g):
                              for c in g.get('routeChoices', [])],
             'dungeonChains': [{'name': c['name'], 'dungeons': c['dungeons'], 'note': c.get('note', '')}
                               for c in g.get('dungeonChains', [])],
+            # Characters that level mostly in dungeons (personal/team.json "dungeons", "spec") and the levels
+            # between the dungeon chains where they need quests (guide.json dungeonGaps): a row on the Next tab.
+            'dungeonLevelers': {n: c.get('spec') or '' for c in g['characters'] if c.get('dungeons') for n in all_names(c)},
+            'dungeonGaps': g.get('dungeonGaps', []),
+            # Each character's own plan per level (personal/team.json "path": from, to, text, where): the Next tab.
+            'paths': {n: c['path'] for c in g['characters'] if c.get('path') for n in all_names(c)},
+            # What each character sends to others (personal/team.json "reserved"): no cooking recipes for it.
+            'reserved': {n: c['reserved'] for c in g['characters'] if c.get('reserved') for n in all_names(c)},
+            # Rares worth hunting (guide.json rares, user 2026-10-26) for who they are for (character names), with the
+            # level and spawn from data/rares.json (QuestieDB): the Next tab's "Kill Swiftmane for ...".
+            'rares': rare_plan(g),
             'trainers': sorted(trainers, key=lambda t: t['name']),
             'classes': classes, 'steps': steps, 'fish': fish_steps, 'training': training, 'zones': zones,
             'camp': camp, 'startTrainers': start, 'aidKeep': keep, 'search': sorted(search)}
@@ -941,13 +959,35 @@ def cook_recipes():
     out = {}
     for prof in ('Cooking', 'First Aid'):
         for name, r in profs.get(prof, {}).items():
-            if name in holiday:
+            # Holiday recipes, and recipes the site lists but nobody saw in game (same rule as forever_profs.py).
+            if name in holiday or (r.get('status') == 'Not yet confirmed' and not r.get('scanned')):
                 continue
             colors = r.get('colors') or []
             out.setdefault(prof, {})[name] = {'r': r.get('reagents', {}), 'learn': r.get('learn') or 0,
                                               'grey': colors[3] if len(colors) > 3 and colors[3] else None,
                                               'src': r.get('source') or ''}
     return out
+
+
+def all_names(c):
+    """A character's first name and its spare names (personal/team.json alts): the addon matches any of them."""
+    return [n for n in [c.get('name') or c['class']] + (c.get('altNames') or []) if n]
+
+
+def rare_plan(g):
+    """guide.json rares + data/rares.json: [{npc, item, stats, group, note, for = {names}, lo, m, x, y}] by level."""
+    p = os.path.join(ROOT, 'data', 'rares.json')
+    found = json.load(open(p, encoding='utf-8')) if os.path.exists(p) else {}
+    names = {c['id']: all_names(c) for c in g['characters']}
+    out = []
+    for r in (g.get('rares') or {}).get('list', []):
+        f = found.get(r['npc'], {})
+        e = {'npc': r['npc'], 'item': r['item'], 'stats': r.get('stats', ''), 'group': bool(r.get('group')),
+             'note': r.get('note', ''), 'for': {n: True for c in r.get('for', []) for n in names.get(c, [])}, 'lo': f.get('lo') or 1}
+        if f.get('m'):
+            e.update({'m': f['m'], 'x': f['x'], 'y': f['y']})
+        out.append(e)
+    return sorted(out, key=lambda e: e['lo'])
 
 
 if __name__ == "__main__":

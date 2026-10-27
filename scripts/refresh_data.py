@@ -7,6 +7,7 @@ update. Runs on every Sync (scripts/server.py) and every `make guide`, before bu
   - data/vendor_items.json (scripts/vendor_items.py): which vendors sell each crafting material; the trainers.
   - data/dungeon_levels.json (scripts/dungeon_levels.py): the real monster levels in each dungeon.
   - data/reagent_drops.json (scripts/reagent_drops.py): which monsters drop each Cooking / First Aid material.
+  - data/rares.json (scripts/rares.py): where the rares of guide.json `rares` stand, their level and drops.
 
 Without QuestieDB installed (a fresh live install), or when a script fails, the last files stay and the sync goes on.
 """
@@ -27,9 +28,10 @@ def main():
     import dungeon_givers
     import dungeon_levels
     import reagent_drops
+    import rares
     import vendor_items
     for name, mod in (('dungeon givers', dungeon_givers), ('vendor lists', vendor_items), ('dungeon levels', dungeon_levels),
-                      ('material drops', reagent_drops)):
+                      ('material drops', reagent_drops), ('rares', rares)):
         out = io.StringIO()
         try:
             with contextlib.redirect_stdout(out):
