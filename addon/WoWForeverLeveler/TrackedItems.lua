@@ -45,6 +45,7 @@ WoWForeverLevelerTracked = {
     ["Copper Bar"] = true,
     ["Copper Ore"] = true,
     ["Copper Rod"] = true,
+    ["Copper Shortsword"] = true,
     ["Coyote Meat"] = true,
     ["Coyote Steak"] = true,
     ["Crab Cake"] = true,

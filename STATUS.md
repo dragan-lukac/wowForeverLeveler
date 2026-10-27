@@ -1529,3 +1529,6 @@ Newest first. One short entry per session.
 - 2026-10-27: wand plan: Konan makes 2 Copper Shortswords after Blacksmithing and mails them to the priest, who
   disenchants them for the Lesser Magic Wands (Ahmpy video). Money method linenPantsShuffle got a wand step.
   Dashboard realm menu shows only live Forever realms (js/app.js filter).
+- 2026-10-27: play order for the wands (user): priest to Brill (character level ~5), then Konan. Konan drops Mining
+  for Blacksmithing as soon as he has 20 Copper Ore + 20 Rough Stone (Dwukk, Razor Hill), makes 2 Copper Shortswords,
+  mails them to the priest. Lesser Magic Wand and Copper Shortsword added to money.watch.ench (AH check for wand gold).
